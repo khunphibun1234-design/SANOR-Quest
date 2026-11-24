@@ -1,0 +1,173 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e3eadc"><title>Alex’s Table 3D · SANOR QUEST (prototype)</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#e3eadc;color:#213f37;font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
+#scene{position:fixed;inset:0;width:100%;height:100%;touch-action:none;display:block}
+button{font:inherit;cursor:pointer;border:1px solid #8a9e8d;border-radius:12px;background:#fffdf5;color:#213f37;padding:10px 14px;min-height:48px}
+button.primary{background:#245647;border-color:#245647;color:#fff}
+button:disabled{opacity:.45}
+button:focus-visible,a:focus-visible{outline:3px solid #bf542d;outline-offset:2px}
+.top{position:fixed;left:10px;right:10px;top:max(10px,env(safe-area-inset-top));display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:8px;pointer-events:auto}
+.chip{background:#fffdf5e6;border:1px solid #cbc7b4;border-radius:999px;padding:6px 12px;font-weight:650;font-size:14px}
+.chip a{color:#22564b}
+.progress{display:flex;gap:4px;flex:1;max-width:220px}
+.progress i{flex:1;height:7px;border-radius:9px;background:#cfd8c8}
+.progress i.done{background:#3d7a63}.progress i.now{background:#e5b34a}
+.ask{pointer-events:auto;background:#fffdf5f2;border:1px solid #cbc7b4;border-radius:18px;padding:10px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 20px #2c4a3f1f}
+.ask h1{font-size:clamp(18px,5vw,24px);margin:0;flex:1}
+.ask .tools{display:flex;gap:6px}
+.ask .tools button{padding:8px 10px;min-width:48px}
+.bottom{position:fixed;left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;justify-content:space-between;pointer-events:none}
+#status{pointer-events:auto;background:#fffdf5f2;border:1px solid #cbc7b4;border-radius:14px;padding:8px 12px;margin:0;flex:1;min-height:48px;display:flex;align-items:center;font-size:15px}
+#status:empty{visibility:hidden}
+#next{pointer-events:auto;font-weight:700}
+.bubble{position:fixed;left:0;top:0;transform:translate(-50%,-100%);background:#fff;border:2px solid #245647;border-radius:14px;padding:6px 10px;font-weight:650;font-size:14px;max-width:190px;text-align:center;pointer-events:none;white-space:normal}
+.bubble:after{content:"";position:absolute;left:50%;bottom:-9px;margin-left:-7px;border:7px solid transparent;border-top-color:#245647;border-bottom:0}
+.overlay{position:fixed;inset:0;background:#e3eadcd9;display:grid;place-items:center;padding:16px;overflow:auto}
+.overlay[hidden]{display:none}
+.card{background:#fffdf5;border:1px solid #cbc7b4;border-radius:22px;padding:20px;max-width:560px;width:100%;box-shadow:0 12px 40px #2c4a3f2a}
+.card h2{margin:4px 0 8px;font:700 clamp(26px,7vw,36px)/1.1 Georgia,serif}
+.eyebrow{font-size:12px;letter-spacing:.18em;font-weight:700;color:#5e7a6d}
+.card p{margin:8px 0}
+.card .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:15px}td,th{text-align:left;padding:5px;border-bottom:1px solid #ddd}
+.proto{font-size:12px;color:#7a6a3a;background:#fbefc9;border-radius:8px;padding:4px 8px;display:inline-block}
+@media print{#scene,.top,.bottom,.bubble,.noprint{display:none!important}.overlay{position:static;background:none}.card{box-shadow:none;border:0}}
+</style></head><body>
+<canvas id="scene" aria-label="Alex's home in 3D. Tap the place or thing Alex asks for."></canvas>
+<div class="top">
+ <div class="bar"><span class="chip"><a href="index.html">← Map 01</a></span><div class="progress" id="progress" aria-hidden="true"></div><span class="chip" id="count"></span></div>
+ <div class="ask"><h1 id="prompt" lang="en"></h1><div class="tools"><button id="listen" aria-label="Listen to Alex">🔊</button><button id="hint" aria-label="Get a hint">💡</button></div></div>
+</div>
+<div class="bubble" id="bubble" hidden></div>
+<div class="bottom"><p id="status" role="status"></p><button class="primary" id="next" hidden>Next →</button></div>
+<div class="overlay" id="intro"><section class="card"><span class="proto">Prototype · 3D</span><div class="eyebrow" style="margin-top:10px">MAP 01 · ALEX’S TABLE</div><h2>Lunch with Alex</h2><p>Listen to Alex. Find the place or thing in the house and tap it.</p><p style="color:#5e7a6d;font-size:14px">The glowing rings show what you can tap. Drag to turn the house.</p><div class="row"><button class="primary" id="start">Start →</button></div></section></div>
+<div class="overlay" id="report" hidden><section class="card"><div class="eyebrow">ALEX’S TABLE · 3D</div><h2>You set the table for Alex!</h2><div id="results"></div><div class="row noprint"><button id="print">Print results</button><button id="again">Start a new round</button><a class="chip" href="index.html" style="align-self:center">← Map 01</a></div><p class="proto noprint">Prototype results are saved separately from the 2D Alex’s Table.</p></section></div>
+<script src="engine.js"></script><script src="world.js"></script><script src="nav.js"></script><script src="table-words.js"></script><script src="../audio/player.js"></script>
+<script>
+'use strict';
+const items=window.AlexTableWords,options=[[0,2,1],[2,1,0],[1,0,2],[4,3,6],[6,8,4],[5,7,4],[8,6,4],[5,8,7],[8,9,6],[6,9,8]];
+const KEY='sanor-table3d-proto-v1',$=id=>document.getElementById(id);
+const E=HomeEngine($('scene')),W=buildHomeWorld(E),{box:B,cylinder:Cy,ellipsoid:S,mesh:M,draw:D,model}=E;
+// ---------- extra 3D props ----------
+B(2.7,.6,-1.55,2.9,.7,.42,'#c9a27a');B(2.7,.97,-1.55,3,.06,.5,'#f2e2c2');for(const x of [1.75,2.7,3.65])B(x,.62,-1.33,.8,.5,.02,'#b98f66');const sideboard=M();
+W.colliders.push({x:2.7,z:-1.55,w:3,d:.5});
+const mk=f=>{f();return M();};
+const mesh={
+ plate:mk(()=>{Cy(0,.015,0,.2,.2,.03,'#fbf4e4',18);Cy(0,.032,0,.13,.13,.004,'#eadfc6',18);}),
+ fork:mk(()=>{B(0,.012,.05,.035,.014,.2,'#8fa19e');B(0,.012,-.07,.06,.014,.03,'#8fa19e');for(const x of [-.022,0,.022])B(x,.012,-.12,.01,.014,.08,'#8fa19e');}),
+ bowl:mk(()=>{Cy(0,.075,0,.09,.17,.15,'#3f7680',16);Cy(0,.151,0,.15,.15,.004,'#a9d0c8',16);}),
+ spoon:mk(()=>{B(0,.014,.07,.028,.014,.2,'#9fb0aa');S(0,.018,-.08,.055,.022,.075,'#9fb0aa',8,4);}),
+ glass:mk(()=>{Cy(0,.11,0,.07,.085,.22,'#d6ecee',14);Cy(0,.221,0,.08,.08,.004,'#f1fbfb',14);}),
+ glassFull:mk(()=>{Cy(0,.075,0,.07,.08,.15,'#5fb6cf',14);Cy(0,.185,0,.08,.085,.07,'#d6ecee',14);Cy(0,.151,0,.077,.077,.004,'#7fd0e4',14);}),
+ water:mk(()=>{Cy(0,.16,0,.11,.095,.32,'#5f9fb5',14);Cy(0,.321,0,.096,.096,.004,'#8fd2e3',14);B(.13,.19,0,.035,.2,.045,'#4d8799');B(-.12,.3,0,.07,.035,.05,'#5f9fb5');}),
+ cloth:mk(()=>Cy(0,0,0,.73,.73,.012,'#f7efd9',24)),
+ ring:mk(()=>{for(let i=0;i<20;i++){const a=i/20*Math.PI*2;B(Math.cos(a),0,Math.sin(a),.12,.025,.34,'#f2b53c',-a);}}),
+ spark:mk(()=>B(0,0,0,.07,.07,.07,'#ffd35c'))};
+// word index -> where it is
+const shelf={4:[1.55,1.0,-1.55],5:[2.05,1.0,-1.55],6:[2.55,1.0,-1.55],7:[3.0,1.0,-1.55],8:[3.45,1.0,-1.55],9:[3.95,1.0,-1.55]};
+const slot={4:[2.3,1.036,1.42,0],5:[2.3,1.07,1.42,.35],6:[2.85,1.036,1.6,0],7:[3.12,1.04,1.38,-.45],8:[2.15,1.036,.85,0]};
+const TABLE=[2.7,1.03,1.05],rooms={0:{ring:[7.65,.3,.25],r:1.7,approach:[6.4,2.8],cam:[7.2,.6,.8]},1:{ring:[-3.7,.3,-4.3],r:1.6,approach:[-1.9,-3.8],cam:[-3.3,.6,-3.9]},2:{ring:[3.2,.3,.1],r:1.6,approach:[1.9,-.2],cam:[3,.6,0]}};
+const names=['garden','bedroom','kitchen','table','plate','fork','bowl','spoon','glass','water'];
+// ---------- state (same shape as 2D Alex's Table) ----------
+const fresh=()=>({index:0,rows:items.map(()=>({answers:[],hint:false}))});
+let state=fresh();
+try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Number.isInteger(s.index)&&s.index>=0&&s.index<=10&&s.rows?.length===10&&s.rows.every((r,i)=>r&&Array.isArray(r.answers)&&r.answers.every(n=>options[i].includes(n))&&typeof r.hint==='boolean'&&(i>=s.index||r.answers[r.answers.length-1]===i)))state=s;}catch{}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch{$('status').textContent='This device cannot save your work. Print your results before you leave.';}}
+const last=a=>a[a.length-1],isOk=()=>state.index<10&&last(state.rows[state.index].answers)===state.index,solved=j=>j<state.index||(j===state.index&&isOk());
+// ---------- characters & camera ----------
+const nav=new HomeNav(W.colliders),player={x:0,z:6.6,angle:Math.PI,walk:false,path:[]},alex={x:.9,z:5.9,angle:Math.PI,walk:false,path:[]},mum={x:-1.8,z:-.5,angle:0,walk:false};
+const TABLE_SPOT={player:[1.55,-.25,Math.PI*.7],alex:[3.8,.7,-Math.PI/2]};
+const cam={center:[1,.4,-.6],dist:1,yaw:.38,pitch:.86,goal:null,drag:0};
+const narrow=()=>innerWidth<700;
+function camGoal(){const i=state.index;if(i>=10||i>=3)return{center:[2.75,.9,-.05],dist:narrow()?13.5:8,yaw:.42,pitch:.82};
+ if(focusRoom!==null){const r=rooms[focusRoom];return{center:r.cam,dist:narrow()?24:15,yaw:.38,pitch:.9};}
+ return{center:[.9,.2,-.6],dist:narrow()?37:27,yaw:.38,pitch:.9};}
+let focusRoom=null;
+function placeAt(p,x,z,a){p.x=x;p.z=z;p.angle=a;p.path=[];p.walk=false;}
+function walkTo(p,to,face){p.path=nav.route([p.x,p.z],to);p.face=face;if(!p.path.length){p.x=to[0];p.z=to[1];}}
+function syncCharacters(instant){const i=state.index;
+ if(i>=3){const P=TABLE_SPOT.player,A=TABLE_SPOT.alex;if(instant){placeAt(player,...P);placeAt(alex,...A);}else{walkTo(player,[P[0],P[1]],P[2]);walkTo(alex,[A[0],A[1]],A[2]);}return;}
+ const lastRoom=[2,1,0].find(j=>solved(j));
+ if(lastRoom===undefined){if(instant){placeAt(player,0,6.6,Math.PI);placeAt(alex,.9,5.9,Math.PI);}return;}
+ const ap=rooms[lastRoom].approach;if(instant){placeAt(player,ap[0]-.5,ap[1]+.3,0);placeAt(alex,ap[0]+.4,ap[1],0);}else{walkTo(alex,[ap[0]+.4,ap[1]],0);walkTo(player,[ap[0]-.5,ap[1]+.3],0);}}
+// ---------- feedback: animation, sparkle, sound, vibration ----------
+let anim=null,wiggle=null,sparks=[],actx=null,clock=0;
+function tone(notes){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const t=actx.currentTime;notes.forEach(([f,d,at],k)=>{const o=actx.createOscillator(),g=actx.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0,t+at);g.gain.linearRampToValueAtTime(.18,t+at+.02);g.gain.exponentialRampToValueAtTime(.001,t+at+d);o.connect(g).connect(actx.destination);o.start(t+at);o.stop(t+at+d+.05);});}catch{}}
+const buzz=p=>{try{navigator.vibrate&&navigator.vibrate(p);}catch{}};
+function burst(at){for(let k=0;k<22;k++){const a=Math.random()*Math.PI*2,u=Math.random();sparks.push({x:at[0],y:at[1]+.15,z:at[2],vx:Math.cos(a)*(.6+u),vy:1.6+Math.random()*1.4,vz:Math.sin(a)*(.6+u),life:1});}}
+function anchor(j){if(j<=2)return rooms[j].ring;if(j===3)return TABLE;if(j===9)return shelf[9];return solved(j)&&slot[j]?slot[j]:shelf[j];}
+function hitRadius(j){return j<=2?110:j===3?90:62;}
+// ---------- UI ----------
+function paint(){const i=state.index,done=i>=10;
+ $('progress').innerHTML=items.map((_,j)=>'<i class="'+(solved(j)?'done':j===i?'now':'')+'"></i>').join('');
+ $('report').hidden=!done;if(done){report();return;}
+ const r=state.rows[i],ok=isOk();
+ $('count').textContent=(i+1)+' / 10';$('prompt').textContent=items[i][1];
+ $('next').hidden=!ok;$('hint').disabled=ok;
+ $('status').textContent=ok?'Correct! '+items[i][0]+(i===9?' · The glass is full.':''):[r.answers.length?'Listen again. What did Alex ask for?':'',r.hint?'Hint: '+items[i][4]:''].filter(Boolean).join(' · ');
+ bubbleText=ok?(i===2?'Nice kitchen! Let’s have lunch.':'Thank you!'):items[i][1];}
+let bubbleText='';
+function report(){const first=state.rows.filter((r,j)=>r.answers[0]===j).length;
+ $('results').innerHTML='<p>Correct on the first try '+first+'/10 words · Practice results</p><table><tr><th>Word</th><th>First choice</th><th>Attempts</th><th>Hint</th></tr>'+state.rows.map((r,j)=>'<tr><td>'+items[j][0]+'</td><td>'+(r.answers.length?items[r.answers[0]][0]:'–')+'</td><td>'+r.answers.length+'</td><td>'+(r.hint?(r.hintBeforeFirst===true?'Before first try':r.hintBeforeFirst===false?'After first try':'Used'):'–')+'</td></tr>').join('')+'</table>';}
+function speak(){if(state.index<10)QuestVoice.play(items[state.index][1],m=>{$('status').textContent=m;});}
+function choose(j){const i=state.index;if(i>=10||isOk()||!$('intro').hidden)return;const r=state.rows[i];r.answers.push(j);save();
+ if(j===i){tone([[660,.18,0],[880,.22,.1],[1175,.3,.2]]);buzz(30);
+  if(j<=2){focusRoom=j;burst(rooms[j].ring);syncCharacters(false);}
+  else if(j===3){anim={k:3,t0:clock,dur:.6};burst(TABLE);}
+  else if(j===9){anim={k:9,t0:clock,dur:1.5,from:shelf[9],to:[slot[8][0]+.16,slot[8][1]+.32,slot[8][2]]};}
+  else{anim={k:j,t0:clock,dur:.8,from:shelf[j],to:slot[j]};}
+ }else{tone([[220,.18,0],[185,.22,.12]]);buzz([20,40,20]);wiggle={k:j,t0:clock};}
+ paint();}
+$('start').onclick=()=>{$('intro').hidden=true;speak();};
+$('listen').onclick=speak;
+$('hint').onclick=()=>{const r=state.rows[state.index];if(!r.hint)r.hintBeforeFirst=r.answers.length===0;r.hint=true;save();paint();};
+$('next').onclick=()=>{QuestVoice.stop();anim=null;focusRoom=null;state.index++;save();cam.drag=0;if(state.index===3)syncCharacters(false);paint();if(state.index<10)speak();};
+$('print').onclick=()=>window.print();
+$('again').onclick=()=>{if(confirm('Start a new round and replace the 3D results on this device?')){state=fresh();save();focusRoom=null;anim=null;syncCharacters(true);paint();}};
+// ---------- input: tap to choose, drag to turn ----------
+const cv=$('scene');let down=null;
+cv.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY,t:performance.now(),yaw:cam.drag,id:e.pointerId};try{cv.setPointerCapture(e.pointerId);}catch{}});
+cv.addEventListener('pointermove',e=>{if(!down||e.pointerId!==down.id)return;const dx=e.clientX-down.x;if(Math.abs(dx)>8)cam.drag=Math.max(-1.1,Math.min(1.1,down.yaw-dx*.006));});
+function endDrag(e){if(!down||e.pointerId!==down.id)return;const moved=Math.hypot(e.clientX-down.x,e.clientY-down.y);if(moved<10&&performance.now()-down.t<700)pick(e.clientX,e.clientY);down=null;}
+cv.addEventListener('pointerup',endDrag);cv.addEventListener('pointercancel',()=>down=null);
+function candidates(){const i=state.index;if(i>=10||isOk())return[];return options[i].map(j=>{const a=anchor(j),p=E.project(a[0],a[1]+(j<=2?0:.08),a[2]);return{j,x:p.x,y:p.y,visible:p.visible,r:hitRadius(j)};});}
+function pick(x,y){let best=null,bd=Infinity;for(const c of candidates()){const d=Math.hypot(c.x-x,c.y-y);if(c.visible&&d<c.r&&d<bd){best=c;bd=d;}}if(best)choose(best.j);else if(state.index<10&&!isOk())$('status').textContent='Tap one of the glowing rings.';}
+addEventListener('resize',()=>E.resize());
+// ---------- render loop ----------
+const lerp=(a,b,u)=>a+(b-a)*u;
+function moveAlong(p,dt){if(!p.path.length){p.walk=false;if(p.face!==undefined){p.angle=p.face;p.face=undefined;}return;}const [tx,tz]=p.path[0],dx=tx-p.x,dz=tz-p.z,d=Math.hypot(dx,dz),s=dt*3.6;p.walk=true;p.angle=Math.atan2(dx,dz);if(d<=s){p.x=tx;p.z=tz;p.path.shift();}else{p.x+=dx/d*s;p.z+=dz/d*s;}}
+function drawItem(j,pos,ry=0,s=1){D(mesh[names[j]],model(pos[0],pos[1],pos[2],ry,s));}
+let prev=performance.now();
+function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-prev)/1000);prev=now;clock+=dt;
+ moveAlong(player,dt);moveAlong(alex,dt);
+ const g=camGoal(),k=Math.min(1,dt*3);cam.center=cam.center.map((v,n)=>lerp(v,g.center[n],k));cam.dist=lerp(cam.dist===1?g.dist:cam.dist,g.dist,k);cam.yaw=lerp(cam.yaw,g.yaw+cam.drag,k*1.6);cam.pitch=lerp(cam.pitch,g.pitch,k);
+ const c=cam.center,cp=Math.cos(cam.pitch),eye=[c[0]+Math.sin(cam.yaw)*cam.dist*cp,c[1]+Math.sin(cam.pitch)*cam.dist,c[2]+Math.cos(cam.yaw)*cam.dist*cp],proj=E.perspective(.77,innerWidth/innerHeight,.1,150);
+ if(narrow())proj[9]=.06;
+ E.begin(E.mul(proj,E.lookAt(eye,c)));
+ W.render(clock,player,alex,mum,cam.yaw,false,false);D(sideboard);
+ // table cloth
+ const clothOn=solved(3),au=anim?Math.min(1,(clock-anim.t0)/anim.dur):1;
+ if(clothOn){const s=anim&&anim.k===3?(.4+.6*Math.sin(au*Math.PI/2))*(1+.08*Math.sin(au*Math.PI)):1;D(mesh.cloth,model(TABLE[0],1.036,TABLE[2],0,s));}
+ // items
+ for(let j=4;j<=9;j++){
+  let pos=(j!==9&&solved(j))?slot[j]:shelf[j],ry=(j!==9&&solved(j))?slot[j][3]:0;
+  if(anim&&anim.k===j&&au<1){const f=anim.from,t=anim.to;if(j===9){const v=au<.5?au*2:(1-au)*2;pos=[lerp(f[0],t[0],v),lerp(f[1],t[1],v)+Math.sin(v*Math.PI)*.25,lerp(f[2],t[2],v)];ry=v*-.9;}else pos=[lerp(f[0],t[0],au),lerp(f[1],t[1],au)+Math.sin(au*Math.PI)*.9,lerp(f[2],t[2],au)];ry=j===9?ry:lerp(0,slot[j][3],au)+Math.sin(au*Math.PI)*1.5;}
+  if(wiggle&&wiggle.k===j){const w=Math.min(1,(clock-wiggle.t0)/.45);pos=[pos[0]+Math.sin(w*40)*.035*(1-w),pos[1],pos[2]];}
+  if(j===8&&solved(9)&&!(anim&&anim.k===9&&au<.5)){D(mesh.glassFull,model(pos[0],pos[1],pos[2]));continue;}
+  drawItem(j,pos,ry);
+  if(anim&&anim.k===j&&au>=1&&!anim.burst){anim.burst=true;burst(j===9?slot[8]:pos);}
+ }
+ if(anim&&anim.k===9&&au>=1&&!anim.burst){anim.burst=true;burst(slot[8]);}
+ // rings on the choices
+ const pulse=1+Math.sin(clock*4)*.08;
+ if(state.index<10&&!isOk()&&$('intro').hidden)for(const j of options[state.index]){const a=anchor(j);const base=j<=2?rooms[j].r:j===3?.85:j===9?.2:.22;let x=a[0];if(wiggle&&wiggle.k===j&&j<=3){const w=Math.min(1,(clock-wiggle.t0)/.45);x+=Math.sin(w*40)*.12*(1-w);}D(mesh.ring,model(x,j<=2?.3:a[1]+.01,a[2],clock*.6,base*pulse));}
+ // sparkles
+ sparks=sparks.filter(s=>(s.life-=dt*1.1)>0);for(const s of sparks){s.vy-=dt*4.2;s.x+=s.vx*dt;s.y+=s.vy*dt;s.z+=s.vz*dt;D(mesh.spark,model(s.x,s.y,s.z,clock*5,.5+s.life));}
+ E.end();
+ // speech bubble above Alex
+ const b=$('bubble'),p=E.project(alex.x,2.35,alex.z),show=state.index<10&&$('intro').hidden&&p.visible&&!alex.walk;b.hidden=!show;if(show){if(b.textContent!==bubbleText)b.textContent=bubbleText;b.style.transform=`translate(${p.x}px,${p.y}px) translate(-50%,-100%)`;}
+}
+window.table3dStatus=()=>({index:state.index,ok:isOk(),rows:JSON.parse(JSON.stringify(state.rows)),walking:player.walk||alex.walk,animating:!!(anim&&(clock-anim.t0)<anim.dur),renderer:E.isGPU?'webgl':'canvas',targets:candidates().map(c=>({word:items[c.j][0],x:Math.round(c.x),y:Math.round(c.y),visible:c.visible}))});
+syncCharacters(true);if(state.index>0){$('intro').hidden=true;}paint();requestAnimationFrame(frame);
+</script></body></html>
