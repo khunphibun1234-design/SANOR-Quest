@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>School Buddy · SANOR QUEST</title>
+<link rel="stylesheet" href="school.css">
+<header><b>SANOR QUEST</b><a href="../#map-02">Back to town</a></header>
+<main><small>MAP 02 · SCHOOL OF ADVENTURES</small><h1>School Buddy</h1><p>Be a buddy to Alex on his first day. Listen, choose a word and collect stamps for his school pass.</p>
+<section class="campus" aria-label="New student pass"><div id="art" aria-hidden="true"></div><div><small>ALEX’S SCHOOL PASS</small><h2 id="place">First day at school</h2><p id="stamps">No stamps yet</p></div></section>
+<section id="play"><small id="count"></small><h2 id="line" lang="en"></h2><div class="tools"><button id="listen">Listen to Alex</button><button id="hint">Get a hint</button></div><p id="clue"></p><div id="choices"></div><p id="message" role="status"></p><button id="next" class="primary" hidden>Continue</button></section>
+<section id="report" hidden><h2 tabindex="-1">You helped Alex start school!</h2><form id="studentForm" autocomplete="off">
+<fieldset><legend>Student details for this report</legend><div class="student-grid">
+<label>Student ID<input name="studentId" required maxlength="24" type="text"></label>
+<label>Full name<input name="fullName" required maxlength="120" type="text"></label>
+<label>Class number<input name="classNumber" required maxlength="6" inputmode="numeric"></label>
+<label>Class<input name="classroom" required maxlength="24" placeholder="e.g. 8/5"></label>
+</div></fieldset></form>
+<div class="printed-student student-grid" aria-label="Student details">
+<div>Student ID <b data-value="studentId"></b></div><div>Full name <b data-value="fullName"></b></div>
+<div>Class number <b data-value="classNumber"></b></div><div>Class <b data-value="classroom"></b></div>
+</div><p id="score"></p><div class="scroll"><table><thead><tr><th>Word</th><th>First choice</th><th>Attempts</th><th>Hint</th></tr></thead><tbody id="rows"></tbody></table></div><div class="tools"><button id="print" type="submit" form="studentForm">Print results</button><button id="again">Start a new round</button></div></section></main>
+<script src="../town-art.js"></script><script src="../audio/player.js"></script><script src="school.js"></script></html>

@@ -1,0 +1,28 @@
+*{box-sizing:border-box}body{margin:0;background:#f6f5eb;color:#233f36;font:1rem/1.55 system-ui,sans-serif}header,main{max-width:48rem;margin:auto;padding:1rem}header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #cbd0bf}a{color:#295344;padding:.5rem}main{padding-block:2rem}h1{font: bold clamp(2.5rem,7vw,4rem)/1.05 Georgia,serif;margin:.5rem 0}h2{margin:.5rem 0}small{font-weight:bold;letter-spacing:.08em}.campus{background:#e3ebdc;display:flex;align-items:center;gap:1rem}.campus svg{width:100%;display:block}#art{width:34%;flex:none}.campus p{margin:.3rem 0}section{padding:clamp(1rem,3vw,1.6rem);border-radius:1rem;margin:1rem 0;background:#fffdf5;border:1px solid #ced4c5}button{padding:.65rem .95rem;min-height:44px;color:inherit;background:white;border:1px solid #82988a;border-radius:.6rem;font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #916600}.tools,#choices{display:flex;flex-wrap:wrap;gap:.5rem}#choices button{flex:1;font-weight:650}.primary,button.correct{background:#305a49;color:white}button:disabled{cursor:default}th,td{text-align:left;padding:.5rem;border-bottom:1px solid #ced4c5}.scroll{overflow:auto;margin:1rem 0}table{border-collapse:collapse;width:100%}#message:empty,#clue:empty{display:none}#choices{margin-top:1rem}@media print{header,.tools,#play{display:none}section{break-inside:avoid}}
+
+#studentForm fieldset{margin:1rem 0;padding:1rem;border:1px solid #a3b3a7;border-radius:.6rem}
+#studentForm legend{font-weight:650}
+.student-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1rem}
+.student-grid label{display:grid;gap:.2rem}
+.student-grid input{min-width:0;width:100%;padding:.6rem;border:1px solid #82988a;border-radius:.4rem;font:inherit;color:inherit}
+.printed-student{display:none}
+@media(max-width:30rem){.student-grid{grid-template-columns:1fr}}
+@page{size:A4 portrait;margin:13mm}
+@media print{
+  body{background:white;color:#172d24;font:11pt/1.35 system-ui,sans-serif}
+  main{max-width:none;margin:0;padding:0}
+  main>small::before{content:"SANOR QUEST · "}
+  h1{font-size:23pt;margin:2mm 0}
+  main>p{margin:1mm 0 3mm}
+  section{background:white;border:0;margin:0;padding:0}
+  .campus{display:flex;background:white;border-block:1px solid #999;padding:2mm 0;margin:2mm 0}
+  #art{width:23mm}
+  .campus h2,#report h2{font-size:14pt;margin:1mm 0}
+  #studentForm{display:none}
+  .printed-student{display:grid;grid-template-columns:2fr 3fr;gap:2mm 5mm;padding:3mm 0;border-bottom:1px solid #999;overflow-wrap:anywhere}
+  .printed-student b{font-weight:600}
+  #score{margin:3mm 0;font-weight:700}
+  .scroll{overflow:visible;margin:2mm 0}
+  th,td{padding:1.7mm 2mm}
+  tr{break-inside:avoid}
+}
