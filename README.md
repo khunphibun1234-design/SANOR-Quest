@@ -1,2 +1,2 @@
-# SANOR-Quest-
+# SANOR-Quest
 เรียนคำศัพท์ 
