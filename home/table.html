@@ -1,6 +1,7 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Alex’s Table · SANOR QUEST</title>
+<link rel="icon" href="../hub-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="../shared/tokens.css"><script src="../shared/profile.js"></script>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f3efdf;color:#213f37;font:17px/1.5 system-ui,sans-serif}main{max-width:740px;margin:auto;padding:18px}a{color:#22564b}header{display:flex;justify-content:space-between;align-items:center}h1{margin:18px 0 0;font: bold clamp(32px,7vw,56px) Georgia}h2{font-size:1.35rem;margin:8px 0}p{margin:8px 0}.panel{background:#fffdf5;border-radius:20px;padding:18px;margin:14px 0;border:1px solid #cbc7b4}svg{width:100%;display:block;border-radius:18px;background:#dfe8d6}button{font:inherit;cursor:pointer;border:1px solid #8a9e8d;border-radius:12px;background:white;color:#213f37;padding:10px 14px;min-height:46px}button:focus-visible,a:focus-visible{outline:3px solid #bf542d}#choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-top:12px}#choices button{font-size:1.7rem}#choices small{display:block;font-size:14px}#status{min-height:1.5em;color:#7a3e19}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:5px;border-bottom:1px solid #ddd}button.primary{background:#245647;color:white} @media print{header,button,svg,.hideprint{display:none}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 var(--body)}main{max-width:740px;margin:auto;padding:18px}a{color:#22564b}header{display:flex;justify-content:space-between;align-items:center}h1{margin:18px 0 0;font:800 clamp(32px,7vw,56px)/1.1 var(--display);letter-spacing:-.01em}h2{font-family:var(--display)}#promptTh{margin:0 0 6px}#status .th{display:block}header{gap:10px}header .right{display:flex;align-items:center;gap:10px}h2{font-size:1.35rem;margin:8px 0}p{margin:8px 0}.panel{background:#fffdf5;border-radius:20px;padding:18px;margin:14px 0;border:1px solid #cbc7b4}svg{width:100%;display:block;border-radius:18px;background:#dfe8d6}button{font:600 16px/1.2 var(--body);cursor:pointer;border:1px solid #c5cfc4;border-radius:12px;background:#fff;color:var(--ink);padding:10px 14px;min-height:46px}button:focus-visible,a:focus-visible{outline:3px solid #bf542d}#choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-top:12px}#choices button{font-size:1.7rem}#choices small{display:block;font-size:14px}#status{min-height:1.5em;color:#7a3e19}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:5px;border-bottom:1px solid #ddd}button.primary{background:var(--green);border-color:var(--green);color:white} @media print{header,button,svg,.hideprint{display:none}}
 #studentForm fieldset{margin:1rem 0;padding:1rem;border:1px solid #a3b3a7;border-radius:.6rem}
 #studentForm legend{font-weight:650}
 .student-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1rem}
@@ -21,9 +22,9 @@
  td,th{padding:2mm}
  tr{break-inside:avoid}
 }
-</style><main><header><b>SANOR QUEST</b><a href="index.html">Back to Map 01</a></header><h1>Alex’s Table</h1><p>Show Alex around your home and set the table for your guest.</p>
+</style><main><header><b>SANOR QUEST</b><span class="right"><span id="levelSlot"></span><a href="index.html">Back to Map 01</a></span></header><h1>Alex’s Table</h1><p>Show Alex around your home and set the table for your guest.</p>
 <svg viewBox="0 0 600 205" role="img" aria-label="The house and table change as you play."><rect x="35" y="16" width="110" height="70" rx="10" fill="#a4c7bf"/><path d="M90 16v70M35 51h110" stroke="#fff9e5" stroke-width="5"/><text id="room" x="165" y="64" font-size="26">🏠 My home</text><g id="furniture" visibility="hidden"><path d="M70 100h445l45 62H40Z" fill="#c49764"/><path d="M40 162h520v10H40zm18 10h14v28H58zm468 0h14v28h-14z" fill="#825c43"/></g><g id="setting"></g></svg>
-<section class="panel" id="game"><b id="count"></b><h2 id="prompt" lang="en"></h2><button id="listen">Listen to Alex</button> <button id="hint">Get a hint</button><div id="choices"></div><p id="status" role="status"></p><button class="primary" id="next" hidden>Next →</button></section><section class="panel" id="transfer" hidden><h2>A new guest</h2><p>Your guest is having soup. Choose the two things they need to eat it.</p><div id="pairs"></div><p role="status" id="pairFeedback"></p></section><section id="report" class="panel" hidden><h2>You set the table for Alex!</h2><form id="studentForm" autocomplete="off">
+<section class="panel" id="game"><b id="count"></b><h2 id="prompt" lang="en"></h2><p id="promptTh" class="th" lang="th"></p><button id="listen">Listen to Alex</button> <button id="hint">Get a hint</button><div id="choices"></div><p id="status" role="status"></p><button class="primary" id="next" hidden>Next →</button></section><section class="panel" id="transfer" hidden><h2>A new guest</h2><p>Your guest is having soup. Choose the two things they need to eat it.</p><div id="pairs"></div><p role="status" id="pairFeedback"></p></section><section id="report" class="panel" hidden><h2>You set the table for Alex!</h2><form id="studentForm" autocomplete="off">
 <fieldset><legend>Student details for this report</legend><div class="student-grid">
 <label>Student ID<input name="studentId" required maxlength="24" type="text"></label>
 <label>Full name<input name="fullName" required maxlength="120" type="text"></label>
@@ -36,7 +37,8 @@
 </div><div id="results"></div><section id="exportPanel" tabindex="-1" class="hideprint" hidden><h2>Your results</h2><p id="exportStatus" role="status"></p><button id="sharePdf" type="button" hidden>Share PDF</button> <a id="resultPdf" target="_blank" rel="noopener" download="Alex-Table-Results.pdf">Open / save PDF</a> <button type="button" onclick="window.print()">Print here</button><img id="resultImage" alt="One-page student results, ready for a screenshot" style="display:block;width:100%;max-height:78vh;object-fit:contain;margin:.7rem auto"></section></section><p id="notice"></p></main>
 <script src="../audio/player.js"></script><script src="welcome-print.js"></script><script src="table-export.js"></script><script src="table-words.js"></script>
 <script>
-const items = window.AlexTableWords;
+const items = window.AlexTableWords, SP = window.SanorProfile;
+SP.mountLevelButton(document.getElementById('levelSlot'));
 const options=[[0,2,1],[2,1,0],[1,0,2],[4,3,6],[6,8,4],[5,7,4],[8,6,4],[5,8,7],[8,9,6],[6,9,8]];
 const shapes=['','','','','<ellipse cx="210" cy="141" rx="53" ry="14" fill="#fff9ef" stroke="#73908e" stroke-width="3"/>','<text x="190" y="151" font-size="34">🍴</text>','<path d="M312 124q34 48 68 0Z" fill="#386f79"/><ellipse cx="346" cy="124" rx="34" ry="7" fill="#accfc6"/>','<text x="386" y="149" font-size="32">🥄</text>','<path d="M455 98h28l-4 35h-20Z" fill="#eefafa" stroke="#466c78" stroke-width="2"/>','<path d="M458 112h22l-3 19h-16Z" fill="#67bad0"/>'];
 const get=id=>document.getElementById(id), key='sanor-table-mission-v1';
@@ -53,7 +55,8 @@ if(host){
   if(progress)state=progress;
 }
 if(!host)try{const s=JSON.parse(localStorage.getItem(key));if(s&&Number.isInteger(s.index)&&s.index>=0&&s.index<=10&&s.rows?.length===10&&s.rows.every((r,i)=>r&&Array.isArray(r.answers)&&r.answers.every(n=>options[i].includes(n))&&typeof r.hint==='boolean'&&(i>=s.index||r.answers.at(-1)===i)))state=s}catch{}
-function save(){if(host){host.save(state);return;}try{localStorage.setItem(key,JSON.stringify(state))}catch{get('notice').textContent='This device cannot save your work. Print your results before you leave.'}}
+function syncProfile(){const n=state.rows.filter((r,j)=>r.answers.at(-1)===j).length;SP.record('01','table',{xp:n*SP.XP.step+(state.index>=10?SP.XP.bonus:0),done:state.index>=10,stamps:items.filter((_,j)=>state.rows[j].answers.at(-1)===j).map(it=>({id:'table-'+it[0],label:it[0],icon:it[3]||'🪑'}))});}
+function save(){syncProfile();if(host){host.save(state);return;}try{localStorage.setItem(key,JSON.stringify(state))}catch{get('notice').textContent='This device cannot save your work. Print your results before you leave.'}}
 function paint(){const i=state.index,done=i===10,r=state.rows[i],ok=!done&&r.answers.at(-1)===i,n=i+Number(ok);
 get('room').textContent=n?items[Math.min(n-1,2)][3]+' '+items[Math.min(n-1,2)][0]:'🏠 My home';
 get('furniture').setAttribute('visibility',n>=4?'visible':'hidden');get('setting').innerHTML=shapes.slice(0,n).join('');
@@ -86,9 +89,9 @@ if(done){get('results').innerHTML='<p>Correct on the first try '+state.rows.filt
   return;
 }
 get('again').onclick=()=>{if(confirm('Start a new round and replace the results on this device?')){get('exportPanel').hidden=true;studentForm.reset();updatePrintedStudent();state=fresh();save();paint()}};return}
-get('count').textContent='Mission '+(i+1)+' / 10';get('prompt').textContent=items[i][1];get('next').hidden=!ok;get('hint').disabled=ok;get('choices').replaceChildren();
+get('count').textContent='Mission '+(i+1)+' / 10';get('prompt').textContent=items[i][1];get('promptTh').textContent=items[i][6];get('promptTh').classList.remove('open');get('next').hidden=!ok;get('hint').disabled=ok;get('choices').replaceChildren();
 for(const j of options[i]){const b=document.createElement('button');b.innerHTML=(items[j][0]==='table'?'<img src="dining-table.svg" alt="" width="50" height="38">':items[j][3])+'<small>'+items[j][2]+'</small>';b.disabled=ok;b.onclick=()=>{r.answers.push(j);save();paint()};get('choices').append(b)}
-get('status').textContent=ok?'Correct! '+items[i][0]+' · '+items[i][2]:[r.answers.length?'Listen again. What did Alex ask for?':'',r.hint?items[i][4]:''].filter(Boolean).join(' · ')}
+get('status').innerHTML=ok?SP.esc('Correct! '+items[i][0]+' · '+items[i][2])+SP.th(items[i][0]+' = '+items[i][5]):[r.answers.length?SP.esc('Listen again. What did Alex ask for?'):'',r.hint?SP.esc(items[i][4])+SP.th(items[i][7]):''].filter(Boolean).join(' · ')}
 const studentForm = get('studentForm');
 function updatePrintedStudent() {
   for (const field of studentForm.querySelectorAll('input')) {

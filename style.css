@@ -13,3 +13,12 @@
 @media(max-height:560px){.zoom-controls{top:195px}.mouse-hint{display:none}}
 
 .home-mission-link{display:block;margin:16px 0 0;padding:12px 16px;border:1px solid #f3d89b70;border-radius:12px;text-decoration:none;background:#f4d991;color:#274c45;font-size:13px;font-weight:600}.home-mission-nav{position:fixed;top:90px;left:50%;transform:translateX(-50%);z-index:3;background:#f4d991;color:#274c45;padding:10px 16px;border-radius:20px;text-decoration:none;font-size:12px;font-weight:600}@media(max-width:700px){.home-mission-nav{top:auto;bottom:210px;font-size:10px;white-space:nowrap}}
+
+/* ---------- Thai help on the dark island panels (shared/tokens.css) ---------- */
+.glass .th,#win .th{color:inherit;opacity:.85}
+#question .th{opacity:1}
+#hint .th{display:block;margin-top:3px}
+[data-thai="tap"] .glass .th:not(.open){background:repeating-linear-gradient(135deg,#ffffff14 0 8px,#ffffff22 8px 16px)}
+[data-thai="tap"] .glass .th:not(.open)::after{color:#d7ece6}
+.top-right .sq-level{background:#173049e6;border-color:#ffffff26;color:#fff;box-shadow:none;backdrop-filter:blur(8px)}
+.top-right .sq-level b{color:#a8ecd0}

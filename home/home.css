@@ -18,3 +18,11 @@
  #reportOverlay .report-top .badge{display:none}
  #reportOverlay .report-actions,#cardPrintOptions{display:none!important}
 }
+
+/* ---------- Thai help (shared/profile.js + shared/tokens.css) ---------- */
+.place-label small.th{font-size:10px;margin-top:2px}
+#stageList small.th{display:block;font-size:10.5px;margin-top:1px}
+.translation.th{font-size:13px;margin-top:8px}
+.prompt .th,.hint-text .th,.feedback .th{display:block;font-size:12.5px;margin-top:3px}
+.vocab-row small.th{display:block;font-size:12px;margin-top:3px}
+.header-actions .sq-level{min-height:44px}

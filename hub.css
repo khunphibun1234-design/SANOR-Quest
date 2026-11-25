@@ -10,3 +10,33 @@
 .mini-art svg,.detail-art svg{max-width:100%}.progress-track>span{width:0}
 @media(max-width:800px){.map-detail{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-art{min-width:0}.detail-art svg{object-fit:contain}}
 @media(max-width:360px){.title-spark{display:none}.map-detail{padding:18px 16px}.map-detail h3{font-size:23px}.detail-art{height:115px}.detail-kicker{font-size:6px;letter-spacing:.5px}.detail-thai{font-size:11px}.map-scale{display:none}.map-card{padding:10px}.map-card h3{font-size:14px}.map-card p,.card-status{font-size:10px}}
+
+/* ---------- Thai help, level button and passport (shared profile) ---------- */
+.detail-description-th{margin:-4px 0 14px;font-size:13px;line-height:1.7}
+.map-card p.th{font-family:var(--thai)}
+#levelSlot{display:inline-flex}
+.passport-stats{flex-wrap:wrap}
+.passport-name{display:grid;gap:6px;margin:0 0 18px;font:600 13px var(--display)}
+.passport-name input{min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:500 15px var(--body);color:var(--ink);background:#fff}
+.level-picker{border:0;margin:0 0 20px;padding:0}
+.level-picker legend{font:600 13px var(--display);margin-bottom:8px}
+.level-picker legend .th{display:block;font-size:12px;font-weight:500;margin-top:2px}
+#levelOptions{display:grid;gap:8px}
+.level-option{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer;background:#fff}
+.level-option:has(input:checked){border-color:var(--green);background:#f1f6ef;box-shadow:inset 0 0 0 1px var(--green)}
+.level-option input{accent-color:var(--green);width:18px;height:18px;flex:none}
+.level-option b{font:700 14px var(--display)}
+.level-option [lang="th"]{font-size:13px;color:var(--ink-soft)}
+.level-option small{display:block;font-size:12px;color:var(--muted)}
+.level-icon{font-size:22px}
+.passport-heading{font:700 15px var(--display);margin:6px 0 10px}
+.world-list{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:6px}
+.world-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:#f4f6ee}
+.world-row.locked{opacity:.6}
+.world-icon{font-size:22px;flex:none}
+.world-name{flex:1;min-width:0;display:grid;gap:2px;font-size:13px}
+.world-name b{font:600 13px var(--display)}
+.world-name .th{font-size:12px}
+.world-stamps{font-size:14px;letter-spacing:2px;color:var(--muted)}
+.world-xp{font:700 14px var(--display);color:#8a6418;white-space:nowrap}
+@media(max-width:800px){.detail-description{grid-row:5}.detail-description-th{grid-column:1 / -1;grid-row:6}.detail-missions{grid-row:7 / 11}.mission-progress{grid-row:7}.map-detail .primary-button,.unavailable-button{grid-row:8}.detail-footnote{grid-row:9}}
