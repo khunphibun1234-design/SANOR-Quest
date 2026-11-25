@@ -34,5 +34,5 @@ test('Map 01: the whole story can be played to the end',async({page})=>{
   await expect(page.locator('#reportContent')).toContainText('300 XP');
   await expect(page.locator('#reportContent')).toContainText("Ploy's home story");
   expect(await page.evaluate(()=>[SanorProfile.activity('01','welcome'),SanorProfile.activity('01','table').xp,SanorProfile.stamps('01').length]))
-    .toEqual([expect.objectContaining({xp:300,done:true}),300,17]);
+    .toEqual([expect.objectContaining({xp:300,done:true}),300,16]); // 5 stage stamps + welcome card + 10 table items
   expect(errors).toEqual([]);});
