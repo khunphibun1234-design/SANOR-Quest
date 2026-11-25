@@ -1,17 +1,18 @@
 // SANOR QUEST · Alex's Table · Three.js version (path B)
 // Build: see src/README.md. Output: home/table-three.js (bundled, minified).
-import {WebGLRenderer,Scene,PerspectiveCamera,Group,Mesh,Color,Vector3,Matrix4,MeshStandardMaterial,MeshBasicMaterial,
+import {WebGLRenderer,Scene,PerspectiveCamera,Group,Mesh,Color,Vector3,MeshStandardMaterial,MeshBasicMaterial,
  BoxGeometry,CylinderGeometry,SphereGeometry,CapsuleGeometry,TorusGeometry,LatheGeometry,Vector2,CanvasTexture,
  HemisphereLight,DirectionalLight,Fog,PMREMGenerator,NeutralToneMapping,SRGBColorSpace,PCFSoftShadowMap,DoubleSide,RepeatWrapping} from 'three';
 import {RoundedBoxGeometry} from 'three-addons/geometries/RoundedBoxGeometry.js';
 import {RoomEnvironment} from 'three-addons/environments/RoomEnvironment.js';
-import {mergeGeometries} from 'three-addons/utils/BufferGeometryUtils.js';
+// Shared SANOR engine pieces (materials, surface patterns, world-layout adapter): see src/sq-three.js
+import {stdMat,makeWorldAdapter} from 'sq3';
 
 const $=id=>document.getElementById(id);
-// ---------- renderer (fall back to the lighter 3D page if WebGL is missing) ----------
+// ---------- renderer (fall back to the 2D page if WebGL is missing) ----------
 let renderer;
 try{renderer=new WebGLRenderer({canvas:$('scene'),antialias:true,alpha:true,powerPreference:'high-performance'});}
-catch(e){location.replace('table3d.html'+location.search);throw e;}
+catch(e){location.replace('table.html'+location.search);throw e;}
 const FIXED_Q=/quality=high/.test(location.search);
 let pixelCap=Math.min(devicePixelRatio||1,2);
 renderer.setPixelRatio(pixelCap);renderer.setSize(innerWidth,innerHeight,false);
@@ -25,46 +26,9 @@ const sun=new DirectionalLight(0xffe9c7,2.5);sun.castShadow=true;sun.shadow.mapS
 scene.add(sun,sun.target);const SUN_DIR=new Vector3(-.45,1,.42).normalize();
 function fitShadow(c,r){sun.target.position.set(...c);sun.position.set(c[0]+SUN_DIR.x*30,c[1]+SUN_DIR.y*30,c[2]+SUN_DIR.z*30);const s=sun.shadow.camera;s.left=-r;s.right=r;s.top=r;s.bottom=-r;s.near=5;s.far=70;s.updateProjectionMatrix();}
 
-// ---------- surface patterns, computed in world space inside the standard material ----------
-const PATTERN_GLSL=`
-float sqHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-float sqNoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(sqHash(i),sqHash(i+vec2(1,0)),f.x),mix(sqHash(i+vec2(0,1)),sqHash(i+vec2(1,1)),f.x),f.y);}
-float sqPattern(int m,vec3 p,vec3 n){
- if(m==1){vec2 q=abs(n.y)>.5?p.xz:(abs(n.x)>.5?p.zy:p.xy);float g=sqNoise(vec2(q.x*1.2,q.y*26.))*.6+sqNoise(vec2(q.x*3.,q.y*60.))*.4;float plank=step(.97,fract(q.y*2.6));float id=sqHash(floor(vec2(q.x*.7+floor(q.y*2.6)*.37,q.y*2.6)));return .94+.07*g-plank*.14+(id-.5)*.08;}
- if(m==2){vec2 g=abs(fract(p.xz/.4)-.5);return 1.-step(.465,max(g.x,g.y))*.18+(sqHash(floor(p.xz/.4))-.5)*.05;}
- if(m==3){return .84+.24*(sqNoise(p.xz*3.)*.6+sqNoise(p.xz*14.)*.4);}
- if(m==4){return .95+.05*sin(p.x*90.)*sin(p.z*90.+p.y*90.)+(sqNoise(p.xz*8.)-.5)*.06;}
- if(m==5){return .97+.05*sqNoise(p.xy*6.+p.zz*6.);}
- return 1.;}`;
-const matCache=new Map();
-function stdMat(hex,pattern=0,opts={}){const key=hex+'|'+pattern+'|'+JSON.stringify(opts);if(matCache.has(key))return matCache.get(key);
- const rough=[.78,.62,.32,.95,.96,.9,.9,.35][pattern]??.78;
- const m=new MeshStandardMaterial({color:new Color(hex),roughness:rough,metalness:pattern===7?.25:0,...opts});
- if(pattern>0&&pattern<7){m.onBeforeCompile=sh=>{
-  sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vSqPos;varying vec3 vSqN;').replace('#include <project_vertex>','#include <project_vertex>\nvSqPos=(modelMatrix*vec4(transformed,1.)).xyz;vSqN=normalize(mat3(modelMatrix)*objectNormal);');
-  sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 vSqPos;varying vec3 vSqN;'+PATTERN_GLSL).replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.rgb*=sqPattern('+pattern+',vSqPos,normalize(vSqN));');};
-  m.customProgramCacheKey=()=>'sq'+pattern;}
- matCache.set(key,m);return m;}
-const WOOD=['#cba477','#a78462','#c19a70','#bc9873','#b99571','#ccac82','#b28c65','#d6ae83','#8e7052','#ceaa80','#e6c29a','#a48661','#e5cda5','#dfd7c2','#d6be98','#e1c9b3','#b99169','#c49764','#825c43','#c9a27a','#b98f66','#e9d3ad'];
-const PAT={'#a9bf8b':3,'#c9bd98':3,'#d8e3d3':2,'#c9dacb':2,'#c7d8c8':2,'#f6ead4':5,'#f3e7d0':5,'#f0e3c9':5,'#e4d3ac':5,'#f9edd0':5,'#6c9480':4,'#739c85':4,'#88a58b':4,'#b9c5a0':4,'#96b8bb':4,'#fcf2dd':4,'#fff7e3':4,'#d8a482':4,'#fff5dc':5,'#496961':7,'#91afa4':7,'#b0b9a6':7,'#e9eddf':7};for(const c of WOOD)PAT[c]=1;
-
-// ---------- adapter: lets the existing world.js layout build Three.js meshes ----------
-let pending=[];const registered=[];
-function push(geo,col){pending.push({geo,col:col.toLowerCase()});}
-const adapter={
- box(x,y,z,w,h,d,col,ry=0){const m=Math.min(w,h,d);const g=m<.05?new BoxGeometry(w,h,d):new RoundedBoxGeometry(w,h,d,2,Math.min(.04,m*.3));g.rotateY(ry);g.translate(x,y,z);push(g,col);},
- cylinder(x,y,z,r1,r2,h,col,n=12){const g=new CylinderGeometry(r2,r1,h,Math.max(n*2,16));g.translate(x,y,z);push(g,col);},
- ellipsoid(x,y,z,rx,ry,rz,col,seg=10,rings=6){const g=new SphereGeometry(1,Math.max(seg*2,16),Math.max(rings*2,10));g.scale(rx,ry,rz);g.translate(x,y,z);push(g,col);},
- tri(){},
- mesh(){const by=new Map();for(const p of pending){if(!by.has(p.col))by.set(p.col,[]);by.get(p.col).push(p.geo);}pending=[];
-  const group=new Group();for(const [col,geos] of by){const merged=mergeGeometries(geos.map(g=>{g.deleteAttribute('uv');return g.index?g.toNonIndexed():g;}),false);const mesh=new Mesh(merged,stdMat(col,PAT[col]||0));mesh.castShadow=mesh.receiveShadow=true;group.add(mesh);}
-  const handle={group,pool:[],used:0,static:false};registered.push(handle);return handle;},
- draw(h,mat){if(!mat){h.group.visible=true;if(!h.group.parent)scene.add(h.group);return;}
-  if(mat[12]>200)return; // hidden placeholder avatars from world.js
-  let o=h.pool[h.used];if(!o){o=h.group.clone();o.matrixAutoUpdate=false;h.pool.push(o);scene.add(o);}h.used++;o.matrix.fromArray(mat);o.visible=true;},
- model(x=0,y=0,z=0,ry=0,s=1){const c=Math.cos(ry)*s,n=Math.sin(ry)*s;return new Float32Array([c,0,-n,0,0,s,0,0,n,0,c,0,x,y,z,1]);}};
+// ---------- the shared adapter lets the world.js layout build Three.js meshes ----------
+const {adapter,beginFrame:beginWorldFrame}=makeWorldAdapter(scene);
 const W=window.buildHomeWorld(adapter);
-function beginWorldFrame(){for(const h of registered){h.group.visible=false;for(const o of h.pool)o.visible=false;h.used=0;}}
 
 // ---------- native props ----------
 const P=(g,m,cast=true)=>{const o=new Mesh(g,m);o.castShadow=cast;o.receiveShadow=true;return o;};

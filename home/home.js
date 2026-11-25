@@ -2,7 +2,7 @@
 const $=id=>document.getElementById(id),C=window.HomeContent,KEY='sanor-home-welcome-v1',canvas=$('scene'),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));let saved=null,storageOK=true;try{saved=JSON.parse(localStorage.getItem(KEY));}catch{storageOK=false;}
 let lesson=new HomeLesson(saved),started=false,modal='intro',lastFocus=null,path=[],pathPlace=null,near=null,followTrail=[],toastTimer;
 const keys=new Set(),player={x:0,z:7,angle:Math.PI,walk:false},alex={x:.85,z:5.6,angle:0,walk:false},mum={x:-1.8,z:-.5,angle:0,walk:false},camera={yaw:.38,pitch:.78,zoom:1,targetZoom:1},clamp=(n,a,b)=>Math.min(b,Math.max(a,n));let orbit=null,engine,world,nav;
-try{engine=new HomeEngine(canvas);world=buildHomeWorld(engine);nav=new HomeNav(world.colliders);}catch(err){$('intro').hidden=true;$('error').hidden=false;console.error(err);return;}
+try{engine=SQ3.createEngine(canvas,{background:'#e3eadc',fog:[40,95],shadowCenter:[0,0,0],shadowRadius:14});world=buildHomeWorld(engine);nav=new HomeNav(world.colliders);}catch(err){$('intro').hidden=true;$('error').hidden=false;console.error(err);return;}
 const fill=s=>String(s).replaceAll('{name}',lesson.state.name);
 function save(){try{localStorage.setItem(KEY,JSON.stringify(lesson.state));storageOK=true;}catch{storageOK=false;}$('saveStatus').textContent=storageOK?'Saved in this browser':'This device cannot save your progress';}
 function toast(s){clearTimeout(toastTimer);$('toast').textContent=s;$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,3600);}
