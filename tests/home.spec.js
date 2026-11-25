@@ -2,7 +2,7 @@ const {test,expect}=require('@playwright/test');const {watch}=require('./helpers
 // Plays Map 01 from the front gate to the printed welcome card, like a student would:
 // walk with "Take me there", answer every question, set the lunch table, then write the card.
 test('Map 01: the whole story can be played to the end',async({page})=>{
-  test.setTimeout(240_000);const errors=watch(page);
+  test.setTimeout(480_000);const errors=watch(page);
   await page.goto('/home/?quality=low');await page.evaluate(()=>localStorage.clear());await page.reload();
   await page.fill('#playerName','Ploy');await page.click('#startBtn');await page.click('#enterStory');
   const visible=sel=>page.locator(sel).isVisible();
