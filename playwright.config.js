@@ -2,6 +2,7 @@
 const {defineConfig}=require('@playwright/test');
 module.exports=defineConfig({
   testDir:'tests',
+  testMatch:/.*\.spec\.m?js/,
   timeout:60_000,
   fullyParallel:true,
   reporter:process.env.CI?[['github'],['list']]:'list',

@@ -43,7 +43,7 @@ function ask() {
   const task = {kind: 'choice', choices, answer: choices.findIndex(c => c.id === w.id)};
   let first = true;
   SQMission.render(el('choices'), task, {support: P.support(), onResult({correct}) {
-    if (first) { first = false; SRS.record(w.id, {correct}); P.logAnswer(correct); results.push({w, correct}); }
+    if (first) { first = false; SRS.record(w.id, {correct}); P.logAnswer(correct, {world: 'review', activity: 'review', item: w.id, label: w.en, correct, hint: false}); results.push({w, correct}); }
     const ex = w.example ? '<span class="example" lang="en">' + esc(w.example.en) + '</span>' + th(w.example.th) : '';
     el('feedback').innerHTML = (correct ? '✓ ' : '✗ ' + esc('The answer is ')) + '<b>' + esc(w.en) + '</b> = ' + esc(w.th) + ex + (correct ? '' : th('คำนี้จะกลับมาให้ทบทวนเร็ว ๆ นี้'));
     if (kind === 'listen') el('question').textContent = '🔊 ' + w.example.en;

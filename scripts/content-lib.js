@@ -4,10 +4,11 @@ const ROOT=path.join(__dirname,'..');
 const readJSON=f=>JSON.parse(fs.readFileSync(path.join(ROOT,f),'utf8'));
 function load(){
   const words=readJSON('content/words.json').words;
+  const tests=readJSON('content/tests.json');
   const worlds={};
   for(const f of fs.readdirSync(path.join(ROOT,'content/worlds')).filter(f=>f.endsWith('.json')).sort()){
     const w=readJSON('content/worlds/'+f);worlds[w.id]=w;}
-  return {words,worlds};}
+  return {words,worlds,tests};}
 
 // Every line the game can play aloud, with where it lives and the file it needs.
 function spokenLines({words,worlds}){
@@ -57,5 +58,9 @@ function validate({words,worlds}){
       if(m.card){need(m.card.intro?.en&&m.card.intro?.th,`${M}: card.intro en/th required`);for(const f of m.card.fields){const F=`${M} card field ${f.id}`;need(f.label?.en&&f.label?.th&&f.help?.en&&f.help?.th&&f.example?.en,`${F}: label, help (en/th) and example are required`);
         need(f.rules&&f.rules.minWords>0,`${F}: rules.minWords is required`);for(const r of [...(f.rules?.all||[]),...(f.rules?.any||[])]){try{new RegExp(r,'i');}catch{errors.push(`${F}: bad pattern ${r}`);}}
         need(f.example&&require('../shared/mission.js').checkWriting(f.example.en,f.rules),`${F}: the example must pass its own rules`);}}}}
+  if(arguments[0].tests){const T=arguments[0].tests,seen=new Set();need(T.title?.en&&T.title?.th,'tests: title en/th required');
+    for(const part of T.parts){need(part.title?.en&&part.title?.th&&part.instruction?.en&&part.instruction?.th,`tests part ${part.id}: title and instruction en/th required`);
+      for(const it of part.items){need(!seen.has(it.id),`tests: duplicate item ${it.id}`);seen.add(it.id);need(it.prompt?.en&&Array.isArray(it.choices)&&it.choices.length>=2&&Number.isInteger(it.answer)&&it.answer<it.choices.length,`tests item ${it.id}: prompt, choices and a valid answer are required`);
+        if(it.word)need(words.some(w=>w.id===it.word),`tests item ${it.id}: unknown word ${it.word}`);}}}
   return errors;}
 module.exports={ROOT,load,validate,spokenLines};

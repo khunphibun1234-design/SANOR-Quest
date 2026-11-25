@@ -70,7 +70,7 @@ function showRound() {
   // Answer buttons come from the shared mission player (shared/mission.js).
   SQMission.render(el('choices'), {kind:'choice', choices:options, answer:options.indexOf(r.word)}, {
     support: P.support(), showHint: () => el('hint').click(),
-    onPick(value) { const result = results[index]; result.attempts++; if (!result.first) { result.first = options[value]; result.hintBeforeFirst = result.hint; const ok = options[value] === r.word; SanorSRS.record(r.word, {correct: ok, hint: result.hint}); P.logAnswer(ok && !result.hint); updateCrowd(); } },
+    onPick(value) { const result = results[index]; result.attempts++; if (!result.first) { result.first = options[value]; result.hintBeforeFirst = result.hint; const ok = options[value] === r.word; SanorSRS.record(r.word, {correct: ok, hint: result.hint}); P.logAnswer(ok && !result.hint, {world: '02', activity: 'buddy', item: r.word, label: r.word, correct: ok, hint: result.hint}); updateCrowd(); } },
     onResult({correct}) {
       if (!correct) { say('Listen to Alex again and choose another word.', 'ลองฟัง Alex อีกครั้ง แล้วเลือกคำอื่นนะ'); return; }
       results[index].done = true;

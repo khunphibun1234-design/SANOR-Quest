@@ -12,6 +12,7 @@
     "audio": "node scripts/audio-report.js"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.3.7",
     "@playwright/test": "^1.63.0",
     "esbuild": "^0.24.0",
     "three": "^0.187.0"

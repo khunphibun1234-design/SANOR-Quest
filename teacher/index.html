@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f5ed"><title>Teacher Dashboard · SANOR QUEST</title>
+<link rel="icon" href="../hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../shared/tokens.css"><link rel="stylesheet" href="teacher.css">
+<script src="../shared/config.js"></script><script src="../shared/backend.js"></script></head>
+<body class="sq-page">
+<header class="bar"><a class="brand" href="../"><img src="../sanor-quest-book-logo.png" width="40" height="40" alt=""><span>SANOR <b>QUEST</b> · สำหรับครู</span></a><div class="bar-tools"><span id="who"></span><button id="signOut" hidden>ออกจากระบบ</button></div></header>
+<main>
+<p id="demoNote" class="demo-note" hidden>โหมดทดลอง: ข้อมูลห้องเรียนเก็บไว้ในเบราว์เซอร์นี้เท่านั้น (นักเรียนต้องเล่นบนเครื่องเดียวกัน) เมื่อตั้งค่า Supabase แล้ว ข้อมูลจะรวมจากทุกเครื่อง · ดู docs/SETUP-SUPABASE.md</p>
+
+<section id="auth" class="card" hidden>
+ <h1>แดชบอร์ดครู</h1><p>ดูความคืบหน้าของนักเรียน คำที่ทั้งห้องพลาดบ่อย และผลก่อน/หลังเรียน</p>
+ <form id="authForm" class="auth-form"><label>อีเมล<input name="email" type="email" required autocomplete="email"></label><label>รหัสผ่าน (อย่างน้อย 8 ตัว)<input name="password" type="password" minlength="8" required autocomplete="current-password"></label>
+  <fieldset id="signUpFields" hidden><label>ชื่อครู<input name="name" maxlength="80"></label><label>โรงเรียน<input name="school" maxlength="120"></label></fieldset>
+  <button class="primary" type="submit" id="authSubmit">เข้าสู่ระบบ</button><button type="button" id="toggleMode" class="link">ยังไม่มีบัญชี? สมัครใช้งาน</button><p id="authError" role="alert"></p></form>
+ <button id="demoStart" class="primary" hidden>เริ่มทดลองใช้ (โหมดทดลอง) →</button>
+</section>
+
+<section id="classesView" hidden>
+ <div class="row-between"><h1>ห้องเรียนของฉัน</h1><form id="newClass" class="inline-form"><input name="name" maxlength="60" required placeholder="เช่น ม.2/5"><button class="primary" type="submit">+ สร้างห้อง</button></form></div>
+ <div id="classList" class="class-list"></div>
+</section>
+
+<section id="classView" hidden>
+ <div class="row-between"><div><button id="backToClasses" class="link">← ห้องเรียนทั้งหมด</button><h1 id="className"></h1></div>
+  <div class="code-card"><small>รหัสห้องสำหรับนักเรียน</small><strong id="classCode"></strong><span>เปิด SANOR QUEST → My passport → Join my class</span></div></div>
+ <nav class="tabs" role="tablist"><button role="tab" data-tab="overview" aria-selected="true">ภาพรวมห้อง</button><button role="tab" data-tab="words">คำที่พลาดบ่อย</button><button role="tab" data-tab="tests">ก่อน/หลังเรียน</button><button role="tab" data-tab="settings">ตั้งค่าห้อง</button></nav>
+ <div class="toolbar"><button id="refresh">↻ รีเฟรช</button><button id="csv">⬇ ส่งออก CSV</button><button id="print">🖨 พิมพ์รายงาน</button><span id="updated"></span></div>
+ <div id="tab-overview" class="tab"></div>
+ <div id="tab-words" class="tab" hidden></div>
+ <div id="tab-tests" class="tab" hidden></div>
+ <div id="tab-settings" class="tab" hidden></div>
+</section>
+
+<dialog id="studentDialog"><button class="close" data-close aria-label="ปิด">×</button><div id="studentBody"></div></dialog>
+</main>
+<script src="../content/content.js"></script><script src="teacher.js"></script>
+</body></html>

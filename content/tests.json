@@ -1,0 +1,34 @@
+{
+ "note": "Pre-test and post-test (same 20 questions, shown in a mixed order). Map 01–02, CEFR A1. Draft for expert review.",
+ "title": {"en": "SANOR QUEST English Check", "th": "แบบทดสอบภาษาอังกฤษ SANOR QUEST"},
+ "minutes": 15,
+ "parts": [
+  {"id": "words", "title": {"en": "Part 1 · Words", "th": "ตอนที่ 1 · คำศัพท์"}, "instruction": {"en": "Choose the English word.", "th": "เลือกคำภาษาอังกฤษที่ตรงกับความหมาย"},
+   "items": [
+    {"id": "w1", "prompt": {"en": "สวน"}, "choices": ["garden", "kitchen", "bedroom"], "answer": 0, "word": "garden"},
+    {"id": "w2", "prompt": {"en": "ห้องครัว"}, "choices": ["living room", "kitchen", "garden"], "answer": 1, "word": "kitchen"},
+    {"id": "w3", "prompt": {"en": "ห้องนอน"}, "choices": ["bedroom", "classroom", "library"], "answer": 0, "word": "bedroom"},
+    {"id": "w4", "prompt": {"en": "จาน"}, "choices": ["bowl", "glass", "plate"], "answer": 2, "word": "plate"},
+    {"id": "w5", "prompt": {"en": "ช้อน"}, "choices": ["spoon", "fork", "table"], "answer": 0, "word": "spoon"},
+    {"id": "w6", "prompt": {"en": "แก้ว"}, "choices": ["water", "glass", "bowl"], "answer": 1, "word": "glass"},
+    {"id": "w7", "prompt": {"en": "ห้องสมุด"}, "choices": ["canteen", "gym", "library"], "answer": 2, "word": "library"},
+    {"id": "w8", "prompt": {"en": "โรงอาหาร"}, "choices": ["canteen", "stage", "gate"], "answer": 0, "word": "canteen"},
+    {"id": "w9", "prompt": {"en": "ตารางเรียน"}, "choices": ["notebook", "timetable", "club"], "answer": 1, "word": "timetable"},
+    {"id": "w10", "prompt": {"en": "เวที"}, "choices": ["stage", "gym", "classroom"], "answer": 0, "word": "stage"}]},
+  {"id": "talk", "title": {"en": "Part 2 · Conversations", "th": "ตอนที่ 2 · บทสนทนา"}, "instruction": {"en": "Choose the best reply.", "th": "เลือกคำตอบที่เหมาะสมที่สุด"},
+   "items": [
+    {"id": "t1", "prompt": {"en": "Alex: Hi! Thank you for inviting me."}, "choices": ["Hi! Welcome to my home!", "Goodbye! See you tomorrow.", "Where is your school?"], "answer": 0},
+    {"id": "t2", "prompt": {"en": "Alex: I'm Alex. What's your name?"}, "choices": ["This is the kitchen.", "I'm Mook. Nice to meet you.", "I like orange juice."], "answer": 1},
+    {"id": "t3", "prompt": {"en": "Mum: Would you like some water?"}, "choices": ["Yes, please. Thank you!", "Yes, I am.", "It's my bedroom."], "answer": 0},
+    {"id": "t4", "prompt": {"en": "Alex: Can I help you?"}, "choices": ["No, I'm not.", "I help every day.", "Sure! Take this watering can."], "answer": 2},
+    {"id": "t5", "prompt": {"en": "Alex: When is our English lesson? (English 9:30)"}, "choices": ["At half past nine.", "At nine o'clock.", "On Monday morning."], "answer": 0},
+    {"id": "t6", "prompt": {"en": "Alex: Do you want to play basketball?"}, "choices": ["Yes! Let's play after school.", "I play basketball yesterday.", "No, it isn't."], "answer": 0}]},
+  {"id": "read", "title": {"en": "Part 3 · Reading", "th": "ตอนที่ 3 · การอ่าน"}, "instruction": {"en": "Read and answer.", "th": "อ่านแล้วตอบคำถาม"},
+   "passage": {"en": "Alex is a new student at Phibun School. He is in Class 2/5. He likes music very much. He can play the guitar and the piano. On Friday, Alex sings at the school concert on the stage. His friends come to watch him."},
+   "items": [
+    {"id": "r1", "prompt": {"en": "What does Alex like?"}, "choices": ["Sport", "Music", "Cooking"], "answer": 1},
+    {"id": "r2", "prompt": {"en": "What can Alex play?"}, "choices": ["The guitar and the piano", "The drums", "Basketball"], "answer": 0},
+    {"id": "r3", "prompt": {"en": "When is the concert?"}, "choices": ["On Monday", "On Wednesday", "On Friday"], "answer": 2},
+    {"id": "r4", "prompt": {"en": "Where does Alex sing?"}, "choices": ["In the library", "On the stage", "In the canteen"], "answer": 1}]}
+ ]
+}

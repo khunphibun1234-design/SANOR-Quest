@@ -107,7 +107,7 @@ function report(){$('playerLine').textContent=SP.name()||'';if(!speakMounted){sp
 function speak(){if(state.index<10)QuestVoice.play(items[state.index][1],m=>{$('status').textContent=m;});}
 function syncProfile(){const n=items.filter((_,j)=>solved(j)).length;SP.record('01','table',{xp:n*SP.XP.step+(state.index>=10?SP.XP.bonus:0),done:state.index>=10,stamps:items.filter((_,j)=>solved(j)).map(it=>({id:'table-'+it[0],label:it[0],icon:it[3]||'🪑'}))});}
 function choose(j){const i=state.index;if(i>=10||isOk()||!$('intro').hidden)return;const r=state.rows[i];r.answers.push(j);save();
- const right=SQMission.check({kind:'tap3d',answer:i},j);if(r.answers.length===1){SanorSRS.record(items[i][0],{correct:right,hint:r.hint});SP.logAnswer(right&&!r.hint);}
+ const right=SQMission.check({kind:'tap3d',answer:i},j);if(r.answers.length===1){SanorSRS.record(items[i][0],{correct:right,hint:r.hint});SP.logAnswer(right&&!r.hint,{world:'01',activity:'table',item:items[i][0],label:items[i][0],correct:right,hint:r.hint});}
  if(right){tone([[660,.18,0],[880,.22,.1],[1175,.3,.2]]);buzz(30);alex.act={type:'wave',t0:clock,dur:1.8};if(i===9)player.act={type:'cheer',t0:clock+.9,dur:2.2};
   if(j<=2){focusRoom=j;burst(rooms[j].ring);syncCharacters(false);}else if(j===3){anim={k:3,t0:clock,dur:.6};burst(TABLE);}
   else if(j===9)anim={k:9,t0:clock,dur:1.5,from:shelf[9],to:[slot[8][0]+.16,slot[8][1]+.32,slot[8][2]]};else anim={k:j,t0:clock,dur:.8,from:shelf[j],to:slot[j]};}

@@ -8,6 +8,13 @@
 | Map 01 · My Home, My Story (3D) · 3 ภารกิจ | `home/` (ภารกิจ 2 Lunch with Alex: `home/table-three.html`; 2D สำรอง: `home/table.html`) |
 | Map 02 · School of Adventures (3D) · 3 ภารกิจ | `school/` (2D สำรอง: `school/quiz.html`) |
 | ทบทวนประจำวัน 3 นาที | `review/` |
+| แบบทดสอบก่อน/หลังเรียน | `test/?kind=pre` · `test/?kind=post` (ข้อสอบ: `content/tests.json`) |
+| **แดชบอร์ดครู** | `teacher/` |
+
+## ระบบห้องเรียน
+นักเรียนกด **🏫 Join my class** แล้วใส่รหัสห้อง + เลขที่ + ชื่อเล่น + PIN 4 หลัก (ถ้าไม่เข้าห้องก็ยังเล่นได้ตามปกติ)
+ผลการเล่นเก็บในเครื่องก่อน แล้วส่งขึ้นเซิร์ฟเวอร์เมื่อมีอินเทอร์เน็ต (`shared/sync.js`)
+ฐานข้อมูลคือ Supabase (`supabase/migrations/`) ดูวิธีตั้งค่าใน **`docs/SETUP-SUPABASE.md`** ถ้ายังไม่ตั้งค่า ระบบจะทำงานใน **โหมดทดลอง** ซึ่งเก็บข้อมูลในเบราว์เซอร์
 
 ## เนื้อหา
 เนื้อหาทั้งหมดอยู่ใน `content/` (JSON) ดูวิธีแก้ใน `content/README.md` · บทอัดเสียงอยู่ใน `docs/audio/`

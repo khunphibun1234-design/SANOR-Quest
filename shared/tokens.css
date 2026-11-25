@@ -111,3 +111,4 @@
 .sq-coach-actions .th{display:inline;font-size:.78rem;margin:0 0 0 .2rem;color:inherit;opacity:.85}
 .sq-page .sq-field small,.sq-field small{text-transform:none;letter-spacing:0;font:500 .84rem/1.45 var(--body);color:var(--muted)}
 .sq-page .sq-field small.th,.sq-field small.th{color:var(--ink-soft)}
+.sq-level.locked{cursor:default;background:#f1efe6}

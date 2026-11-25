@@ -86,7 +86,7 @@ function question(id,place){const q=C.questions[id];show('dialogOverlay');
  if(listening)setTimeout(()=>speak(q.line),350);
  SQMission.render($('answerArea'),q,{fill,letters:true,rotate:Object.keys(C.questions).indexOf(id)%3,support:P.support(),showHint:()=>{$('hintText').hidden=false;},
   decide(value){if(correct)return null;const r=lesson.answer(id,value);if(!r.accepted)return null;
-   const first=lesson.state.attempts[id]===1,clean=first&&!lesson.state.aided.includes(id);if(first)P.logAnswer(r.correct&&clean);save();hud();
+   const first=lesson.state.attempts[id]===1,clean=first&&!lesson.state.aided.includes(id);if(first)P.logAnswer(r.correct&&clean,{world:cfg.worldId,activity:current,item:current+'-'+id,label:q.kind==='order'?q.tokens.join(' '):fill(q.choices[q.answer]),correct:r.correct,hint:lesson.state.aided.includes(id)});save();hud();
    $('answerFeedback').hidden=false;$('answerFeedback').className='feedback'+(r.correct?' good':'');
    const who=q.speaker==='Alex'?alex:npcs[q.speaker.toLowerCase()];if(who)who.act={type:r.correct?'wave':'hmm',t0:clock,dur:r.correct?1.8:1.2};
    if(r.correct){correct=true;const change=clean&&cfg.changeMessage?cfg.changeMessage(current):null;
@@ -198,7 +198,9 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min((now-last)/10
  for(const p of Object.values(C.places)){const pos=engine.project(p.x,p.y,p.z);p.el.style.transform=`translate(${pos.x}px,${pos.y}px) translate(-50%,-100%)`;p.el.style.visibility=pos.visible?'visible':'hidden';}
  uiTick+=dt;if(uiTick>.12){uiTick=0;let closest=null,distance=Infinity;for(const [id,p] of Object.entries(C.places)){const d=Math.hypot(player.x-p.approach[0],player.z-p.approach[1]);if(d<distance){distance=d;closest=id;}}
   near=distance<1.7?closest:null;$('interact').disabled=!near||!ready();$('nearText').textContent=near?C.places[near].name+' · Ready to talk':'Walk closer to your destination';$('locationName').textContent=C.places[closest].name;}}
-placeCast();picker();hud();zoomUI();if(!storageOK)$('saveStatus').textContent='Progress cannot be saved on this device';
+placeCast();picker();hud();zoomUI();
+// a teacher can close a world for the class (shared/sync.js)
+if(root.SanorClass&&!root.SanorClass.worldOpen(cfg.worldId)){$('startBtn').disabled=true;$('startBtn').textContent='Closed by your teacher · ครูยังไม่เปิดโลกนี้';$('missionPicker').querySelectorAll('button').forEach(b=>b.disabled=true);}if(!storageOK)$('saveStatus').textContent='Progress cannot be saved on this device';
 for(const id of stories)syncProfile(id);
 requestAnimationFrame(frame);
 root.storyStatus=()=>({mission:current,stage:lesson.stage.id,completed:[...lesson.state.completed],xp:lesson.xp,done:lesson.state.done,position:{x:player.x,z:player.z}});
