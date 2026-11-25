@@ -33,6 +33,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offs
 .card p{margin:8px 0}
 .card .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 table{border-collapse:collapse;width:100%;font-size:15px}td,th{text-align:left;padding:5px;border-bottom:1px solid #ddd}
+.chip-btn{display:inline-flex;align-items:center;padding:10px 14px;border-radius:12px;background:var(--green);color:#fff;text-decoration:none;font-weight:600;min-height:48px}#stampLine{font-weight:600}
 .proto{font-size:12px;color:#7a6a3a;background:#fbefc9;border-radius:8px;padding:4px 8px;display:inline-block}
 @media print{#scene,.top,.bottom,.bubble,.noprint{display:none!important}.overlay{position:static;background:none}.card{box-shadow:none;border:0}}
 </style></head><body>
@@ -44,7 +45,7 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{text-align:left;p
 <div class="bubble" id="bubble" hidden></div>
 <div class="bottom"><p id="status" role="status"></p><button class="primary" id="next" hidden>Next →</button></div>
 <div class="overlay" id="intro"><section class="card"><div class="eyebrow">MAP 01 · ALEX’S TABLE</div><h2>Lunch with Alex</h2><p>Listen to Alex. Find the place or thing in the house and tap it.<br><span class="th" lang="th">ฟัง Alex แล้วหาสถานที่หรือสิ่งของในบ้าน จากนั้นแตะที่มัน</span></p><p style="color:#5e7a6d;font-size:14px">The glowing rings show what you can tap. Drag to turn the house.</p><div class="row"><button class="primary" id="start">Start →</button></div></section></div>
-<div class="overlay" id="report" hidden><section class="card"><div class="eyebrow">ALEX’S TABLE · 3D</div><h2>You set the table for Alex!</h2><div id="speakBox" class="noprint"></div><div id="results"></div><div class="row noprint"><button id="print">Print results</button><button id="again">Start a new round</button><a class="chip" href="index.html" style="align-self:center">← Map 01</a></div></section></div>
+<div class="overlay" id="report" hidden><section class="card"><div class="eyebrow">MAP 01 · MISSION 02 · LUNCH WITH ALEX</div><h2>You set the table for Alex!</h2><p id="stampLine">🏅 Passport stamp: Lunch with Alex · <span id="playerLine"></span></p><div id="speakBox" class="noprint"></div><div id="results"></div><div class="row noprint"><button id="print">Print results</button><button id="again">Start a new round</button><a class="primary chip-btn" id="nextMission" href="index.html?mission=garden">Next mission: An Afternoon in the Garden →</a><a class="chip" href="index.html" style="align-self:center">← Map 01</a></div></section></div>
 <script src="../content/content.js"></script><script src="../shared/mission.js"></script><script src="../shared/srs.js"></script><script src="../shared/voice.js"></script><script src="../shared/coach.js"></script><script src="world.js"></script><script src="nav.js"></script><script src="table-words.js"></script><script src="../audio/player.js"></script>
 <script>if(!(function(){try{const c=document.createElement("canvas");return !!(window.WebGLRenderingContext&&(c.getContext("webgl2")||c.getContext("webgl")));}catch(e){return false}})())location.replace("table.html"+location.search);</script>
 <script src="../shared/sq-three.js"></script><script src="table-three.js"></script>

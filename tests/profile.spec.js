@@ -1,5 +1,5 @@
 const {test,expect}=require('@playwright/test');
-test.beforeEach(async({page})=>{await page.goto('/school/');await page.evaluate(()=>{localStorage.clear();});await page.reload();});
+test.beforeEach(async({page})=>{await page.goto('/school/quiz.html');await page.evaluate(()=>{localStorage.clear();});await page.reload();});
 
 test('record keeps the best XP and never duplicates stamps',async({page})=>{
   const r=await page.evaluate(()=>{const P=SanorProfile;P.reset();

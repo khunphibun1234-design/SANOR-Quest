@@ -2,7 +2,7 @@
 
 สร้างอัตโนมัติด้วย `npm run audio` · อย่าแก้ไฟล์นี้เอง
 
-- ต้องอัดเพิ่ม **23** ไฟล์ จากทั้งหมด 46 ประโยค
+- ต้องอัดเพิ่ม **48** ไฟล์ จากทั้งหมด 71 ประโยค
 - อัดเป็น .mp3 (mono, 44.1 kHz) ตั้งชื่อไฟล์ตามคอลัมน์ "ชื่อไฟล์" แล้วส่งมาทั้งชุด
 - `{name}` คือชื่อเล่นของผู้เล่น: ให้พูดว่า "Mook" แทน
 
@@ -54,3 +54,28 @@
 | 44 | ✅ | I want to join a group that sings after school. Is there a music ___? | ฉันอยากเข้ากลุ่มที่ร้องเพลงหลังเลิกเรียน มี ___ ดนตรีไหม | `line-28.mp3` | example: club |
 | 45 | ⬜ | stage |  | `word-stage.mp3` | word: stage |
 | 46 | ✅ | Our club has a concert! Where should I stand so everyone can see me sing? | ชมรมของเรามีคอนเสิร์ต ฉันควรยืนตรงไหนให้ทุกคนเห็นตอนร้องเพลง | `line-29.mp3` | example: stage |
+| 47 | ⬜ | afternoon |  | `word-afternoon.mp3` | word: afternoon |
+| 48 | ⬜ | What can we do this afternoon? | บ่ายนี้เราทำอะไรกันดี | `word-afternoon-example.mp3` | example: afternoon |
+| 49 | ⬜ | snack |  | `word-snack.mp3` | word: snack |
+| 50 | ⬜ | Would you like some snacks? | อยากกินขนมไหม | `word-snack-example.mp3` | example: snack |
+| 51 | ⬜ | plant |  | `word-plant.mp3` | word: plant |
+| 52 | ⬜ | I'm watering the plants. | ฉันกำลังรดน้ำต้นไม้ | `word-plant-example.mp3` | example: plant |
+| 53 | ⬜ | board game |  | `word-board-game.mp3` | word: board-game |
+| 54 | ⬜ | Do you like board games? | เธอชอบเล่นบอร์ดเกมไหม | `word-board-game-example.mp3` | example: board-game |
+| 55 | ⬜ | chess |  | `word-chess.mp3` | word: chess |
+| 56 | ⬜ | I like chess. | ฉันชอบหมากรุก | `word-chess-example.mp3` | example: chess |
+| 57 | ⬜ | tomorrow |  | `word-tomorrow.mp3` | word: tomorrow |
+| 58 | ⬜ | See you tomorrow! | เจอกันพรุ่งนี้นะ | `word-tomorrow-example.mp3` | example: tomorrow |
+| 59 | ⬜ | lesson |  | `word-lesson.mp3` | word: lesson |
+| 60 | ⬜ | When is our English lesson? | เราเรียนภาษาอังกฤษกี่โมง | `word-lesson-example.mp3` | example: lesson |
+| 61 | ⬜ | library card |  | `word-library-card.mp3` | word: library-card |
+| 62 | ⬜ | Do you have a library card? | มีบัตรห้องสมุดไหม | `word-library-card-example.mp3` | example: library-card |
+| 63 | ⬜ | lunch |  | `word-lunch.mp3` | word: lunch |
+| 64 | ⬜ | What do you usually eat for lunch? | ปกติเธอกินอะไรเป็นมื้อกลางวัน | `word-lunch-example.mp3` | example: lunch |
+| 65 | ⬜ | basketball |  | `word-basketball.mp3` | word: basketball |
+| 66 | ⬜ | Let's play basketball after school. | ไปเล่นบาสหลังเลิกเรียนกันเถอะ | `word-basketball-example.mp3` | example: basketball |
+| 67 | ⬜ | guitar |  | `word-guitar.mp3` | word: guitar |
+| 68 | ⬜ | I can play the guitar and the piano. | ฉันเล่นกีตาร์กับเปียโนได้ | `word-guitar-example.mp3` | example: guitar |
+| 69 | ⬜ | piano |  | `word-piano.mp3` | word: piano |
+| 70 | ⬜ | concert |  | `word-concert.mp3` | word: concert |
+| 71 | ⬜ | Is Alex ready for the concert? | Alex พร้อมสำหรับคอนเสิร์ตหรือยัง | `word-concert-example.mp3` | example: concert |

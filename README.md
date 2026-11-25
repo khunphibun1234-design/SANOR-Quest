@@ -5,8 +5,8 @@
 
 | โลก | ไฟล์ |
 |---|---|
-| Map 01 · My Home, My Story (3D) | `home/` และ Alex's Table `home/table-three.html` (2D สำรอง: `home/table.html`) |
-| Map 02 · School Buddy | `school/` |
+| Map 01 · My Home, My Story (3D) · 3 ภารกิจ | `home/` (ภารกิจ 2 Lunch with Alex: `home/table-three.html`; 2D สำรอง: `home/table.html`) |
+| Map 02 · School of Adventures (3D) · 3 ภารกิจ | `school/` (2D สำรอง: `school/quiz.html`) |
 | ทบทวนประจำวัน 3 นาที | `review/` |
 
 ## เนื้อหา
@@ -16,6 +16,7 @@
 
 - `shared/sq-three.js`: เอนจิน 3D เดียวของทุกแผนที่ (Three.js r187) ต้นฉบับอยู่ที่ `src/` และวิธี build อยู่ใน `src/README.md`
 - `shared/profile.js`: โปรไฟล์ผู้เล่น ทั้งชื่อเล่น ระดับ XP และตราประทับจากทุกโลก ซึ่งแสดงในพาสปอร์ต
+- `shared/story.js` + `shared/lesson.js`: เอนจินเรื่องราว 3D ที่ทุกแผนที่ใช้ร่วมกัน (เดิน คุย ภารกิจหลายภารกิจ การ์ดเขียน งานพูด ตราประทับ และรายงานที่พิมพ์ได้) แผนที่ใหม่มีแค่ฉาก 3D (`world.js`) กับไฟล์ตั้งค่าสั้น ๆ
 - `shared/mission.js`: ตัวเล่นภารกิจกลาง (choice, listen, order, speak, write, tap3d)
 - `shared/srs.js`: ระบบทบทวนคำแบบเว้นระยะ (Leitner 5 กล่อง) ใช้ในหน้า `review/`
 - `shared/voice.js`: ฝึกพูด (ไมค์ตรวจคำ / อัดเสียงแล้วประเมินเอง / ข้าม) ผลเก็บใน profile

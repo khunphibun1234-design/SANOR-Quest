@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f5ed"><title>School Buddy · SANOR QUEST</title>
+<link rel="icon" href="../hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../shared/tokens.css"><link rel="stylesheet" href="school.css">
+<script src="../shared/profile.js"></script></head>
+<body class="sq-page">
+<header class="bar"><a class="brand" href="../#map-02" aria-label="Back to the SANOR QUEST town map"><img src="../sanor-quest-book-logo.png" width="44" height="44" alt=""><span>SANOR <b>QUEST</b></span></a><div class="bar-tools" id="barTools"><span class="sq-xp" title="XP from every world"><span aria-hidden="true">✦</span> <span id="totalXp">0</span> XP</span></div></header>
+<main><small>MAP 02 · SCHOOL OF ADVENTURES</small><h1>School Buddy</h1><p class="lede">Be a buddy to Alex on his first day. Listen, choose a word and collect stamps for his school pass.<span class="th" lang="th">เป็นเพื่อนคู่หูของ Alex ในวันแรกที่โรงเรียน ฟังเขาพูด เลือกคำที่ถูก แล้วสะสมตราประทับลงบัตรนักเรียนของเขา</span></p>
+<section class="campus" aria-label="New student pass"><div id="art" aria-hidden="true"></div><div><small>ALEX’S SCHOOL PASS</small><h2 id="place">First day at school</h2><p id="stamps" class="stamp-row">No stamps yet</p><div class="pass-bar" aria-hidden="true"><i id="passBar"></i></div><p class="crowd"><span id="crowd" aria-hidden="true">·</span><span id="crowdText"></span></p></div></section>
+<section id="play" class="card"><small id="count"></small><h2 id="line" lang="en"></h2><p id="lineTh" class="th" lang="th"></p><div class="tools"><button id="listen"><span aria-hidden="true">🔊</span> Listen to Alex</button><button id="hint"><span aria-hidden="true">💡</span> Get a hint</button></div><div id="clue" class="clue" hidden></div><div id="choices"></div><p id="message" role="status"></p><button id="next" class="primary" hidden>Continue</button></section>
+<section id="finale" class="card" hidden><small>BEFORE THE CONCERT</small><h2 tabindex="-1">Help Alex get ready</h2><div id="speakBox"></div><h2 class="card-title"><span id="cardTitle"></span><span id="cardTitleTh" class="th" lang="th"></span></h2><div id="writeBox"></div><p id="finaleMsg" role="status"></p><button id="finishSchool" class="primary">See my results +100 XP</button></section>
+<section id="report" class="card" hidden><h2 tabindex="-1">You helped Alex start school!</h2><p class="th" lang="th">เยี่ยมมาก! คุณช่วยให้ Alex เริ่มต้นวันแรกที่โรงเรียนได้แล้ว</p><form id="studentForm" autocomplete="off">
+<fieldset><legend>Student details for this report</legend><div class="student-grid">
+<label>Student ID<input name="studentId" required maxlength="24" type="text"></label>
+<label>Full name<input name="fullName" required maxlength="120" type="text"></label>
+<label>Class number<input name="classNumber" required maxlength="6" inputmode="numeric"></label>
+<label>Class<input name="classroom" required maxlength="24" placeholder="e.g. 8/5"></label>
+</div></fieldset></form>
+<div class="printed-student student-grid" aria-label="Student details">
+<div>Student ID <b data-value="studentId"></b></div><div>Full name <b data-value="fullName"></b></div>
+<div>Class number <b data-value="classNumber"></b></div><div>Class <b data-value="classroom"></b></div>
+</div><p id="score"></p><div id="cardOut" class="card-out"></div><p id="speechOut"></p><div class="scroll"><table><thead><tr><th>Word</th><th>Thai</th><th>First choice</th><th>Attempts</th><th>Hint</th></tr></thead><tbody id="rows"></tbody></table></div><div class="tools"><button id="print" class="primary" type="submit" form="studentForm">Print results</button><button id="again">Start a new round</button><a class="back-link" href="../#map-02">← Back to town</a></div></section></main>
+<script src="../content/content.js"></script><script src="../shared/mission.js"></script><script src="../shared/srs.js"></script><script src="../shared/voice.js"></script><script src="../shared/writing.js"></script><script src="../shared/coach.js"></script><script src="../town-art.js"></script><script src="../audio/player.js"></script><script src="school.js"></script></body></html>

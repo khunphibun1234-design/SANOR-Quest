@@ -48,3 +48,6 @@
 .dr-text{flex:1;display:grid;gap:2px;font:600 15px var(--display)}
 .dr-text .th{font-size:12px;font-weight:500}
 .dr-count{padding:6px 12px;border-radius:999px;background:var(--gold);color:#3d2d07;font:700 13px var(--display);white-space:nowrap}
+
+#missionList li.done{color:#356f53}
+#missionList li small.th{display:block;font-size:11px;font-weight:500}

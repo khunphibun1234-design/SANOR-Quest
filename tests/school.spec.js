@@ -1,7 +1,7 @@
 const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
 const answers=['gate','classroom','timetable','library','librarian','canteen','gym','music','club','stage'];
 test('School Buddy: a full round gives 10 stamps and 300 XP',async({page})=>{const errors=watch(page);
-  await page.goto('/school/');await page.evaluate(()=>localStorage.clear());await page.reload();
+  await page.goto('/school/quiz.html');await page.evaluate(()=>localStorage.clear());await page.reload();
   for(const [i,word] of answers.entries()){
     await expect(page.locator('#count')).toHaveText(`Mission ${i+1} / 10`);
     await page.locator('#choices button',{hasText:new RegExp('^'+word+'$')}).click();

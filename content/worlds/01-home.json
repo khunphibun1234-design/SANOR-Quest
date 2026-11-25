@@ -50,7 +50,8 @@
       "kitchen",
       "bedroom",
       "garden"
-     ]
+     ],
+     "anyOrder": true
     },
     {
      "id": "listen",
@@ -85,83 +86,6 @@
      "questions": []
     }
    ],
-   "places": {
-    "gate": {
-     "name": "Front door",
-     "en": "Front gate",
-     "th": "ประตูหน้าบ้าน",
-     "icon": "✦",
-     "pos": [
-      0,
-      2.7,
-      5.6
-     ],
-     "approach": [
-      0,
-      5.2
-     ]
-    },
-    "living": {
-     "name": "Living room",
-     "en": "Living room",
-     "th": "ห้องนั่งเล่น",
-     "icon": "⌂",
-     "pos": [
-      -3.2,
-      2.6,
-      0.25
-     ],
-     "approach": [
-      -1.6,
-      0.8
-     ]
-    },
-    "kitchen": {
-     "name": "Kitchen",
-     "en": "Kitchen",
-     "th": "ห้องครัว",
-     "icon": "◈",
-     "pos": [
-      3.1,
-      2.55,
-      -0.6
-     ],
-     "approach": [
-      1.9,
-      -0.2
-     ]
-    },
-    "bedroom": {
-     "name": "Bedroom",
-     "en": "Bedroom",
-     "th": "ห้องนอน",
-     "icon": "☾",
-     "pos": [
-      -3.3,
-      2.7,
-      -4.2
-     ],
-     "approach": [
-      -1.9,
-      -3.8
-     ]
-    },
-    "garden": {
-     "name": "Garden",
-     "en": "Garden",
-     "th": "สวน",
-     "icon": "❀",
-     "pos": [
-      7.2,
-      2.6,
-      1.9
-     ],
-     "approach": [
-      6.4,
-      2.8
-     ]
-    }
-   },
    "questions": {
     "greet": {
      "kind": "choice",
@@ -345,7 +269,8 @@
        "audio": "line-55.mp3"
       }
      ],
-     "answer": 1
+     "answer": 1,
+     "at": "kitchen"
     },
     "bedroom": {
      "kind": "choice",
@@ -382,7 +307,8 @@
        "en": "This is our garden."
       }
      ],
-     "answer": 0
+     "answer": 0,
+     "at": "bedroom"
     },
     "garden": {
      "kind": "choice",
@@ -419,7 +345,8 @@
        "audio": "line-43.mp3"
       }
      ],
-     "answer": 2
+     "answer": 2,
+     "at": "garden"
     },
     "listen": {
      "kind": "listen",
@@ -681,14 +608,18 @@
    "speakPrompt": {
     "en": "Listen, then say each sentence aloud.",
     "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "summary": {
+    "en": "Welcome Alex, introduce your family, show him around and offer him water.",
+    "th": "ต้อนรับ Alex แนะนำครอบครัว พาเดินชมบ้าน และชวนดื่มน้ำ"
    }
   },
   {
    "id": "table",
    "type": "tap3d",
    "title": {
-    "en": "Alex’s Table",
-    "th": "โต๊ะอาหารของ Alex"
+    "en": "Lunch with Alex",
+    "th": "มื้อกลางวันกับ Alex"
    },
    "items": [
     {
@@ -959,7 +890,537 @@
      "en": "Lunch is ready. Please sit down.",
      "th": "มื้อกลางวันพร้อมแล้ว เชิญนั่งเลย"
     }
-   }
+   },
+   "summary": {
+    "en": "Find places and things in the house and set the table for lunch.",
+    "th": "หาสถานที่และสิ่งของในบ้าน แล้วจัดโต๊ะสำหรับมื้อกลางวัน"
+   },
+   "play": "table-three.html"
+  },
+  {
+   "id": "garden",
+   "type": "story",
+   "title": {
+    "en": "An Afternoon in the Garden",
+    "th": "บ่ายวันสบายในสวน"
+   },
+   "summary": {
+    "en": "Make plans, help in the garden, play a game and say goodbye.",
+    "th": "วางแผนทำกิจกรรม ช่วยงานในสวน เล่นเกม แล้วกล่าวลา"
+   },
+   "stages": [
+    {
+     "id": "plans",
+     "title": "Make a plan",
+     "subtitle": "After lunch",
+     "th": "วางแผนตอนบ่าย",
+     "target": "living",
+     "go": "Go to the living room and talk to Alex.",
+     "questions": [
+      "plan",
+      "snack"
+     ]
+    },
+    {
+     "id": "helping",
+     "title": "Help in the garden",
+     "subtitle": "Water the plants",
+     "th": "ช่วยรดน้ำต้นไม้",
+     "target": "garden",
+     "go": "Go to the garden.",
+     "questions": [
+      "doing",
+      "help"
+     ]
+    },
+    {
+     "id": "game",
+     "title": "Play a game",
+     "subtitle": "Games we like",
+     "th": "เล่นเกมด้วยกัน",
+     "target": "living",
+     "go": "Go back to the living room to play.",
+     "questions": [
+      "games",
+      "chess"
+     ]
+    },
+    {
+     "id": "goodbye",
+     "title": "Say goodbye",
+     "subtitle": "See you tomorrow",
+     "th": "กล่าวลาเพื่อน",
+     "target": "gate",
+     "go": "Walk Alex to the front door.",
+     "questions": [
+      "time",
+      "bye"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My thank-you message",
+     "subtitle": "A note for Alex",
+     "th": "ข้อความขอบคุณถึง Alex",
+     "target": "living",
+     "go": "Go to the living room to write your message.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "plan": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "That was a great lunch! What can we do this afternoon?",
+      "th": "มื้อกลางวันอร่อยมาก บ่ายนี้เราทำอะไรกันดี"
+     },
+     "prompt": {
+      "en": "Suggest something to do together.",
+      "th": "ชวนเพื่อนทำอะไรด้วยกัน"
+     },
+     "hint": {
+      "en": "Let's … is a way to suggest an idea.",
+      "th": "Let's … ใช้ชวนทำอะไรด้วยกัน"
+     },
+     "why": {
+      "en": "Let's play in the garden. suggests an activity",
+      "th": "Let's play in the garden. คือการชวนไปเล่นในสวน"
+     },
+     "reply": {
+      "en": "Good idea! I love being outside."
+     },
+     "choices": [
+      {
+       "en": "Let's play in the garden."
+      },
+      {
+       "en": "I'm cooking lunch."
+      },
+      {
+       "en": "It's my bedroom."
+      }
+     ],
+     "answer": 0
+    },
+    "snack": {
+     "kind": "choice",
+     "speaker": "Mum",
+     "line": {
+      "en": "Would you two like some snacks?",
+      "th": "ลูกกับ Alex อยากกินขนมไหมจ๊ะ"
+     },
+     "prompt": {
+      "en": "Answer Mum politely.",
+      "th": "ตอบคุณแม่อย่างสุภาพ"
+     },
+     "hint": {
+      "en": "Yes, please. is polite. Add Thank you!",
+      "th": "Yes, please. คือคำตอบรับอย่างสุภาพ"
+     },
+     "why": {
+      "en": "Yes, please. Thank you! accepts an offer politely",
+      "th": "Yes, please. Thank you! คือการตอบรับอย่างสุภาพ"
+     },
+     "reply": {
+      "en": "Here are some mangoes and sticky rice!"
+     },
+     "choices": [
+      {
+       "en": "No, I don't."
+      },
+      {
+       "en": "Yes, please. Thank you!"
+      },
+      {
+       "en": "I'm fine, and you?"
+      }
+     ],
+     "answer": 1
+    },
+    "doing": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "What are you doing?",
+      "th": "เธอกำลังทำอะไรอยู่"
+     },
+     "prompt": {
+      "en": "Look at the watering can. Tell Alex what you are doing.",
+      "th": "ดูบัวรดน้ำ แล้วบอก Alex ว่าคุณกำลังทำอะไร"
+     },
+     "hint": {
+      "en": "Use I'm … -ing for something you are doing now.",
+      "th": "ใช้ I'm … -ing บอกสิ่งที่กำลังทำอยู่ตอนนี้"
+     },
+     "why": {
+      "en": "I'm watering the plants. says what you are doing now",
+      "th": "I'm watering the plants. แปลว่า ฉันกำลังรดน้ำต้นไม้"
+     },
+     "reply": {
+      "en": "Can I help you?"
+     },
+     "choices": [
+      {
+       "en": "I water the plants every day."
+      },
+      {
+       "en": "I'm watering the plants."
+      },
+      {
+       "en": "I watered the plants yesterday."
+      }
+     ],
+     "answer": 1
+    },
+    "help": {
+     "kind": "order",
+     "speaker": "Alex",
+     "line": {
+      "en": "Can I help you?",
+      "th": "ฉันช่วยได้ไหม"
+     },
+     "prompt": {
+      "en": "Alex wants to help. Put your answer in order.",
+      "th": "Alex อยากช่วย เรียงคำตอบให้ถูก"
+     },
+     "hint": {
+      "en": "Start with Sure! then tell Alex what to take.",
+      "th": "ขึ้นต้นด้วย Sure! แล้วบอกให้ Alex หยิบอะไร"
+     },
+     "why": {
+      "en": "Sure! Take this watering can. accepts help and gives Alex a job",
+      "th": "Sure! Take this watering can. แปลว่า ได้เลย หยิบบัวรดน้ำอันนี้ไปสิ"
+     },
+     "reply": {
+      "en": "Thanks! The flowers look happy now."
+     },
+     "tokens": [
+      "Sure!",
+      "Take",
+      "this",
+      "watering",
+      "can."
+     ],
+     "answerText": {
+      "en": "Sure! Take this watering can."
+     }
+    },
+    "games": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Do you like board games?",
+      "th": "เธอชอบเล่นบอร์ดเกมไหม"
+     },
+     "prompt": {
+      "en": "Answer Alex's question.",
+      "th": "ตอบคำถามของ Alex"
+     },
+     "hint": {
+      "en": "A Do you …? question can be answered with Yes, I do. or No, I don't.",
+      "th": "คำถาม Do you …? ตอบด้วย Yes, I do. หรือ No, I don't."
+     },
+     "why": {
+      "en": "Yes, I do. Let's play! answers the question and makes a plan",
+      "th": "Yes, I do. Let's play! แปลว่า ชอบสิ มาเล่นกันเถอะ"
+     },
+     "reply": {
+      "en": "Great! Let me choose a game."
+     },
+     "choices": [
+      {
+       "en": "Yes, I do. Let's play!"
+      },
+      {
+       "en": "Yes, I am."
+      },
+      {
+       "en": "Yes, it is."
+      }
+     ],
+     "answer": 0
+    },
+    "chess": {
+     "kind": "listen",
+     "speaker": "Alex",
+     "line": {
+      "en": "I like chess. It's my favourite game.",
+      "th": "ฉันชอบหมากรุก มันเป็นเกมโปรดของฉัน"
+     },
+     "prompt": {
+      "en": "Listen. Which game does Alex like?",
+      "th": "ฟังแล้วเลือกเกมที่ Alex ชอบ"
+     },
+     "hint": {
+      "en": "Listen for the name of the game.",
+      "th": "ฟังชื่อเกมให้ดี"
+     },
+     "why": {
+      "en": "Alex says chess, so he likes chess",
+      "th": "Alex พูดว่า chess แปลว่าเขาชอบหมากรุก"
+     },
+     "reply": {
+      "en": "Let's play chess!"
+     },
+     "choices": [
+      {
+       "en": "Cards"
+      },
+      {
+       "en": "Chess"
+      },
+      {
+       "en": "Football"
+      }
+     ],
+     "answer": 1
+    },
+    "time": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "It's five o'clock. I have to go home now.",
+      "th": "ห้าโมงแล้ว ฉันต้องกลับบ้านแล้ว"
+     },
+     "prompt": {
+      "en": "Say something kind before Alex leaves.",
+      "th": "พูดอะไรดี ๆ ก่อนที่ Alex จะกลับ"
+     },
+     "hint": {
+      "en": "Thank Alex for coming.",
+      "th": "ขอบคุณ Alex ที่มาเที่ยว"
+     },
+     "why": {
+      "en": "Thank you for coming! is what a good host says",
+      "th": "Thank you for coming! แปลว่า ขอบคุณที่มานะ"
+     },
+     "reply": {
+      "en": "Thank you for having me. I had a great day!"
+     },
+     "choices": [
+      {
+       "en": "Thank you for coming!"
+      },
+      {
+       "en": "Welcome to my home!"
+      },
+      {
+       "en": "Where are you going?"
+      }
+     ],
+     "answer": 0
+    },
+    "bye": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "See you tomorrow at school!",
+      "th": "เจอกันพรุ่งนี้ที่โรงเรียนนะ"
+     },
+     "prompt": {
+      "en": "Say goodbye to Alex.",
+      "th": "กล่าวลา Alex"
+     },
+     "hint": {
+      "en": "Use the same words Alex used: See you …",
+      "th": "ใช้คำเดียวกับที่ Alex พูด: See you …"
+     },
+     "why": {
+      "en": "See you tomorrow! is a friendly goodbye",
+      "th": "See you tomorrow! แปลว่า เจอกันพรุ่งนี้นะ"
+     },
+     "reply": {
+      "en": "Bye!"
+     },
+     "choices": [
+      {
+       "en": "Good morning!"
+      },
+      {
+       "en": "See you tomorrow, Alex!"
+      },
+      {
+       "en": "Nice to meet you!"
+      }
+     ],
+     "answer": 1
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write a thank-you message to Alex: 3 short sentences.",
+     "th": "เขียนข้อความขอบคุณถึง Alex 3 ประโยคสั้น ๆ"
+    },
+    "fields": [
+     {
+      "id": "thanks",
+      "label": {
+       "en": "1. Thank Alex for visiting.",
+       "th": "1. ขอบคุณ Alex ที่มาเยี่ยม"
+      },
+      "example": {
+       "en": "Thank you for visiting my home."
+      },
+      "help": {
+       "en": "Use thank you or thanks. At least 4 words.",
+       "th": "ใช้ thank you หรือ thanks อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bthank(s| you)\\b"
+       ]
+      }
+     },
+     {
+      "id": "together",
+      "label": {
+       "en": "2. Say what you did together.",
+       "th": "2. บอกว่าวันนี้ทำอะไรด้วยกัน"
+      },
+      "example": {
+       "en": "We played chess together."
+      },
+      "help": {
+       "en": "Use a verb like played, watered or ate. At least 4 words.",
+       "th": "ใช้คำกริยาเช่น played, watered หรือ ate อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\b(play|played|water|watered|eat|ate|read|talked|had|cooked|helped)\\b"
+       ]
+      }
+     },
+     {
+      "id": "again",
+      "label": {
+       "en": "3. Invite Alex to come again.",
+       "th": "3. ชวน Alex มาอีก"
+      },
+      "example": {
+       "en": "Please come again soon."
+      },
+      "help": {
+       "en": "Use come, visit or see you. At least 4 words.",
+       "th": "ใช้ come, visit หรือ see you อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bcome\\b",
+        "\\bvisit\\b",
+        "\\bsee you\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "Let's play in the garden.",
+     "th": "ไปเล่นในสวนกันเถอะ"
+    },
+    {
+     "en": "I'm watering the plants.",
+     "th": "ฉันกำลังรดน้ำต้นไม้"
+    },
+    {
+     "en": "Thank you for coming!",
+     "th": "ขอบคุณที่มานะ"
+    },
+    {
+     "en": "See you tomorrow!",
+     "th": "เจอกันพรุ่งนี้นะ"
+    }
+   ]
   }
+ ],
+ "places": {
+  "gate": {
+   "name": "Front door",
+   "en": "Front gate",
+   "th": "ประตูหน้าบ้าน",
+   "icon": "✦",
+   "pos": [
+    0,
+    2.7,
+    5.6
+   ],
+   "approach": [
+    0,
+    5.2
+   ]
+  },
+  "living": {
+   "name": "Living room",
+   "en": "Living room",
+   "th": "ห้องนั่งเล่น",
+   "icon": "⌂",
+   "pos": [
+    -3.2,
+    2.6,
+    0.25
+   ],
+   "approach": [
+    -1.6,
+    0.8
+   ]
+  },
+  "kitchen": {
+   "name": "Kitchen",
+   "en": "Kitchen",
+   "th": "ห้องครัว",
+   "icon": "◈",
+   "pos": [
+    3.1,
+    2.55,
+    -0.6
+   ],
+   "approach": [
+    1.9,
+    -0.2
+   ]
+  },
+  "bedroom": {
+   "name": "Bedroom",
+   "en": "Bedroom",
+   "th": "ห้องนอน",
+   "icon": "☾",
+   "pos": [
+    -3.3,
+    2.7,
+    -4.2
+   ],
+   "approach": [
+    -1.9,
+    -3.8
+   ]
+  },
+  "garden": {
+   "name": "Garden",
+   "en": "Garden",
+   "th": "สวน",
+   "icon": "❀",
+   "pos": [
+    7.2,
+    2.6,
+    1.9
+   ],
+   "approach": [
+    6.4,
+    2.8
+   ]
+  }
+ },
+ "missionOrder": [
+  "welcome",
+  "table",
+  "garden"
  ]
 }

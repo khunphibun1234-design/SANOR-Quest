@@ -35,8 +35,8 @@ function renderWelcomeCard(report) {
   canvas.height=1754;
   const ctx=canvas.getContext('2d');
   const groups=[
-    ['SANOR QUEST  /  MAP 01',24,true],
-    ['My Home Welcome Card',54,true],
+    [report.dataset.header||'SANOR QUEST  /  MAP 01',24,true],
+    [report.dataset.title||'My Home Welcome Card',54,true],
     ...Array.from(report.querySelectorAll('.stats > div'),node=>[
       node.querySelector('strong').textContent+'  ·  '+node.querySelector('span').textContent,32,false]),
     ...Array.from(report.querySelectorAll(':scope > p:not(.report-note)'),node=>[node.textContent,32,false]),

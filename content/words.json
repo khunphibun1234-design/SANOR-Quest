@@ -368,6 +368,201 @@
     "th": "ชมรมของเรามีคอนเสิร์ต ฉันควรยืนตรงไหนให้ทุกคนเห็นตอนร้องเพลง",
     "audio": "line-29.mp3"
    }
+  },
+  {
+   "id": "afternoon",
+   "en": "afternoon",
+   "th": "ตอนบ่าย",
+   "cefr": "A1",
+   "topic": "time",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "What can we do this afternoon?",
+    "th": "บ่ายนี้เราทำอะไรกันดี"
+   }
+  },
+  {
+   "id": "snack",
+   "en": "snack",
+   "th": "ขนม",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Would you like some snacks?",
+    "th": "อยากกินขนมไหม"
+   }
+  },
+  {
+   "id": "plant",
+   "en": "plant",
+   "th": "ต้นไม้ (ปลูก)",
+   "cefr": "A1",
+   "topic": "home",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I'm watering the plants.",
+    "th": "ฉันกำลังรดน้ำต้นไม้"
+   }
+  },
+  {
+   "id": "board-game",
+   "en": "board game",
+   "th": "บอร์ดเกม",
+   "cefr": "A1",
+   "topic": "free time",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Do you like board games?",
+    "th": "เธอชอบเล่นบอร์ดเกมไหม"
+   }
+  },
+  {
+   "id": "chess",
+   "en": "chess",
+   "th": "หมากรุก",
+   "cefr": "A1",
+   "topic": "free time",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I like chess.",
+    "th": "ฉันชอบหมากรุก"
+   }
+  },
+  {
+   "id": "tomorrow",
+   "en": "tomorrow",
+   "th": "พรุ่งนี้",
+   "cefr": "A1",
+   "topic": "time",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "See you tomorrow!",
+    "th": "เจอกันพรุ่งนี้นะ"
+   }
+  },
+  {
+   "id": "lesson",
+   "en": "lesson",
+   "th": "วิชาเรียน / คาบเรียน",
+   "cefr": "A1",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "When is our English lesson?",
+    "th": "เราเรียนภาษาอังกฤษกี่โมง"
+   }
+  },
+  {
+   "id": "library-card",
+   "en": "library card",
+   "th": "บัตรห้องสมุด",
+   "cefr": "A1",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Do you have a library card?",
+    "th": "มีบัตรห้องสมุดไหม"
+   }
+  },
+  {
+   "id": "lunch",
+   "en": "lunch",
+   "th": "อาหารกลางวัน",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "What do you usually eat for lunch?",
+    "th": "ปกติเธอกินอะไรเป็นมื้อกลางวัน"
+   }
+  },
+  {
+   "id": "basketball",
+   "en": "basketball",
+   "th": "บาสเกตบอล",
+   "cefr": "A1",
+   "topic": "free time",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Let's play basketball after school.",
+    "th": "ไปเล่นบาสหลังเลิกเรียนกันเถอะ"
+   }
+  },
+  {
+   "id": "guitar",
+   "en": "guitar",
+   "th": "กีตาร์",
+   "cefr": "A1",
+   "topic": "music",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I can play the guitar and the piano.",
+    "th": "ฉันเล่นกีตาร์กับเปียโนได้"
+   }
+  },
+  {
+   "id": "piano",
+   "en": "piano",
+   "th": "เปียโน",
+   "cefr": "A1",
+   "topic": "music",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I can play the guitar and the piano.",
+    "th": "ฉันเล่นกีตาร์กับเปียโนได้"
+   }
+  },
+  {
+   "id": "concert",
+   "en": "concert",
+   "th": "คอนเสิร์ต",
+   "cefr": "A1",
+   "topic": "music",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Is Alex ready for the concert?",
+    "th": "Alex พร้อมสำหรับคอนเสิร์ตหรือยัง"
+   }
   }
  ]
 }

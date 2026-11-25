@@ -2,7 +2,7 @@
 
 สร้างอัตโนมัติด้วย `npm run audio` · อย่าแก้ไฟล์นี้เอง
 
-- ต้องอัดเพิ่ม **1** ไฟล์ จากทั้งหมด 47 ประโยค
+- ต้องอัดเพิ่ม **18** ไฟล์ จากทั้งหมด 64 ประโยค
 - อัดเป็น .mp3 (mono, 44.1 kHz) ตั้งชื่อไฟล์ตามคอลัมน์ "ชื่อไฟล์" แล้วส่งมาทั้งชุด
 - `{name}` คือชื่อเล่นของผู้เล่น: ให้พูดว่า "Mook" แทน
 
@@ -55,3 +55,20 @@
 | 45 | ✅ | Pour some water into my glass. | รินน้ำใส่แก้วให้ฉันหน่อย | `line-18.mp3` | table · water · line |
 | 46 | ✅ | water. Pour some water into my glass. |  | `line-19.mp3` | table · water · word + line |
 | 47 | ⬜ | Lunch is ready. Please sit down. | มื้อกลางวันพร้อมแล้ว เชิญนั่งเลย | `01-table-speak.mp3` | table · speaking task |
+| 48 | ⬜ | That was a great lunch! What can we do this afternoon? | มื้อกลางวันอร่อยมาก บ่ายนี้เราทำอะไรกันดี | `01-garden-plan-line.mp3` | garden · plan · line |
+| 49 | ⬜ | Let's play in the garden. |  | `01-garden-plan-answer.mp3` | garden · plan · answer |
+| 50 | ⬜ | Would you two like some snacks? | ลูกกับ Alex อยากกินขนมไหมจ๊ะ | `01-garden-snack-line.mp3` | garden · snack · line |
+| 51 | ⬜ | Yes, please. Thank you! |  | `01-garden-snack-answer.mp3` | garden · snack · answer |
+| 52 | ⬜ | What are you doing? | เธอกำลังทำอะไรอยู่ | `01-garden-doing-line.mp3` | garden · doing · line |
+| 53 | ⬜ | I'm watering the plants. |  | `01-garden-doing-answer.mp3` | garden · doing · answer |
+| 54 | ⬜ | Can I help you? | ฉันช่วยได้ไหม | `01-garden-help-line.mp3` | garden · help · line |
+| 55 | ⬜ | Sure! Take this watering can. |  | `01-garden-help-answer.mp3` | garden · help · answer |
+| 56 | ⬜ | Do you like board games? | เธอชอบเล่นบอร์ดเกมไหม | `01-garden-games-line.mp3` | garden · games · line |
+| 57 | ⬜ | Yes, I do. Let's play! |  | `01-garden-games-answer.mp3` | garden · games · answer |
+| 58 | ⬜ | I like chess. It's my favourite game. | ฉันชอบหมากรุก มันเป็นเกมโปรดของฉัน | `01-garden-chess-line.mp3` | garden · chess · line |
+| 59 | ⬜ | Chess |  | `01-garden-chess-answer.mp3` | garden · chess · answer |
+| 60 | ⬜ | It's five o'clock. I have to go home now. | ห้าโมงแล้ว ฉันต้องกลับบ้านแล้ว | `01-garden-time-line.mp3` | garden · time · line |
+| 61 | ⬜ | Thank you for coming! |  | `01-garden-time-answer.mp3` | garden · time · answer |
+| 62 | ⬜ | See you tomorrow at school! | เจอกันพรุ่งนี้ที่โรงเรียนนะ | `01-garden-bye-line.mp3` | garden · bye · line |
+| 63 | ⬜ | See you tomorrow, Alex! |  | `01-garden-bye-answer.mp3` | garden · bye · answer |
+| 64 | ⬜ | See you tomorrow! | เจอกันพรุ่งนี้นะ | `01-garden-speak-4.mp3` | garden · speaking 4 |

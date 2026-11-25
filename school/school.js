@@ -4,6 +4,8 @@
 // Content: content/worlds/02-school.json (mission "buddy"). Thai words come from content/words.json.
 const SQ = window.SQContent;
 const MISSION = SQ.worlds['02'].missions.find(m => m.id === 'buddy');
+// the 2D quick practice shares the school card with the 3D mission "Show Your Friend Around"
+const CARD = MISSION.card || SQ.worlds['02'].missions.find(m => m.id === 'tour').card;
 const rounds = MISSION.questions.map(q => ({
   word: q.word, icon: q.icon, th: (SQ.words.find(w => w.id === q.word) || {}).th || '',
   choices: q.choices.map(c => c.en), line: q.line.en, lineTh: q.line.th, hint: q.hint.en, hintTh: q.hint.th
@@ -98,12 +100,12 @@ el('next').onclick = () => {
 function finale() {
   el('play').hidden = true;
   el('finale').hidden = false;
-  el('cardTitle').textContent = MISSION.card.title.en;
-  el('cardTitleTh').textContent = MISSION.card.title.th;
+  el('cardTitle').textContent = CARD.title.en;
+  el('cardTitleTh').textContent = CARD.title.th;
   SQVoice.mount(el('speakBox'), {target: MISSION.speak.target, prompt: MISSION.speak.prompt, onDone(r) {
     speech = r; P.recordSpeech('02', MISSION.speak.id, r);
   }});
-  card = SQWriting.mount(el('writeBox'), MISSION.card, {prefix: 'school-', onExample() { card.usedExample = true; }});
+  card = SQWriting.mount(el('writeBox'), CARD, {prefix: 'school-', onExample() { card.usedExample = true; }});
   el('finale').querySelector('h2').focus();
 }
 el('finishSchool').onclick = () => {
@@ -125,7 +127,7 @@ function showReport() {
     return row;
   }));
   const v = card.values();
-  el('cardOut').innerHTML = '<h3>' + esc(MISSION.card.title.en) + '</h3>' + MISSION.card.fields.map(f => '<p>' + esc(v[f.id]) + '</p>').join('') + (card.usedExample ? '<p class="note">Used a writing example</p>' : '');
+  el('cardOut').innerHTML = '<h3>' + esc(CARD.title.en) + '</h3>' + CARD.fields.map(f => '<p>' + esc(v[f.id]) + '</p>').join('') + (card.usedExample ? '<p class="note">Used a writing example</p>' : '');
   el('speechOut').textContent = 'Speaking: “' + MISSION.speak.target.en + '” · ' + ({asr: 'said it (checked by the microphone)', self: 'said it (self-check)', skip: 'skipped', 'not-yet': 'not yet'}[speech ? (speech.mode === 'skip' ? 'skip' : !speech.passed ? 'not-yet' : speech.mode) : 'skip']);
   el('report').querySelector('h2').focus();
 }

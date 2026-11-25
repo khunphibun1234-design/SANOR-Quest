@@ -1,5 +1,5 @@
 const {test,expect}=require('@playwright/test');const {load}=require('./load');
-const boot=()=>load(['content/content.js','shared/mission.js','home/content.js','home/lesson.js']);
+const boot=()=>load(['content/content.js','shared/mission.js','shared/lesson.js','home/content.js','home/lesson.js']);
 test('a new lesson starts at the gate with no XP',()=>{const {HomeLesson}=boot();const l=new HomeLesson();
   expect([l.stage.id,l.target(),l.xp,l.nextQuestion('gate')]).toEqual(['welcome','gate',0,'greet']);});
 test('answers must follow the story order and score 20 XP each',()=>{const {HomeLesson,HomeContent:C}=boot();const l=new HomeLesson();

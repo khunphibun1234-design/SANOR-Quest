@@ -1,5 +1,5 @@
 const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
-const pages=[['town map','/'],['Map 01 home','/home/'],['Map 02 school','/school/'],['Alex’s Table 3D','/home/table-three.html'],['Alex’s Table 2D','/home/table.html']];
+const pages=[['town map','/'],['Map 01 home','/home/'],['Map 02 school (3D)','/school/'],['Map 02 quick practice (2D)','/school/quiz.html'],['Daily review','/review/'],['Alex’s Table 3D','/home/table-three.html'],['Alex’s Table 2D','/home/table.html']];
 for(const [name,url] of pages){
   test(`${name} loads without errors`,async({page})=>{const errors=watch(page);
     await page.goto(url);await page.waitForTimeout(1500);
