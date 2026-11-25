@@ -6,10 +6,12 @@
     "build": "npm run build:engine && npm run build:table",
     "build:engine": "esbuild src/sq-three.js --bundle --minify --format=iife --target=es2019 --alias:three=./node_modules/three/build/three.module.js --alias:three-addons=./node_modules/three/examples/jsm --legal-comments=eof --outfile=shared/sq-three.js",
     "build:table": "esbuild src/table-three.js --bundle --minify --format=iife --target=es2019 --alias:three=./src/shim/three.cjs --alias:three-addons/geometries/RoundedBoxGeometry.js=./src/shim/rounded-box.cjs --alias:three-addons/environments/RoomEnvironment.js=./src/shim/room-environment.cjs --alias:sq3=./src/shim/sq3.cjs --outfile=home/table-three.js",
-    "serve": "python3 -m http.server 8080"
+    "serve": "python3 -m http.server 8080",
+    "test": "playwright test"
   },
   "devDependencies": {
-    "esbuild": "0.24.0",
-    "three": "0.187.0"
+    "@playwright/test": "^1.63.0",
+    "esbuild": "^0.24.0",
+    "three": "^0.187.0"
   }
 }

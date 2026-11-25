@@ -1,0 +1,13 @@
+const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
+const pages=[['town map','/'],['Map 01 home','/home/'],['Map 02 school','/school/'],['Alex’s Table 3D','/home/table-three.html'],['Alex’s Table 2D','/home/table.html']];
+for(const [name,url] of pages){
+  test(`${name} loads without errors`,async({page})=>{const errors=watch(page);
+    await page.goto(url);await page.waitForTimeout(1500);
+    expect(errors).toEqual([]);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+    expect(await page.evaluate(()=>!!window.SanorProfile)).toBe(true);});
+}
+test('3D pages run on the shared Three.js engine',async({page})=>{
+  await page.goto('/home/table-three.html');await page.click('#start');await page.waitForTimeout(800);
+  const s=await page.evaluate(()=>window.table3dStatus());
+  expect(s.renderer).toBe('three.js r187');expect(s.drawCalls).toBeGreaterThan(10);});
