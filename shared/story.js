@@ -28,7 +28,8 @@ const keyFor=id=>(cfg.keys&&cfg.keys[id])||`sanor-${cfg.slug}-${id}-v1`;
 let storageOK=true;
 const loadState=id=>{try{return JSON.parse(localStorage.getItem(keyFor(id)));}catch{storageOK=false;return null;}};
 const contents={},lessons={};for(const id of stories){contents[id]=id===cfg.mainMission&&root.HomeContent?root.HomeContent:root.StoryContent(cfg.worldId,id);lessons[id]=new root.StoryLesson(loadState(id),contents[id]);}
-const isDone=id=>missionById(id).type==='story'?lessons[id].state.done:P.activity(cfg.worldId,id).done;
+// a mission counts as done when its saved story says so or the passport has it (e.g. finished on another page)
+const isDone=id=>P.activity(cfg.worldId,id).done||(missionById(id).type==='story'&&lessons[id].state.done);
 const unlocked=id=>{const i=ORDER.indexOf(id);return i<=0||isDone(ORDER[i-1])||isDone(id);};
 const wanted=new URLSearchParams(location.search).get('mission');
 let current=stories.includes(wanted)&&unlocked(wanted)?wanted:stories.find(id=>unlocked(id)&&!isDone(id))||stories[0];
