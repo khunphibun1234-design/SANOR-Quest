@@ -7,6 +7,7 @@
 |---|---|
 | Map 01 · My Home, My Story (3D) | `home/` และ Alex's Table `home/table-three.html` (2D สำรอง: `home/table.html`) |
 | Map 02 · School Buddy | `school/` |
+| ทบทวนประจำวัน 3 นาที | `review/` |
 
 ## เนื้อหา
 เนื้อหาทั้งหมดอยู่ใน `content/` (JSON) ดูวิธีแก้ใน `content/README.md` · บทอัดเสียงอยู่ใน `docs/audio/`
@@ -16,7 +17,10 @@
 - `shared/sq-three.js`: เอนจิน 3D เดียวของทุกแผนที่ (Three.js r187) ต้นฉบับอยู่ที่ `src/` และวิธี build อยู่ใน `src/README.md`
 - `shared/profile.js`: โปรไฟล์ผู้เล่น ทั้งชื่อเล่น ระดับ XP และตราประทับจากทุกโลก ซึ่งแสดงในพาสปอร์ต
 - `shared/mission.js`: ตัวเล่นภารกิจกลาง (choice, listen, order, speak, write, tap3d)
-- `shared/srs.js`: ระบบทบทวนคำแบบเว้นระยะ (Leitner 5 กล่อง)
+- `shared/srs.js`: ระบบทบทวนคำแบบเว้นระยะ (Leitner 5 กล่อง) ใช้ในหน้า `review/`
+- `shared/voice.js`: ฝึกพูด (ไมค์ตรวจคำ / อัดเสียงแล้วประเมินเอง / ข้าม) ผลเก็บใน profile
+- `shared/writing.js`: การ์ดเขียนประโยค (แม่แบบจากการ์ดต้อนรับ Map 01) ใช้ทุกโลก
+- `shared/coach.js`: ปรับความยากตามผู้เรียน (ถูกครั้งแรก >85% เสนอเลื่อนระดับ, <50% เปิดตัวช่วยเพิ่ม)
 - `shared/tokens.css`: design system (ฟอนต์ Outfit + Noto Sans Thai, สี, ปุ่ม) และสไตล์ตัวช่วยภาษาไทย
 
 ### ตัวช่วยภาษาไทย 3 ระดับ

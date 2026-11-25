@@ -26,3 +26,9 @@
 .prompt .th,.hint-text .th,.feedback .th{display:block;font-size:12.5px;margin-top:3px}
 .vocab-row small.th{display:block;font-size:12px;margin-top:3px}
 .header-actions .sq-level{min-height:44px}
+
+/* ---------- Phase 3: world changes, speaking, writing ---------- */
+.world-change{margin-top:8px;padding:8px 10px;border-radius:10px;background:#fbeef2;color:#8a3d55;font-size:12.5px;font-weight:600}
+.world-change .th{display:block;font-weight:500;color:inherit}
+#cardBox .sq-writing{margin-bottom:8px}
+.speaking-section #speakBox{margin:8px 0}

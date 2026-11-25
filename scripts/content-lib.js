@@ -21,7 +21,8 @@ function spokenLines({words,worlds}){
       m.speaking.forEach((s,i)=>add(world.id,`${m.id} · speaking ${i+1}`,s,`${p}-speak-${i+1}.mp3`));
       m.vocabulary.forEach(v=>add(world.id,`${m.id} · word book · ${v.word}`,v.example,`${p}-book-${v.word.replace(/\s+/g,'-')}.mp3`));}
     if(m.type==='tap3d')m.items.forEach(it=>{add(world.id,`${m.id} · ${it.word} · line`,it.line,`${p}-${it.word}-line.mp3`);add(world.id,`${m.id} · ${it.word} · word + line`,it.wordLine,`${p}-${it.word}-wordline.mp3`);});
-    if(m.type==='quiz')m.questions.forEach(q=>add(world.id,`${m.id} · ${q.id} · line`,q.line,`${p}-${q.id}-line.mp3`));}
+    if(m.type==='quiz')m.questions.forEach(q=>add(world.id,`${m.id} · ${q.id} · line`,q.line,`${p}-${q.id}-line.mp3`));
+    if(m.speak)add(world.id,`${m.id} · speaking task`,m.speak.target,`${p}-speak.mp3`);}
   // the same sentence can appear in several places: one recording serves them all
   const known=new Map(out.filter(l=>l.audio).map(l=>[l.en,l.audio]));
   for(const l of out)if(!l.audio&&known.has(l.en))l.audio=known.get(l.en);
@@ -41,6 +42,13 @@ function validate({words,worlds}){
         for(const s of m.stages){need(m.places[s.target],`${M} stage ${s.id}: unknown place ${s.target}`);for(const q of s.questions)need(m.questions[q],`${M} stage ${s.id}: unknown question ${q}`);}}
       else if(m.type==='quiz')m.questions.forEach(q=>checkQ(q,q.id));
       else if(m.type==='tap3d'){const names=m.items.map(i=>i.word);m.items.forEach((it,i)=>{need(it.line?.en&&it.line?.th,`${M} item ${it.word}: line en/th required`);need(it.choices.includes(it.word)&&it.choices.every(c=>names.includes(c)),`${M} item ${it.word}: choices must include the answer and only known items`);});}
-      else errors.push(`${M}: unknown mission type ${m.type}`);}}
+      else errors.push(`${M}: unknown mission type ${m.type}`);
+      // every mission needs one speaking task (Phase 3 rule)
+      need(m.speak||(m.speaking&&m.speaking.length),`${M}: needs a speaking task ("speak" or "speaking")`);
+      if(m.speak)need(m.speak.id&&m.speak.target?.en&&m.speak.target?.th&&m.speak.prompt?.en&&m.speak.prompt?.th,`${M}: speak needs id, prompt en/th and target en/th`);
+      (m.speaking||[]).forEach((x,i)=>need(x.en&&x.th,`${M}: speaking ${i+1} needs en and th`));
+      if(m.card){need(m.card.intro?.en&&m.card.intro?.th,`${M}: card.intro en/th required`);for(const f of m.card.fields){const F=`${M} card field ${f.id}`;need(f.label?.en&&f.label?.th&&f.help?.en&&f.help?.th&&f.example?.en,`${F}: label, help (en/th) and example are required`);
+        need(f.rules&&f.rules.minWords>0,`${F}: rules.minWords is required`);for(const r of [...(f.rules?.all||[]),...(f.rules?.any||[])]){try{new RegExp(r,'i');}catch{errors.push(`${F}: bad pattern ${r}`);}}
+        need(f.example&&require('../shared/mission.js').checkWriting(f.example.en,f.rules),`${F}: the example must pass its own rules`);}}}}
   return errors;}
 module.exports={ROOT,load,validate,spokenLines};

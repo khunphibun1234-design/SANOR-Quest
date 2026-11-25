@@ -21,7 +21,19 @@ const KINDS=['choice','listen','order','speak','write','tap3d'];
 const text=t=>t==null?'':typeof t==='string'?t:t.en;
 
 // Similarity of two sentences by shared words (for spoken answers): 0..1
-function overlap(said,target){const a=norm(said).split(' ').filter(Boolean),b=norm(target).split(' ').filter(Boolean);if(!b.length)return 0;let hit=0;const pool=[...a];for(const w of b){const i=pool.indexOf(w);if(i>=0){hit++;pool.splice(i,1);}}return hit/b.length;}
+// Flexible comparison of a spoken (or typed) sentence with the target.
+// Words match when equal, when a short/long form of the same word ("I'm" ~ "I am"), or when one letter is off
+// in words of 4+ letters (speech engines often mishear endings). Returns {score 0..1, words:[{w, ok}]}.
+const EXPAND={"i'm":"i am","im":"i am","you're":"you are","it's":"it is","that's":"that is","let's":"let us","we're":"we are","they're":"they are","what's":"what is","where's":"where is","don't":"do not","can't":"can not","cannot":"can not","i'd":"i would","isn't":"is not"};
+const words=s=>norm(s).split(' ').filter(Boolean).flatMap(w=>(EXPAND[w]||w).split(' '));
+function near(a,b){if(a===b)return true;if(Math.min(a.length,b.length)<4||Math.abs(a.length-b.length)>1)return false;
+ let i=0,j=0,edits=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++edits>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++;}}return edits+(a.length-i)+(b.length-j)<=1;}
+function compare(said,target){const heard=words(said),want=words(target);const pool=[...heard];
+ const res=want.map(w=>{const k=pool.findIndex(h=>near(h,w));if(k>=0)pool.splice(k,1);return{w,ok:k>=0};});
+ return{score:want.length?res.filter(r=>r.ok).length/want.length:0,words:res};}
+function overlap(said,target){return compare(said,target).score;}
+// Pass rule: one missed word is allowed per 5 words (a 4-word sentence must be complete).
+function spokenOk(said,target,threshold){const r=compare(said,target);if(threshold)return r.score>=threshold;const miss=r.words.filter(w=>!w.ok).length;return r.words.length>0&&miss<=Math.floor(r.words.length/5);}
 
 // Rules for short written answers: {minWords, all:[regex], any:[regex]}
 function checkWriting(value,rules={}){const v=String(value||'');const words=(v.match(/[a-z]+(?:'[a-z]+)?/gi)||[]).length;
@@ -32,7 +44,7 @@ function checkWriting(value,rules={}){const v=String(value||'');const words=(v.m
 function check(task,value){switch(task.kind){
  case 'choice':case 'listen':return value===task.answer;
  case 'order':return Array.isArray(value)&&value.join(' ')===task.tokens.join(' ');
- case 'speak':return value&&value.selfCheck===true?true:overlap(value&&value.said!=null?value.said:value,text(task.target||task.line))>=(task.threshold||.75);
+ case 'speak':return value&&value.selfCheck===true?true:spokenOk(value&&value.said!=null?value.said:value,text(task.target||task.line),task.threshold);
  case 'write':return checkWriting(value,task.rules);
  case 'tap3d':return value===task.answer;
  default:throw Error('Unknown task kind: '+task.kind);}}
@@ -49,11 +61,14 @@ function render(el,task,o={}){
  const fill=o.fill||(s=>s),decide=o.decide||(v=>check(task,v));let done=false,attempts=0;const doc=el.ownerDocument;
  const finish=(value,button)=>{if(done)return;o.onPick&&o.onPick(value,button);const r=decide(value);if(r===null||r===undefined)return; // host ignored it
   attempts++;const correct=!!r;if(correct){done=true;button&&button.classList.add('correct');lock();}else button&&button.classList.add('wrong');
+  if(!correct&&o.support&&o.showHint)o.showHint();
   o.onResult&&o.onResult({correct,value,attempts,button});};
  const lock=()=>el.querySelectorAll('button,textarea,input').forEach(b=>{if(!b.classList.contains('sq-keep'))b.disabled=true;});
  const btn=(cls,html,on)=>{const b=doc.createElement('button');b.type='button';b.className=cls;b.innerHTML=html;b.onclick=()=>on(b);return b;};
  el.innerHTML='';
- if(task.kind==='choice'||task.kind==='listen'){const n=task.choices.length,rot=o.rotate||0,order=[...Array(n).keys()].map(i=>(i+rot)%n);
+ if(task.kind==='choice'||task.kind==='listen'){const n=task.choices.length,rot=o.rotate||0;let order=[...Array(n).keys()].map(i=>(i+rot)%n);
+  // extra help (SanorProfile.support): one fewer wrong choice
+  if(o.support&&n>2){const drop=order.filter(v=>v!==task.answer).pop();order=order.filter(v=>v!==drop);}
   const wrap=doc.createElement('div');wrap.className='choices';
   order.forEach((v,i)=>{const b=btn('choice',(o.letters?`<span class="letter">${'ABCDEF'[i]}</span>`:'')+`<span lang="en">${esc(fill(text(task.choices[v])))}</span>`,b=>{b.disabled=true;finish(v,b);});b.dataset.answer=v;wrap.append(b);});el.append(wrap);}
  else if(task.kind==='order'){let picked=[];const bank=bankOrder(task.tokens);
@@ -64,6 +79,7 @@ function render(el,task,o={}){
    bankEl.innerHTML='';for(const v of bank){const b=btn('token',esc(v.t),()=>{picked.push(v.i);paint();});b.disabled=done||picked.includes(v.i);bankEl.append(b);}
    checkBtn.disabled=done||picked.length!==task.tokens.length;};
   paint();checkBtn.onclick=()=>finish(picked.map(i=>task.tokens[i]),null);}
+ else if(task.kind==='speak'&&root.SQVoice){root.SQVoice.mount(el,{target:task.target||task.line,prompt:task.prompt,fill,onDone:r=>{done=r.mode!=='skip';attempts=r.tries;o.onResult&&o.onResult({correct:r.passed,value:r,attempts:r.tries});}});}
  else if(task.kind==='speak'){const target=fill(text(task.target||task.line));const SR=root.SpeechRecognition||root.webkitSpeechRecognition;
   el.innerHTML=`<div class="sq-speak"><p class="sq-say" lang="en">“${esc(target)}”</p><div class="sq-row"></div><p class="sq-heard" role="status"></p></div>`;
   const row=el.querySelector('.sq-row'),heard=el.querySelector('.sq-heard');
@@ -77,6 +93,6 @@ function render(el,task,o={}){
  else throw Error('Unknown task kind: '+task.kind);
  return{pick:v=>finish(v,null),lock,get done(){return done;},get attempts(){return attempts;}};}
 
-root.SQMission={KINDS,check,checkWriting,overlap,tracker,render,bankOrder,norm};
+root.SQMission={KINDS,check,checkWriting,overlap,compare,spokenOk,tracker,render,bankOrder,norm};
 if(typeof module!=='undefined')module.exports=root.SQMission;
 })(typeof window!=='undefined'?window:globalThis);

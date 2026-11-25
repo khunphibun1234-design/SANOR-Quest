@@ -21,19 +21,24 @@ const WORLDS={
  '03':{en:'Phibun Hometown Quest',th:'ภารกิจบ้านเกิดพิบูล',icon:'🏞️'},
  '04':{en:'Market & Food Street',th:'ตลาดและถนนอาหาร',icon:'🛒'},
  '05':{en:'Around the World',th:'รอบโลก',icon:'✈️'},
- '06':{en:'Future Makers City',th:'เมืองนักสร้างอนาคต',icon:'🤖'}};
+ '06':{en:'Future Makers City',th:'เมืองนักสร้างอนาคต',icon:'🤖'},
+ review:{en:'Daily Review',th:'ทบทวนประจำวัน',icon:'🔁',href:'review/',bonus:true}};
+// speaking results, best first; adaptive help looks at the last RECENT first-try answers
+const SPEECH_RANK={asr:4,self:3,'not-yet':2,skip:1},RECENT=20;
 const clean=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fresh=()=>({version:1,name:'',level:'starter',maps:{},createdAt:new Date().toISOString(),updatedAt:null});
+const fresh=()=>({version:1,name:'',level:'starter',maps:{},recent:[],answers:0,adviceAfter:0,supportOn:false,createdAt:new Date().toISOString(),updatedAt:null});
 let storageOK=true;
 
 function sanitize(s){const out=fresh();if(!s||typeof s!=='object'||s.version!==1)return null;
  out.name=clean(s.name,20);out.level=Object.hasOwn(LEVELS,s.level)?s.level:'starter';
  if(typeof s.createdAt==='string')out.createdAt=s.createdAt;if(typeof s.updatedAt==='string')out.updatedAt=s.updatedAt;
- for(const [id,m] of Object.entries(s.maps||{})){if(!Object.hasOwn(WORLDS,id)||!m||typeof m!=='object')continue;const map={activities:{},stamps:{}};
+ for(const [id,m] of Object.entries(s.maps||{})){if(!Object.hasOwn(WORLDS,id)||!m||typeof m!=='object')continue;const map={activities:{},stamps:{},speech:{}};
   for(const [a,v] of Object.entries(m.activities||{})){if(!/^[a-z0-9-]{1,24}$/.test(a)||!v)continue;map.activities[a]={xp:Math.max(0,Math.min(5000,Math.round(+v.xp||0))),done:v.done===true,at:typeof v.at==='string'?v.at:null};}
   for(const [k,v] of Object.entries(m.stamps||{})){if(!/^[a-z0-9-]{1,40}$/.test(k)||!v)continue;map.stamps[k]={label:clean(v.label,40),icon:clean(v.icon,8),at:typeof v.at==='string'?v.at:null};}
+  for(const [k,v] of Object.entries(m.speech||{})){if(!/^[a-z0-9-]{1,40}$/.test(k)||!v||!SPEECH_RANK[v.best])continue;map.speech[k]={best:v.best,tries:Math.max(0,Math.min(999,+v.tries||0)),score:Math.max(0,Math.min(1,+v.score||0)),at:typeof v.at==='string'?v.at:null};}
   out.maps[id]=map;}
+ out.recent=Array.isArray(s.recent)?s.recent.filter(x=>x===0||x===1).slice(-RECENT):[];out.answers=Math.max(0,Math.round(+s.answers||0));out.adviceAfter=Math.max(0,Math.round(+s.adviceAfter||0));out.supportOn=s.supportOn===true;
  return out;}
 function load(){try{const s=sanitize(JSON.parse(localStorage.getItem(KEY)));storageOK=true;if(s)return s;}catch{storageOK=false;}return migrate(fresh());}
 // First visit after the update: carry over the name and Map 01 progress saved by the older version.
@@ -43,7 +48,7 @@ function save(){state.updatedAt=new Date().toISOString();try{localStorage.setIte
 function emit(){applyThai();for(const f of listeners){try{f(api.get());}catch(e){console.error(e);}}}
 root.addEventListener?.('storage',e=>{if(e.key===KEY||e.key===null){state=load();emit();}});
 
-function map(id){if(!Object.hasOwn(WORLDS,id))throw Error('Unknown world '+id);return state.maps[id]||(state.maps[id]={activities:{},stamps:{}});}
+function map(id){if(!Object.hasOwn(WORLDS,id))throw Error('Unknown world '+id);const m=state.maps[id]||(state.maps[id]={activities:{},stamps:{},speech:{}});m.speech=m.speech||{};return m;}
 const mapXp=id=>Object.values(state.maps[id]?.activities||{}).reduce((s,a)=>s+a.xp,0);
 
 // ---------- Thai help (scaffolding) ----------
@@ -79,6 +84,24 @@ const api={XP,LEVELS,WORLDS,KEY,
  stamps:id=>Object.entries(state.maps[id]?.stamps||{}).map(([k,v])=>({id:k,...v})),
  activity:(id,a)=>({...(state.maps[id]?.activities?.[a]||{xp:0,done:false,at:null})}),
  onChange(f){listeners.add(f);return()=>listeners.delete(f);},
+ // ---------- speaking ----------
+ // result from SQVoice: {mode:'asr'|'self'|'skip', passed, score}. Keeps the best result per task.
+ recordSpeech(mapId,id,r={}){const m=map(mapId);id=String(id).toLowerCase().replace(/[^a-z0-9-]/g,'-').slice(0,40);
+  const best=r.mode==='skip'?'skip':!r.passed?'not-yet':r.mode==='asr'?'asr':'self';const cur=m.speech[id]||{best:'skip',tries:0,score:0,at:null};
+  cur.tries++;if(SPEECH_RANK[best]>=SPEECH_RANK[cur.best]){cur.best=best;cur.at=new Date().toISOString();}cur.score=Math.max(cur.score,+r.score||0);m.speech[id]=cur;save();return{...cur};},
+ speech:id=>Object.entries(state.maps[id]?.speech||{}).map(([k,v])=>({id:k,...v})),
+ speechStats(){const all=Object.values(state.maps).flatMap(m=>Object.values(m.speech||{}));return{tasks:all.length,spoken:all.filter(v=>v.best==='asr'||v.best==='self').length,recognised:all.filter(v=>v.best==='asr').length,skipped:all.filter(v=>v.best==='skip').length};},
+ // ---------- adaptive help ----------
+ // Call once per question with whether the FIRST answer was right without a hint.
+ logAnswer(firstTry){state.recent.push(firstTry?1:0);state.recent=state.recent.slice(-RECENT);state.answers++;const a=api.accuracy();
+  if(a.n>=8&&a.rate<.5)state.supportOn=true;else if(state.supportOn&&a.rate>=.65)state.supportOn=false;save();},
+ accuracy(){const n=state.recent.length;return{n,rate:n?state.recent.reduce((x,y)=>x+y,0)/n:0};},
+ // More help (fewer choices, hints shown after a mistake) while first-try accuracy is under 50%.
+ support:()=>state.supportOn,
+ // 'level-up' when the last answers are over 85% right and there is a level left to try.
+ advice(){const a=api.accuracy();if(a.n>=12&&a.rate>.85&&state.level!=='challenger'&&state.answers>=state.adviceAfter)return'level-up';return null;},
+ nextLevel(){const o=Object.keys(LEVELS);return o[Math.min(o.length-1,o.indexOf(state.level)+1)];},
+ snoozeAdvice(){state.adviceAfter=state.answers+10;save();},
  reset(){state=fresh();save();}};
 root.SanorProfile=api;
 })(typeof window!=='undefined'?window:globalThis);

@@ -18,4 +18,12 @@ B(2.76,1.06,1.34,.04,.022,.22,'#93a7a1');
 S(2.76,1.07,1.19,.055,.018,.075,'#93a7a1',7,4);
 const lunchSetting=M();
 function avatar(p,kind,t){D(shadow,model(p.x,.27,p.z));D(people[kind],model(p.x,.27+(p.walk?Math.sin(t*10)*.025:Math.sin(t*2)*.012),p.z,p.angle));for(const side of [-1,1]){const a=p.angle,offset=side*.15,swing=p.walk?Math.sin(t*10+side*Math.PI/2)*.15:0;D(leg,model(p.x+Math.cos(a)*offset+Math.sin(a)*swing,.27,p.z-Math.sin(a)*offset+Math.cos(a)*swing,a));}}
-return{colliders,render(t,player,alex,mum,yaw,served,tableReady){for(const m of objects)D(m);for(const w of walls)if(w.nx*Math.sin(yaw)+w.nz*Math.cos(yaw)<.2)D(w.mesh);avatar(mum,'mum',t);avatar(alex,'alex',t);avatar(player,'player',t);if(tableReady)D(lunchSetting);if(served)D(glass,model(2.9,0,1.1));}};};
+// ---- "Your words change the world": things that appear as the player answers well ----
+const flowerSpots=[[-1.25,2.9],[1.25,3.0],[-1.3,3.9],[1.3,4.0],[-1.25,4.9],[1.25,5.0],[-1.3,5.9],[1.3,6.0],[-1.25,6.9],[1.25,7.0]];
+C(0,.2,0,.035,.035,.4,'#5f9468',5);for(let i=0;i<5;i++){const a=i*1.257;S(Math.cos(a)*.09,.42,Math.sin(a)*.09,.08,.04,.08,'#f2a6b8',6,3);}S(0,.43,0,.05,.04,.05,'#f6d36b',6,3);S(.08,.12,0,.09,.035,.05,'#78ad6f',5,3);const flower=M();
+B(0,2.25,7.8,3.2,.03,.03,'#9b8a6c');const cols=['#e9806e','#f2c14e','#6fb0a8','#b98bd1','#e9806e','#f2c14e','#6fb0a8','#b98bd1'];cols.forEach((c,i)=>{const x=-1.4+i*.4;e.tri([x-.14,2.24,7.8],[x+.14,2.24,7.8],[x,1.95,7.8],c);});const bunting=M();
+C(-5.3,.85,-1.45,.04,.04,1.25,'#8b7a63',6);C(-5.3,.3,-1.45,.22,.25,.06,'#8b7a63',10);C(-5.3,1.55,-1.45,.26,.18,.3,'#efe3c8',12);const lampOff=M();
+C(-5.3,1.55,-1.45,.26,.18,.3,'#ffe39a',12);S(-5.3,1.45,-1.45,.13,.13,.13,'#fff4c8',8,5);C(-5.3,.1,-1.45,1.4,1.4,.01,'#f6e2a8',24);const lampOn=M();solid(-5.3,-1.45,.5,.5);
+return{colliders,render(t,player,alex,mum,yaw,served,tableReady,fx={}){
+ for(let i=0;i<Math.min(fx.flowers||0,flowerSpots.length);i++){const [x,z]=flowerSpots[i],grow=Math.min(1,(t-(fx.bloomAt?.[i]??-9))/0.8);D(flower,model(x,.1,z,i*.7,.6+.4*Math.max(0,grow)));}
+ if(fx.bunting)D(bunting);D(fx.lamp?lampOn:lampOff);for(const m of objects)D(m);for(const w of walls)if(w.nx*Math.sin(yaw)+w.nz*Math.cos(yaw)<.2)D(w.mesh);avatar(mum,'mum',t);avatar(alex,'alex',t);avatar(player,'player',t);if(tableReady)D(lunchSetting);if(served)D(glass,model(2.9,0,1.1));}};};

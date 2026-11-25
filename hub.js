@@ -17,7 +17,8 @@ $('headerXp').textContent=total;$('passportXp').textContent=total;$('passportSta
 $('passportName').textContent=P.name()||'New explorer';if(document.activeElement!==$('nameInput'))$('nameInput').value=P.name();
 $('levelOptions').innerHTML=Object.entries(P.LEVELS).map(([id,L])=>`<label class="level-option"><input type="radio" name="level" value="${id}"${P.level()===id?' checked':''}><span class="level-icon" aria-hidden="true">${L.icon}</span><span><b>${L.en}</b> <span lang="th">${L.th}</span><small lang="th">${L.about}</small></span></label>`).join('');
 $('worldList').innerHTML=worlds.map(([id,w])=>{const xp=P.mapXp(id),st=P.stamps(id),open=!!w.href;return `<li class="world-row${open?'':' locked'}"><span class="world-icon" aria-hidden="true">${w.icon}</span><span class="world-name"><b>${w.bonus?'Bonus':'Map '+id} · ${escape(w.en)}</b>${P.th(w.th)}<span class="world-stamps" aria-label="${st.length} stamps">${st.map(x=>escape(x.icon||'✦')).join(' ')||(open?'No stamps yet':'Coming soon')}</span></span><strong class="world-xp">${xp} XP</strong></li>`;}).join('');}
-P.mountLevelButton($('levelSlot'));P.onChange(()=>passport());
+P.mountLevelButton($('levelSlot'));SQCoach.mount();
+function dailyReview(){const st=SanorSRS.stats();$('dueCount').textContent=st.total?(st.due?st.due+(st.due===1?' word waiting':' words waiting'):'All done for now ✓'):'Start';}dailyReview();window.addEventListener('pageshow',dailyReview);P.onChange(()=>passport());
 $('nameInput').addEventListener('change',e=>P.setName(e.target.value));
 $('levelOptions').addEventListener('change',e=>{if(e.target.name==='level')P.setLevel(e.target.value);});
 $('townMap').innerHTML=QuestArt.atlas(maps);

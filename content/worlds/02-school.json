@@ -285,7 +285,92 @@
      ],
      "answer": 1
     }
-   ]
+   ],
+   "speak": {
+    "id": "buddy-cheer",
+    "prompt": {
+     "en": "Alex is going on stage. Cheer for your new friend!",
+     "th": "Alex กำลังจะขึ้นเวที ส่งกำลังใจให้เพื่อนใหม่หน่อย"
+    },
+    "target": {
+     "en": "Good luck, Alex! You can do it!",
+     "th": "โชคดีนะ Alex เธอทำได้!"
+    }
+   },
+   "card": {
+    "title": {
+     "en": "My school card for Alex",
+     "th": "การ์ดโรงเรียนของฉันสำหรับ Alex"
+    },
+    "intro": {
+     "en": "Write 3 short sentences to help Alex at our school. The game checks the key parts.",
+     "th": "เขียนประโยคสั้น ๆ 3 ประโยคเพื่อช่วย Alex ที่โรงเรียนของเรา เกมจะตรวจส่วนสำคัญให้"
+    },
+    "fields": [
+     {
+      "id": "place",
+      "label": {
+       "en": "1. Show Alex a place at our school.",
+       "th": "1. แนะนำสถานที่ในโรงเรียนให้ Alex"
+      },
+      "example": {
+       "en": "This is our library."
+      },
+      "help": {
+       "en": "Use at least 4 words and name a school place.",
+       "th": "ใช้อย่างน้อย 4 คำ และบอกชื่อสถานที่ในโรงเรียน"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\b(gate|classroom|library|canteen|gym|stage|music room|garden)\\b"
+       ]
+      }
+     },
+     {
+      "id": "like",
+      "label": {
+       "en": "2. Say what you like at school.",
+       "th": "2. บอกว่าคุณชอบอะไรที่โรงเรียน"
+      },
+      "example": {
+       "en": "I like the music club."
+      },
+      "help": {
+       "en": "Start with I like … Use at least 4 words.",
+       "th": "ขึ้นต้นด้วย I like … ใช้อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\bi like\\b"
+       ]
+      }
+     },
+     {
+      "id": "invite",
+      "label": {
+       "en": "3. Invite Alex to do something with you.",
+       "th": "3. ชวน Alex ไปทำอะไรด้วยกัน"
+      },
+      "example": {
+       "en": "Let's go to the canteen."
+      },
+      "help": {
+       "en": "Start with Let's … or Do you want to … ? Use at least 4 words.",
+       "th": "ขึ้นต้นด้วย Let's … หรือ Do you want to … ? ใช้อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\blet'?s\\b",
+        "\\bdo you want to\\b",
+        "\\bwould you like to\\b"
+       ]
+      }
+     }
+    ]
+   }
   }
  ]
 }

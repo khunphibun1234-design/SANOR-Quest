@@ -40,3 +40,11 @@
 .world-stamps{font-size:14px;letter-spacing:2px;color:var(--muted)}
 .world-xp{font:700 14px var(--display);color:#8a6418;white-space:nowrap}
 @media(max-width:800px){.detail-description{grid-row:5}.detail-description-th{grid-column:1 / -1;grid-row:6}.detail-missions{grid-row:7 / 11}.mission-progress{grid-row:7}.map-detail .primary-button,.unavailable-button{grid-row:8}.detail-footnote{grid-row:9}}
+
+/* ---------- Daily review entry ---------- */
+.daily-review{display:flex;align-items:center;gap:14px;margin:0 0 26px;padding:16px 20px;border-radius:18px;background:#fff8e6;border:1px solid #f0dfae;color:var(--ink);text-decoration:none;box-shadow:0 6px 18px #9a7a2414;transition:transform .15s}
+.daily-review:hover{transform:translateY(-1px)}
+.dr-icon{font-size:26px}
+.dr-text{flex:1;display:grid;gap:2px;font:600 15px var(--display)}
+.dr-text .th{font-size:12px;font-weight:500}
+.dr-count{padding:6px 12px;border-radius:999px;background:var(--gold);color:#3d2d07;font:700 13px var(--display);white-space:nowrap}

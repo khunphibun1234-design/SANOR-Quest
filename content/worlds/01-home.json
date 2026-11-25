@@ -535,19 +535,23 @@
    "speaking": [
     {
      "en": "Welcome to my home.",
-     "audio": "line-50.mp3"
+     "audio": "line-50.mp3",
+     "th": "ยินดีต้อนรับสู่บ้านของฉัน"
     },
     {
      "en": "This is my friend, Alex.",
-     "audio": "line-51.mp3"
+     "audio": "line-51.mp3",
+     "th": "นี่คือ Alex เพื่อนของฉัน"
     },
     {
      "en": "This is the living room.",
-     "audio": "line-52.mp3"
+     "audio": "line-52.mp3",
+     "th": "นี่คือห้องนั่งเล่น"
     },
     {
      "en": "Would you like some water?",
-     "audio": "line-47.mp3"
+     "audio": "line-47.mp3",
+     "th": "อยากดื่มน้ำไหม"
     }
    ],
    "vocabulary": [
@@ -673,6 +677,10 @@
       }
      }
     ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
    }
   },
   {
@@ -939,6 +947,17 @@
     "hint": {
      "en": "Think about what holds soup and what you eat it with.",
      "th": "ลองนึกว่าอะไรใส่ซุป และเราใช้อะไรกินซุป"
+    }
+   },
+   "speak": {
+    "id": "table-lunch",
+    "prompt": {
+     "en": "The table is ready. Tell Alex that lunch is ready.",
+     "th": "โต๊ะพร้อมแล้ว บอก Alex ว่ามื้อกลางวันพร้อมแล้ว"
+    },
+    "target": {
+     "en": "Lunch is ready. Please sit down.",
+     "th": "มื้อกลางวันพร้อมแล้ว เชิญนั่งเลย"
     }
    }
   }

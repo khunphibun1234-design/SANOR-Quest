@@ -2,7 +2,7 @@
 
 สร้างอัตโนมัติด้วย `npm run audio` · อย่าแก้ไฟล์นี้เอง
 
-- ต้องอัดเพิ่ม **0** ไฟล์ จากทั้งหมด 10 ประโยค
+- ต้องอัดเพิ่ม **1** ไฟล์ จากทั้งหมด 11 ประโยค
 - อัดเป็น .mp3 (mono, 44.1 kHz) ตั้งชื่อไฟล์ตามคอลัมน์ "ชื่อไฟล์" แล้วส่งมาทั้งชุด
 - `{name}` คือชื่อเล่นของผู้เล่น: ให้พูดว่า "Mook" แทน
 
@@ -18,3 +18,4 @@
 | 8 | ✅ | What do I like? I love singing and playing the guitar. | ฉันชอบอะไรนะ ฉันชอบร้องเพลงและเล่นกีตาร์ | `line-27.mp3` | buddy · music · line |
 | 9 | ✅ | I want to join a group that sings after school. Is there a music ___? | ฉันอยากเข้ากลุ่มที่ร้องเพลงหลังเลิกเรียน มี ___ ดนตรีไหม | `line-28.mp3` | buddy · club · line |
 | 10 | ✅ | Our club has a concert! Where should I stand so everyone can see me sing? | ชมรมของเรามีคอนเสิร์ต ฉันควรยืนตรงไหนให้ทุกคนเห็นตอนร้องเพลง | `line-29.mp3` | buddy · stage · line |
+| 11 | ⬜ | Good luck, Alex! You can do it! | โชคดีนะ Alex เธอทำได้! | `02-buddy-speak.mp3` | buddy · speaking task |

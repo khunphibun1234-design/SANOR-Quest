@@ -2,7 +2,7 @@
 
 สร้างอัตโนมัติด้วย `npm run audio` · อย่าแก้ไฟล์นี้เอง
 
-- ต้องอัดเพิ่ม **0** ไฟล์ จากทั้งหมด 46 ประโยค
+- ต้องอัดเพิ่ม **1** ไฟล์ จากทั้งหมด 47 ประโยค
 - อัดเป็น .mp3 (mono, 44.1 kHz) ตั้งชื่อไฟล์ตามคอลัมน์ "ชื่อไฟล์" แล้วส่งมาทั้งชุด
 - `{name}` คือชื่อเล่นของผู้เล่น: ให้พูดว่า "Mook" แทน
 
@@ -28,9 +28,9 @@
 | 18 | ✅ | Would you like some water? |  | `line-47.mp3` | welcome · offer · answer |
 | 19 | ✅ | Yes, please! | ได้เลย ขอบคุณนะ! | `line-48.mp3` | welcome · serve · line |
 | 20 | ✅ | Here you are. |  | `line-49.mp3` | welcome · serve · answer |
-| 21 | ✅ | Welcome to my home. |  | `line-50.mp3` | welcome · speaking 1 |
-| 22 | ✅ | This is my friend, Alex. |  | `line-51.mp3` | welcome · speaking 2 |
-| 23 | ✅ | This is the living room. |  | `line-52.mp3` | welcome · speaking 3 |
+| 21 | ✅ | Welcome to my home. | ยินดีต้อนรับสู่บ้านของฉัน | `line-50.mp3` | welcome · speaking 1 |
+| 22 | ✅ | This is my friend, Alex. | นี่คือ Alex เพื่อนของฉัน | `line-51.mp3` | welcome · speaking 2 |
+| 23 | ✅ | This is the living room. | นี่คือห้องนั่งเล่น | `line-52.mp3` | welcome · speaking 3 |
 | 24 | ✅ | We watch TV in the living room. | เราดูทีวีกันในห้องนั่งเล่น | `line-53.mp3` | welcome · word book · living room |
 | 25 | ✅ | I sleep in my bedroom. | ฉันนอนในห้องนอน | `line-54.mp3` | welcome · word book · bedroom |
 | 26 | ✅ | We water the plants in the garden. | เรารดน้ำต้นไม้ในสวน | `line-55.mp3` | welcome · word book · garden |
@@ -54,3 +54,4 @@
 | 44 | ✅ | glass. Bring me an empty glass. |  | `line-17.mp3` | table · glass · word + line |
 | 45 | ✅ | Pour some water into my glass. | รินน้ำใส่แก้วให้ฉันหน่อย | `line-18.mp3` | table · water · line |
 | 46 | ✅ | water. Pour some water into my glass. |  | `line-19.mp3` | table · water · word + line |
+| 47 | ⬜ | Lunch is ready. Please sit down. | มื้อกลางวันพร้อมแล้ว เชิญนั่งเลย | `01-table-speak.mp3` | table · speaking task |

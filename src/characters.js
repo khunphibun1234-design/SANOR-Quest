@@ -2,8 +2,8 @@
 // SQ3.createCast(scene) → {pose(kind, p, t)}  where p = {x, z, angle, walk, act:{type:'wave'|'cheer'|'hmm', t0, dur}}
 import {Group,Mesh,MeshStandardMaterial,MeshBasicMaterial,SphereGeometry,CapsuleGeometry,CylinderGeometry,BoxGeometry,TorusGeometry} from 'three';
 const P=(g,m,cast=true)=>{const o=new Mesh(g,m);o.castShadow=cast;o.receiveShadow=true;return o;};
-export const LOOKS={player:['#5e9a85','#34584f','#4a3b32','#edc39b',true],alex:['#f0b955','#3d5a73','#7a5a40','#efc6a0',false],mum:['#c98a77','#5a4a44','#3f3a35','#dfb087',true]};
-export function createCast(scene,kinds=Object.keys(LOOKS)){
+export const LOOKS={dad:['#7d9fc0','#3f4b57','#2f2a26','#d9a77f',false],player:['#5e9a85','#34584f','#4a3b32','#edc39b',true],alex:['#f0b955','#3d5a73','#7a5a40','#efc6a0',false],mum:['#c98a77','#5a4a44','#3f3a35','#dfb087',true]};
+export function createCast(scene,kinds=['player','alex','mum']){
 function person(shirt,pants,hair,skin,long){const root=new Group(),mat=c=>new MeshStandardMaterial({color:c,roughness:.8}),skinM=mat(skin),shirtM=mat(shirt),pantsM=mat(pants),hairM=mat(hair);
  const legs=[-1,1].map(s=>{const pivot=new Group();pivot.position.set(s*.12,.62,0);const leg=P(new CapsuleGeometry(.1,.36,6,14),pantsM);leg.position.y=-.27;const shoe=P(new SphereGeometry(1,16,10),mat('#3d4a44'));shoe.scale.set(.11,.07,.16);shoe.position.set(0,-.56,.05);pivot.add(leg,shoe);root.add(pivot);return pivot;});
  const torso=P(new CapsuleGeometry(.26,.34,8,20),shirtM);torso.scale.set(1,1,.82);torso.position.y=.95;const belt=P(new CylinderGeometry(.245,.25,.08,24),pantsM);belt.position.y=.66;const neck=P(new CylinderGeometry(.07,.07,.12,12),skinM);neck.position.y=1.28;root.add(torso,belt,neck);
