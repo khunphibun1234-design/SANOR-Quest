@@ -1,0 +1,11 @@
+const {test,expect}=require('@playwright/test');const path=require('path');
+// WCAG 2.1 AA checks with axe-core on every page (colour contrast, labels, names, structure, …).
+const AXE=path.join(__dirname,'../node_modules/axe-core/axe.min.js');
+const pages=[['town map','/',null],['passport','/','#passportBtn'],['Map 01 intro','/home/?quality=low',null],['Map 02 intro','/school/?quality=low',null],['Map 02 2D','/school/quiz.html',null],
+  ['daily review','/review/',null],['pre-test','/test/?kind=pre','#begin'],['teacher sign-in','/teacher/',null],['3D table intro','/home/table-three.html?quality=low',null],['privacy policy','/privacy/',null],['consent form','/consent/',null],['teacher guide','/teacher/guide.html',null]];
+for(const [name,url,click] of pages)test(`accessibility (WCAG 2.1 AA): ${name}`,async({page})=>{
+  await page.goto(url);await page.evaluate(()=>localStorage.clear());await page.reload();await page.waitForTimeout(600);if(click)await page.click(click);await page.waitForTimeout(300);
+  await page.addScriptTag({path:AXE});
+  const r=await page.evaluate(async()=>{const res=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}});
+    return res.violations.map(v=>({id:v.id,impact:v.impact,n:v.nodes.length,where:v.nodes.slice(0,3).map(n=>n.target.join(' ')+' :: '+(n.failureSummary||'').split('\n')[1])}));});
+  expect(r).toEqual([]);});

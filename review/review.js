@@ -7,6 +7,7 @@ const SECONDS = 180, MAX_ITEMS = 15, XP_EACH = 5, XP_DAY = 50, DAY = 86400000;
 const today = () => { const d = new Date(); return 'd' + d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0'); };
 let queue = [], index = 0, results = [], left = SECONDS, timer = null, current = null;
 P.mountLevelButton(el('barTools')); SQCoach.mount();
+addEventListener('load', () => window.SQPwa && SQPwa.cacheWorld('words'));
 const paintXp = () => { el('totalXp').textContent = P.totalXp(); el('todayXp').textContent = P.activity('review', today()).xp; };
 P.onChange(paintXp);
 

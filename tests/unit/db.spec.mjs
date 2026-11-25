@@ -55,3 +55,14 @@ test('class settings reach the students; PIN reset signs old devices out',async(
   await expect(rpc(h,'anon','class_settings',[j.token])).rejects.toThrow(/bad_token/);
   expect((await rpc(h,'anon','join_class',[c1.code,4,'D','5555'])).token).toBeTruthy();
   await rpc(h,T1,'remove_student',[sid]);expect((await rpc(h,T1,'class_report',[c1.id])).students).toEqual([]);});
+
+test('PDPA: a student deletes their own data; a teacher deletes a whole class',async()=>{const {h,c1,c2}=await setup();
+  const a=await rpc(h,'anon','join_class',[c1.code,1,'A','1111']);await rpc(h,'anon','join_class',[c1.code,2,'B','2222']);
+  await rpc(h,'anon','submit_events',[a.token,JSON.stringify([{id:'evt-0000001',kind:'answer',item:'gym',firstTry:true},{kind:'progress',world:'02',activity:'tour',xp:20}])]);
+  await rpc(h,'anon','delete_me',[a.token]);
+  expect((await rpc(h,T1,'class_report',[c1.id])).students.map(s=>s.number)).toEqual([2]);
+  expect((await h.db.query('select count(*)::int n from public.events')).rows[0].n).toBe(0);
+  await expect(rpc(h,'anon','class_settings',[a.token])).rejects.toThrow(/bad_token/);
+  await expect(rpc(h,T1,'delete_class',[c2.id])).rejects.toThrow(/not_your_class/);
+  await rpc(h,T1,'delete_class',[c1.id]);expect(await rpc(h,T1,'my_classes',[])).toEqual([]);
+  expect((await h.db.query('select count(*)::int n from public.students')).rows[0].n).toBe(0);});

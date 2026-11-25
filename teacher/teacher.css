@@ -40,3 +40,4 @@ dialog .close{float:right;min-height:0;border:0;background:none;font-size:1.6rem
 .ev-ok{color:var(--green);font-weight:700}.ev-no{color:var(--danger);font-weight:700}
 @media print{.bar,.tabs,.toolbar,.inline-form,#backToClasses,.demo-note,button{display:none!important}.tab[hidden]{display:block!important}.table-wrap{border:0;overflow:visible}th{position:static}main{padding:0}}
 .hint{font-size:.85rem;color:var(--muted)}
+.danger{border:1px solid #e2b3a8;border-radius:var(--radius);padding:1rem;max-width:38rem;margin-top:1.2rem}.danger legend{font-weight:700;color:var(--danger)}#deleteClass{color:var(--danger)}

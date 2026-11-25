@@ -1,6 +1,6 @@
 const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
 // The speaking task on Alex's Table results page, with the microphone simulated.
-const finishedTable=()=>{localStorage.clear();localStorage.setItem('sanor-table-mission-v1',JSON.stringify({index:10,rows:Array.from({length:10},(_,i)=>({answers:[i],hint:false}))}));};
+const finishedTable=()=>{localStorage.clear();SanorProfile.setRecognition(true);localStorage.setItem('sanor-table-mission-v1',JSON.stringify({index:10,rows:Array.from({length:10},(_,i)=>({answers:[i],hint:false}))}));};
 const fakeRecognition=said=>{window.__said=said;window.SpeechRecognition=class{start(){setTimeout(()=>{const list=[[{transcript:window.__said.shift()}]];list[0].length=1;this.onresult&&this.onresult({results:list});this.onend&&this.onend();},50);}};};
 async function open(page){await page.goto('/home/table.html');await page.evaluate(finishedTable);await page.reload();await expect(page.locator('#speakBox .sq-voice-target')).toHaveText('“Lunch is ready. Please sit down.”');}
 
@@ -21,10 +21,15 @@ test('speech recognition: missing words are shown, and after two tries the stude
   await page.locator('#speakBox .sq-voice-btn.good').click();
   expect(await page.evaluate(()=>SanorProfile.speech('01')[0].best)).toBe('self');});
 
-test('no speech recognition (e.g. iOS): record-and-compare path, and Skip always works',async({page})=>{
+test('privacy default: without the microphone switch (or on iOS) the record-and-compare path is used, and Skip always works',async({page})=>{
   await page.addInitScript(()=>{delete window.webkitSpeechRecognition;delete window.SpeechRecognition;});await open(page);
   await expect(page.locator('#speakBox [data-row=self]')).toBeVisible();
   await expect(page.locator('#speakBox .sq-voice-btn',{hasText:'I said it'})).toBeVisible();
   await page.locator('#speakBox .sq-skip').click();
   await expect(page.locator('#speakBox')).toHaveClass(/is-skipped/);
   expect(await page.evaluate(()=>[SanorProfile.speech('01')[0].best,SanorProfile.speechStats()])).toEqual(['skip',{tasks:1,spoken:0,recognised:0,skipped:1}]);});
+
+test('speech recognition stays off until the student switches it on',async({page})=>{
+  await page.addInitScript(()=>{window.SpeechRecognition=class{start(){}};});
+  await page.goto('/home/table.html');await page.evaluate(()=>{localStorage.clear();localStorage.setItem('sanor-table-mission-v1',JSON.stringify({index:10,rows:Array.from({length:10},(_,i)=>({answers:[i],hint:false}))}));});await page.reload();
+  await expect(page.locator('#speakBox .sq-voice-btn.primary')).toHaveCount(0);await expect(page.locator('#speakBox [data-row=self]')).toBeVisible();});

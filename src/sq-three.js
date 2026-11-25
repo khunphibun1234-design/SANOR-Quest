@@ -88,14 +88,17 @@ function createEngine(canvas,o={}){
  const opt={background:'#e3eadc',fog:[45,110],pixelRatio:1.75,shadowCenter:[0,0,0],shadowRadius:14,exposure:.95,sun:2.3,...o};
  const renderer=new WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
  // ?quality=high keeps full quality; ?quality=low starts at the lightest setting (very weak devices, automated tests)
- const FIXED_Q=/quality=(high|low)/.test(location.search),LOW_Q=/quality=low/.test(location.search);let pixelCap=LOW_Q?.5:Math.min(devicePixelRatio||1,opt.pixelRatio);
+ const FIXED_Q=/quality=(high|low)/.test(location.search),LOW_Q=/quality=low/.test(location.search);
+ // budget phones (≤4 GB memory or ≤4 cores) start lighter: 1× resolution and smaller shadows
+ const BUDGET=!FIXED_Q&&((navigator.deviceMemory&&navigator.deviceMemory<=4)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4));
+ let pixelCap=LOW_Q?.5:BUDGET?1:Math.min(devicePixelRatio||1,opt.pixelRatio);
  renderer.setPixelRatio(pixelCap);renderer.setSize(innerWidth,innerHeight,false);
  renderer.toneMapping=NeutralToneMapping;renderer.toneMappingExposure=opt.exposure;renderer.outputColorSpace=SRGBColorSpace;
  renderer.shadowMap.enabled=!LOW_Q;renderer.shadowMap.type=PCFSoftShadowMap;renderer.setClearColor(new Color(opt.background),1);
  const scene=new Scene();scene.fog=new Fog(new Color(opt.background),opt.fog[0],opt.fog[1]);
  const pmrem=new PMREMGenerator(renderer);scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;scene.environmentIntensity=.22;
  scene.add(new HemisphereLight(0xdfeaf7,0xa98f68,.8));
- const sun=new DirectionalLight(0xffe9c7,opt.sun);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.bias=-.0004;sun.shadow.normalBias=.025;sun.shadow.radius=4;
+ const sun=new DirectionalLight(0xffe9c7,opt.sun);sun.castShadow=true;sun.shadow.mapSize.set(BUDGET?1024:2048,BUDGET?1024:2048);sun.shadow.bias=-.0004;sun.shadow.normalBias=.025;sun.shadow.radius=4;
  scene.add(sun,sun.target);const SUN_DIR=new Vector3(-.45,1,.42).normalize();
  function setShadow(c,r){sun.target.position.set(...c);sun.position.set(c[0]+SUN_DIR.x*40,c[1]+SUN_DIR.y*40,c[2]+SUN_DIR.z*40);const s=sun.shadow.camera;s.left=-r;s.right=r;s.top=r;s.bottom=-r;s.near=5;s.far=90;s.updateProjectionMatrix();}
  setShadow(opt.shadowCenter,opt.shadowRadius);
@@ -115,7 +118,7 @@ function createEngine(canvas,o={}){
    camera.matrix.copy(view4).invert();camera.matrixWorld.copy(camera.matrix);camera.matrixWorldInverse.copy(view4);
    camera.projectionMatrix.copy(proj4);camera.projectionMatrixInverse.copy(proj4).invert();
    lastProj=lastView=null;beginFrame();},
-  end(){const now=performance.now();if(prev){const ms=now-prev;frames++;if(frames>120&&!FIXED_Q){slowT+=ms;slowN++;if(slowN>=90){if(slowT/slowN>45){const q=lowerQuality();if(q)qualityLog.push(q);}slowT=0;slowN=0;}}}prev=now;
+  end(){const now=performance.now();if(prev){const ms=now-prev;frames++;if(frames>120&&!FIXED_Q){slowT+=ms;slowN++;if(slowN>=90){if(slowT/slowN>34){/* below ~30 fps: step down */const q=lowerQuality();if(q)qualityLog.push(q);}slowT=0;slowN=0;}}}prev=now;
    renderer.render(scene,camera);},
   project(x,y,z){const p=[x,y,z,1],c=[0,0,0,0];for(let i=0;i<4;i++)for(let k=0;k<4;k++)c[i]+=vp[k*4+i]*p[k];return{x:(c[0]/c[3]*.5+.5)*innerWidth,y:(-.5*c[1]/c[3]+.5)*innerHeight,visible:c[3]>0&&Math.abs(c[0]/c[3])<1.1&&Math.abs(c[1]/c[3])<1.2};},
   status:()=>({renderer:'three.js r187',quality:{ratio:pixelCap,shadows:renderer.shadowMap.enabled,shadowSize:sun.shadow.mapSize.x},qualityLog,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles})};

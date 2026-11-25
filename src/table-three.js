@@ -9,7 +9,7 @@ import {RoomEnvironment} from 'three-addons/environments/RoomEnvironment.js';
 import {stdMat,makeWorldAdapter,createCast} from 'sq3';
 
 const $=id=>document.getElementById(id);
-const SP=window.SanorProfile,TH=SP.th,ESC=SP.esc;SP.mountLevelButton($('levelSlot'));SQCoach.mount();
+const SP=window.SanorProfile,TH=SP.th,ESC=SP.esc;SP.mountLevelButton($('levelSlot'));addEventListener('load',()=>window.SQPwa&&SQPwa.cacheWorld('01'));SQCoach.mount();
 const TABLE_MISSION=window.SQContent.worlds['01'].missions.find(m=>m.id==='table');let speakMounted=false;
 // ---------- renderer (fall back to the 2D page if WebGL is missing) ----------
 let renderer;
@@ -135,7 +135,7 @@ function moveAlong(p,dt){if(!p.path.length){p.walk=false;if(p.face!==undefined){
 let prev=performance.now(),slowT=0,slowN=0;const qualityLog=[];
 function lowerQuality(){if(pixelCap>1.25){pixelCap=1;renderer.setPixelRatio(1);return'resolution';}if(sun.shadow.mapSize.x>1024){sun.shadow.mapSize.set(1024,1024);sun.shadow.map?.dispose();sun.shadow.map=null;return'shadow-size';}if(renderer.shadowMap.enabled){renderer.shadowMap.enabled=false;scene.traverse(o=>{if(o.material)o.material.needsUpdate=true;});return'shadows';}return null;}
 function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-prev)/1000);const frameMs=now-prev;prev=now;clock+=dt;
- if(clock>2&&!FIXED_Q){slowT+=frameMs;slowN++;if(slowN>=90){if(slowT/slowN>45){const q=lowerQuality();if(q)qualityLog.push(q);}slowT=0;slowN=0;}}
+ if(clock>2&&!FIXED_Q){slowT+=frameMs;slowN++;if(slowN>=90){if(slowT/slowN>34){const q=lowerQuality();if(q)qualityLog.push(q);}slowT=0;slowN=0;}}
  moveAlong(player,dt);moveAlong(alex,dt);
  const g=camGoal(),k=Math.min(1,dt*3);if(!cam.dist){cam.dist=g.dist;cam.center=g.center.slice();}cam.center=cam.center.map((v,n)=>lerp(v,g.center[n],k));cam.dist=lerp(cam.dist,g.dist,k);cam.yaw=lerp(cam.yaw,g.yaw+cam.drag,k*1.6);cam.pitch=lerp(cam.pitch,g.pitch,k);
  const c=cam.center,cp=Math.cos(cam.pitch);camera.position.set(c[0]+Math.sin(cam.yaw)*cam.dist*cp,c[1]+Math.sin(cam.pitch)*cam.dist,c[2]+Math.cos(cam.yaw)*cam.dist*cp);camera.lookAt(c[0],c[1],c[2]);camera.updateMatrixWorld();

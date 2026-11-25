@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>แบบฟอร์มยินยอมผู้ปกครอง · SANOR QUEST</title>
+<link rel="manifest" href="../manifest.webmanifest"><link rel="icon" href="../hub-icon.svg" type="image/svg+xml"><script src="../shared/pwa.js" defer></script>
+<link rel="stylesheet" href="../shared/tokens.css"><link rel="stylesheet" href="../shared/doc.css"></head>
+<body class="sq-page">
+<div class="doc-bar"><a href="../">← SANOR QUEST</a><span class="noprint"><label>ชื่อโรงเรียน <input id="school" placeholder="โรงเรียน…" style="min-height:40px"></label> <button onclick="window.print()">🖨 พิมพ์</button></span></div>
+<main class="doc">
+<p class="meta">แบบฟอร์มสำหรับโรงเรียนพิมพ์แจกผู้ปกครอง · 1 หน้า A4</p>
+<h1>หนังสือแสดงความยินยอมของผู้ปกครอง<br><small style="font-size:.6em">การใช้เกมฝึกภาษาอังกฤษ SANOR QUEST ในชั้นเรียน</small></h1>
+<p><span class="fill" id="schoolOut" style="min-width:18rem">&nbsp;</span> จะใช้เกม SANOR QUEST ในรายวิชาภาษาอังกฤษ นักเรียนจะเข้าห้องเรียนในเกมด้วย <b>เลขที่ ชื่อเล่น และ PIN 4 หลัก</b> เพื่อให้ครูดูความคืบหน้าได้ ระบบ <b>ไม่เก็บชื่อจริง อีเมล รูป หรือไฟล์เสียง</b> รายละเอียดอยู่ในนโยบายความเป็นส่วนตัว (เปิดได้จากหน้าแรกของเกม → “ความเป็นส่วนตัว”)</p>
+<div class="box"><b>ข้อมูลที่เก็บ:</b> เลขที่, ชื่อเล่น, PIN (เข้ารหัส), XP/ภารกิจ/คำตอบ (ถูก-ผิด), ผลการฝึกพูดแบบ พูดได้/ยังไม่ได้, คะแนนแบบทดสอบก่อน-หลังเรียน · <b>เก็บถึง:</b> สิ้นปีการศึกษา แล้วครูลบทั้งห้อง · <b>ลบเองได้ทุกเมื่อ:</b> My passport → ลบข้อมูลของฉัน</div>
+<p style="margin-top:1rem">ข้าพเจ้า <span class="fill" style="min-width:16rem">&nbsp;</span> ผู้ปกครองของ <span class="fill" style="min-width:14rem">&nbsp;</span> ชั้น <span class="fill" style="min-width:4rem">&nbsp;</span> เลขที่ <span class="fill" style="min-width:3rem">&nbsp;</span></p>
+<div class="check"><span class="sq"></span><span><b>ยินยอม</b> ให้นักเรียนเข้าห้องเรียนในเกม SANOR QUEST และให้ครูดูความคืบหน้าและผลการเรียนตามที่ระบุข้างต้น</span></div>
+<div class="check"><span class="sq"></span><span><b>ไม่ยินยอม</b> (นักเรียนยังเล่นเกมได้ โดยข้อมูลเก็บไว้ในเครื่องเท่านั้น ครูจะไม่เห็นผลในแดชบอร์ด)</span></div>
+<p style="margin:.8rem 0 .2rem"><b>การตรวจการพูดด้วยไมโครโฟน (ไม่บังคับ)</b> — ถ้าเปิด เบราว์เซอร์ (เช่น Chrome) จะส่งเสียงพูดไปแปลงเป็นข้อความที่เซิร์ฟเวอร์ของผู้ผลิตเบราว์เซอร์ (Google) เกมไม่เก็บเสียง ถ้าไม่เปิด นักเรียนยังฝึกพูดแบบอัดเสียงฟังเองในเครื่องได้</p>
+<div class="check"><span class="sq"></span><span>อนุญาตให้เปิดการตรวจการพูดด้วยไมโครโฟน</span></div>
+<div class="check"><span class="sq"></span><span>ไม่อนุญาต</span></div>
+<p>ข้าพเจ้าทราบว่าสามารถถอนความยินยอมหรือขอให้ลบข้อมูลได้ทุกเมื่อ โดยแจ้งครูประจำวิชาหรือ <span class="fill">&nbsp;</span></p>
+<div class="sign"><div>ลงชื่อผู้ปกครอง<br><br>(<span class="fill" style="min-width:12rem">&nbsp;</span>)</div><div>วันที่<br><br><span class="fill" style="min-width:10rem">&nbsp;</span></div></div>
+</main>
+<script>const i=document.getElementById('school'),o=document.getElementById('schoolOut');i.oninput=()=>{o.textContent=i.value||' ';};</script>
+</body></html>

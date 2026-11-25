@@ -25,7 +25,7 @@ function supabase(){const url=cfg.supabaseUrl.replace(/\/$/,''),key=cfg.supabase
  const t=async(fn,args={})=>rpc(fn,args,await token());
  return{mode:'supabase',
   student:{join:(code,number,nickname,pin)=>rpc('join_class',{p_code:code,p_number:number,p_nickname:nickname,p_pin:pin}),
-   settings:tok=>rpc('class_settings',{p_token:tok}),submit:(tok,events)=>rpc('submit_events',{p_token:tok,p_events:events})},
+   settings:tok=>rpc('class_settings',{p_token:tok}),submit:(tok,events)=>rpc('submit_events',{p_token:tok,p_events:events}),deleteMe:tok=>rpc('delete_me',{p_token:tok})},
   teacher:{session:()=>sess?{email:sess.email}:null,
    async signUp(email,password,name,school){const r=await call('/auth/v1/signup',{email,password});if(!r.access_token)return{confirm:true};keep(r);await t('ensure_teacher',{p_name:name,p_school:school});return{email};},
    async signIn(email,password){keep(await call('/auth/v1/token?grant_type=password',{email,password}));await t('ensure_teacher',{p_name:'',p_school:''});return{email};},
@@ -33,7 +33,7 @@ function supabase(){const url=cfg.supabaseUrl.replace(/\/$/,''),key=cfg.supabase
    classes:()=>t('my_classes'),createClass:name=>t('create_class',{p_name:name}),
    updateClass:(id,o)=>t('update_class',{p_class:id,p_name:o.name??null,p_worlds:o.worlds??null,p_thai:o.thai??null,p_tests:o.tests??null}),
    report:id=>t('class_report',{p_class:id}),studentDetail:id=>t('student_detail',{p_student:id}),
-   resetPin:(id,pin)=>t('reset_student_pin',{p_student:id,p_pin:pin}),removeStudent:id=>t('remove_student',{p_student:id})}};}
+   resetPin:(id,pin)=>t('reset_student_pin',{p_student:id,p_pin:pin}),removeStudent:id=>t('remove_student',{p_student:id}),deleteClass:id=>t('delete_class',{p_class:id})}};}
 
 // ---------------------------------------------------------------- demo (this browser only)
 function demo(){const KEY='sanor-demo-db-v1';
@@ -45,6 +45,7 @@ function demo(){const KEY='sanor-demo-db-v1';
  const student=(d,tok)=>{const id=d.sessions[hash('session:'+(tok||''))];const s=d.students.find(x=>x.id===id);if(!s)fail('bad_token');return s;};
  const own=(d,classId)=>{const c=d.classes.find(x=>x.id===classId);if(!c)fail('not_your_class');return c;};
  const signedIn=()=>!!read('sanor-demo-teacher-v1',null);
+ const wipe=(d,id)=>{d.students=d.students.filter(x=>x.id!==id);d.events=d.events.filter(e=>e.student_id!==id);d.progress=d.progress.filter(p=>p.student_id!==id);d.tests=d.tests.filter(t=>t.student_id!==id);for(const [k,v] of Object.entries(d.sessions))if(v===id)delete d.sessions[k];};
  const T=f=>(...a)=>{if(!signedIn())return Promise.reject(new Error('not_signed_in'));try{return tx(d=>f(d,...a));}catch(e){return Promise.reject(e);}};
  const S=f=>(...a)=>{try{return tx(d=>f(d,...a));}catch(e){return Promise.reject(e);}};
  return{mode:'demo',
@@ -63,7 +64,8 @@ function demo(){const KEY='sanor-demo-db-v1';
      else if(e.kind==='progress'){let p=d.progress.find(x=>x.student_id===s.id&&x.world===e.world&&x.activity===e.activity);if(!p)d.progress.push(p={student_id:s.id,world:e.world,activity:e.activity,xp:0,done:false,stamps:0});
       p.xp=Math.max(p.xp,Math.min(5000,+e.xp||0));p.done=p.done||!!e.done;p.stamps=Math.max(p.stamps,+e.stamps||0);n++;}
      else if(e.kind==='test'&&['pre','post'].includes(e.test)&&!d.tests.some(x=>x.student_id===s.id&&x.kind===e.test)){d.tests.push({student_id:s.id,kind:e.test,score:+e.score,total:+e.total,answers:e.answers||[],at:new Date().toISOString()});n++;}}
-    s.last_seen=new Date().toISOString();return n;})},
+    s.last_seen=new Date().toISOString();return n;}),
+   deleteMe:S((d,tok)=>{const s=student(d,tok);wipe(d,s.id);})},
   teacher:{session:()=>read('sanor-demo-teacher-v1',null),
    signUp:(email,pw,name,school)=>{write('sanor-demo-teacher-v1',{email:email||'demo@teacher',name,school});return Promise.resolve({email});},
    signIn:email=>{write('sanor-demo-teacher-v1',{email:email||'demo@teacher'});return Promise.resolve({email});},
@@ -83,7 +85,8 @@ function demo(){const KEY='sanor-demo-db-v1';
     return{number:s.number,nickname:s.nickname,events:d.events.filter(e=>e.student_id===id).slice(-500).reverse().map(e=>({kind:e.kind,world:e.world,activity:e.activity,item:e.item,label:e.label,correct:e.correct,firstTry:e.first_try,hint:e.hint,result:e.result,at:e.at})),
      tests:d.tests.filter(t=>t.student_id===id).map(t=>({kind:t.kind,score:t.score,total:t.total,answers:t.answers,at:t.at}))};}),
    resetPin:T((d,id,pin)=>{if(!/^[0-9]{4}$/.test(pin||''))fail('bad_pin_format');const s=d.students.find(x=>x.id===id);if(!s)fail('not_your_class');own(d,s.class_id);s.pin_hash=hash(s.id+':'+pin);s.failed=0;s.locked_until=0;for(const [k,v] of Object.entries(d.sessions))if(v===id)delete d.sessions[k];}),
-   removeStudent:T((d,id)=>{const s=d.students.find(x=>x.id===id);if(!s)return;own(d,s.class_id);d.students=d.students.filter(x=>x.id!==id);d.events=d.events.filter(e=>e.student_id!==id);d.progress=d.progress.filter(p=>p.student_id!==id);d.tests=d.tests.filter(t=>t.student_id!==id);for(const [k,v] of Object.entries(d.sessions))if(v===id)delete d.sessions[k];})}};}
+   removeStudent:T((d,id)=>{const s=d.students.find(x=>x.id===id);if(!s)return;own(d,s.class_id);wipe(d,id);}),
+   deleteClass:T((d,id)=>{own(d,id);for(const s of d.students.filter(x=>x.class_id===id))wipe(d,s.id);d.classes=d.classes.filter(c=>c.id!==id);})}};}
 
 root.SQBackend=cfg.supabaseUrl&&cfg.supabaseAnonKey?supabase():demo();
 })(typeof window!=='undefined'?window:globalThis);

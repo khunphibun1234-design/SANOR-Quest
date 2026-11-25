@@ -13,3 +13,4 @@
 #feedback .th{display:block;font-weight:500}
 #feedback .example{display:block;color:var(--ink-soft);font-weight:500}
 @media(max-width:30rem){.review-stats{grid-template-columns:1fr}}
+#startNote .th{display:block}

@@ -3,17 +3,19 @@
   "private": true,
   "description": "SANOR QUEST: English adventure worlds. Static site; only the 3D bundles need building.",
   "scripts": {
-    "build": "npm run build:content && npm run build:engine && npm run build:table",
+    "build": "npm run build:content && npm run build:engine && npm run build:table && npm run build:sw",
     "build:engine": "esbuild src/sq-three.js --bundle --minify --format=iife --target=es2019 --alias:three=./node_modules/three/build/three.module.js --alias:three-addons=./node_modules/three/examples/jsm --legal-comments=eof --outfile=shared/sq-three.js",
     "build:table": "esbuild src/table-three.js --bundle --minify --format=iife --target=es2019 --alias:three=./src/shim/three.cjs --alias:three-addons/geometries/RoundedBoxGeometry.js=./src/shim/rounded-box.cjs --alias:three-addons/environments/RoomEnvironment.js=./src/shim/room-environment.cjs --alias:sq3=./src/shim/sq3.cjs --outfile=home/table-three.js",
     "serve": "python3 -m http.server 8080",
     "test": "playwright test",
     "build:content": "node scripts/build-content.js",
-    "audio": "node scripts/audio-report.js"
+    "audio": "node scripts/audio-report.js",
+    "build:sw": "node scripts/build-sw.js"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.3.7",
     "@playwright/test": "^1.63.0",
+    "axe-core": "^4.10.2",
     "esbuild": "^0.24.0",
     "three": "^0.187.0"
   }

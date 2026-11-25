@@ -38,7 +38,12 @@ const api={
  async join(code,number,nickname,pin){const r=await B.student.join(code,+number,nickname,pin);if(r&&r.error)throw new Error(r.error);
   me={token:r.token,code:r.settings.code,className:r.settings.className,number:r.student.number,nickname:r.student.nickname,settings:r.settings,lastSync:null};saveMe();
   if(!P.name())P.setName(r.student.nickname);applySettings(r.settings);snapshot();await flush();return api.info();},
- leave(){me=null;outbox=[];write(OUT,outbox);saveMe();P.setClassLevel(null);emit();},
+ // PDPA: delete this student's data on the server (if in a class) and everything SANOR QUEST stored in this browser
+ async deleteMyData(){if(me)await B.student.deleteMe(me.token);me=null;outbox=[];
+  try{for(const k of Object.keys(localStorage))if(/^sanor-/.test(k)&&!/^sanor-(demo-db|demo-teacher|teacher-session)/.test(k))localStorage.removeItem(k);}catch{}
+  emit();},
+ // shared devices: clearDevice also removes this device's game progress, so the next student starts fresh
+ leave(opts={}){if(opts.clearDevice){try{for(const k of Object.keys(localStorage))if(/^sanor-/.test(k)&&!/^sanor-(demo-db|demo-teacher|teacher-session)/.test(k))localStorage.removeItem(k);}catch{}}me=null;outbox=[];write(OUT,outbox);saveMe();P.setClassLevel(null);emit();},
  info:()=>me?{className:me.className,code:me.code,number:me.number,nickname:me.nickname,settings:me.settings,expired:!!me.expired}:null,
  status:()=>({pending:outbox.length,lastSync,lastError,online:!(root.navigator&&root.navigator.onLine===false),mode:B.mode}),
  worldOpen:id=>!me||!me.settings||!/^\d\d$/.test(id)||me.settings.worldsOpen.includes(id),

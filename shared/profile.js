@@ -27,7 +27,7 @@ const WORLDS={
 const SPEECH_RANK={asr:4,self:3,'not-yet':2,skip:1},RECENT=20;
 const clean=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fresh=()=>({version:1,name:'',level:'starter',maps:{},recent:[],answers:0,adviceAfter:0,supportOn:false,classLevel:null,tests:{},createdAt:new Date().toISOString(),updatedAt:null});
+const fresh=()=>({version:1,name:'',level:'starter',maps:{},recent:[],answers:0,adviceAfter:0,supportOn:false,classLevel:null,tests:{},motion:'auto',recognition:false,createdAt:new Date().toISOString(),updatedAt:null});
 let storageOK=true;
 
 function sanitize(s){const out=fresh();if(!s||typeof s!=='object'||s.version!==1)return null;
@@ -38,7 +38,7 @@ function sanitize(s){const out=fresh();if(!s||typeof s!=='object'||s.version!==1
   for(const [k,v] of Object.entries(m.stamps||{})){if(!/^[a-z0-9-]{1,40}$/.test(k)||!v)continue;map.stamps[k]={label:clean(v.label,40),icon:clean(v.icon,8),at:typeof v.at==='string'?v.at:null};}
   for(const [k,v] of Object.entries(m.speech||{})){if(!/^[a-z0-9-]{1,40}$/.test(k)||!v||!SPEECH_RANK[v.best])continue;map.speech[k]={best:v.best,tries:Math.max(0,Math.min(999,+v.tries||0)),score:Math.max(0,Math.min(1,+v.score||0)),at:typeof v.at==='string'?v.at:null};}
   out.maps[id]=map;}
- out.recent=Array.isArray(s.recent)?s.recent.filter(x=>x===0||x===1).slice(-RECENT):[];out.answers=Math.max(0,Math.round(+s.answers||0));out.adviceAfter=Math.max(0,Math.round(+s.adviceAfter||0));out.supportOn=s.supportOn===true;out.classLevel=Object.hasOwn(LEVELS,s.classLevel)?s.classLevel:null;
+ out.recent=Array.isArray(s.recent)?s.recent.filter(x=>x===0||x===1).slice(-RECENT):[];out.answers=Math.max(0,Math.round(+s.answers||0));out.adviceAfter=Math.max(0,Math.round(+s.adviceAfter||0));out.supportOn=s.supportOn===true;out.classLevel=Object.hasOwn(LEVELS,s.classLevel)?s.classLevel:null;out.motion=['auto','reduce','full'].includes(s.motion)?s.motion:'auto';out.recognition=s.recognition===true;
  for(const k of ['pre','post']){const t=s.tests?.[k];if(t&&Number.isInteger(t.score)&&Number.isInteger(t.total)&&t.total>0&&t.score>=0&&t.score<=t.total)out.tests[k]={score:t.score,total:t.total,at:typeof t.at==='string'?t.at:null};}
  return out;}
 function load(){try{const s=sanitize(JSON.parse(localStorage.getItem(KEY)));storageOK=true;if(s)return s;}catch{storageOK=false;}return migrate(fresh());}
@@ -56,7 +56,9 @@ const mapXp=id=>Object.values(state.maps[id]?.activities||{}).reduce((s,a)=>s+a.
 
 // ---------- Thai help (scaffolding) ----------
 function thaiMode(){return LEVELS[state.classLevel||state.level].thai;}
-function applyThai(doc=root.document){if(!doc?.documentElement)return;doc.documentElement.dataset.thai=thaiMode();}
+// reduce motion: the player's choice, or the device setting (prefers-reduced-motion) when left on 'auto'
+function reducedMotion(){return state.motion==='reduce'||(state.motion==='auto'&&!!root.matchMedia&&root.matchMedia('(prefers-reduced-motion: reduce)').matches);}
+function applyThai(doc=root.document){if(!doc?.documentElement)return;doc.documentElement.dataset.thai=thaiMode();doc.documentElement.dataset.motion=reducedMotion()?'reduce':'full';}
 function th(text,tag='span'){return text?`<${tag} class="th" lang="th">${esc(text)}</${tag}>`:'';}
 if(root.document){applyThai();
  // Explorer level: Thai is veiled; tapping (or Enter/Space on) a veiled line reveals it.
@@ -79,6 +81,9 @@ const api={XP,LEVELS,WORLDS,KEY,
  name:()=>state.name,setName(n){const v=clean(n,20);if(v!==state.name){state.name=v;save();}},
  level:()=>state.classLevel||state.level,setLevel(l){if(state.classLevel)return;if(Object.hasOwn(LEVELS,l)&&l!==state.level){state.level=l;save();}},
  classLevel:()=>state.classLevel,setClassLevel(l){const v=Object.hasOwn(LEVELS,l)?l:null;if(v!==state.classLevel){state.classLevel=v;save();}},
+ // speech recognition sends the voice to the browser maker (Google in Chrome), so it stays off until switched on
+ recognitionAllowed:()=>state.recognition,setRecognition(v){if(!!v!==state.recognition){state.recognition=!!v;save();}},
+ reducedMotion,motion:()=>state.motion,setMotion(m){if(['auto','reduce','full'].includes(m)&&m!==state.motion){state.motion=m;save();}},
  onEvent(f){eventListeners.add(f);return()=>eventListeners.delete(f);},
  // pre/post test: the first attempt is kept
  recordTest(kind,{score,total,answers=[]}){if(!['pre','post'].includes(kind)||state.tests[kind])return false;state.tests[kind]={score,total,at:new Date().toISOString()};save();event({kind:'test',test:kind,score,total,answers});return true;},

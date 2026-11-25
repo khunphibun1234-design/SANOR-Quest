@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f5ed"><title>Teacher Dashboard · SANOR QUEST</title>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f5ed"><title>Teacher Dashboard · SANOR QUEST</title><link rel="manifest" href="../manifest.webmanifest"><link rel="apple-touch-icon" href="../images/icon-192.png"><script src="../shared/pwa.js" defer></script>
 <link rel="icon" href="../hub-icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../shared/tokens.css"><link rel="stylesheet" href="teacher.css">
 <script src="../shared/config.js"></script><script src="../shared/backend.js"></script></head>
 <body class="sq-page">
-<header class="bar"><a class="brand" href="../"><img src="../sanor-quest-book-logo.png" width="40" height="40" alt=""><span>SANOR <b>QUEST</b> · สำหรับครู</span></a><div class="bar-tools"><span id="who"></span><button id="signOut" hidden>ออกจากระบบ</button></div></header>
+<header class="bar"><a class="brand" href="../"><img src="../images/logo-192.png" width="40" height="40" alt=""><span>SANOR <b>QUEST</b> · สำหรับครู</span></a><div class="bar-tools"><span id="who"></span><button id="signOut" hidden>ออกจากระบบ</button></div></header>
 <main>
 <p id="demoNote" class="demo-note" hidden>โหมดทดลอง: ข้อมูลห้องเรียนเก็บไว้ในเบราว์เซอร์นี้เท่านั้น (นักเรียนต้องเล่นบนเครื่องเดียวกัน) เมื่อตั้งค่า Supabase แล้ว ข้อมูลจะรวมจากทุกเครื่อง · ดู docs/SETUP-SUPABASE.md</p>
 
@@ -25,7 +25,7 @@
  <div class="row-between"><div><button id="backToClasses" class="link">← ห้องเรียนทั้งหมด</button><h1 id="className"></h1></div>
   <div class="code-card"><small>รหัสห้องสำหรับนักเรียน</small><strong id="classCode"></strong><span>เปิด SANOR QUEST → My passport → Join my class</span></div></div>
  <nav class="tabs" role="tablist"><button role="tab" data-tab="overview" aria-selected="true">ภาพรวมห้อง</button><button role="tab" data-tab="words">คำที่พลาดบ่อย</button><button role="tab" data-tab="tests">ก่อน/หลังเรียน</button><button role="tab" data-tab="settings">ตั้งค่าห้อง</button></nav>
- <div class="toolbar"><button id="refresh">↻ รีเฟรช</button><button id="csv">⬇ ส่งออก CSV</button><button id="print">🖨 พิมพ์รายงาน</button><span id="updated"></span></div>
+ <div class="toolbar"><a href="guide.html">📘 คู่มือครู</a><button id="refresh">↻ รีเฟรช</button><button id="csv">⬇ ส่งออก CSV</button><button id="print">🖨 พิมพ์รายงาน</button><span id="updated"></span></div>
  <div id="tab-overview" class="tab"></div>
  <div id="tab-words" class="tab" hidden></div>
  <div id="tab-tests" class="tab" hidden></div>

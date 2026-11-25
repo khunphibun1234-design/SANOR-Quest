@@ -6,9 +6,9 @@ const T1='33333333-3333-3333-3333-333333333333';
 function demoBackend(){const sb=load(['shared/backend.js'],{storage:memoryStorage()});return sb.SQBackend;}
 async function sqlBackend(){const h=await freshDb();await h.teacher(T1);
   const rpc=async(who,fn,args)=>{const ph=args.map((_,i)=>'$'+(i+1)).join(',');try{return (await h.as(who,`select ${fn}(${ph}) as r`,args))[0].r;}catch(e){const m=/[a-z_]+/.exec(e.message.replace(/^.*?:\s*/,''));throw new Error(['class_not_found','wrong_pin','locked','bad_token','bad_pin_format','bad_number','bad_nickname','not_your_class','bad_batch'].find(c=>e.message.includes(c))||e.message);}};
-  return{mode:'sql',student:{join:(c,n,nick,pin)=>rpc('anon','join_class',[c,n,nick,pin]),settings:t=>rpc('anon','class_settings',[t]),submit:(t,ev)=>rpc('anon','submit_events',[t,JSON.stringify(ev)])},
+  return{mode:'sql',student:{join:(c,n,nick,pin)=>rpc('anon','join_class',[c,n,nick,pin]),settings:t=>rpc('anon','class_settings',[t]),submit:(t,ev)=>rpc('anon','submit_events',[t,JSON.stringify(ev)]),deleteMe:t=>rpc('anon','delete_me',[t])},
    teacher:{classes:()=>rpc(T1,'my_classes',[]),createClass:n=>rpc(T1,'create_class',[n]),updateClass:(id,o)=>rpc(T1,'update_class',[id,o.name??null,o.worlds??null,o.thai??null,o.tests??null]),
-    report:id=>rpc(T1,'class_report',[id]),studentDetail:id=>rpc(T1,'student_detail',[id]),resetPin:(id,p)=>rpc(T1,'reset_student_pin',[id,p]),removeStudent:id=>rpc(T1,'remove_student',[id])}};}
+    report:id=>rpc(T1,'class_report',[id]),studentDetail:id=>rpc(T1,'student_detail',[id]),resetPin:(id,p)=>rpc(T1,'reset_student_pin',[id,p]),removeStudent:id=>rpc(T1,'remove_student',[id]),deleteClass:id=>rpc(T1,'delete_class',[id])}};}
 async function scenario(B){const out={};const c=await B.teacher.createClass('M.2/5');
   const a=await B.student.join(c.code,1,'Ploy','1234'),b=await B.student.join(c.code,2,'Mook','5678');
   out.rejoin=(await B.student.join(c.code,1,'X','1234')).student;out.wrong=await B.student.join(c.code,2,'Mook','0000');
@@ -22,7 +22,9 @@ async function scenario(B){const out={};const c=await B.teacher.createClass('M.2
   const d=await B.teacher.studentDetail(r.students[0].id);out.detail=d.events.map(e=>[e.kind,e.item,e.firstTry,e.hint,e.result]).sort();
   await B.teacher.resetPin(r.students[0].id,'9999');try{await B.student.settings(a.token);out.afterReset='ok';}catch(e){out.afterReset=e.message;}
   await B.teacher.removeStudent(r.students[1].id);out.after=(await B.teacher.report(c.id)).students.map(s=>s.number);
-  out.classes=(await B.teacher.classes()).map(x=>({name:x.className,students:x.students}));return out;}
+  out.classes=(await B.teacher.classes()).map(x=>({name:x.className,students:x.students}));
+  const z=await B.student.join(c.code,9,'Zed','1111');await B.student.deleteMe(z.token);out.afterDeleteMe=(await B.teacher.report(c.id)).students.map(s=>s.number);
+  await B.teacher.deleteClass(c.id);out.afterDeleteClass=await B.teacher.classes();return out;}
 test('demo mode and the Supabase database give the same results',async()=>{
   const demo=demoBackend();demo.teacher.signIn('t@x');const a=await scenario(demo),b=await scenario(await sqlBackend());
   expect(a).toEqual(b);

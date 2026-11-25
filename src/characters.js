@@ -19,7 +19,7 @@ function person(shirt,pants,hair,skin,long){const root=new Group(),mat=c=>new Me
  const smile=new Mesh(new TorusGeometry(.065,.012,8,20,Math.PI),new MeshStandardMaterial({color:0x8c4f45,roughness:.6}));smile.rotation.z=Math.PI;smile.position.set(0,.2,.285);head.add(smile);
  root.add(head);root.traverse(o=>{if(o.isMesh&&o.castShadow!==false)o.castShadow=true;});scene.add(root);return{root,legs,arms,head};}
 const people=Object.fromEntries(kinds.map(k=>[k,person(...LOOKS[k])]));
-function posePerson(kind,p,t){const R=people[kind],walk=p.walk,sw=walk?Math.sin(t*10)*.55:0,bob=walk?Math.abs(Math.sin(t*10))*.04:Math.sin(t*2+(kind==='alex'?1:0))*.012;
+function posePerson(kind,p,t){const calm=typeof window!=='undefined'&&window.SanorProfile&&window.SanorProfile.reducedMotion();if(calm&&p.act)p.act=null;const R=people[kind],walk=p.walk,sw=walk?Math.sin(t*10)*(calm?.2:.55):0,bob=calm?0:walk?Math.abs(Math.sin(t*10))*.04:Math.sin(t*2+(kind==='alex'?1:0))*.012;
  R.root.position.set(p.x,.27+bob,p.z);R.root.rotation.y=p.angle;R.legs.forEach((l,k)=>l.rotation.x=walk?(k?1:-1)*sw:0);
  const act=p.act&&t>=p.act.t0&&t-p.act.t0<p.act.dur?p.act:null,u=act?(t-act.t0)/act.dur:0;
  R.arms.forEach((a,k)=>{const side=k?1:-1;let rz=side*.08,rx=walk?-side*sw*.8:Math.sin(t*2)*.03;if(act&&act.type==='wave'&&side===1){rz=2.6+Math.sin(u*Math.PI*8)*.35;rx=0;}if(act&&act.type==='cheer'){rz=side*(2.7+Math.sin(u*Math.PI*6)*.2);rx=0;}a.rotation.set(rx,0,rz);});

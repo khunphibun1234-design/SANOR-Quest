@@ -37,7 +37,7 @@ function mount(el,o){
  button('sq-keep','🔊 Listen <span class="th" lang="th">ฟังตัวอย่าง</span>',model);
 
  // 2a. speech recognition
- if(SR()&&!o.noRecognition){const mic=button('primary','🎤 Speak <span class="th" lang="th">กดแล้วพูด</span>',()=>{
+ if(SR()&&!o.noRecognition&&(!root.SanorProfile||root.SanorProfile.recognitionAllowed())){const mic=button('primary','🎤 Speak <span class="th" lang="th">กดแล้วพูด</span>',()=>{
    const R=new (SR())();R.lang='en-US';R.interimResults=false;R.maxAlternatives=4;mic.disabled=true;say('Listening… <span class="th" lang="th">กำลังฟัง…</span>');let got=false;
    R.onresult=e=>{got=true;tries++;const alts=[...e.results[0]].map(r=>r.transcript);const best=alts.map(a=>({a,r:M.compare(a,target)})).sort((x,y)=>y.r.score-x.r.score)[0];
     const words=best.r.words.map(w=>`<span class="${w.ok?'ok':'miss'}">${esc(w.w)}</span>`).join(' ');

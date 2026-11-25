@@ -56,5 +56,5 @@ B(-2.6,3.6,-7.9,5.4,.03,.03,'#9b8a6c');['#e9806e','#f2c14e','#6fb0a8','#b98bd1',
 for(const x of [-1.8,0,1.8])S(x,3.0,-8.4,.16,.16,.16,'#fff1b8',8,5);C(0,.67,-7.4,2.2,2.2,.01,'#ffe9a8',24);const lights=M();
 B(-3.4,2.75,5.2,.32,.32,.05,'#f2c14e');const star=M();
 return{colliders,render(t,yaw,fx={}){for(const m of objects)D(m);
- const n=Math.min(fx.audience||0,seats.length);for(let i=0;i<n;i++){const [x,z]=seats[i];D(student,model(x,.12+Math.abs(Math.sin(t*3+i))*.03*(fx.cheer?1:0),z+.05,Math.PI));}
- if(fx.bunting)D(bunting);if(fx.lights)D(lights);if(fx.star)D(star,model(0,Math.sin(t*2)*.05,0));}};};
+ const n=Math.min(fx.audience||0,seats.length);for(let i=0;i<n;i++){const [x,z]=seats[i];D(student,model(x,.12+(window.SanorProfile&&SanorProfile.reducedMotion()?0:Math.abs(Math.sin(t*3+i))*.03*(fx.cheer?1:0)),z+.05,Math.PI));}
+ if(fx.bunting)D(bunting);if(fx.lights)D(lights);if(fx.star)D(star);}};};

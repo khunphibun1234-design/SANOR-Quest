@@ -202,6 +202,8 @@ placeCast();picker();hud();zoomUI();
 // a teacher can close a world for the class (shared/sync.js)
 if(root.SanorClass&&!root.SanorClass.worldOpen(cfg.worldId)){$('startBtn').disabled=true;$('startBtn').textContent='Closed by your teacher · ครูยังไม่เปิดโลกนี้';$('missionPicker').querySelectorAll('button').forEach(b=>b.disabled=true);}if(!storageOK)$('saveStatus').textContent='Progress cannot be saved on this device';
 for(const id of stories)syncProfile(id);
+// keep this world's recordings for offline play
+addEventListener('load',()=>root.SQPwa&&root.SQPwa.cacheWorld(cfg.worldId));
 requestAnimationFrame(frame);
 root.storyStatus=()=>({mission:current,stage:lesson.stage.id,completed:[...lesson.state.completed],xp:lesson.xp,done:lesson.state.done,position:{x:player.x,z:player.z}});
 root.homeStatus=root.storyStatus;

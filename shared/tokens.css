@@ -11,7 +11,7 @@
   /* colour */
   --ink:#25483e;          /* headings, main text */
   --ink-soft:#3c5d52;
-  --muted:#6f8076;        /* secondary text (4.5:1 on paper) */
+  --muted:#576b62;        /* secondary text (4.5:1 on paper) */
   --paper:#f6f5ed;        /* page background */
   --card:#fffdf6;         /* raised surfaces */
   --tint:#e3ebdc;         /* soft green panels */
@@ -112,3 +112,6 @@
 .sq-page .sq-field small,.sq-field small{text-transform:none;letter-spacing:0;font:500 .84rem/1.45 var(--body);color:var(--muted)}
 .sq-page .sq-field small.th,.sq-field small.th{color:var(--ink-soft)}
 .sq-level.locked{cursor:default;background:#f1efe6}
+
+/* reduce motion (SanorProfile.setMotion or the device setting) */
+[data-motion="reduce"] *,[data-motion="reduce"] *::before,[data-motion="reduce"] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}

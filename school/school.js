@@ -15,6 +15,7 @@ const el = id => document.getElementById(id);
 let index, results;
 el('art').innerHTML = QuestArt.miniature(1);
 P.mountLevelButton(el('barTools'));
+addEventListener('load', () => window.SQPwa && SQPwa.cacheWorld('02'));
 const paintXp = () => { el('totalXp').textContent = P.totalXp(); };
 P.onChange(paintXp); paintXp();
 SQCoach.mount();
