@@ -1,13 +1,12 @@
 # SANOR QUEST
 เกมผจญภัยฝึกภาษาอังกฤษ · English Changes the World
 
-เว็บแบบ static (เปิดผ่าน GitHub Pages ได้ทันที) มี 3 โลกที่เล่นได้แล้ว:
+เว็บแบบ static (เปิดผ่าน GitHub Pages ได้ทันที) มี 2 โลกที่เล่นได้แล้ว:
 
 | โลก | ไฟล์ |
 |---|---|
 | Map 01 · My Home, My Story (3D) | `home/` และ Alex's Table `home/table-three.html` (2D สำรอง: `home/table.html`) |
 | Map 02 · School Buddy | `school/` |
-| Bonus · Word Island (3D) | `word-island/` |
 
 ## ระบบกลาง (`shared/`)
 

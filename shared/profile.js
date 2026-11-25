@@ -21,8 +21,7 @@ const WORLDS={
  '03':{en:'Phibun Hometown Quest',th:'ภารกิจบ้านเกิดพิบูล',icon:'🏞️'},
  '04':{en:'Market & Food Street',th:'ตลาดและถนนอาหาร',icon:'🛒'},
  '05':{en:'Around the World',th:'รอบโลก',icon:'✈️'},
- '06':{en:'Future Makers City',th:'เมืองนักสร้างอนาคต',icon:'🤖'},
- island:{en:'Word Island',th:'เกาะคำศัพท์',icon:'🏝️',href:'word-island/',bonus:true}};
+ '06':{en:'Future Makers City',th:'เมืองนักสร้างอนาคต',icon:'🤖'}};
 const clean=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fresh=()=>({version:1,name:'',level:'starter',maps:{},createdAt:new Date().toISOString(),updatedAt:null});

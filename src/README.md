@@ -16,7 +16,7 @@ npm run build
 
 ## How a map uses the engine
 
-Map layouts (`home/world.js`, the scene part of `game.js`) are written in a small immediate-mode API:
+Map layouts (`home/world.js`) are written in a small immediate-mode API:
 `box`, `cylinder`, `ellipsoid`, `tri`, `mesh`, `draw(mesh, matrix, water)`, `model`.
 `SQ3.createEngine()` turns those calls into merged Three.js meshes with lighting, soft shadows,
 surface patterns, fog and automatic quality lowering on slow devices.
@@ -24,7 +24,6 @@ surface patterns, fog and automatic quality lowering on slow devices.
 | Page | Engine |
 |---|---|
 | `home/index.html` (Map 01) | `SQ3.createEngine` + `home/world.js` |
-| `word-island/` | `SQ3.createEngine` + `game.js` |
 | `home/table-three.html` | Three.js directly + `SQ3.makeWorldAdapter` + `home/world.js` |
 
 Devices without WebGL are sent to `home/table.html` (the 2D version of Alex's Table).
