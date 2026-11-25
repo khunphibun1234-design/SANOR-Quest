@@ -4,10 +4,10 @@ SANOR QUEST uses **one 3D engine: Three.js r187** (MIT, https://github.com/mrdoo
 
 | Source | Output | What it is |
 |---|---|---|
-| `src/sq-three.js` | `shared/sq-three.js` | The shared engine. Bundles Three.js and exposes `window.SQ3`: `createEngine(canvas, options)`, `makeWorldAdapter(scene)`, `stdMat`, `webglAvailable()` |
+| `src/sq-three.js` + `src/characters.js` | `shared/sq-three.js` | The shared engine. Bundles Three.js and exposes `window.SQ3`: `createEngine(canvas, options)`, `makeWorldAdapter(scene)`, `createCast(scene)` (Alex, Mum, the player), `stdMat`, `webglAvailable()` |
 | `src/table-three.js` | `home/table-three.js` | Alex's Table 3D. Imports Three.js from `shared/sq-three.js` through `src/shim/*` so it is downloaded only once |
 
-Build both after editing a file in `src/`:
+Build after editing a file in `src/` or `content/`:
 
 ```
 npm install

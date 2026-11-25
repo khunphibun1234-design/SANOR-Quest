@@ -8,10 +8,15 @@
 | Map 01 · My Home, My Story (3D) | `home/` และ Alex's Table `home/table-three.html` (2D สำรอง: `home/table.html`) |
 | Map 02 · School Buddy | `school/` |
 
+## เนื้อหา
+เนื้อหาทั้งหมดอยู่ใน `content/` (JSON) ดูวิธีแก้ใน `content/README.md` · บทอัดเสียงอยู่ใน `docs/audio/`
+
 ## ระบบกลาง (`shared/`)
 
 - `shared/sq-three.js`: เอนจิน 3D เดียวของทุกแผนที่ (Three.js r187) ต้นฉบับอยู่ที่ `src/` และวิธี build อยู่ใน `src/README.md`
 - `shared/profile.js`: โปรไฟล์ผู้เล่น ทั้งชื่อเล่น ระดับ XP และตราประทับจากทุกโลก ซึ่งแสดงในพาสปอร์ต
+- `shared/mission.js`: ตัวเล่นภารกิจกลาง (choice, listen, order, speak, write, tap3d)
+- `shared/srs.js`: ระบบทบทวนคำแบบเว้นระยะ (Leitner 5 กล่อง)
 - `shared/tokens.css`: design system (ฟอนต์ Outfit + Noto Sans Thai, สี, ปุ่ม) และสไตล์ตัวช่วยภาษาไทย
 
 ### ตัวช่วยภาษาไทย 3 ระดับ
@@ -29,5 +34,9 @@
 
 ## รันบนเครื่อง
 ```
+npm install
+npm run build   # หลังแก้ content/ หรือ src/
+npm test        # เทสต์ทั้งหมด
+npm run audio   # รายงานไฟล์เสียงที่ยังขาด
 npm run serve   # แล้วเปิด http://localhost:8080
 ```

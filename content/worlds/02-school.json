@@ -1,0 +1,291 @@
+{
+ "id": "02",
+ "slug": "school",
+ "cefr": "A1",
+ "title": {
+  "en": "School of Adventures",
+  "th": "โรงเรียนแห่งการผจญภัย"
+ },
+ "missions": [
+  {
+   "id": "buddy",
+   "type": "quiz",
+   "title": {
+    "en": "School Buddy",
+    "th": "เพื่อนคู่หูที่โรงเรียน"
+   },
+   "questions": [
+    {
+     "id": "gate",
+     "kind": "choice",
+     "word": "gate",
+     "icon": "🚪",
+     "line": {
+      "en": "Meet me at the school entrance. Where should I wait?",
+      "th": "เจอกันที่ทางเข้าโรงเรียนนะ ฉันควรรอที่ไหน",
+      "audio": "line-20.mp3"
+     },
+     "hint": {
+      "en": "The entrance to the school",
+      "th": "ทางเข้าโรงเรียน"
+     },
+     "choices": [
+      {
+       "en": "gym"
+      },
+      {
+       "en": "gate"
+      },
+      {
+       "en": "stage"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "classroom",
+     "kind": "choice",
+     "word": "classroom",
+     "icon": "🏫",
+     "line": {
+      "en": "Where do we have our English lesson?",
+      "th": "เราเรียนวิชาภาษาอังกฤษกันที่ไหน",
+      "audio": "line-21.mp3"
+     },
+     "hint": {
+      "en": "A room where students have lessons",
+      "th": "ห้องที่นักเรียนใช้เรียนหนังสือ"
+     },
+     "choices": [
+      {
+       "en": "canteen"
+      },
+      {
+       "en": "library"
+      },
+      {
+       "en": "classroom"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "id": "timetable",
+     "kind": "choice",
+     "word": "timetable",
+     "icon": "📅",
+     "line": {
+      "en": "What shows the time of each lesson?",
+      "th": "อะไรบอกเวลาของแต่ละวิชา",
+      "audio": "line-22.mp3"
+     },
+     "hint": {
+      "en": "A list of lessons and their times",
+      "th": "รายการวิชาเรียนพร้อมเวลาเรียน"
+     },
+     "choices": [
+      {
+       "en": "timetable"
+      },
+      {
+       "en": "notebook"
+      },
+      {
+       "en": "pencil"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "library",
+     "kind": "choice",
+     "word": "library",
+     "icon": "📚",
+     "line": {
+      "en": "I want to borrow a book. Where can we go?",
+      "th": "ฉันอยากยืมหนังสือ เราไปที่ไหนได้บ้าง",
+      "audio": "line-23.mp3"
+     },
+     "hint": {
+      "en": "A place to borrow books",
+      "th": "สถานที่สำหรับยืมหนังสือ"
+     },
+     "choices": [
+      {
+       "en": "gym"
+      },
+      {
+       "en": "library"
+      },
+      {
+       "en": "canteen"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "librarian",
+     "kind": "choice",
+     "word": "librarian",
+     "icon": "🧑‍🏫",
+     "line": {
+      "en": "Who can help me borrow this book?",
+      "th": "ใครช่วยฉันยืมหนังสือเล่มนี้ได้บ้าง",
+      "audio": "line-24.mp3"
+     },
+     "hint": {
+      "en": "The person who helps you borrow books",
+      "th": "คนที่ช่วยเรายืมหนังสือ"
+     },
+     "choices": [
+      {
+       "en": "coach"
+      },
+      {
+       "en": "singer"
+      },
+      {
+       "en": "librarian"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "id": "canteen",
+     "kind": "choice",
+     "word": "canteen",
+     "icon": "🍽️",
+     "line": {
+      "en": "I am hungry. Where can we buy lunch at school?",
+      "th": "ฉันหิวแล้ว เราซื้ออาหารกลางวันในโรงเรียนได้ที่ไหน",
+      "audio": "line-25.mp3"
+     },
+     "hint": {
+      "en": "A place to buy lunch at school",
+      "th": "ที่ซื้ออาหารกลางวันในโรงเรียน"
+     },
+     "choices": [
+      {
+       "en": "canteen"
+      },
+      {
+       "en": "stage"
+      },
+      {
+       "en": "classroom"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "gym",
+     "kind": "choice",
+     "word": "gym",
+     "icon": "🏀",
+     "line": {
+      "en": "Where can we play basketball indoors?",
+      "th": "เราเล่นบาสเกตบอลในร่มได้ที่ไหน",
+      "audio": "line-26.mp3"
+     },
+     "hint": {
+      "en": "An indoor place to play sports",
+      "th": "สถานที่ในร่มสำหรับเล่นกีฬา"
+     },
+     "choices": [
+      {
+       "en": "library"
+      },
+      {
+       "en": "gym"
+      },
+      {
+       "en": "garden"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "music",
+     "kind": "choice",
+     "word": "music",
+     "icon": "🎵",
+     "line": {
+      "en": "What do I like? I love singing and playing the guitar.",
+      "th": "ฉันชอบอะไรนะ ฉันชอบร้องเพลงและเล่นกีตาร์",
+      "audio": "line-27.mp3"
+     },
+     "hint": {
+      "en": "What you hear when someone sings or plays an instrument",
+      "th": "สิ่งที่เราได้ยินเมื่อมีคนร้องเพลงหรือเล่นเครื่องดนตรี"
+     },
+     "choices": [
+      {
+       "en": "science"
+      },
+      {
+       "en": "art"
+      },
+      {
+       "en": "music"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "id": "club",
+     "kind": "choice",
+     "word": "club",
+     "icon": "🎸",
+     "line": {
+      "en": "I want to join a group that sings after school. Is there a music ___?",
+      "th": "ฉันอยากเข้ากลุ่มที่ร้องเพลงหลังเลิกเรียน มี ___ ดนตรีไหม",
+      "audio": "line-28.mp3"
+     },
+     "hint": {
+      "en": "A group of students who share an interest",
+      "th": "กลุ่มนักเรียนที่ชอบสิ่งเดียวกัน"
+     },
+     "choices": [
+      {
+       "en": "club"
+      },
+      {
+       "en": "gate"
+      },
+      {
+       "en": "desk"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "stage",
+     "kind": "choice",
+     "word": "stage",
+     "icon": "🎤",
+     "line": {
+      "en": "Our club has a concert! Where should I stand so everyone can see me sing?",
+      "th": "ชมรมของเรามีคอนเสิร์ต ฉันควรยืนตรงไหนให้ทุกคนเห็นตอนร้องเพลง",
+      "audio": "line-29.mp3"
+     },
+     "hint": {
+      "en": "A place to stand and perform for an audience",
+      "th": "ที่สำหรับยืนแสดงให้ผู้ชมดู"
+     },
+     "choices": [
+      {
+       "en": "canteen"
+      },
+      {
+       "en": "stage"
+      },
+      {
+       "en": "library"
+      }
+     ],
+     "answer": 1
+    }
+   ]
+  }
+ ]
+}

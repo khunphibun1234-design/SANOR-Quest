@@ -1,38 +1,12 @@
 'use strict';
 // Map 02 · School Buddy. Each round: Alex says a line, the player picks the English word.
 // Thai help (line, hint, feedback) follows the player's level from SanorProfile.
-const rounds = [
-  {word:'gate', th:'ประตูโรงเรียน', icon:'🚪', others:['gym','stage'],
-   line:'Meet me at the school entrance. Where should I wait?', lineTh:'เจอกันที่ทางเข้าโรงเรียนนะ ฉันควรรอที่ไหน',
-   hint:'The entrance to the school', hintTh:'ทางเข้าโรงเรียน'},
-  {word:'classroom', th:'ห้องเรียน', icon:'🏫', others:['canteen','library'],
-   line:'Where do we have our English lesson?', lineTh:'เราเรียนวิชาภาษาอังกฤษกันที่ไหน',
-   hint:'A room where students have lessons', hintTh:'ห้องที่นักเรียนใช้เรียนหนังสือ'},
-  {word:'timetable', th:'ตารางเรียน', icon:'📅', others:['notebook','pencil'],
-   line:'What shows the time of each lesson?', lineTh:'อะไรบอกเวลาของแต่ละวิชา',
-   hint:'A list of lessons and their times', hintTh:'รายการวิชาเรียนพร้อมเวลาเรียน'},
-  {word:'library', th:'ห้องสมุด', icon:'📚', others:['gym','canteen'],
-   line:'I want to borrow a book. Where can we go?', lineTh:'ฉันอยากยืมหนังสือ เราไปที่ไหนได้บ้าง',
-   hint:'A place to borrow books', hintTh:'สถานที่สำหรับยืมหนังสือ'},
-  {word:'librarian', th:'บรรณารักษ์', icon:'🧑‍🏫', others:['coach','singer'],
-   line:'Who can help me borrow this book?', lineTh:'ใครช่วยฉันยืมหนังสือเล่มนี้ได้บ้าง',
-   hint:'The person who helps you borrow books', hintTh:'คนที่ช่วยเรายืมหนังสือ'},
-  {word:'canteen', th:'โรงอาหาร', icon:'🍽️', others:['stage','classroom'],
-   line:'I am hungry. Where can we buy lunch at school?', lineTh:'ฉันหิวแล้ว เราซื้ออาหารกลางวันในโรงเรียนได้ที่ไหน',
-   hint:'A place to buy lunch at school', hintTh:'ที่ซื้ออาหารกลางวันในโรงเรียน'},
-  {word:'gym', th:'โรงยิม', icon:'🏀', others:['library','garden'],
-   line:'Where can we play basketball indoors?', lineTh:'เราเล่นบาสเกตบอลในร่มได้ที่ไหน',
-   hint:'An indoor place to play sports', hintTh:'สถานที่ในร่มสำหรับเล่นกีฬา'},
-  {word:'music', th:'ดนตรี', icon:'🎵', others:['science','art'],
-   line:'What do I like? I love singing and playing the guitar.', lineTh:'ฉันชอบอะไรนะ ฉันชอบร้องเพลงและเล่นกีตาร์',
-   hint:'What you hear when someone sings or plays an instrument', hintTh:'สิ่งที่เราได้ยินเมื่อมีคนร้องเพลงหรือเล่นเครื่องดนตรี'},
-  {word:'club', th:'ชมรม', icon:'🎸', others:['gate','desk'],
-   line:'I want to join a group that sings after school. Is there a music ___?', lineTh:'ฉันอยากเข้ากลุ่มที่ร้องเพลงหลังเลิกเรียน มี ___ ดนตรีไหม',
-   hint:'A group of students who share an interest', hintTh:'กลุ่มนักเรียนที่ชอบสิ่งเดียวกัน'},
-  {word:'stage', th:'เวที', icon:'🎤', others:['canteen','library'],
-   line:'Our club has a concert! Where should I stand so everyone can see me sing?', lineTh:'ชมรมของเรามีคอนเสิร์ต ฉันควรยืนตรงไหนให้ทุกคนเห็นตอนร้องเพลง',
-   hint:'A place to stand and perform for an audience', hintTh:'ที่สำหรับยืนแสดงให้ผู้ชมดู'}
-];
+// Content: content/worlds/02-school.json (mission "buddy"). Thai words come from content/words.json.
+const SQ = window.SQContent;
+const rounds = SQ.worlds['02'].missions.find(m => m.id === 'buddy').questions.map(q => ({
+  word: q.word, icon: q.icon, th: (SQ.words.find(w => w.id === q.word) || {}).th || '',
+  choices: q.choices.map(c => c.en), line: q.line.en, lineTh: q.line.th, hint: q.hint.en, hintTh: q.hint.th
+}));
 const P = window.SanorProfile, XP = P.XP, th = P.th, esc = P.esc;
 const el = id => document.getElementById(id);
 let index, results;
@@ -78,25 +52,13 @@ function showRound() {
   el('message').textContent = '';
   el('next').hidden = true;
   el('hint').disabled = false;
-  const options = [...r.others];
-  options.splice((index+1)%3, 0, r.word);
-  el('choices').replaceChildren(...options.map(answer => {
-    const button = document.createElement('button');
-    button.textContent = answer;
-    button.lang = 'en';
-    button.onclick = () => {
-      const result = results[index];
-      result.attempts++;
-      if (!result.first) result.first = answer;
-      button.disabled = true;
-      if (answer !== r.word) {
-        button.classList.add('wrong');
-        say('Listen to Alex again and choose another word.', 'ลองฟัง Alex อีกครั้ง แล้วเลือกคำอื่นนะ');
-        return;
-      }
-      result.done = true;
-      button.classList.add('correct');
-      for (const other of el('choices').children) other.disabled = true;
+  const options = r.choices;
+  // Answer buttons come from the shared mission player (shared/mission.js).
+  SQMission.render(el('choices'), {kind:'choice', choices:options, answer:options.indexOf(r.word)}, {
+    onPick(value) { const result = results[index]; result.attempts++; if (!result.first) { result.first = options[value]; SanorSRS.record(r.word, {correct: options[value] === r.word, hint: result.hint}); } },
+    onResult({correct}) {
+      if (!correct) { say('Listen to Alex again and choose another word.', 'ลองฟัง Alex อีกครั้ง แล้วเลือกคำอื่นนะ'); return; }
+      results[index].done = true;
       el('hint').disabled = true;
       updatePass();
       report(false);
@@ -104,9 +66,8 @@ function showRound() {
       el('next').hidden = false;
       el('next').textContent = index === rounds.length-1 ? 'See my results' : 'Continue';
       el('next').focus();
-    };
-    return button;
-  }));
+    }
+  });
 }
 el('hint').onclick = () => {
   const r = rounds[index];

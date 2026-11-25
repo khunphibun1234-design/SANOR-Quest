@@ -12,6 +12,7 @@ import {WebGLRenderer,Scene,PerspectiveCamera,Group,Mesh,Color,Vector3,Vector2,M
 import {RoundedBoxGeometry} from 'three-addons/geometries/RoundedBoxGeometry.js';
 import {RoomEnvironment} from 'three-addons/environments/RoomEnvironment.js';
 import {mergeGeometries} from 'three-addons/utils/BufferGeometryUtils.js';
+import {createCast,LOOKS} from './characters.js';
 
 const THREE={WebGLRenderer,Scene,PerspectiveCamera,Group,Mesh,Color,Vector3,Vector2,Matrix4,MeshStandardMaterial,MeshBasicMaterial,
  BoxGeometry,CylinderGeometry,SphereGeometry,CapsuleGeometry,TorusGeometry,LatheGeometry,CanvasTexture,BufferGeometry,Float32BufferAttribute,
@@ -86,10 +87,11 @@ function lookAt(eye,target){const z=norm(sub(eye,target)),x=norm(cross([0,1,0],z
 function createEngine(canvas,o={}){
  const opt={background:'#e3eadc',fog:[45,110],pixelRatio:1.75,shadowCenter:[0,0,0],shadowRadius:14,exposure:.95,sun:2.3,...o};
  const renderer=new WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
- const FIXED_Q=/quality=high/.test(location.search);let pixelCap=Math.min(devicePixelRatio||1,opt.pixelRatio);
+ // ?quality=high keeps full quality; ?quality=low starts at the lightest setting (very weak devices, automated tests)
+ const FIXED_Q=/quality=(high|low)/.test(location.search),LOW_Q=/quality=low/.test(location.search);let pixelCap=LOW_Q?.5:Math.min(devicePixelRatio||1,opt.pixelRatio);
  renderer.setPixelRatio(pixelCap);renderer.setSize(innerWidth,innerHeight,false);
  renderer.toneMapping=NeutralToneMapping;renderer.toneMappingExposure=opt.exposure;renderer.outputColorSpace=SRGBColorSpace;
- renderer.shadowMap.enabled=true;renderer.shadowMap.type=PCFSoftShadowMap;renderer.setClearColor(new Color(opt.background),1);
+ renderer.shadowMap.enabled=!LOW_Q;renderer.shadowMap.type=PCFSoftShadowMap;renderer.setClearColor(new Color(opt.background),1);
  const scene=new Scene();scene.fog=new Fog(new Color(opt.background),opt.fog[0],opt.fog[1]);
  const pmrem=new PMREMGenerator(renderer);scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;scene.environmentIntensity=.22;
  scene.add(new HemisphereLight(0xdfeaf7,0xa98f68,.8));
@@ -119,4 +121,4 @@ function createEngine(canvas,o={}){
   status:()=>({renderer:'three.js r187',quality:{ratio:pixelCap,shadows:renderer.shadowMap.enabled,shadowSize:sun.shadow.mapSize.x},qualityLog,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles})};
  return api;}
 
-window.SQ3={THREE,RoundedBoxGeometry,RoomEnvironment,mergeGeometries,stdMat,PAT,makeWorldAdapter,createEngine,webglAvailable,math:{mul,perspective,lookAt}};
+window.SQ3={THREE,createCast,LOOKS,RoundedBoxGeometry,RoomEnvironment,mergeGeometries,stdMat,PAT,makeWorldAdapter,createEngine,webglAvailable,math:{mul,perspective,lookAt}};

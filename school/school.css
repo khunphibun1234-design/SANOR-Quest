@@ -61,3 +61,4 @@ td[lang="th"]{color:var(--ink-soft)}
   td[lang="th"]{display:table-cell!important}
   tr{break-inside:avoid}
 }
+#choices .choices{display:flex;flex-wrap:wrap;gap:.5rem;width:100%}
