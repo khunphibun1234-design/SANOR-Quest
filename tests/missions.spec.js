@@ -6,7 +6,7 @@ test('Map 01 mission 3: An Afternoon in the Garden',async({page})=>{test.setTime
   await expect(page.locator('#missionTitle')).toHaveText('An Afternoon in the Garden');
   await page.click('#startBtn');
   await playMission(page,{card:{thanks:'Thank you for visiting my home.',together:'We played chess together.',again:'Please come again soon.'}});
-  await expect(page.locator('#reportContent')).toContainText('300 XP');
+  await expect(page.locator('#reportContent')).toContainText('260 XP');               // 8 questions × 20 + 100
   expect(await page.evaluate(()=>[SanorProfile.activity('01','garden').done,SanorProfile.stamps('01').some(s=>s.id==='home-garden-done')])).toEqual([true,true]);
   expect(errors).toEqual([]);});
 for(const [id,card,next] of [
