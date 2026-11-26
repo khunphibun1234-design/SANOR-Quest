@@ -1,4 +1,4 @@
-const {test,expect}=require('@playwright/test');
+const {test,expect}=require('./fixtures');
 test('extra support: two choices instead of three, and the hint appears after a mistake',async({page})=>{
   await page.goto('/school/quiz.html');await page.evaluate(()=>{localStorage.clear();for(let i=0;i<10;i++)SanorProfile.logAnswer(false);});await page.reload();
   await expect(page.locator('#choices button')).toHaveCount(2);

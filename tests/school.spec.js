@@ -1,4 +1,4 @@
-const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
+const {test,expect}=require('./fixtures');const {watch}=require('./helpers');
 const answers=['gate','classroom','timetable','library','librarian','canteen','gym','music','club','stage'];
 test('School Buddy: a full round gives 10 stamps and 300 XP',async({page})=>{const errors=watch(page);
   await page.goto('/school/quiz.html');await page.evaluate(()=>localStorage.clear());await page.reload();

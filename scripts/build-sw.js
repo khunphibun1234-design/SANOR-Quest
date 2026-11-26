@@ -5,11 +5,11 @@
 // Run: npm run build:sw   (part of npm run build)
 const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const ROOT=path.join(__dirname,'..');
-const SKIP_DIRS=new Set(['.git','.github','node_modules','tests','src','scripts','supabase','docs','audio','test-results','playwright-report']);
+const SKIP_DIRS=new Set(['.git','.github','node_modules','tests','src','scripts','supabase','docs','audio','test-results','playwright-report','design']);
 const KEEP=/\.(html|js|css|svg|png|webmanifest)$/,SKIP_FILES=new Set(['sw.js','playwright.config.js','package.json','package-lock.json','sanor-quest-logo.png','sanor-quest-book-logo.png']);
 const files=[];
 (function walk(dir){for(const f of fs.readdirSync(path.join(ROOT,dir)).sort()){const rel=dir?dir+'/'+f:f,st=fs.statSync(path.join(ROOT,rel));
-  if(st.isDirectory()){if(!SKIP_DIRS.has(f))walk(rel);}else if(KEEP.test(f)&&!SKIP_FILES.has(rel))files.push(rel);}})('');
+  if(st.isDirectory()){if(!SKIP_DIRS.has(f))walk(rel);}else if((KEEP.test(f)||/^images\/brand\/[^/]+\.webp$/.test(rel))&&!SKIP_FILES.has(rel))files.push(rel);}})('');
 const hash=crypto.createHash('sha256');for(const f of files)hash.update(f).update(fs.readFileSync(path.join(ROOT,f)));
 const version=hash.digest('hex').slice(0,12);
 const shell=['./',...files.map(f=>f.endsWith('/index.html')?f.slice(0,-10):f).filter(f=>f!=='index.html')];

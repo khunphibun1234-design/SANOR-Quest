@@ -1,4 +1,4 @@
-const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
+const {test,expect}=require('./fixtures');const {watch}=require('./helpers');
 // Taps the right glowing ring in the 3D scene for all 10 requests.
 test('Alex’s Table 3D: tapping every item in the scene sets the table',async({page})=>{
   test.setTimeout(180_000);const errors=watch(page);

@@ -1,5 +1,5 @@
 // Phase 9: error reporting, the coordinator's results page and the page for schools.
-const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
+const {test,expect}=require('./fixtures');const {watch}=require('./helpers');
 test('a browser error is reported without personal data (demo mode keeps it in this browser)',async({page})=>{
   await page.goto('/school/quiz.html');await page.evaluate(()=>localStorage.clear());await page.reload();
   await page.evaluate(()=>setTimeout(()=>{throw new Error('Boom for ploy@example.com token 0123456789abcdef0123456789abcdef');},0));

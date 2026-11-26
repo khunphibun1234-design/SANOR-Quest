@@ -1,4 +1,4 @@
-const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
+const {test,expect}=require('./fixtures');const {watch}=require('./helpers');
 // The speaking task on Alex's Table results page, with the microphone simulated.
 const finishedTable=()=>{localStorage.clear();SanorProfile.setRecognition(true);localStorage.setItem('sanor-table-mission-v1',JSON.stringify({index:10,rows:Array.from({length:10},(_,i)=>({answers:[i],hint:false}))}));};
 const fakeRecognition=said=>{window.__said=said;window.SpeechRecognition=class{start(){setTimeout(()=>{const list=[[{transcript:window.__said.shift()}]];list[0].length=1;this.onresult&&this.onresult({results:list});this.onend&&this.onend();},50);}};};

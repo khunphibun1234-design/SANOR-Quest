@@ -1,7 +1,7 @@
-const {test,expect}=require('@playwright/test');const path=require('path');
+const {test,expect}=require('./fixtures');const path=require('path');
 // WCAG 2.1 AA checks with axe-core on every page (colour contrast, labels, names, structure, …).
 const AXE=path.join(__dirname,'../node_modules/axe-core/axe.min.js');
-const pages=[['town map','/',null],['passport','/','#passportBtn'],['Map 01 intro','/home/?quality=low',null],['Map 02 intro','/school/?quality=low',null],['Map 02 2D','/school/quiz.html',null],['for schools','/schools/',null],['research gate','/research/',null],['Map 03 intro','/phibun/?quality=low',null],['Map 04 intro','/market/?quality=low',null],['Map 05 intro','/travel/?quality=low',null],['Map 06 intro','/future/?quality=low',null],
+const pages=[['town map','/',null],['passport','/','#passportBtn'],['Map 01 intro','/home/?quality=low',null],['Map 02 intro','/school/?quality=low',null],['Map 02 2D','/school/quiz.html',null],['for schools','/schools/',null],['start splash','/start/',null],['start log in','/start/#login',null],['start register','/start/#register',null],['research gate','/research/',null],['Map 03 intro','/phibun/?quality=low',null],['Map 04 intro','/market/?quality=low',null],['Map 05 intro','/travel/?quality=low',null],['Map 06 intro','/future/?quality=low',null],
   ['daily review','/review/',null],['pre-test','/test/?kind=pre','#begin'],['teacher sign-in','/teacher/',null],['3D table intro','/home/table-three.html?quality=low',null],['privacy policy','/privacy/',null],['consent form','/consent/',null],['teacher guide','/teacher/guide.html',null],['observation sheet','/teacher/observation.html',null]];
 for(const [name,url,click] of pages)test(`accessibility (WCAG 2.1 AA): ${name}`,async({page})=>{
   await page.goto(url);await page.evaluate(()=>localStorage.clear());await page.reload();await page.waitForTimeout(600);if(click)await page.click(click);await page.waitForTimeout(300);

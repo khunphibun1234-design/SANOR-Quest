@@ -1,4 +1,4 @@
-const {test,expect}=require('@playwright/test');
+const {test,expect}=require('./fixtures');
 // Everything can be done with a keyboard (Tab / Shift+Tab / Enter / Space / arrows / Escape), no mouse.
 async function tabTo(page,selector,max=60){for(let i=0;i<max;i++){if(await page.evaluate(s=>document.activeElement?.matches(s),selector))return;await page.keyboard.press('Tab');}throw new Error('could not reach '+selector+' with Tab');}
 test('keyboard only: start a 3D mission, walk there, answer and close the dialog',async({page})=>{test.setTimeout(120_000);

@@ -1,7 +1,7 @@
-const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
+const {test,expect,skipSplash}=require('./fixtures');const {watch}=require('./helpers');
 // Demo mode (no Supabase): teacher and student share this browser, like trying SANOR QUEST on one computer.
 test('classroom: teacher creates a class, a student joins and plays, the teacher sees the results',async({browser})=>{
-  const ctx=await browser.newContext();const teacher=await ctx.newPage(),errT=watch(teacher);
+  const ctx=await browser.newContext();await ctx.addInitScript(skipSplash);const teacher=await ctx.newPage(),errT=watch(teacher);
   await teacher.goto('/teacher/');await teacher.evaluate(()=>localStorage.clear());await teacher.reload();
   await expect(teacher.locator('#demoNote')).toBeVisible();await teacher.click('#demoStart');
   await teacher.fill('#newClass input','ม.2/5');await teacher.click('#newClass button');
@@ -48,7 +48,7 @@ test('classroom: teacher creates a class, a student joins and plays, the teacher
   expect([...errT,...errS]).toEqual([]);});
 
 test('offline first: answers wait in the outbox and are sent when the internet comes back',async({browser})=>{
-  const ctx=await browser.newContext();const p=await ctx.newPage();
+  const ctx=await browser.newContext();await ctx.addInitScript(skipSplash);const p=await ctx.newPage();
   await p.goto('/');await p.evaluate(async()=>{localStorage.clear();SQBackend.teacher.signIn('t');const c=await SQBackend.teacher.createClass('Test');await SanorClass.join(c.code,3,'Nok','1357');});
   await p.goto('/school/quiz.html');await ctx.setOffline(true);
   await p.locator('#choices button',{hasText:/^gate$/}).click();

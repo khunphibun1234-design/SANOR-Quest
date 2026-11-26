@@ -1,7 +1,7 @@
-const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
+const {test,expect,skipSplash}=require('./fixtures');const {watch}=require('./helpers');
 // PWA: after one visit with internet, the game opens and plays without it.
 test('offline: the town map, both 3D worlds and the practice pages open without internet',async({browser})=>{
-  test.setTimeout(120_000);const ctx=await browser.newContext();const page=await ctx.newPage();
+  test.setTimeout(120_000);const ctx=await browser.newContext();await ctx.addInitScript(skipSplash);const page=await ctx.newPage();
   await page.goto('/');
   await page.evaluate(async()=>{const reg=await navigator.serviceWorker.ready;return reg.active.state;});
   await expect.poll(()=>page.evaluate(async()=>(await caches.keys()).some(k=>k.startsWith('sq-shell-'))),{timeout:30_000}).toBe(true);

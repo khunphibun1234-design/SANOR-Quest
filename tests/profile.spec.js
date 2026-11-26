@@ -1,4 +1,4 @@
-const {test,expect}=require('@playwright/test');
+const {test,expect}=require('./fixtures');
 test.beforeEach(async({page})=>{await page.goto('/school/quiz.html');await page.evaluate(()=>{localStorage.clear();});await page.reload();});
 
 test('record keeps the best XP and never duplicates stamps',async({page})=>{

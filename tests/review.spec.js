@@ -1,4 +1,4 @@
-const {test,expect}=require('@playwright/test');const {watch}=require('./helpers');
+const {test,expect}=require('./fixtures');const {watch}=require('./helpers');
 test('Daily review: weak words come first, answers update spaced review and XP',async({page})=>{const errors=watch(page);
   await page.goto('/review/');
   await page.evaluate(()=>{localStorage.clear();const D=86400000,now=Date.now();
