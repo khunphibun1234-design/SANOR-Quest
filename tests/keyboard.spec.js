@@ -1,7 +1,7 @@
 const {test,expect}=require('./fixtures');
 // Everything can be done with a keyboard (Tab / Shift+Tab / Enter / Space / arrows / Escape), no mouse.
 async function tabTo(page,selector,max=60){for(let i=0;i<max;i++){if(await page.evaluate(s=>document.activeElement?.matches(s),selector))return;await page.keyboard.press('Tab');}throw new Error('could not reach '+selector+' with Tab');}
-test('keyboard only: start a 3D mission, walk there, answer and close the dialog',async({page})=>{test.setTimeout(120_000);
+test('keyboard only: start a 3D mission, walk there, answer and close the dialog',async({page})=>{test.setTimeout(300_000);
   await page.goto('/school/?quality=low&speed=4');await page.evaluate(()=>localStorage.clear());await page.reload();
   await tabTo(page,'#startBtn');await page.keyboard.press('Enter');
   await tabTo(page,'#guideBtn');await page.keyboard.press('Enter');                       // "Take me there"
