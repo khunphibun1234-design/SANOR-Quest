@@ -18,10 +18,10 @@ const LEVELS={
 const WORLDS={
  '01':{en:'My Home, My Story',th:'บ้านของฉัน เรื่องของฉัน',icon:'🏠',href:'home/'},
  '02':{en:'School of Adventures',th:'โรงเรียนแห่งการผจญภัย',icon:'🏫',href:'school/'},
- '03':{en:'Phibun Hometown Quest',th:'ภารกิจบ้านเกิดพิบูล',icon:'🏞️'},
- '04':{en:'Market & Food Street',th:'ตลาดและถนนอาหาร',icon:'🛒'},
- '05':{en:'Around the World',th:'รอบโลก',icon:'✈️'},
- '06':{en:'Future Makers City',th:'เมืองนักสร้างอนาคต',icon:'🤖'},
+ '03':{en:'Phibun Hometown Quest',th:'ภารกิจบ้านเกิดพิบูล',icon:'🏞️',href:'phibun/'},
+ '04':{en:'Market & Food Street',th:'ตลาดและถนนอาหาร',icon:'🛒',href:'market/'},
+ '05':{en:'Around the World',th:'รอบโลก',icon:'✈️',href:'travel/'},
+ '06':{en:'Future Makers City',th:'เมืองนักสร้างอนาคต',icon:'🤖',href:'future/'},
  review:{en:'Daily Review',th:'ทบทวนประจำวัน',icon:'🔁',href:'review/',bonus:true}};
 // speaking results, best first; adaptive help looks at the last RECENT first-try answers
 const SPEECH_RANK={asr:4,self:3,'not-yet':2,skip:1},RECENT=20;

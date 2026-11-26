@@ -563,6 +563,126 @@
     "en": "Is Alex ready for the concert?",
     "th": "Alex พร้อมสำหรับคอนเสิร์ตหรือยัง"
    }
+  },
+  {
+   "id": "rapids",
+   "en": "rapids",
+   "th": "แก่ง (น้ำตก/ลำธารที่ไหลเชี่ยว)",
+   "cefr": "A2",
+   "topic": "places",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "There are many rapids in Phibun.",
+    "th": "ในพิบูลมีแก่งหลายแห่ง"
+   }
+  },
+  {
+   "id": "river",
+   "en": "river",
+   "th": "แม่น้ำ",
+   "cefr": "A1",
+   "topic": "places",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "It's the Mun River. It's very long.",
+    "th": "นี่คือแม่น้ำมูล ยาวมาก"
+   }
+  },
+  {
+   "id": "rock",
+   "en": "rock",
+   "th": "หิน",
+   "cefr": "A1",
+   "topic": "nature",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "There are many big rocks.",
+    "th": "มีหินก้อนใหญ่มากมาย"
+   }
+  },
+  {
+   "id": "boat",
+   "en": "boat",
+   "th": "เรือ",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Can we take a boat on the river?",
+    "th": "เรานั่งเรือในแม่น้ำได้ไหม"
+   }
+  },
+  {
+   "id": "temple",
+   "en": "temple",
+   "th": "วัด",
+   "cefr": "A1",
+   "topic": "places",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Let's go inside the temple.",
+    "th": "เข้าไปในวัดกันเถอะ"
+   }
+  },
+  {
+   "id": "april",
+   "en": "April",
+   "th": "เดือนเมษายน",
+   "cefr": "A1",
+   "topic": "time",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Songkran is in April.",
+    "th": "สงกรานต์อยู่ในเดือนเมษายน"
+   }
+  },
+  {
+   "id": "noodles",
+   "en": "noodles",
+   "th": "ก๋วยเตี๋ยว",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Can I have two bowls of noodles, please?",
+    "th": "ขอก๋วยเตี๋ยวสองชามค่ะ/ครับ"
+   }
+  },
+  {
+   "id": "instead",
+   "en": "instead",
+   "th": "แทน",
+   "cefr": "A2",
+   "topic": "plans",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Let's eat noodles instead.",
+    "th": "ไปกินก๋วยเตี๋ยวแทนกันเถอะ"
+   }
   }
  ]
 }

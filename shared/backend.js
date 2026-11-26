@@ -74,7 +74,7 @@ function demo(){const KEY='sanor-demo-db-v1';
    signOut(){try{LS.removeItem('sanor-demo-teacher-v1');}catch{}},
    classes:T(d=>d.classes.map(c=>({id:c.id,students:d.students.filter(s=>s.class_id===c.id).length,...settings(c)}))),
    createClass:T((d,name)=>{const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let code;do code=[...Array(6)].map(()=>A[Math.floor(Math.random()*32)]).join('');while(d.classes.some(c=>c.code===code));
-    const c={id:uid(),name:String(name).trim().slice(0,60),code,worlds_open:['01','02'],thai_level:null,tests_open:['pre'],created_at:new Date().toISOString()};d.classes.push(c);return{id:c.id,...settings(c)};}),
+    const c={id:uid(),name:String(name).trim().slice(0,60),code,worlds_open:['01','02','03','04','05','06'],thai_level:null,tests_open:['pre'],created_at:new Date().toISOString()};d.classes.push(c);return{id:c.id,...settings(c)};}),
    updateClass:T((d,id,o)=>{const c=own(d,id);if(o.name)c.name=o.name.trim().slice(0,60);if(o.worlds)c.worlds_open=o.worlds;c.thai_level=['starter','explorer','challenger'].includes(o.thai)?o.thai:null;if(o.tests)c.tests_open=o.tests;return{id,...settings(c)};}),
    report:T((d,id)=>{const c=own(d,id),ev=d.events.filter(e=>e.class_id===id);
     const students=d.students.filter(s=>s.class_id===id).sort((a,b)=>a.number-b.number).map(s=>{const mine=ev.filter(e=>e.student_id===s.id),ans=mine.filter(e=>e.kind==='answer'),pr=d.progress.filter(p=>p.student_id===s.id),t=k=>{const x=d.tests.find(y=>y.student_id===s.id&&y.kind===k);return x?{score:x.score,total:x.total}:null;};

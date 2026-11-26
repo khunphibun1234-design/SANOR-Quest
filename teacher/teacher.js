@@ -3,7 +3,7 @@
 const B = window.SQBackend, SQ = window.SQContent, el = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const WORLDS = [['01','My Home, My Story'],['02','School of Adventures'],['03','Phibun Hometown'],['04','Market & Food Street'],['05','Around the World'],['06','Future Makers City']];
-const PLAYABLE = ['01','02'];
+const PLAYABLE = Object.keys(SQ.worlds);   // worlds that have content
 const missionsOf = w => { const W = SQ.worlds[w]; return W ? W.missionOrder.map(id => W.missions.find(m => m.id === id)).filter(m => !m.fallback) : []; };
 const ERR = {invalid_credentials:'อีเมลหรือรหัสผ่านไม่ถูกต้อง', email_taken:'อีเมลนี้มีบัญชีแล้ว ลองเข้าสู่ระบบ', weak_password:'รหัสผ่านสั้นเกินไป (อย่างน้อย 8 ตัว)', offline:'ไม่มีอินเทอร์เน็ต', not_signed_in:'กรุณาเข้าสู่ระบบอีกครั้ง', not_your_class:'ไม่พบห้องเรียนนี้ในบัญชีของคุณ', bad_pin_format:'PIN ต้องเป็นตัวเลข 4 หลัก'};
 const say = e => ERR[e.message] || e.message;

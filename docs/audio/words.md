@@ -2,7 +2,7 @@
 
 สร้างอัตโนมัติด้วย `npm run audio` · อย่าแก้ไฟล์นี้เอง
 
-- ต้องอัดเพิ่ม **48** ไฟล์ จากทั้งหมด 71 ประโยค
+- ต้องอัดเพิ่ม **64** ไฟล์ จากทั้งหมด 87 ประโยค
 - อัดเป็น .mp3 (mono, 44.1 kHz) ตั้งชื่อไฟล์ตามคอลัมน์ "ชื่อไฟล์" แล้วส่งมาทั้งชุด
 - `{name}` คือชื่อเล่นของผู้เล่น: ให้พูดว่า "Mook" แทน
 
@@ -79,3 +79,19 @@
 | 69 | ⬜ | piano |  | `word-piano.mp3` | word: piano |
 | 70 | ⬜ | concert |  | `word-concert.mp3` | word: concert |
 | 71 | ⬜ | Is Alex ready for the concert? | Alex พร้อมสำหรับคอนเสิร์ตหรือยัง | `word-concert-example.mp3` | example: concert |
+| 72 | ⬜ | rapids |  | `word-rapids.mp3` | word: rapids |
+| 73 | ⬜ | There are many rapids in Phibun. | ในพิบูลมีแก่งหลายแห่ง | `word-rapids-example.mp3` | example: rapids |
+| 74 | ⬜ | river |  | `word-river.mp3` | word: river |
+| 75 | ⬜ | It's the Mun River. It's very long. | นี่คือแม่น้ำมูล ยาวมาก | `word-river-example.mp3` | example: river |
+| 76 | ⬜ | rock |  | `word-rock.mp3` | word: rock |
+| 77 | ⬜ | There are many big rocks. | มีหินก้อนใหญ่มากมาย | `word-rock-example.mp3` | example: rock |
+| 78 | ⬜ | boat |  | `word-boat.mp3` | word: boat |
+| 79 | ⬜ | Can we take a boat on the river? | เรานั่งเรือในแม่น้ำได้ไหม | `word-boat-example.mp3` | example: boat |
+| 80 | ⬜ | temple |  | `word-temple.mp3` | word: temple |
+| 81 | ⬜ | Let's go inside the temple. | เข้าไปในวัดกันเถอะ | `word-temple-example.mp3` | example: temple |
+| 82 | ⬜ | April |  | `word-april.mp3` | word: april |
+| 83 | ⬜ | Songkran is in April. | สงกรานต์อยู่ในเดือนเมษายน | `word-april-example.mp3` | example: april |
+| 84 | ⬜ | noodles |  | `word-noodles.mp3` | word: noodles |
+| 85 | ⬜ | Can I have two bowls of noodles, please? | ขอก๋วยเตี๋ยวสองชามค่ะ/ครับ | `word-noodles-example.mp3` | example: noodles |
+| 86 | ⬜ | instead |  | `word-instead.mp3` | word: instead |
+| 87 | ⬜ | Let's eat noodles instead. | ไปกินก๋วยเตี๋ยวแทนกันเถอะ | `word-instead-example.mp3` | example: instead |
