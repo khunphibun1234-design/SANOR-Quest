@@ -45,6 +45,7 @@ button{font:inherit;cursor:pointer}
   radial-gradient(120% 60% at 100% 0%,rgba(214,173,87,.10),transparent 60%),
   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='180' viewBox='0 0 260 180'%3E%3Cg fill='none' stroke='%23c9a45a' stroke-opacity='.16' stroke-width='1.2'%3E%3Cpath d='M-10 40c40-30 80 20 120-5s70-25 150 5'/%3E%3Cpath d='M-10 70c50-25 90 25 130 0s80-20 140 8'/%3E%3Cpath d='M-10 150c40-20 70 15 110-5s90-30 160 0' stroke-dasharray='5 6'/%3E%3C/g%3E%3C/svg%3E"),var(--parch);
  border:2.5px solid var(--gold-line);box-shadow:0 0 0 6px rgba(255,248,226,.65),0 18px 40px rgba(60,45,10,.22)}
+.card-logo{display:block;width:clamp(120px,32vw,152px);height:auto;margin:-104px auto 8px;filter:drop-shadow(0 8px 14px rgba(70,45,0,.32)) drop-shadow(0 0 18px rgba(255,240,190,.7))}
 .card h1{margin:0;text-align:center;font:800 clamp(2rem,8.4vw,2.6rem)/1.1 var(--display);color:var(--forest);letter-spacing:-.01em}
 .card h1:focus{outline:none}
 .sub{margin:6px 0 0;text-align:center;font:600 .98rem var(--thai);color:#5b6b4f}
@@ -95,6 +96,7 @@ button{font:inherit;cursor:pointer}
  .auth-art img{height:100%;aspect-ratio:auto;object-position:30% 20%}
  .auth-art::after{content:"";position:absolute;inset:0 0 0 auto;width:90px;background:linear-gradient(90deg,transparent,rgba(243,234,208,.9))}
  .auth-panel{margin:0;padding:40px 36px;align-content:center}
+ .card{margin-top:78px}
 }
 @media (max-width:380px){.card{padding:24px 16px 20px}.row{grid-template-columns:1fr}.input input{padding-left:50px}.input>svg{left:13px}}
 html.calm *,html.calm *::before,html.calm *::after{animation:none!important;transition:none!important}
