@@ -1,0 +1,1262 @@
+{
+ "id": "04",
+ "slug": "market",
+ "cefr": "A1-A2",
+ "title": {
+  "en": "Market & Food Street",
+  "th": "ตลาดและถนนอาหาร"
+ },
+ "places": {
+  "entrance": {
+   "name": "Market entrance",
+   "en": "Way in",
+   "th": "ทางเข้าตลาด",
+   "icon": "🏮",
+   "pos": [
+    0,
+    3.0,
+    7.0
+   ],
+   "approach": [
+    0,
+    5.8
+   ]
+  },
+  "fruit": {
+   "name": "Fruit stall",
+   "en": "Fruit",
+   "th": "ร้านผลไม้",
+   "icon": "🥭",
+   "pos": [
+    -6.6,
+    2.8,
+    3.2
+   ],
+   "approach": [
+    -4.8,
+    3.2
+   ]
+  },
+  "bakery": {
+   "name": "Bakery",
+   "en": "Cakes",
+   "th": "ร้านขนม",
+   "icon": "🎂",
+   "pos": [
+    -6.6,
+    2.8,
+    -2.4
+   ],
+   "approach": [
+    -4.8,
+    -2.4
+   ]
+  },
+  "drinks": {
+   "name": "Drinks stall",
+   "en": "Drinks",
+   "th": "ร้านเครื่องดื่ม",
+   "icon": "🥥",
+   "pos": [
+    6.6,
+    2.8,
+    3.2
+   ],
+   "approach": [
+    4.8,
+    3.2
+   ]
+  },
+  "restaurant": {
+   "name": "Restaurant",
+   "en": "Thai food",
+   "th": "ร้านอาหาร",
+   "icon": "🍛",
+   "pos": [
+    7.0,
+    3.4,
+    -2.6
+   ],
+   "approach": [
+    4.6,
+    -2.4
+   ]
+  },
+  "gifts": {
+   "name": "Gift shop",
+   "en": "Gifts",
+   "th": "ร้านของขวัญ",
+   "icon": "🎁",
+   "pos": [
+    0,
+    3.4,
+    -7.0
+   ],
+   "approach": [
+    0,
+    -5.0
+   ]
+  }
+ },
+ "missionOrder": [
+  "shopping",
+  "meal",
+  "party"
+ ],
+ "missions": [
+  {
+   "id": "shopping",
+   "type": "story",
+   "title": {
+    "en": "Shopping List and Prices",
+    "th": "รายการซื้อของและการถามราคา"
+   },
+   "summary": {
+    "en": "Read the shopping list, find the right stalls and ask how much things cost.",
+    "th": "อ่านรายการซื้อของ หาร้านที่ถูกต้อง และถามราคาสินค้า"
+   },
+   "stages": [
+    {
+     "id": "list",
+     "title": "Read the list",
+     "subtitle": "At the market entrance",
+     "th": "อ่านรายการ",
+     "target": "entrance",
+     "go": "Meet Alex at the market entrance.",
+     "questions": [
+      "need",
+      "where"
+     ]
+    },
+    {
+     "id": "fruit",
+     "title": "Buy fruit",
+     "subtitle": "At the fruit stall",
+     "th": "ซื้อผลไม้",
+     "target": "fruit",
+     "go": "Go to the fruit stall.",
+     "questions": [
+      "price",
+      "total"
+     ]
+    },
+    {
+     "id": "drinks",
+     "title": "Buy drinks",
+     "subtitle": "At the drinks stall",
+     "th": "ซื้อเครื่องดื่ม",
+     "target": "drinks",
+     "go": "Go to the drinks stall.",
+     "questions": [
+      "water",
+      "pay"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My shopping list",
+     "subtitle": "Write and ask",
+     "th": "รายการซื้อของของฉัน",
+     "target": "entrance",
+     "go": "Go back to the entrance to write your list.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "need": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Here is our shopping list. What do we need first?",
+      "th": "นี่คือรายการซื้อของของเรา เราต้องซื้ออะไรก่อน"
+     },
+     "prompt": {
+      "en": "Read the list and answer.",
+      "th": "อ่านรายการแล้วตอบ"
+     },
+     "hint": {
+      "en": "Read the first line of the list: the item and how many.",
+      "th": "อ่านบรรทัดแรก: ของและจำนวน"
+     },
+     "why": {
+      "en": "We need three mangoes. reads the first line",
+      "th": "We need three mangoes. แปลว่า เราต้องการมะม่วงสามลูก"
+     },
+     "reply": {
+      "en": "OK! Mangoes first."
+     },
+     "choices": [
+      {
+       "en": "We need three mangoes."
+      },
+      {
+       "en": "We need two mangoes."
+      },
+      {
+       "en": "We need three breads."
+      }
+     ],
+     "answer": 0,
+     "table": {
+      "caption": {
+       "en": "Our shopping list",
+       "th": "รายการของที่ต้องซื้อ"
+      },
+      "head": [
+       "Item",
+       "How many"
+      ],
+      "rows": [
+       [
+        "Mangoes",
+        "3"
+       ],
+       [
+        "Water",
+        "2 bottles"
+       ],
+       [
+        "Bread",
+        "1 loaf"
+       ]
+      ]
+     }
+    },
+    "where": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Where can we buy mangoes?",
+      "th": "เราซื้อมะม่วงได้ที่ไหน"
+     },
+     "prompt": {
+      "en": "Tell Alex where to go.",
+      "th": "บอก Alex ว่าต้องไปที่ไหน"
+     },
+     "hint": {
+      "en": "Mangoes are fruit.",
+      "th": "มะม่วงเป็นผลไม้"
+     },
+     "why": {
+      "en": "At the fruit stall. Mangoes are fruit",
+      "th": "At the fruit stall. แปลว่า ที่ร้านผลไม้"
+     },
+     "reply": {
+      "en": "Let's go!"
+     },
+     "choices": [
+      {
+       "en": "At the drinks stall."
+      },
+      {
+       "en": "At the fruit stall."
+      },
+      {
+       "en": "At the gift shop."
+      }
+     ],
+     "answer": 1
+    },
+    "price": {
+     "kind": "choice",
+     "speaker": "Vendor",
+     "line": {
+      "en": "Hello! Can I help you?",
+      "th": "สวัสดีจ้ะ ให้ช่วยอะไรดี"
+     },
+     "prompt": {
+      "en": "Ask the price of the mangoes.",
+      "th": "ถามราคามะม่วง"
+     },
+     "hint": {
+      "en": "Use How much …? for prices.",
+      "th": "ใช้ How much …? ถามราคา"
+     },
+     "why": {
+      "en": "How much are the mangoes? asks the price",
+      "th": "How much are the mangoes? แปลว่า มะม่วงราคาเท่าไร"
+     },
+     "reply": {
+      "en": "They're fifteen baht each."
+     },
+     "choices": [
+      {
+       "en": "How many are the mangoes?"
+      },
+      {
+       "en": "How much are the mangoes?"
+      },
+      {
+       "en": "How old are the mangoes?"
+      }
+     ],
+     "answer": 1
+    },
+    "total": {
+     "kind": "listen",
+     "speaker": "Vendor",
+     "line": {
+      "en": "They're fifteen baht each.",
+      "th": "ลูกละสิบห้าบาทจ้ะ"
+     },
+     "prompt": {
+      "en": "Listen. How much are three mangoes?",
+      "th": "ฟังแล้วคิดว่ามะม่วงสามลูกราคาเท่าไร"
+     },
+     "hint": {
+      "en": "15 + 15 + 15 = ?",
+      "th": "15 + 15 + 15 = ?"
+     },
+     "why": {
+      "en": "Three mangoes at fifteen baht each are forty-five baht",
+      "th": "มะม่วงสามลูก ลูกละ 15 บาท รวม 45 บาท"
+     },
+     "reply": {
+      "en": "Forty-five baht, please."
+     },
+     "choices": [
+      {
+       "en": "30 baht"
+      },
+      {
+       "en": "45 baht"
+      },
+      {
+       "en": "50 baht"
+      }
+     ],
+     "answer": 1
+    },
+    "water": {
+     "kind": "choice",
+     "speaker": "Vendor",
+     "line": {
+      "en": "What would you like?",
+      "th": "รับอะไรดีจ๊ะ"
+     },
+     "prompt": {
+      "en": "Order the water on your list.",
+      "th": "สั่งน้ำตามรายการ"
+     },
+     "hint": {
+      "en": "Can I have …, please? and say how many.",
+      "th": "Can I have …, please? และบอกจำนวน"
+     },
+     "why": {
+      "en": "Can I have two bottles of water, please? orders politely with the number",
+      "th": "Can I have two bottles of water, please? แปลว่า ขอน้ำสองขวดค่ะ/ครับ"
+     },
+     "reply": {
+      "en": "Here you are. Twenty baht, please."
+     },
+     "choices": [
+      {
+       "en": "Can I have two bottles of water, please?"
+      },
+      {
+       "en": "I want water two."
+      },
+      {
+       "en": "Give me bottle!"
+      }
+     ],
+     "answer": 0
+    },
+    "pay": {
+     "kind": "order",
+     "speaker": "Vendor",
+     "line": {
+      "en": "Twenty baht, please.",
+      "th": "ยี่สิบบาทจ้ะ"
+     },
+     "prompt": {
+      "en": "Give the money politely. Put the words in order.",
+      "th": "ยื่นเงินอย่างสุภาพ เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Start with Here you are.",
+      "th": "ขึ้นต้นด้วย Here you are."
+     },
+     "why": {
+      "en": "Here you are. Thank you! is polite when you pay",
+      "th": "Here you are. Thank you! แปลว่า นี่ค่ะ/ครับ ขอบคุณ"
+     },
+     "reply": {
+      "en": "Thank you. Have a nice day!"
+     },
+     "tokens": [
+      "Here",
+      "you",
+      "are.",
+      "Thank",
+      "you!"
+     ],
+     "answerText": {
+      "en": "Here you are. Thank you!"
+     }
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write a short shopping list and two questions for the market.",
+     "th": "เขียนรายการซื้อของสั้น ๆ และคำถามสองข้อสำหรับไปตลาด"
+    },
+    "fields": [
+     {
+      "id": "list",
+      "label": {
+       "en": "1. Write two things you need, with numbers.",
+       "th": "1. เขียนของที่ต้องซื้อ 2 อย่าง พร้อมจำนวน"
+      },
+      "example": {
+       "en": "two bananas and three mangoes"
+      },
+      "help": {
+       "en": "Use numbers like two, three or 2, 3. At least 4 words.",
+       "th": "ใช้ตัวเลข เช่น two, three หรือ 2, 3 อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\b(one|two|three|four|five|six|seven|eight|nine|ten|\\d+)\\b"
+       ]
+      }
+     },
+     {
+      "id": "ask",
+      "label": {
+       "en": "2. Ask a price.",
+       "th": "2. ถามราคา"
+      },
+      "example": {
+       "en": "How much are the bananas?"
+      },
+      "help": {
+       "en": "Use How much …? At least 4 words.",
+       "th": "ใช้ How much …? อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\bhow much\\b"
+       ]
+      }
+     },
+     {
+      "id": "buy",
+      "label": {
+       "en": "3. Ask to buy something.",
+       "th": "3. ขอซื้อของ"
+      },
+      "example": {
+       "en": "Can I have three mangoes, please?"
+      },
+      "help": {
+       "en": "Use Can I have …? At least 4 words.",
+       "th": "ใช้ Can I have …? อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\bcan i have\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "How much are the mangoes?",
+     "th": "มะม่วงราคาเท่าไร"
+    },
+    {
+     "en": "Can I have two bottles of water, please?",
+     "th": "ขอน้ำสองขวดค่ะ/ครับ"
+    },
+    {
+     "en": "Here you are. Thank you!",
+     "th": "นี่ค่ะ/ครับ ขอบคุณ"
+    }
+   ]
+  },
+  {
+   "id": "meal",
+   "type": "story",
+   "title": {
+    "en": "Order a Meal for a Friend",
+    "th": "สั่งอาหารให้เพื่อน"
+   },
+   "summary": {
+    "en": "Read the menu, choose food Alex can eat, order drinks and a dessert.",
+    "th": "อ่านเมนู เลือกอาหารที่ Alex กินได้ สั่งเครื่องดื่มและของหวาน"
+   },
+   "stages": [
+    {
+     "id": "menu",
+     "title": "Read the menu",
+     "subtitle": "At the restaurant",
+     "th": "อ่านเมนู",
+     "target": "restaurant",
+     "go": "Take Alex to the restaurant.",
+     "questions": [
+      "likes",
+      "order"
+     ]
+    },
+    {
+     "id": "drink",
+     "title": "Choose drinks",
+     "subtitle": "At the drinks stall",
+     "th": "เลือกเครื่องดื่ม",
+     "target": "drinks",
+     "go": "Go to the drinks stall.",
+     "questions": [
+      "cold",
+      "all"
+     ]
+    },
+    {
+     "id": "dessert",
+     "title": "Dessert time",
+     "subtitle": "At the bakery",
+     "th": "ของหวาน",
+     "target": "bakery",
+     "go": "Go to the bakery for dessert.",
+     "questions": [
+      "dessert",
+      "bill"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "A menu for my friend",
+     "subtitle": "Write an order",
+     "th": "เมนูสำหรับเพื่อน",
+     "target": "restaurant",
+     "go": "Write your order at the restaurant.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "likes": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "I don't like spicy food. What can I eat?",
+      "th": "ฉันไม่ชอบอาหารเผ็ด ฉันกินอะไรได้บ้าง"
+     },
+     "prompt": {
+      "en": "Read the menu and help Alex.",
+      "th": "อ่านเมนูแล้วช่วย Alex"
+     },
+     "hint": {
+      "en": "Look at the Spicy? column. Find a dish with no.",
+      "th": "ดูช่อง Spicy? หาเมนูที่เขียนว่า no"
+     },
+     "why": {
+      "en": "You can eat fried rice. It isn't spicy. chooses a dish that is not spicy",
+      "th": "You can eat fried rice. It isn't spicy. แปลว่า กินข้าวผัดได้นะ ไม่เผ็ด"
+     },
+     "reply": {
+      "en": "Great, I love fried rice!"
+     },
+     "choices": [
+      {
+       "en": "You can eat som tam. It's very spicy."
+      },
+      {
+       "en": "You can eat fried rice. It isn't spicy."
+      },
+      {
+       "en": "You can eat green curry. It isn't spicy."
+      }
+     ],
+     "answer": 1,
+     "table": {
+      "caption": {
+       "en": "Menu · Ruan Thai Restaurant",
+       "th": "เมนู ร้านเรือนไทย"
+      },
+      "head": [
+       "Dish",
+       "Spicy?",
+       "Price"
+      ],
+      "rows": [
+       [
+        "Fried rice",
+        "no",
+        "45 baht"
+       ],
+       [
+        "Pad Thai",
+        "no",
+        "50 baht"
+       ],
+       [
+        "Som tam",
+        "very spicy",
+        "40 baht"
+       ],
+       [
+        "Green curry",
+        "spicy",
+        "60 baht"
+       ]
+      ]
+     }
+    },
+    "order": {
+     "kind": "choice",
+     "speaker": "Chef",
+     "line": {
+      "en": "Hello! Are you ready to order?",
+      "th": "สวัสดีครับ พร้อมสั่งอาหารหรือยัง"
+     },
+     "prompt": {
+      "en": "Order for Alex and yourself.",
+      "th": "สั่งอาหารให้ Alex และตัวเอง"
+     },
+     "hint": {
+      "en": "Can I have … and …, please?",
+      "th": "Can I have … and …, please?"
+     },
+     "why": {
+      "en": "Can I have fried rice and pad Thai, please? orders two dishes politely",
+      "th": "Can I have fried rice and pad Thai, please? แปลว่า ขอข้าวผัดกับผัดไทยค่ะ/ครับ"
+     },
+     "reply": {
+      "en": "Coming right up!"
+     },
+     "choices": [
+      {
+       "en": "Can I have fried rice and pad Thai, please?"
+      },
+      {
+       "en": "I want eat rice."
+      },
+      {
+       "en": "Fried rice, you!"
+      }
+     ],
+     "answer": 0
+    },
+    "cold": {
+     "kind": "listen",
+     "speaker": "Vendor",
+     "line": {
+      "en": "We have hot tea, iced coffee and fresh coconut juice.",
+      "th": "เรามีชาร้อน กาแฟเย็น และน้ำมะพร้าวสด"
+     },
+     "prompt": {
+      "en": "Listen. Which drinks are cold?",
+      "th": "ฟังแล้วตอบว่าเครื่องดื่มไหนเย็น"
+     },
+     "hint": {
+      "en": "Iced = cold. Fresh coconut juice is cold too.",
+      "th": "Iced แปลว่าเย็น น้ำมะพร้าวสดก็เย็น"
+     },
+     "why": {
+      "en": "Iced coffee and coconut juice are the cold drinks",
+      "th": "กาแฟเย็นและน้ำมะพร้าวเป็นเครื่องดื่มเย็น"
+     },
+     "reply": {
+      "en": "Coconut juice for me!"
+     },
+     "choices": [
+      {
+       "en": "Iced coffee and coconut juice"
+      },
+      {
+       "en": "Hot tea and iced coffee"
+      },
+      {
+       "en": "Only hot tea"
+      }
+     ],
+     "answer": 0
+    },
+    "all": {
+     "kind": "choice",
+     "speaker": "Vendor",
+     "line": {
+      "en": "Two coconut juices. Anything else?",
+      "th": "น้ำมะพร้าวสองแก้ว รับอะไรเพิ่มไหม"
+     },
+     "prompt": {
+      "en": "Say you don't need anything more.",
+      "th": "บอกว่าไม่ต้องการอะไรเพิ่ม"
+     },
+     "hint": {
+      "en": "No, thank you. That's all. is polite.",
+      "th": "No, thank you. That's all. เป็นคำตอบที่สุภาพ"
+     },
+     "why": {
+      "en": "No, thank you. That's all. finishes the order politely",
+      "th": "No, thank you. That's all. แปลว่า ไม่ค่ะ/ครับ ขอบคุณ แค่นี้"
+     },
+     "reply": {
+      "en": "Thank you!"
+     },
+     "choices": [
+      {
+       "en": "No, thank you. That's all."
+      },
+      {
+       "en": "No, I'm not."
+      },
+      {
+       "en": "Yes, I'm thirsty yesterday."
+      }
+     ],
+     "answer": 0
+    },
+    "dessert": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Can we have a dessert?",
+      "th": "เรากินของหวานได้ไหม"
+     },
+     "prompt": {
+      "en": "Answer and suggest a dessert to share.",
+      "th": "ตอบและชวนแบ่งกันกินของหวาน"
+     },
+     "hint": {
+      "en": "Sure! Let's share …",
+      "th": "Sure! Let's share …"
+     },
+     "why": {
+      "en": "Sure! Let's share mango sticky rice. agrees and suggests",
+      "th": "Sure! Let's share mango sticky rice. แปลว่า ได้สิ แบ่งกันกินข้าวเหนียวมะม่วงกันเถอะ"
+     },
+     "reply": {
+      "en": "Yum!"
+     },
+     "choices": [
+      {
+       "en": "Sure! Let's share mango sticky rice."
+      },
+      {
+       "en": "No, you can't eat."
+      },
+      {
+       "en": "Dessert is a noodle."
+      }
+     ],
+     "answer": 0
+    },
+    "bill": {
+     "kind": "order",
+     "speaker": "Vendor",
+     "line": {
+      "en": "Here is your mango sticky rice!",
+      "th": "ข้าวเหนียวมะม่วงมาแล้วจ้ะ"
+     },
+     "prompt": {
+      "en": "After eating, ask to pay. Put the words in order.",
+      "th": "กินเสร็จแล้วขอเช็กบิล เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Can we have the bill, please?",
+      "th": "Can we have the bill, please?"
+     },
+     "why": {
+      "en": "Can we have the bill, please? asks to pay",
+      "th": "Can we have the bill, please? แปลว่า ขอเช็กบิลด้วยค่ะ/ครับ"
+     },
+     "reply": {
+      "en": "Of course. That's eighty baht."
+     },
+     "tokens": [
+      "Can",
+      "we",
+      "have",
+      "the",
+      "bill,",
+      "please?"
+     ],
+     "answerText": {
+      "en": "Can we have the bill, please?"
+     }
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Order a meal for a friend: 3 short sentences.",
+     "th": "สั่งอาหารให้เพื่อน 3 ประโยคสั้น ๆ"
+    },
+    "fields": [
+     {
+      "id": "dish",
+      "label": {
+       "en": "1. Order a dish.",
+       "th": "1. สั่งอาหารหนึ่งอย่าง"
+      },
+      "example": {
+       "en": "Can I have pad Thai, please?"
+      },
+      "help": {
+       "en": "Use Can I have … or I would like …. At least 4 words.",
+       "th": "ใช้ Can I have … หรือ I would like … อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bcan i have\\b",
+        "\\bi would like\\b",
+        "\\bi'd like\\b"
+       ]
+      }
+     },
+     {
+      "id": "why",
+      "label": {
+       "en": "2. Say why your friend will like it.",
+       "th": "2. บอกเหตุผลว่าทำไมเพื่อนจะชอบ"
+      },
+      "example": {
+       "en": "It isn't spicy and it's tasty."
+      },
+      "help": {
+       "en": "Use because, isn't or is. At least 4 words.",
+       "th": "ใช้ because, isn't หรือ is อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bbecause\\b",
+        "\\bisn't\\b",
+        "\\bis\\b"
+       ]
+      }
+     },
+     {
+      "id": "drink",
+      "label": {
+       "en": "3. Order a drink.",
+       "th": "3. สั่งเครื่องดื่ม"
+      },
+      "example": {
+       "en": "Can I have a coconut juice, please?"
+      },
+      "help": {
+       "en": "Use a drink word. At least 4 words.",
+       "th": "ใช้ชื่อเครื่องดื่ม อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\b(water|juice|tea|coffee|milk|soda|coconut|smoothie)\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "You can eat fried rice. It isn't spicy.",
+     "th": "กินข้าวผัดได้นะ ไม่เผ็ด"
+    },
+    {
+     "en": "Can I have fried rice and pad Thai, please?",
+     "th": "ขอข้าวผัดกับผัดไทยค่ะ/ครับ"
+    },
+    {
+     "en": "Can we have the bill, please?",
+     "th": "ขอเช็กบิลด้วยค่ะ/ครับ"
+    }
+   ]
+  },
+  {
+   "id": "party",
+   "type": "story",
+   "title": {
+    "en": "Plan a Party on a Budget",
+    "th": "วางแผนปาร์ตี้ด้วยงบประมาณ"
+   },
+   "summary": {
+    "en": "Plan a surprise party with 300 baht: compare prices, choose a cake and a gift, and add it up.",
+    "th": "วางแผนปาร์ตี้เซอร์ไพรส์ด้วยเงิน 300 บาท เทียบราคา เลือกเค้กและของขวัญ แล้วรวมเงิน"
+   },
+   "stages": [
+    {
+     "id": "plan",
+     "title": "Make a plan",
+     "subtitle": "At the gift shop",
+     "th": "วางแผน",
+     "target": "gifts",
+     "go": "Meet Alex at the gift shop.",
+     "questions": [
+      "budget",
+      "gift"
+     ]
+    },
+    {
+     "id": "cake",
+     "title": "Choose a cake",
+     "subtitle": "At the bakery",
+     "th": "เลือกเค้ก",
+     "target": "bakery",
+     "go": "Go to the bakery.",
+     "questions": [
+      "cakes",
+      "compare"
+     ]
+    },
+    {
+     "id": "total",
+     "title": "Add it up",
+     "subtitle": "At the fruit stall",
+     "th": "รวมเงิน",
+     "target": "fruit",
+     "go": "Go to the fruit stall to check the money.",
+     "questions": [
+      "sum",
+      "when"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My party plan",
+     "subtitle": "Write the plan",
+     "th": "แผนปาร์ตี้ของฉัน",
+     "target": "gifts",
+     "go": "Write your party plan at the gift shop.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "budget": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "It's Mum's birthday on Saturday! We have 300 baht. What do we need?",
+      "th": "วันเสาร์เป็นวันเกิดคุณแม่ เรามีเงิน 300 บาท ต้องซื้ออะไรบ้าง"
+     },
+     "prompt": {
+      "en": "Make a list with Alex.",
+      "th": "ทำรายการกับ Alex"
+     },
+     "hint": {
+      "en": "Use We need … and a list with commas and and.",
+      "th": "ใช้ We need … แล้วบอกรายการ คั่นด้วย , และ and"
+     },
+     "why": {
+      "en": "We need a cake, drinks and a small gift. lists what to buy",
+      "th": "We need a cake, drinks and a small gift. แปลว่า เราต้องมีเค้ก เครื่องดื่ม และของขวัญเล็ก ๆ"
+     },
+     "reply": {
+      "en": "Good plan!"
+     },
+     "choices": [
+      {
+       "en": "We need a cake, drinks and a small gift."
+      },
+      {
+       "en": "We need a car and a house."
+      },
+      {
+       "en": "We are need cake."
+      }
+     ],
+     "answer": 0
+    },
+    "gift": {
+     "kind": "choice",
+     "speaker": "Clerk",
+     "line": {
+      "en": "This photo frame is 120 baht.",
+      "th": "กรอบรูปนี้ราคา 120 บาทค่ะ"
+     },
+     "prompt": {
+      "en": "It is too much for your budget. Ask for a cheaper one.",
+      "th": "แพงเกินงบ ขอดูอันที่ถูกกว่า"
+     },
+     "hint": {
+      "en": "Use too expensive and cheaper.",
+      "th": "ใช้ too expensive และ cheaper"
+     },
+     "why": {
+      "en": "That's too expensive. Do you have a cheaper one? asks politely for a lower price",
+      "th": "That's too expensive. Do you have a cheaper one? แปลว่า แพงไปหน่อย มีอันที่ถูกกว่าไหม"
+     },
+     "reply": {
+      "en": "Yes! This one is 80 baht."
+     },
+     "choices": [
+      {
+       "en": "That's too expensive. Do you have a cheaper one?"
+      },
+      {
+       "en": "That's very cheap. I want two."
+      },
+      {
+       "en": "How old is it?"
+      }
+     ],
+     "answer": 0
+    },
+    "cakes": {
+     "kind": "listen",
+     "speaker": "Vendor",
+     "line": {
+      "en": "A small cake is 150 baht. A big cake is 250 baht.",
+      "th": "เค้กเล็ก 150 บาท เค้กใหญ่ 250 บาท"
+     },
+     "prompt": {
+      "en": "Listen. We also need 60 baht for drinks and 80 for the frame. Which cake can we buy?",
+      "th": "ฟังแล้วคิด เรายังต้องใช้ 60 บาทค่าเครื่องดื่ม และ 80 บาทค่ากรอบรูป ซื้อเค้กไหนได้"
+     },
+     "hint": {
+      "en": "300 − 60 − 80 = 160 baht left for the cake.",
+      "th": "300 − 60 − 80 = เหลือ 160 บาทสำหรับเค้ก"
+     },
+     "why": {
+      "en": "Only the small cake (150 baht) fits the budget",
+      "th": "มีแค่เค้กเล็ก (150 บาท) ที่พอกับงบ"
+     },
+     "reply": {
+      "en": "The small cake, then!"
+     },
+     "choices": [
+      {
+       "en": "The small cake"
+      },
+      {
+       "en": "The big cake"
+      },
+      {
+       "en": "Two big cakes"
+      }
+     ],
+     "answer": 0
+    },
+    "compare": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Why don't we buy the big cake?",
+      "th": "ทำไมเราไม่ซื้อเค้กใหญ่ล่ะ"
+     },
+     "prompt": {
+      "en": "Explain with a comparing word.",
+      "th": "อธิบายโดยใช้คำเปรียบเทียบ"
+     },
+     "hint": {
+      "en": "cheap → cheaper, expensive → more expensive.",
+      "th": "cheap → cheaper, expensive → more expensive"
+     },
+     "why": {
+      "en": "The big cake is more expensive than our budget. compares correctly",
+      "th": "The big cake is more expensive than our budget. แปลว่า เค้กใหญ่แพงเกินงบของเรา"
+     },
+     "reply": {
+      "en": "You're right."
+     },
+     "choices": [
+      {
+       "en": "The big cake is more expensive than our budget."
+      },
+      {
+       "en": "The big cake is expensiver."
+      },
+      {
+       "en": "The big cake is cheap than the small cake."
+      }
+     ],
+     "answer": 0
+    },
+    "sum": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "So how much do we spend in total?",
+      "th": "สรุปเราใช้เงินทั้งหมดเท่าไร"
+     },
+     "prompt": {
+      "en": "Add up the prices.",
+      "th": "รวมราคาทั้งหมด"
+     },
+     "hint": {
+      "en": "150 + 60 + 80 = ?",
+      "th": "150 + 60 + 80 = ?"
+     },
+     "why": {
+      "en": "150 + 60 + 80 = 290 baht, so 10 baht is left",
+      "th": "150 + 60 + 80 = 290 บาท เหลือเงิน 10 บาท"
+     },
+     "reply": {
+      "en": "Perfect, we have money left!"
+     },
+     "choices": [
+      {
+       "en": "290 baht. We have 10 baht left."
+      },
+      {
+       "en": "300 baht. We have 0 baht left."
+      },
+      {
+       "en": "250 baht. We have 50 baht left."
+      }
+     ],
+     "answer": 0,
+     "table": {
+      "caption": {
+       "en": "Party shopping · budget 300 baht",
+       "th": "ของสำหรับปาร์ตี้ งบ 300 บาท"
+      },
+      "head": [
+       "Item",
+       "Price"
+      ],
+      "rows": [
+       [
+        "Small cake",
+        "150 baht"
+       ],
+       [
+        "Drinks",
+        "60 baht"
+       ],
+       [
+        "Photo frame",
+        "80 baht"
+       ]
+      ]
+     }
+    },
+    "when": {
+     "kind": "order",
+     "speaker": "Alex",
+     "line": {
+      "en": "When is the party?",
+      "th": "ปาร์ตี้วันไหน"
+     },
+     "prompt": {
+      "en": "Put the words in order.",
+      "th": "เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Start with Let's have …",
+      "th": "ขึ้นต้นด้วย Let's have …"
+     },
+     "why": {
+      "en": "Let's have the party on Saturday! uses on with a day",
+      "th": "Let's have the party on Saturday! แปลว่า จัดปาร์ตี้วันเสาร์กันเถอะ"
+     },
+     "reply": {
+      "en": "Mum will be so happy!"
+     },
+     "tokens": [
+      "Let's",
+      "have",
+      "the",
+      "party",
+      "on",
+      "Saturday!"
+     ],
+     "answerText": {
+      "en": "Let's have the party on Saturday!"
+     }
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write a party plan: 3 short sentences.",
+     "th": "เขียนแผนปาร์ตี้ 3 ประโยคสั้น ๆ"
+    },
+    "fields": [
+     {
+      "id": "what",
+      "label": {
+       "en": "1. Say what you will buy.",
+       "th": "1. บอกว่าจะซื้ออะไร"
+      },
+      "example": {
+       "en": "We will buy a small cake and drinks."
+      },
+      "help": {
+       "en": "Use will or need. At least 4 words.",
+       "th": "ใช้ will หรือ need อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bwill\\b",
+        "\\bneed\\b"
+       ]
+      }
+     },
+     {
+      "id": "cost",
+      "label": {
+       "en": "2. Say how much it costs.",
+       "th": "2. บอกว่าใช้เงินเท่าไร"
+      },
+      "example": {
+       "en": "It costs 290 baht."
+      },
+      "help": {
+       "en": "Use a number and baht. At least 3 words.",
+       "th": "ใช้ตัวเลขและคำว่า baht อย่างน้อย 3 คำ"
+      },
+      "rules": {
+       "minWords": 3,
+       "all": [
+        "\\bbaht\\b"
+       ]
+      }
+     },
+     {
+      "id": "when",
+      "label": {
+       "en": "3. Say when and where the party is.",
+       "th": "3. บอกวันและสถานที่จัดปาร์ตี้"
+      },
+      "example": {
+       "en": "The party is on Saturday at home."
+      },
+      "help": {
+       "en": "Use on (day) or at (place/time). At least 4 words.",
+       "th": "ใช้ on กับวัน หรือ at กับสถานที่/เวลา อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bon (monday|tuesday|wednesday|thursday|friday|saturday|sunday)\\b",
+        "\\bat\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "We need a cake, drinks and a small gift.",
+     "th": "เราต้องมีเค้ก เครื่องดื่ม และของขวัญเล็ก ๆ"
+    },
+    {
+     "en": "That's too expensive. Do you have a cheaper one?",
+     "th": "แพงไปหน่อย มีอันที่ถูกกว่าไหม"
+    },
+    {
+     "en": "Let's have the party on Saturday!",
+     "th": "จัดปาร์ตี้วันเสาร์กันเถอะ"
+    }
+   ]
+  }
+ ]
+}

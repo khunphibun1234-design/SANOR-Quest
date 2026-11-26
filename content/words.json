@@ -683,6 +683,171 @@
     "en": "Let's eat noodles instead.",
     "th": "ไปกินก๋วยเตี๋ยวแทนกันเถอะ"
    }
+  },
+  {
+   "id": "mango",
+   "en": "mango",
+   "th": "มะม่วง",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "They're fifteen baht each.",
+    "th": "ลูกละสิบห้าบาท"
+   }
+  },
+  {
+   "id": "bottle",
+   "en": "bottle",
+   "th": "ขวด",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Can I have two bottles of water, please?",
+    "th": "ขอน้ำสองขวดค่ะ/ครับ"
+   }
+  },
+  {
+   "id": "baht",
+   "en": "baht",
+   "th": "บาท (สกุลเงินไทย)",
+   "cefr": "A1",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "They're fifteen baht each.",
+    "th": "ลูกละสิบห้าบาท"
+   }
+  },
+  {
+   "id": "spicy",
+   "en": "spicy",
+   "th": "เผ็ด",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I don't like spicy food.",
+    "th": "ฉันไม่ชอบอาหารเผ็ด"
+   }
+  },
+  {
+   "id": "menu",
+   "en": "menu",
+   "th": "เมนู รายการอาหาร",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Look at the menu.",
+    "th": "ดูเมนู"
+   }
+  },
+  {
+   "id": "bill",
+   "en": "bill",
+   "th": "ใบเสร็จ บิล",
+   "cefr": "A2",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Can we have the bill, please?",
+    "th": "ขอเช็กบิลด้วยค่ะ/ครับ"
+   }
+  },
+  {
+   "id": "budget",
+   "en": "budget",
+   "th": "งบประมาณ",
+   "cefr": "A2",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "We have a budget of 300 baht.",
+    "th": "เรามีงบ 300 บาท"
+   }
+  },
+  {
+   "id": "expensive",
+   "en": "expensive",
+   "th": "แพง",
+   "cefr": "A1",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "That's too expensive.",
+    "th": "แพงไปหน่อย"
+   }
+  },
+  {
+   "id": "cheap",
+   "en": "cheap",
+   "th": "ถูก (ราคา)",
+   "cefr": "A1",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Do you have a cheaper one?",
+    "th": "มีอันที่ถูกกว่าไหม"
+   }
+  },
+  {
+   "id": "cake",
+   "en": "cake",
+   "th": "เค้ก",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "A small cake is 150 baht.",
+    "th": "เค้กเล็ก 150 บาท"
+   }
+  },
+  {
+   "id": "gift",
+   "en": "gift",
+   "th": "ของขวัญ",
+   "cefr": "A1",
+   "topic": "shopping",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "We need a small gift.",
+    "th": "เราต้องมีของขวัญเล็ก ๆ"
+   }
   }
  ]
 }
