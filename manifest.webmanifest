@@ -1,0 +1,38 @@
+{
+  "name": "SANOR QUEST · English Adventures",
+  "short_name": "SANOR QUEST",
+  "description": "ผจญภัยในโลก 3D และฝึกภาษาอังกฤษ สำหรับนักเรียนมัธยม · Explore 3D worlds and use English.",
+  "lang": "th",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f5ed",
+  "theme_color": "#356f53",
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/brand/icon-any-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

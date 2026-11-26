@@ -1,11 +1,12 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e3eadc"><title>Alex’s Table 3D+ · SANOR QUEST (prototype B)</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e3eadc"><title>Alex’s Table 3D · SANOR QUEST</title><link rel="manifest" href="../manifest.webmanifest"><link rel="apple-touch-icon" href="../images/brand/apple-touch-icon.png"><script src="../shared/pwa.js" defer></script>
+<link rel="icon" href="../images/brand/favicon.png" type="image/png"><link rel="stylesheet" href="../shared/tokens.css"><script src="../shared/profile.js"></script><script src="../shared/config.js"></script><script src="../shared/errors.js"></script><script src="../shared/backend.js"></script><script src="../shared/sync.js"></script>
 <style>
-*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:linear-gradient(180deg,#cfe2ea 0%,#e9eee0 45%,#e6e9d6 100%);color:#213f37;font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:linear-gradient(180deg,#cfe2ea 0%,#e9eee0 45%,#e6e9d6 100%);color:var(--ink);font:16px/1.4 var(--body);-webkit-tap-highlight-color:transparent}
 #scene{position:fixed;inset:0;width:100%;height:100%;touch-action:none;display:block}
-button{font:inherit;cursor:pointer;border:1px solid #8a9e8d;border-radius:12px;background:#fffdf5;color:#213f37;padding:10px 14px;min-height:48px}
-button.primary{background:#245647;border-color:#245647;color:#fff}
+button{font:600 15px/1.2 var(--body);cursor:pointer;border:1px solid #c5cfc4;border-radius:12px;background:var(--card);color:var(--ink);padding:10px 14px;min-height:48px}
+button.primary{background:var(--green);border-color:var(--green);color:#fff}
 button:disabled{opacity:.45}
-button:focus-visible,a:focus-visible{outline:3px solid #bf542d;outline-offset:2px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .top{position:fixed;left:10px;right:10px;top:max(10px,env(safe-area-inset-top));display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:8px;pointer-events:auto}
 .chip{background:#fffdf5e6;border:1px solid #cbc7b4;border-radius:999px;padding:6px 12px;font-weight:650;font-size:14px}
@@ -14,10 +15,11 @@ button:focus-visible,a:focus-visible{outline:3px solid #bf542d;outline-offset:2p
 .progress i{flex:1;height:7px;border-radius:9px;background:#cfd8c8}
 .progress i.done{background:#3d7a63}.progress i.now{background:#e5b34a}
 .ask{pointer-events:auto;background:#fffdf5f2;border:1px solid #cbc7b4;border-radius:18px;padding:10px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 20px #2c4a3f1f}
-.ask h1{font-size:clamp(18px,5vw,24px);margin:0;flex:1}
+.ask h1{font:700 clamp(18px,5vw,24px)/1.25 var(--display);margin:0}.ask .say{flex:1;min-width:0}.ask .th{display:inline-block;font-size:14px;margin-top:2px}#status .th{margin-left:.4em}
 .ask .tools{display:flex;gap:6px}
 .ask .tools button{padding:8px 10px;min-width:48px}
 .bottom{position:fixed;left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;justify-content:space-between;pointer-events:none}
+#speakBox{margin:10px 0}
 #status{pointer-events:auto;background:#fffdf5f2;border:1px solid #cbc7b4;border-radius:14px;padding:8px 12px;margin:0;flex:1;min-height:48px;display:flex;align-items:center;font-size:15px}
 #status:empty{visibility:hidden}
 #next{pointer-events:auto;font-weight:700}
@@ -26,24 +28,25 @@ button:focus-visible,a:focus-visible{outline:3px solid #bf542d;outline-offset:2p
 .overlay{position:fixed;inset:0;background:#e3eadcd9;display:grid;place-items:center;padding:16px;overflow:auto}
 .overlay[hidden]{display:none}
 .card{background:#fffdf5;border:1px solid #cbc7b4;border-radius:22px;padding:20px;max-width:560px;width:100%;box-shadow:0 12px 40px #2c4a3f2a}
-.card h2{margin:4px 0 8px;font:700 clamp(26px,7vw,36px)/1.1 Georgia,serif}
-.eyebrow{font-size:12px;letter-spacing:.18em;font-weight:700;color:#5e7a6d}
+.card h2{margin:4px 0 8px;font:800 clamp(26px,7vw,36px)/1.1 var(--display);color:var(--ink)}
+.eyebrow{font:700 12px/1.3 var(--display);letter-spacing:.16em;color:var(--muted)}
 .card p{margin:8px 0}
 .card .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 table{border-collapse:collapse;width:100%;font-size:15px}td,th{text-align:left;padding:5px;border-bottom:1px solid #ddd}
+.chip-btn{display:inline-flex;align-items:center;padding:10px 14px;border-radius:12px;background:var(--green);color:#fff;text-decoration:none;font-weight:600;min-height:48px}#stampLine{font-weight:600}
 .proto{font-size:12px;color:#7a6a3a;background:#fbefc9;border-radius:8px;padding:4px 8px;display:inline-block}
 @media print{#scene,.top,.bottom,.bubble,.noprint{display:none!important}.overlay{position:static;background:none}.card{box-shadow:none;border:0}}
 </style></head><body>
 <canvas id="scene" aria-label="Alex's home in 3D. Tap the place or thing Alex asks for."></canvas>
 <div class="top">
- <div class="bar"><span class="chip"><a href="index.html">← Map 01</a></span><div class="progress" id="progress" aria-hidden="true"></div><span class="chip" id="count"></span></div>
- <div class="ask"><h1 id="prompt" lang="en"></h1><div class="tools"><button id="listen" aria-label="Listen to Alex">🔊</button><button id="hint" aria-label="Get a hint">💡</button></div></div>
+ <div class="bar"><span class="chip"><a href="index.html">← Map 01</a></span><div class="progress" id="progress" aria-hidden="true"></div><span id="levelSlot"></span><span class="chip" id="count"></span></div>
+ <div class="ask"><div class="say"><h1 id="prompt" lang="en"></h1><p id="promptTh" class="th" lang="th" style="margin:0"></p></div><div class="tools"><button id="listen" aria-label="Listen to Alex">🔊</button><button id="hint" aria-label="Get a hint">💡</button></div></div>
 </div>
 <div class="bubble" id="bubble" hidden></div>
 <div class="bottom"><p id="status" role="status"></p><button class="primary" id="next" hidden>Next →</button></div>
-<div class="overlay" id="intro"><section class="card"><span class="proto">Prototype B · Three.js</span><div class="eyebrow" style="margin-top:10px">MAP 01 · ALEX’S TABLE</div><h2>Lunch with Alex</h2><p>Listen to Alex. Find the place or thing in the house and tap it.</p><p style="color:#5e7a6d;font-size:14px">The glowing rings show what you can tap. Drag to turn the house.</p><div class="row"><button class="primary" id="start">Start →</button></div></section></div>
-<div class="overlay" id="report" hidden><section class="card"><div class="eyebrow">ALEX’S TABLE · 3D</div><h2>You set the table for Alex!</h2><div id="results"></div><div class="row noprint"><button id="print">Print results</button><button id="again">Start a new round</button><a class="chip" href="index.html" style="align-self:center">← Map 01</a></div><p class="proto noprint">Prototype results are saved separately from the 2D Alex’s Table.</p></section></div>
-<script src="world.js"></script><script src="nav.js"></script><script src="table-words.js"></script><script src="../audio/player.js"></script>
-<script>if(!(function(){try{const c=document.createElement("canvas");return !!(window.WebGLRenderingContext&&(c.getContext("webgl2")||c.getContext("webgl")));}catch(e){return false}})())location.replace("table3d.html"+location.search);</script>
-<script src="table-three.js"></script>
+<div class="overlay" id="intro"><section class="card"><div class="eyebrow">MAP 01 · ALEX’S TABLE</div><h2>Lunch with Alex</h2><p>Listen to Alex. Find the place or thing in the house and tap it.<br><span class="th" lang="th">ฟัง Alex แล้วหาสถานที่หรือสิ่งของในบ้าน จากนั้นแตะที่มัน</span></p><p style="color:#5e7a6d;font-size:14px">The glowing rings show what you can tap. Drag to turn the house.</p><div class="row"><button class="primary" id="start">Start →</button></div></section></div>
+<div class="overlay" id="report" hidden><section class="card"><div class="eyebrow">MAP 01 · MISSION 02 · LUNCH WITH ALEX</div><h2>You set the table for Alex!</h2><p id="stampLine">🏅 Passport stamp: Lunch with Alex · <span id="playerLine"></span></p><div id="speakBox" class="noprint"></div><div id="feedbackBox" class="noprint"></div><div id="results"></div><div class="row noprint"><button id="print">Print results</button><button id="again">Start a new round</button><a class="primary chip-btn" id="nextMission" href="index.html?mission=garden">Next mission: An Afternoon in the Garden →</a><a class="chip" href="index.html" style="align-self:center">← Map 01</a></div></section></div>
+<script src="../content/content.js"></script><script src="../shared/mission.js"></script><script src="../shared/srs.js"></script><script src="../shared/voice.js"></script><script src="../shared/coach.js"></script><script src="../shared/feedback.js"></script><script src="world.js"></script><script src="nav.js"></script><script src="table-words.js"></script><script src="../audio/player.js"></script>
+<script>if(!(function(){try{const c=document.createElement("canvas");return !!(window.WebGLRenderingContext&&(c.getContext("webgl2")||c.getContext("webgl")));}catch(e){return false}})())location.replace("table.html"+location.search);</script>
+<script src="../shared/sq-three.js"></script><script src="table-three.js"></script>
 </body></html>

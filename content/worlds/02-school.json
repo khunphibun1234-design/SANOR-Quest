@@ -1,0 +1,1650 @@
+{
+ "id": "02",
+ "slug": "school",
+ "cefr": "A1",
+ "title": {
+  "en": "School of Adventures",
+  "th": "โรงเรียนแห่งการผจญภัย"
+ },
+ "missions": [
+  {
+   "id": "timetable",
+   "type": "story",
+   "title": {
+    "en": "Read the Timetable",
+    "th": "อ่านตารางเรียน"
+   },
+   "summary": {
+    "en": "Meet Alex at the gate, read the timetable together and find your classroom.",
+    "th": "พบ Alex ที่ประตู อ่านตารางเรียนด้วยกัน แล้วหาห้องเรียน"
+   },
+   "stages": [
+    {
+     "id": "meet",
+     "title": "Meet Alex",
+     "subtitle": "At the gate",
+     "th": "พบ Alex ที่ประตูโรงเรียน",
+     "target": "gate",
+     "go": "Go to the school gate.",
+     "questions": [
+      "gate",
+      "nervous"
+     ]
+    },
+    {
+     "id": "read",
+     "title": "Read the timetable",
+     "subtitle": "At the notice board",
+     "th": "อ่านตารางเรียนที่บอร์ด",
+     "target": "board",
+     "go": "Go to the notice board.",
+     "questions": [
+      "timetable",
+      "english",
+      "after-lunch"
+     ]
+    },
+    {
+     "id": "room",
+     "title": "Find the classroom",
+     "subtitle": "Our room",
+     "th": "หาห้องเรียน",
+     "target": "classroom",
+     "go": "Take Alex to the classroom.",
+     "questions": [
+      "classroom",
+      "this-is"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My timetable",
+     "subtitle": "Write about your day",
+     "th": "เขียนเรื่องตารางเรียนของฉัน",
+     "target": "classroom",
+     "go": "Write about your timetable in the classroom.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "gate": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Meet me at the school entrance. Where should I wait?",
+      "th": "เจอกันที่ทางเข้าโรงเรียนนะ ฉันควรรอที่ไหน",
+      "audio": "line-20.mp3"
+     },
+     "prompt": {
+      "en": "Alex is looking for you. Which place is he talking about?",
+      "th": "Alex กำลังตามหาคุณ เขาพูดถึงที่ไหน"
+     },
+     "hint": {
+      "en": "The entrance to the school",
+      "th": "ทางเข้าโรงเรียน"
+     },
+     "why": {
+      "en": "gate is the word Alex needs",
+      "th": "\"gate\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "OK! I'm at the gate now."
+     },
+     "choices": [
+      {
+       "en": "gym"
+      },
+      {
+       "en": "gate"
+      },
+      {
+       "en": "stage"
+      }
+     ],
+     "answer": 1
+    },
+    "nervous": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Hi! It's my first day. I'm a bit nervous.",
+      "th": "สวัสดี วันนี้วันแรกของฉัน ตื่นเต้นนิดหน่อย"
+     },
+     "prompt": {
+      "en": "Help Alex feel better.",
+      "th": "ช่วยให้ Alex สบายใจขึ้น"
+     },
+     "hint": {
+      "en": "Say Don't worry. and offer to help.",
+      "th": "พูดว่า Don't worry. แล้วเสนอความช่วยเหลือ"
+     },
+     "why": {
+      "en": "Don't worry. I can help you! makes a new friend feel better",
+      "th": "Don't worry. I can help you! แปลว่า ไม่ต้องห่วง ฉันช่วยเธอเอง"
+     },
+     "reply": {
+      "en": "Thank you! You're very kind."
+     },
+     "choices": [
+      {
+       "en": "Don't worry. I can help you!"
+      },
+      {
+       "en": "I'm nervous too. Bye!"
+      },
+      {
+       "en": "Where is your house?"
+      }
+     ],
+     "answer": 0
+    },
+    "timetable": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "What shows the time of each lesson?",
+      "th": "อะไรบอกเวลาของแต่ละวิชา",
+      "audio": "line-22.mp3"
+     },
+     "prompt": {
+      "en": "Look at the notice board. What shows the time of each lesson?",
+      "th": "ดูที่บอร์ดประกาศ อะไรบอกเวลาของแต่ละวิชา"
+     },
+     "hint": {
+      "en": "A list of lessons and their times",
+      "th": "รายการวิชาเรียนพร้อมเวลาเรียน"
+     },
+     "why": {
+      "en": "timetable is the word Alex needs",
+      "th": "\"timetable\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "Great! Let's read it together."
+     },
+     "choices": [
+      {
+       "en": "timetable"
+      },
+      {
+       "en": "notebook"
+      },
+      {
+       "en": "pencil"
+      }
+     ],
+     "answer": 0
+    },
+    "english": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "When is our English lesson?",
+      "th": "เราเรียนภาษาอังกฤษกี่โมง"
+     },
+     "prompt": {
+      "en": "Read the timetable and answer.",
+      "th": "อ่านตารางเรียนแล้วตอบ"
+     },
+     "hint": {
+      "en": "Find English in the Lesson column, then read the time.",
+      "th": "หาคำว่า English ในช่อง Lesson แล้วดูเวลา"
+     },
+     "why": {
+      "en": "English is at 9:30, so it is at half past nine",
+      "th": "English อยู่เวลา 9:30 คือเก้าโมงครึ่ง"
+     },
+     "reply": {
+      "en": "Half past nine. Thanks!"
+     },
+     "choices": [
+      {
+       "en": "At half past eight."
+      },
+      {
+       "en": "At half past nine."
+      },
+      {
+       "en": "At half past twelve."
+      }
+     ],
+     "answer": 1,
+     "table": {
+      "caption": {
+       "en": "Class 2/5 · Monday",
+       "th": "ตารางเรียนชั้น ม.2/5 วันจันทร์"
+      },
+      "head": [
+       "Time",
+       "Lesson"
+      ],
+      "rows": [
+       [
+        "8:30",
+        "Maths"
+       ],
+       [
+        "9:30",
+        "English"
+       ],
+       [
+        "10:30",
+        "Science"
+       ],
+       [
+        "11:30",
+        "Lunch"
+       ],
+       [
+        "12:30",
+        "Music"
+       ],
+       [
+        "1:30",
+        "P.E."
+       ]
+      ]
+     }
+    },
+    "after-lunch": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "What lesson do we have after lunch?",
+      "th": "หลังพักกลางวันเราเรียนวิชาอะไร"
+     },
+     "prompt": {
+      "en": "Read the timetable and answer.",
+      "th": "อ่านตารางเรียนแล้วตอบ"
+     },
+     "hint": {
+      "en": "Find Lunch, then look at the next line.",
+      "th": "หาคำว่า Lunch แล้วดูบรรทัดถัดไป"
+     },
+     "why": {
+      "en": "Music is at 12:30, right after lunch",
+      "th": "วิชา Music อยู่เวลา 12:30 ต่อจากพักกลางวัน"
+     },
+     "reply": {
+      "en": "Music! I love music."
+     },
+     "choices": [
+      {
+       "en": "Science"
+      },
+      {
+       "en": "Maths"
+      },
+      {
+       "en": "Music"
+      }
+     ],
+     "answer": 2,
+     "table": {
+      "caption": {
+       "en": "Class 2/5 · Monday",
+       "th": "ตารางเรียนชั้น ม.2/5 วันจันทร์"
+      },
+      "head": [
+       "Time",
+       "Lesson"
+      ],
+      "rows": [
+       [
+        "8:30",
+        "Maths"
+       ],
+       [
+        "9:30",
+        "English"
+       ],
+       [
+        "10:30",
+        "Science"
+       ],
+       [
+        "11:30",
+        "Lunch"
+       ],
+       [
+        "12:30",
+        "Music"
+       ],
+       [
+        "1:30",
+        "P.E."
+       ]
+      ]
+     }
+    },
+    "classroom": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Where do we have our English lesson?",
+      "th": "เราเรียนวิชาภาษาอังกฤษกันที่ไหน",
+      "audio": "line-21.mp3"
+     },
+     "prompt": {
+      "en": "Alex asks about the room. Which word does he need?",
+      "th": "Alex ถามถึงห้อง เขาต้องการคำไหน"
+     },
+     "hint": {
+      "en": "A room where students have lessons",
+      "th": "ห้องที่นักเรียนใช้เรียนหนังสือ"
+     },
+     "why": {
+      "en": "classroom is the word Alex needs",
+      "th": "\"classroom\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "Here it is. Room 2/5!"
+     },
+     "choices": [
+      {
+       "en": "canteen"
+      },
+      {
+       "en": "library"
+      },
+      {
+       "en": "classroom"
+      }
+     ],
+     "answer": 2
+    },
+    "this-is": {
+     "kind": "order",
+     "speaker": "Alex",
+     "line": {
+      "en": "Is this our room?",
+      "th": "นี่คือห้องของเราใช่ไหม"
+     },
+     "prompt": {
+      "en": "Put the words in order to show Alex the room.",
+      "th": "เรียงคำเพื่อแนะนำห้องเรียนให้ Alex"
+     },
+     "hint": {
+      "en": "Start with This is …",
+      "th": "ขึ้นต้นด้วย This is …"
+     },
+     "why": {
+      "en": "This is our classroom. introduces the room",
+      "th": "This is our classroom. แปลว่า นี่คือห้องเรียนของเรา"
+     },
+     "reply": {
+      "en": "It's big and bright!"
+     },
+     "tokens": [
+      "This",
+      "is",
+      "our",
+      "classroom."
+     ],
+     "answerText": {
+      "en": "This is our classroom."
+     }
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write 2 sentences about your school day.",
+     "th": "เขียน 2 ประโยคเกี่ยวกับวันเรียนของคุณ"
+    },
+    "fields": [
+     {
+      "id": "time",
+      "label": {
+       "en": "1. Write the time of one lesson.",
+       "th": "1. เขียนเวลาของวิชาหนึ่งวิชา"
+      },
+      "example": {
+       "en": "English is at half past nine."
+      },
+      "help": {
+       "en": "Name a lesson and use at. At least 4 words.",
+       "th": "บอกชื่อวิชาและใช้คำว่า at อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\bat\\b"
+       ],
+       "any": [
+        "\\b(english|maths|math|science|music|p\\.?e\\.?|thai|art|history|lunch)\\b"
+       ]
+      }
+     },
+     {
+      "id": "favourite",
+      "label": {
+       "en": "2. Say your favourite lesson.",
+       "th": "2. บอกวิชาที่คุณชอบที่สุด"
+      },
+      "example": {
+       "en": "My favourite lesson is music."
+      },
+      "help": {
+       "en": "Use favourite. At least 4 words.",
+       "th": "ใช้คำว่า favourite อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bfavou?rite\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "Don't worry. I can help you!",
+     "th": "ไม่ต้องห่วง ฉันช่วยเธอเอง"
+    },
+    {
+     "en": "English is at half past nine.",
+     "th": "วิชาภาษาอังกฤษเรียนตอนเก้าโมงครึ่ง"
+    },
+    {
+     "en": "This is our classroom.",
+     "th": "นี่คือห้องเรียนของเรา"
+    }
+   ]
+  },
+  {
+   "id": "tour",
+   "type": "story",
+   "title": {
+    "en": "Show Your Friend Around",
+    "th": "พาเพื่อนเดินชมโรงเรียน"
+   },
+   "summary": {
+    "en": "Visit the library, the canteen and the gym with Alex.",
+    "th": "พา Alex ไปห้องสมุด โรงอาหาร และโรงยิม"
+   },
+   "stages": [
+    {
+     "id": "library",
+     "title": "At the library",
+     "subtitle": "Borrow a book",
+     "th": "ที่ห้องสมุด",
+     "target": "library",
+     "go": "Take Alex to the library.",
+     "questions": [
+      "library",
+      "librarian",
+      "card"
+     ]
+    },
+    {
+     "id": "canteen",
+     "title": "At the canteen",
+     "subtitle": "Lunch time",
+     "th": "ที่โรงอาหาร",
+     "target": "canteen",
+     "go": "Go to the canteen for lunch.",
+     "questions": [
+      "canteen",
+      "eat"
+     ]
+    },
+    {
+     "id": "gym",
+     "title": "At the gym",
+     "subtitle": "After school",
+     "th": "ที่โรงยิม",
+     "target": "gym",
+     "go": "Show Alex the gym.",
+     "questions": [
+      "gym",
+      "basketball"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My school card",
+     "subtitle": "Help Alex at our school",
+     "th": "การ์ดโรงเรียนของฉัน",
+     "target": "library",
+     "go": "Go back to the library to write your school card.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "library": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "I want to borrow a book. Where can we go?",
+      "th": "ฉันอยากยืมหนังสือ เราไปที่ไหนได้บ้าง",
+      "audio": "line-23.mp3"
+     },
+     "prompt": {
+      "en": "Choose the word Alex needs.",
+      "th": "เลือกคำที่ Alex ต้องการ"
+     },
+     "hint": {
+      "en": "A place to borrow books",
+      "th": "สถานที่สำหรับยืมหนังสือ"
+     },
+     "why": {
+      "en": "library is the word Alex needs",
+      "th": "\"library\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "Wow, so many books!"
+     },
+     "choices": [
+      {
+       "en": "gym"
+      },
+      {
+       "en": "library"
+      },
+      {
+       "en": "canteen"
+      }
+     ],
+     "answer": 1
+    },
+    "librarian": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Who can help me borrow this book?",
+      "th": "ใครช่วยฉันยืมหนังสือเล่มนี้ได้บ้าง",
+      "audio": "line-24.mp3"
+     },
+     "prompt": {
+      "en": "Who works in the library?",
+      "th": "ใครทำงานในห้องสมุด"
+     },
+     "hint": {
+      "en": "The person who helps you borrow books",
+      "th": "คนที่ช่วยเรายืมหนังสือ"
+     },
+     "why": {
+      "en": "librarian is the word Alex needs",
+      "th": "\"librarian\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "Let's ask her."
+     },
+     "choices": [
+      {
+       "en": "coach"
+      },
+      {
+       "en": "singer"
+      },
+      {
+       "en": "librarian"
+      }
+     ],
+     "answer": 2
+    },
+    "card": {
+     "kind": "choice",
+     "speaker": "Librarian",
+     "line": {
+      "en": "Hello! Do you have a library card?",
+      "th": "สวัสดีจ้ะ มีบัตรห้องสมุดไหม"
+     },
+     "prompt": {
+      "en": "Give the librarian your card.",
+      "th": "ยื่นบัตรให้บรรณารักษ์"
+     },
+     "hint": {
+      "en": "Here you are. is what you say when you give something.",
+      "th": "Here you are. ใช้พูดตอนยื่นของให้"
+     },
+     "why": {
+      "en": "Yes, here you are. answers and gives the card",
+      "th": "Yes, here you are. แปลว่า มีค่ะ/ครับ นี่ค่ะ/นี่ครับ"
+     },
+     "reply": {
+      "en": "Thank you. You can borrow two books."
+     },
+     "choices": [
+      {
+       "en": "No, I'm not."
+      },
+      {
+       "en": "Yes, here you are."
+      },
+      {
+       "en": "It's on Monday."
+      }
+     ],
+     "answer": 1
+    },
+    "canteen": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "I am hungry. Where can we buy lunch at school?",
+      "th": "ฉันหิวแล้ว เราซื้ออาหารกลางวันในโรงเรียนได้ที่ไหน",
+      "audio": "line-25.mp3"
+     },
+     "prompt": {
+      "en": "Choose the word Alex needs.",
+      "th": "เลือกคำที่ Alex ต้องการ"
+     },
+     "hint": {
+      "en": "A place to buy lunch at school",
+      "th": "ที่ซื้ออาหารกลางวันในโรงเรียน"
+     },
+     "why": {
+      "en": "canteen is the word Alex needs",
+      "th": "\"canteen\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "Yum! It smells good."
+     },
+     "choices": [
+      {
+       "en": "canteen"
+      },
+      {
+       "en": "stage"
+      },
+      {
+       "en": "classroom"
+      }
+     ],
+     "answer": 0
+    },
+    "eat": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "What do you usually eat for lunch?",
+      "th": "ปกติเธอกินอะไรเป็นมื้อกลางวัน"
+     },
+     "prompt": {
+      "en": "Tell Alex about your lunch.",
+      "th": "บอก Alex ว่าคุณกินอะไร"
+     },
+     "hint": {
+      "en": "Use usually for something you do most days.",
+      "th": "ใช้ usually กับสิ่งที่ทำเป็นประจำ"
+     },
+     "why": {
+      "en": "I usually eat rice and chicken. talks about a habit",
+      "th": "I usually eat rice and chicken. แปลว่า ปกติฉันกินข้าวกับไก่"
+     },
+     "reply": {
+      "en": "I'll try that too!"
+     },
+     "choices": [
+      {
+       "en": "I usually eat rice and chicken."
+      },
+      {
+       "en": "I'm eating at home yesterday."
+      },
+      {
+       "en": "I eat usually lunch."
+      }
+     ],
+     "answer": 0
+    },
+    "gym": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Where can we play basketball indoors?",
+      "th": "เราเล่นบาสเกตบอลในร่มได้ที่ไหน",
+      "audio": "line-26.mp3"
+     },
+     "prompt": {
+      "en": "Choose the word Alex needs.",
+      "th": "เลือกคำที่ Alex ต้องการ"
+     },
+     "hint": {
+      "en": "An indoor place to play sports",
+      "th": "สถานที่ในร่มสำหรับเล่นกีฬา"
+     },
+     "why": {
+      "en": "gym is the word Alex needs",
+      "th": "\"gym\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "Cool! I like basketball."
+     },
+     "choices": [
+      {
+       "en": "library"
+      },
+      {
+       "en": "gym"
+      },
+      {
+       "en": "garden"
+      }
+     ],
+     "answer": 1
+    },
+    "basketball": {
+     "kind": "order",
+     "speaker": "Alex",
+     "line": {
+      "en": "Do you want to play basketball?",
+      "th": "อยากเล่นบาสเกตบอลไหม"
+     },
+     "prompt": {
+      "en": "Make a plan with Alex. Put the words in order.",
+      "th": "วางแผนกับ Alex เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Start with Let's …",
+      "th": "ขึ้นต้นด้วย Let's …"
+     },
+     "why": {
+      "en": "Let's play basketball after school. makes a plan",
+      "th": "Let's play basketball after school. แปลว่า ไปเล่นบาสหลังเลิกเรียนกันเถอะ"
+     },
+     "reply": {
+      "en": "Great! See you here at four."
+     },
+     "tokens": [
+      "Let's",
+      "play",
+      "basketball",
+      "after",
+      "school."
+     ],
+     "answerText": {
+      "en": "Let's play basketball after school."
+     }
+    }
+   },
+   "card": {
+    "title": {
+     "en": "My school card for Alex",
+     "th": "การ์ดโรงเรียนของฉันสำหรับ Alex"
+    },
+    "intro": {
+     "en": "Write 3 short sentences to help Alex at our school. The game checks the key parts.",
+     "th": "เขียนประโยคสั้น ๆ 3 ประโยคเพื่อช่วย Alex ที่โรงเรียนของเรา เกมจะตรวจส่วนสำคัญให้"
+    },
+    "fields": [
+     {
+      "id": "place",
+      "label": {
+       "en": "1. Show Alex a place at our school.",
+       "th": "1. แนะนำสถานที่ในโรงเรียนให้ Alex"
+      },
+      "example": {
+       "en": "This is our library."
+      },
+      "help": {
+       "en": "Use at least 4 words and name a school place.",
+       "th": "ใช้อย่างน้อย 4 คำ และบอกชื่อสถานที่ในโรงเรียน"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\b(gate|classroom|library|canteen|gym|stage|music room|garden)\\b"
+       ]
+      }
+     },
+     {
+      "id": "like",
+      "label": {
+       "en": "2. Say what you like at school.",
+       "th": "2. บอกว่าคุณชอบอะไรที่โรงเรียน"
+      },
+      "example": {
+       "en": "I like the music club."
+      },
+      "help": {
+       "en": "Start with I like … Use at least 4 words.",
+       "th": "ขึ้นต้นด้วย I like … ใช้อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\bi like\\b"
+       ]
+      }
+     },
+     {
+      "id": "invite",
+      "label": {
+       "en": "3. Invite Alex to do something with you.",
+       "th": "3. ชวน Alex ไปทำอะไรด้วยกัน"
+      },
+      "example": {
+       "en": "Let's go to the canteen."
+      },
+      "help": {
+       "en": "Start with Let's … or Do you want to … ? Use at least 4 words.",
+       "th": "ขึ้นต้นด้วย Let's … หรือ Do you want to … ? ใช้อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\blet'?s\\b",
+        "\\bdo you want to\\b",
+        "\\bwould you like to\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "This is our library.",
+     "th": "นี่คือห้องสมุดของเรา"
+    },
+    {
+     "en": "I usually eat rice and chicken.",
+     "th": "ปกติฉันกินข้าวกับไก่"
+    },
+    {
+     "en": "Let's play basketball after school.",
+     "th": "ไปเล่นบาสหลังเลิกเรียนกันเถอะ"
+    }
+   ]
+  },
+  {
+   "id": "club",
+   "type": "story",
+   "title": {
+    "en": "Join the Music Club",
+    "th": "เข้าชมรมดนตรี"
+   },
+   "summary": {
+    "en": "Find out what Alex likes, help him join the music club and cheer at the concert.",
+    "th": "หาว่า Alex ชอบอะไร ช่วยเขาเข้าชมรมดนตรี แล้วไปเชียร์ที่คอนเสิร์ต"
+   },
+   "stages": [
+    {
+     "id": "likes",
+     "title": "What Alex likes",
+     "subtitle": "Hobbies",
+     "th": "สิ่งที่ Alex ชอบ",
+     "target": "classroom",
+     "go": "Talk to Alex in the classroom.",
+     "questions": [
+      "music",
+      "instruments"
+     ]
+    },
+    {
+     "id": "join",
+     "title": "Join the club",
+     "subtitle": "The music room",
+     "th": "สมัครเข้าชมรม",
+     "target": "music",
+     "go": "Take Alex to the music room.",
+     "questions": [
+      "club",
+      "introduce"
+     ]
+    },
+    {
+     "id": "concert",
+     "title": "The concert",
+     "subtitle": "On stage",
+     "th": "คอนเสิร์ต",
+     "target": "stage",
+     "go": "Go to the stage.",
+     "questions": [
+      "stage",
+      "ready"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "Concert poster",
+     "subtitle": "Invite everyone",
+     "th": "โปสเตอร์คอนเสิร์ต",
+     "target": "stage",
+     "go": "Make a poster at the stage.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "music": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "What do I like? I love singing and playing the guitar.",
+      "th": "ฉันชอบอะไรนะ ฉันชอบร้องเพลงและเล่นกีตาร์",
+      "audio": "line-27.mp3"
+     },
+     "prompt": {
+      "en": "Choose the word Alex needs.",
+      "th": "เลือกคำที่ Alex ต้องการ"
+     },
+     "hint": {
+      "en": "What you hear when someone sings or plays an instrument",
+      "th": "สิ่งที่เราได้ยินเมื่อมีคนร้องเพลงหรือเล่นเครื่องดนตรี"
+     },
+     "why": {
+      "en": "music is the word Alex needs",
+      "th": "\"music\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "Yes! I love music."
+     },
+     "choices": [
+      {
+       "en": "science"
+      },
+      {
+       "en": "art"
+      },
+      {
+       "en": "music"
+      }
+     ],
+     "answer": 2
+    },
+    "instruments": {
+     "kind": "listen",
+     "speaker": "Alex",
+     "line": {
+      "en": "I can play the guitar and the piano.",
+      "th": "ฉันเล่นกีตาร์กับเปียโนได้"
+     },
+     "prompt": {
+      "en": "Listen. Which instruments can Alex play?",
+      "th": "ฟังแล้วเลือกเครื่องดนตรีที่ Alex เล่นได้"
+     },
+     "hint": {
+      "en": "Listen for two instruments.",
+      "th": "ฟังชื่อเครื่องดนตรีสองชนิด"
+     },
+     "why": {
+      "en": "Alex said the guitar and the piano",
+      "th": "Alex พูดว่า กีตาร์และเปียโน"
+     },
+     "reply": {
+      "en": "Do you play an instrument too?"
+     },
+     "choices": [
+      {
+       "en": "Guitar and drums"
+      },
+      {
+       "en": "Guitar and piano"
+      },
+      {
+       "en": "Piano and violin"
+      }
+     ],
+     "answer": 1
+    },
+    "club": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "I want to join a group that sings after school. Is there a music ___?",
+      "th": "ฉันอยากเข้ากลุ่มที่ร้องเพลงหลังเลิกเรียน มี ___ ดนตรีไหม",
+      "audio": "line-28.mp3"
+     },
+     "prompt": {
+      "en": "Alex wants to join a group. Which word is missing?",
+      "th": "Alex อยากเข้ากลุ่ม คำไหนหายไป"
+     },
+     "hint": {
+      "en": "A group of students who share an interest",
+      "th": "กลุ่มนักเรียนที่ชอบสิ่งเดียวกัน"
+     },
+     "why": {
+      "en": "club is the word Alex needs",
+      "th": "\"club\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "A music club! Let's ask the teacher."
+     },
+     "choices": [
+      {
+       "en": "club"
+      },
+      {
+       "en": "gate"
+      },
+      {
+       "en": "desk"
+      }
+     ],
+     "answer": 0
+    },
+    "introduce": {
+     "kind": "choice",
+     "speaker": "Teacher",
+     "line": {
+      "en": "Welcome to the music club! Who is your friend?",
+      "th": "ยินดีต้อนรับสู่ชมรมดนตรี เพื่อนของเธอคือใคร"
+     },
+     "prompt": {
+      "en": "Introduce Alex to the teacher.",
+      "th": "แนะนำ Alex ให้คุณครูรู้จัก"
+     },
+     "hint": {
+      "en": "Use This is … and say what Alex loves.",
+      "th": "ใช้ This is … และบอกว่า Alex ชอบอะไร"
+     },
+     "why": {
+      "en": "This is Alex. He loves singing. introduces Alex and his hobby",
+      "th": "This is Alex. He loves singing. แปลว่า นี่คือ Alex เขาชอบร้องเพลง"
+     },
+     "reply": {
+      "en": "Wonderful! You can sing at our concert, Alex."
+     },
+     "choices": [
+      {
+       "en": "This is Alex. He loves singing."
+      },
+      {
+       "en": "I am Alex. I love singing."
+      },
+      {
+       "en": "That is a guitar."
+      }
+     ],
+     "answer": 0
+    },
+    "stage": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Our club has a concert! Where should I stand so everyone can see me sing?",
+      "th": "ชมรมของเรามีคอนเสิร์ต ฉันควรยืนตรงไหนให้ทุกคนเห็นตอนร้องเพลง",
+      "audio": "line-29.mp3"
+     },
+     "prompt": {
+      "en": "Choose the word Alex needs.",
+      "th": "เลือกคำที่ Alex ต้องการ"
+     },
+     "hint": {
+      "en": "A place to stand and perform for an audience",
+      "th": "ที่สำหรับยืนแสดงให้ผู้ชมดู"
+     },
+     "why": {
+      "en": "stage is the word Alex needs",
+      "th": "\"stage\" คือคำที่ Alex ต้องการ"
+     },
+     "reply": {
+      "en": "I'm ready to sing!"
+     },
+     "choices": [
+      {
+       "en": "canteen"
+      },
+      {
+       "en": "stage"
+      },
+      {
+       "en": "library"
+      }
+     ],
+     "answer": 1
+    },
+    "ready": {
+     "kind": "choice",
+     "speaker": "Teacher",
+     "line": {
+      "en": "Is Alex ready for the concert?",
+      "th": "Alex พร้อมสำหรับคอนเสิร์ตหรือยัง"
+     },
+     "prompt": {
+      "en": "Answer the teacher.",
+      "th": "ตอบคุณครู"
+     },
+     "hint": {
+      "en": "Answer with Yes, he is. and say what he will do.",
+      "th": "ตอบด้วย Yes, he is. แล้วบอกว่าเขาจะทำอะไร"
+     },
+     "why": {
+      "en": "Yes, he is. He is ready to sing! answers about Alex",
+      "th": "Yes, he is. He is ready to sing! แปลว่า พร้อมแล้วค่ะ/ครับ เขาพร้อมร้องเพลงแล้ว"
+     },
+     "reply": {
+      "en": "Let's start the show!"
+     },
+     "choices": [
+      {
+       "en": "Yes, I do. I like singing."
+      },
+      {
+       "en": "Yes, he is. He is ready to sing!"
+      },
+      {
+       "en": "No, it isn't."
+      }
+     ],
+     "answer": 1
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Make a poster for the music club concert: 3 short lines.",
+     "th": "ทำโปสเตอร์คอนเสิร์ตของชมรมดนตรี 3 บรรทัดสั้น ๆ"
+    },
+    "fields": [
+     {
+      "id": "event",
+      "label": {
+       "en": "1. Name the event.",
+       "th": "1. ตั้งชื่องาน"
+      },
+      "example": {
+       "en": "The Music Club Concert"
+      },
+      "help": {
+       "en": "Use concert or show. At least 3 words.",
+       "th": "ใช้คำว่า concert หรือ show อย่างน้อย 3 คำ"
+      },
+      "rules": {
+       "minWords": 3,
+       "any": [
+        "\\bconcert\\b",
+        "\\bshow\\b"
+       ]
+      }
+     },
+     {
+      "id": "when",
+      "label": {
+       "en": "2. Say when and where.",
+       "th": "2. บอกวันเวลาและสถานที่"
+      },
+      "example": {
+       "en": "It is on Friday at the stage."
+      },
+      "help": {
+       "en": "Use on (a day) or at (a time or place). At least 4 words.",
+       "th": "ใช้ on กับวัน หรือ at กับเวลา/สถานที่ อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bon (monday|tuesday|wednesday|thursday|friday|saturday|sunday)\\b",
+        "\\bat (the )?(stage|hall|school|\\d)"
+       ]
+      }
+     },
+     {
+      "id": "invite",
+      "label": {
+       "en": "3. Invite people to come.",
+       "th": "3. เชิญชวนทุกคนมาดู"
+      },
+      "example": {
+       "en": "Please come and listen to Alex!"
+      },
+      "help": {
+       "en": "Use come, join or welcome. At least 4 words.",
+       "th": "ใช้ come, join หรือ welcome อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bcome\\b",
+        "\\bjoin\\b",
+        "\\bwelcome\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speak": {
+    "id": "buddy-cheer",
+    "prompt": {
+     "en": "Alex is going on stage. Cheer for your new friend!",
+     "th": "Alex กำลังจะขึ้นเวที ส่งกำลังใจให้เพื่อนใหม่หน่อย"
+    },
+    "target": {
+     "en": "Good luck, Alex! You can do it!",
+     "th": "โชคดีนะ Alex เธอทำได้!"
+    }
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "This is Alex. He loves singing.",
+     "th": "นี่คือ Alex เขาชอบร้องเพลง"
+    },
+    {
+     "en": "Good luck, Alex! You can do it!",
+     "th": "โชคดีนะ Alex เธอทำได้!"
+    }
+   ]
+  },
+  {
+   "id": "buddy",
+   "type": "quiz",
+   "title": {
+    "en": "School Buddy (quick practice)",
+    "th": "เพื่อนคู่หูที่โรงเรียน (ฝึกแบบเร็ว)"
+   },
+   "questions": [
+    {
+     "id": "gate",
+     "kind": "choice",
+     "word": "gate",
+     "icon": "🚪",
+     "line": {
+      "en": "Meet me at the school entrance. Where should I wait?",
+      "th": "เจอกันที่ทางเข้าโรงเรียนนะ ฉันควรรอที่ไหน",
+      "audio": "line-20.mp3"
+     },
+     "hint": {
+      "en": "The entrance to the school",
+      "th": "ทางเข้าโรงเรียน"
+     },
+     "choices": [
+      {
+       "en": "gym"
+      },
+      {
+       "en": "gate"
+      },
+      {
+       "en": "stage"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "classroom",
+     "kind": "choice",
+     "word": "classroom",
+     "icon": "🏫",
+     "line": {
+      "en": "Where do we have our English lesson?",
+      "th": "เราเรียนวิชาภาษาอังกฤษกันที่ไหน",
+      "audio": "line-21.mp3"
+     },
+     "hint": {
+      "en": "A room where students have lessons",
+      "th": "ห้องที่นักเรียนใช้เรียนหนังสือ"
+     },
+     "choices": [
+      {
+       "en": "canteen"
+      },
+      {
+       "en": "library"
+      },
+      {
+       "en": "classroom"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "id": "timetable",
+     "kind": "choice",
+     "word": "timetable",
+     "icon": "📅",
+     "line": {
+      "en": "What shows the time of each lesson?",
+      "th": "อะไรบอกเวลาของแต่ละวิชา",
+      "audio": "line-22.mp3"
+     },
+     "hint": {
+      "en": "A list of lessons and their times",
+      "th": "รายการวิชาเรียนพร้อมเวลาเรียน"
+     },
+     "choices": [
+      {
+       "en": "timetable"
+      },
+      {
+       "en": "notebook"
+      },
+      {
+       "en": "pencil"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "library",
+     "kind": "choice",
+     "word": "library",
+     "icon": "📚",
+     "line": {
+      "en": "I want to borrow a book. Where can we go?",
+      "th": "ฉันอยากยืมหนังสือ เราไปที่ไหนได้บ้าง",
+      "audio": "line-23.mp3"
+     },
+     "hint": {
+      "en": "A place to borrow books",
+      "th": "สถานที่สำหรับยืมหนังสือ"
+     },
+     "choices": [
+      {
+       "en": "gym"
+      },
+      {
+       "en": "library"
+      },
+      {
+       "en": "canteen"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "librarian",
+     "kind": "choice",
+     "word": "librarian",
+     "icon": "🧑‍🏫",
+     "line": {
+      "en": "Who can help me borrow this book?",
+      "th": "ใครช่วยฉันยืมหนังสือเล่มนี้ได้บ้าง",
+      "audio": "line-24.mp3"
+     },
+     "hint": {
+      "en": "The person who helps you borrow books",
+      "th": "คนที่ช่วยเรายืมหนังสือ"
+     },
+     "choices": [
+      {
+       "en": "coach"
+      },
+      {
+       "en": "singer"
+      },
+      {
+       "en": "librarian"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "id": "canteen",
+     "kind": "choice",
+     "word": "canteen",
+     "icon": "🍽️",
+     "line": {
+      "en": "I am hungry. Where can we buy lunch at school?",
+      "th": "ฉันหิวแล้ว เราซื้ออาหารกลางวันในโรงเรียนได้ที่ไหน",
+      "audio": "line-25.mp3"
+     },
+     "hint": {
+      "en": "A place to buy lunch at school",
+      "th": "ที่ซื้ออาหารกลางวันในโรงเรียน"
+     },
+     "choices": [
+      {
+       "en": "canteen"
+      },
+      {
+       "en": "stage"
+      },
+      {
+       "en": "classroom"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "gym",
+     "kind": "choice",
+     "word": "gym",
+     "icon": "🏀",
+     "line": {
+      "en": "Where can we play basketball indoors?",
+      "th": "เราเล่นบาสเกตบอลในร่มได้ที่ไหน",
+      "audio": "line-26.mp3"
+     },
+     "hint": {
+      "en": "An indoor place to play sports",
+      "th": "สถานที่ในร่มสำหรับเล่นกีฬา"
+     },
+     "choices": [
+      {
+       "en": "library"
+      },
+      {
+       "en": "gym"
+      },
+      {
+       "en": "garden"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "music",
+     "kind": "choice",
+     "word": "music",
+     "icon": "🎵",
+     "line": {
+      "en": "What do I like? I love singing and playing the guitar.",
+      "th": "ฉันชอบอะไรนะ ฉันชอบร้องเพลงและเล่นกีตาร์",
+      "audio": "line-27.mp3"
+     },
+     "hint": {
+      "en": "What you hear when someone sings or plays an instrument",
+      "th": "สิ่งที่เราได้ยินเมื่อมีคนร้องเพลงหรือเล่นเครื่องดนตรี"
+     },
+     "choices": [
+      {
+       "en": "science"
+      },
+      {
+       "en": "art"
+      },
+      {
+       "en": "music"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "id": "club",
+     "kind": "choice",
+     "word": "club",
+     "icon": "🎸",
+     "line": {
+      "en": "I want to join a group that sings after school. Is there a music ___?",
+      "th": "ฉันอยากเข้ากลุ่มที่ร้องเพลงหลังเลิกเรียน มี ___ ดนตรีไหม",
+      "audio": "line-28.mp3"
+     },
+     "hint": {
+      "en": "A group of students who share an interest",
+      "th": "กลุ่มนักเรียนที่ชอบสิ่งเดียวกัน"
+     },
+     "choices": [
+      {
+       "en": "club"
+      },
+      {
+       "en": "gate"
+      },
+      {
+       "en": "desk"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "stage",
+     "kind": "choice",
+     "word": "stage",
+     "icon": "🎤",
+     "line": {
+      "en": "Our club has a concert! Where should I stand so everyone can see me sing?",
+      "th": "ชมรมของเรามีคอนเสิร์ต ฉันควรยืนตรงไหนให้ทุกคนเห็นตอนร้องเพลง",
+      "audio": "line-29.mp3"
+     },
+     "hint": {
+      "en": "A place to stand and perform for an audience",
+      "th": "ที่สำหรับยืนแสดงให้ผู้ชมดู"
+     },
+     "choices": [
+      {
+       "en": "canteen"
+      },
+      {
+       "en": "stage"
+      },
+      {
+       "en": "library"
+      }
+     ],
+     "answer": 1
+    }
+   ],
+   "fallback": true,
+   "speak": {
+    "id": "buddy-cheer",
+    "prompt": {
+     "en": "Alex is going on stage. Cheer for your new friend!",
+     "th": "Alex กำลังจะขึ้นเวที ส่งกำลังใจให้เพื่อนใหม่หน่อย"
+    },
+    "target": {
+     "en": "Good luck, Alex! You can do it!",
+     "th": "โชคดีนะ Alex เธอทำได้!"
+    }
+   }
+  }
+ ],
+ "places": {
+  "gate": {
+   "name": "School gate",
+   "en": "Gate",
+   "th": "ประตูโรงเรียน",
+   "icon": "🚪",
+   "pos": [
+    0,
+    2.6,
+    8.2
+   ],
+   "approach": [
+    0,
+    7.2
+   ]
+  },
+  "board": {
+   "name": "Notice board",
+   "en": "Timetable",
+   "th": "บอร์ดประกาศ",
+   "icon": "📅",
+   "pos": [
+    -3.4,
+    2.7,
+    5.2
+   ],
+   "approach": [
+    -2.6,
+    6.0
+   ]
+  },
+  "classroom": {
+   "name": "Classroom",
+   "en": "Room 2/5",
+   "th": "ห้องเรียน",
+   "icon": "🏫",
+   "pos": [
+    -6.2,
+    3.4,
+    -1.2
+   ],
+   "approach": [
+    -4.0,
+    -0.6
+   ]
+  },
+  "library": {
+   "name": "Library",
+   "en": "Books",
+   "th": "ห้องสมุด",
+   "icon": "📚",
+   "pos": [
+    -6.2,
+    3.4,
+    -6.0
+   ],
+   "approach": [
+    -4.0,
+    -5.4
+   ]
+  },
+  "canteen": {
+   "name": "Canteen",
+   "en": "Lunch",
+   "th": "โรงอาหาร",
+   "icon": "🍽️",
+   "pos": [
+    6.2,
+    3.0,
+    -1.2
+   ],
+   "approach": [
+    4.0,
+    -0.6
+   ]
+  },
+  "gym": {
+   "name": "Gym",
+   "en": "Sports",
+   "th": "โรงยิม",
+   "icon": "🏀",
+   "pos": [
+    6.2,
+    3.6,
+    -6.2
+   ],
+   "approach": [
+    4.0,
+    -5.4
+   ]
+  },
+  "music": {
+   "name": "Music room",
+   "en": "Club",
+   "th": "ห้องดนตรี",
+   "icon": "🎸",
+   "pos": [
+    6.4,
+    3.0,
+    4.0
+   ],
+   "approach": [
+    4.4,
+    4.4
+   ]
+  },
+  "stage": {
+   "name": "Stage",
+   "en": "Concert",
+   "th": "เวที",
+   "icon": "🎤",
+   "pos": [
+    0,
+    3.2,
+    -8.2
+   ],
+   "approach": [
+    0,
+    -5.8
+   ]
+  }
+ },
+ "missionOrder": [
+  "timetable",
+  "tour",
+  "club"
+ ]
+}

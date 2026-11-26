@@ -1,0 +1,1183 @@
+{
+ "note": "Central word bank. CEFR levels and topics are a draft for expert review.",
+ "words": [
+  {
+   "id": "welcome",
+   "en": "welcome",
+   "th": "ยินดีต้อนรับ",
+   "cefr": "A1",
+   "topic": "greetings",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Welcome to my home.",
+    "th": "ยินดีต้อนรับสู่บ้านของฉัน",
+    "audio": "line-50.mp3"
+   }
+  },
+  {
+   "id": "friend",
+   "en": "friend",
+   "th": "เพื่อน",
+   "cefr": "A1",
+   "topic": "people",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "This is my friend, Alex.",
+    "th": "นี่คือ Alex เพื่อนของฉัน",
+    "audio": "line-51.mp3"
+   }
+  },
+  {
+   "id": "living-room",
+   "en": "living room",
+   "th": "ห้องนั่งเล่น",
+   "cefr": "A1",
+   "topic": "home",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "We watch TV in the living room.",
+    "th": "เราดูทีวีกันในห้องนั่งเล่น",
+    "audio": "line-53.mp3"
+   }
+  },
+  {
+   "id": "kitchen",
+   "en": "kitchen",
+   "th": "ห้องครัว",
+   "cefr": "A1",
+   "topic": "home",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "We cook in the kitchen.",
+    "th": "เราทำอาหารในห้องครัว",
+    "audio": "line-39.mp3"
+   }
+  },
+  {
+   "id": "bedroom",
+   "en": "bedroom",
+   "th": "ห้องนอน",
+   "cefr": "A1",
+   "topic": "home",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I sleep in my bedroom.",
+    "th": "ฉันนอนในห้องนอน",
+    "audio": "line-54.mp3"
+   }
+  },
+  {
+   "id": "garden",
+   "en": "garden",
+   "th": "สวน",
+   "cefr": "A1",
+   "topic": "home",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "We water the plants in the garden.",
+    "th": "เรารดน้ำต้นไม้ในสวน",
+    "audio": "line-55.mp3"
+   }
+  },
+  {
+   "id": "table",
+   "en": "table",
+   "th": "โต๊ะ",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "We need a table for lunch.",
+    "th": "เราต้องใช้โต๊ะสำหรับมื้อกลางวัน",
+    "audio": "line-06.mp3"
+   }
+  },
+  {
+   "id": "plate",
+   "en": "plate",
+   "th": "จาน",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Put a plate on the table.",
+    "th": "วางจานบนโต๊ะ",
+    "audio": "line-08.mp3"
+   }
+  },
+  {
+   "id": "fork",
+   "en": "fork",
+   "th": "ส้อม",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Put a fork on the plate.",
+    "th": "วางส้อมบนจาน",
+    "audio": "line-10.mp3"
+   }
+  },
+  {
+   "id": "bowl",
+   "en": "bowl",
+   "th": "ชาม",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Place a bowl beside my plate.",
+    "th": "วางชามไว้ข้างจานของฉัน",
+    "audio": "line-12.mp3"
+   }
+  },
+  {
+   "id": "spoon",
+   "en": "spoon",
+   "th": "ช้อน",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Put a spoon next to the bowl.",
+    "th": "วางช้อนไว้ข้างชาม",
+    "audio": "line-14.mp3"
+   }
+  },
+  {
+   "id": "glass",
+   "en": "glass",
+   "th": "แก้ว",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Bring me an empty glass.",
+    "th": "เอาแก้วเปล่ามาให้ฉันหน่อย",
+    "audio": "line-16.mp3"
+   }
+  },
+  {
+   "id": "water",
+   "en": "water",
+   "th": "น้ำ",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Pour some water into my glass.",
+    "th": "รินน้ำใส่แก้วให้ฉันหน่อย",
+    "audio": "line-18.mp3"
+   }
+  },
+  {
+   "id": "gate",
+   "en": "gate",
+   "th": "ประตูโรงเรียน",
+   "cefr": "A1",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Meet me at the school entrance. Where should I wait?",
+    "th": "เจอกันที่ทางเข้าโรงเรียนนะ ฉันควรรอที่ไหน",
+    "audio": "line-20.mp3"
+   }
+  },
+  {
+   "id": "classroom",
+   "en": "classroom",
+   "th": "ห้องเรียน",
+   "cefr": "A1",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Where do we have our English lesson?",
+    "th": "เราเรียนวิชาภาษาอังกฤษกันที่ไหน",
+    "audio": "line-21.mp3"
+   }
+  },
+  {
+   "id": "timetable",
+   "en": "timetable",
+   "th": "ตารางเรียน",
+   "cefr": "A2",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "What shows the time of each lesson?",
+    "th": "อะไรบอกเวลาของแต่ละวิชา",
+    "audio": "line-22.mp3"
+   }
+  },
+  {
+   "id": "library",
+   "en": "library",
+   "th": "ห้องสมุด",
+   "cefr": "A1",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I want to borrow a book. Where can we go?",
+    "th": "ฉันอยากยืมหนังสือ เราไปที่ไหนได้บ้าง",
+    "audio": "line-23.mp3"
+   }
+  },
+  {
+   "id": "librarian",
+   "en": "librarian",
+   "th": "บรรณารักษ์",
+   "cefr": "A2",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Who can help me borrow this book?",
+    "th": "ใครช่วยฉันยืมหนังสือเล่มนี้ได้บ้าง",
+    "audio": "line-24.mp3"
+   }
+  },
+  {
+   "id": "canteen",
+   "en": "canteen",
+   "th": "โรงอาหาร",
+   "cefr": "A2",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I am hungry. Where can we buy lunch at school?",
+    "th": "ฉันหิวแล้ว เราซื้ออาหารกลางวันในโรงเรียนได้ที่ไหน",
+    "audio": "line-25.mp3"
+   }
+  },
+  {
+   "id": "gym",
+   "en": "gym",
+   "th": "โรงยิม",
+   "cefr": "A2",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Where can we play basketball indoors?",
+    "th": "เราเล่นบาสเกตบอลในร่มได้ที่ไหน",
+    "audio": "line-26.mp3"
+   }
+  },
+  {
+   "id": "music",
+   "en": "music",
+   "th": "ดนตรี",
+   "cefr": "A1",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "What do I like? I love singing and playing the guitar.",
+    "th": "ฉันชอบอะไรนะ ฉันชอบร้องเพลงและเล่นกีตาร์",
+    "audio": "line-27.mp3"
+   }
+  },
+  {
+   "id": "club",
+   "en": "club",
+   "th": "ชมรม",
+   "cefr": "A2",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I want to join a group that sings after school. Is there a music ___?",
+    "th": "ฉันอยากเข้ากลุ่มที่ร้องเพลงหลังเลิกเรียน มี ___ ดนตรีไหม",
+    "audio": "line-28.mp3"
+   }
+  },
+  {
+   "id": "stage",
+   "en": "stage",
+   "th": "เวที",
+   "cefr": "A2",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Our club has a concert! Where should I stand so everyone can see me sing?",
+    "th": "ชมรมของเรามีคอนเสิร์ต ฉันควรยืนตรงไหนให้ทุกคนเห็นตอนร้องเพลง",
+    "audio": "line-29.mp3"
+   }
+  },
+  {
+   "id": "afternoon",
+   "en": "afternoon",
+   "th": "ตอนบ่าย",
+   "cefr": "A1",
+   "topic": "time",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "What can we do this afternoon?",
+    "th": "บ่ายนี้เราทำอะไรกันดี"
+   }
+  },
+  {
+   "id": "snack",
+   "en": "snack",
+   "th": "ขนม",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Would you like some snacks?",
+    "th": "อยากกินขนมไหม"
+   }
+  },
+  {
+   "id": "plant",
+   "en": "plant",
+   "th": "ต้นไม้ (ปลูก)",
+   "cefr": "A1",
+   "topic": "home",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I'm watering the plants.",
+    "th": "ฉันกำลังรดน้ำต้นไม้"
+   }
+  },
+  {
+   "id": "board-game",
+   "en": "board game",
+   "th": "บอร์ดเกม",
+   "cefr": "A1",
+   "topic": "free time",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Do you like board games?",
+    "th": "เธอชอบเล่นบอร์ดเกมไหม"
+   }
+  },
+  {
+   "id": "chess",
+   "en": "chess",
+   "th": "หมากรุก",
+   "cefr": "A1",
+   "topic": "free time",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I like chess.",
+    "th": "ฉันชอบหมากรุก"
+   }
+  },
+  {
+   "id": "tomorrow",
+   "en": "tomorrow",
+   "th": "พรุ่งนี้",
+   "cefr": "A1",
+   "topic": "time",
+   "worlds": [
+    "01"
+   ],
+   "audio": null,
+   "example": {
+    "en": "See you tomorrow!",
+    "th": "เจอกันพรุ่งนี้นะ"
+   }
+  },
+  {
+   "id": "lesson",
+   "en": "lesson",
+   "th": "วิชาเรียน / คาบเรียน",
+   "cefr": "A1",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "When is our English lesson?",
+    "th": "เราเรียนภาษาอังกฤษกี่โมง"
+   }
+  },
+  {
+   "id": "library-card",
+   "en": "library card",
+   "th": "บัตรห้องสมุด",
+   "cefr": "A1",
+   "topic": "school",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Do you have a library card?",
+    "th": "มีบัตรห้องสมุดไหม"
+   }
+  },
+  {
+   "id": "lunch",
+   "en": "lunch",
+   "th": "อาหารกลางวัน",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "What do you usually eat for lunch?",
+    "th": "ปกติเธอกินอะไรเป็นมื้อกลางวัน"
+   }
+  },
+  {
+   "id": "basketball",
+   "en": "basketball",
+   "th": "บาสเกตบอล",
+   "cefr": "A1",
+   "topic": "free time",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Let's play basketball after school.",
+    "th": "ไปเล่นบาสหลังเลิกเรียนกันเถอะ"
+   }
+  },
+  {
+   "id": "guitar",
+   "en": "guitar",
+   "th": "กีตาร์",
+   "cefr": "A1",
+   "topic": "music",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I can play the guitar and the piano.",
+    "th": "ฉันเล่นกีตาร์กับเปียโนได้"
+   }
+  },
+  {
+   "id": "piano",
+   "en": "piano",
+   "th": "เปียโน",
+   "cefr": "A1",
+   "topic": "music",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I can play the guitar and the piano.",
+    "th": "ฉันเล่นกีตาร์กับเปียโนได้"
+   }
+  },
+  {
+   "id": "concert",
+   "en": "concert",
+   "th": "คอนเสิร์ต",
+   "cefr": "A1",
+   "topic": "music",
+   "worlds": [
+    "02"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Is Alex ready for the concert?",
+    "th": "Alex พร้อมสำหรับคอนเสิร์ตหรือยัง"
+   }
+  },
+  {
+   "id": "rapids",
+   "en": "rapids",
+   "th": "แก่ง (น้ำตก/ลำธารที่ไหลเชี่ยว)",
+   "cefr": "A2",
+   "topic": "places",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "There are many rapids in Phibun.",
+    "th": "ในพิบูลมีแก่งหลายแห่ง"
+   }
+  },
+  {
+   "id": "river",
+   "en": "river",
+   "th": "แม่น้ำ",
+   "cefr": "A1",
+   "topic": "places",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "It's the Mun River. It's very long.",
+    "th": "นี่คือแม่น้ำมูล ยาวมาก"
+   }
+  },
+  {
+   "id": "rock",
+   "en": "rock",
+   "th": "หิน",
+   "cefr": "A1",
+   "topic": "nature",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "There are many big rocks.",
+    "th": "มีหินก้อนใหญ่มากมาย"
+   }
+  },
+  {
+   "id": "boat",
+   "en": "boat",
+   "th": "เรือ",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Can we take a boat on the river?",
+    "th": "เรานั่งเรือในแม่น้ำได้ไหม"
+   }
+  },
+  {
+   "id": "temple",
+   "en": "temple",
+   "th": "วัด",
+   "cefr": "A1",
+   "topic": "places",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Let's go inside the temple.",
+    "th": "เข้าไปในวัดกันเถอะ"
+   }
+  },
+  {
+   "id": "april",
+   "en": "April",
+   "th": "เดือนเมษายน",
+   "cefr": "A1",
+   "topic": "time",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Songkran is in April.",
+    "th": "สงกรานต์อยู่ในเดือนเมษายน"
+   }
+  },
+  {
+   "id": "noodles",
+   "en": "noodles",
+   "th": "ก๋วยเตี๋ยว",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Can I have two bowls of noodles, please?",
+    "th": "ขอก๋วยเตี๋ยวสองชามค่ะ/ครับ"
+   }
+  },
+  {
+   "id": "instead",
+   "en": "instead",
+   "th": "แทน",
+   "cefr": "A2",
+   "topic": "plans",
+   "worlds": [
+    "03"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Let's eat noodles instead.",
+    "th": "ไปกินก๋วยเตี๋ยวแทนกันเถอะ"
+   }
+  },
+  {
+   "id": "mango",
+   "en": "mango",
+   "th": "มะม่วง",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "They're fifteen baht each.",
+    "th": "ลูกละสิบห้าบาท"
+   }
+  },
+  {
+   "id": "bottle",
+   "en": "bottle",
+   "th": "ขวด",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Can I have two bottles of water, please?",
+    "th": "ขอน้ำสองขวดค่ะ/ครับ"
+   }
+  },
+  {
+   "id": "baht",
+   "en": "baht",
+   "th": "บาท (สกุลเงินไทย)",
+   "cefr": "A1",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "They're fifteen baht each.",
+    "th": "ลูกละสิบห้าบาท"
+   }
+  },
+  {
+   "id": "spicy",
+   "en": "spicy",
+   "th": "เผ็ด",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I don't like spicy food.",
+    "th": "ฉันไม่ชอบอาหารเผ็ด"
+   }
+  },
+  {
+   "id": "menu",
+   "en": "menu",
+   "th": "เมนู รายการอาหาร",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Look at the menu.",
+    "th": "ดูเมนู"
+   }
+  },
+  {
+   "id": "bill",
+   "en": "bill",
+   "th": "ใบเสร็จ บิล",
+   "cefr": "A2",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Can we have the bill, please?",
+    "th": "ขอเช็กบิลด้วยค่ะ/ครับ"
+   }
+  },
+  {
+   "id": "budget",
+   "en": "budget",
+   "th": "งบประมาณ",
+   "cefr": "A2",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "We have a budget of 300 baht.",
+    "th": "เรามีงบ 300 บาท"
+   }
+  },
+  {
+   "id": "expensive",
+   "en": "expensive",
+   "th": "แพง",
+   "cefr": "A1",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "That's too expensive.",
+    "th": "แพงไปหน่อย"
+   }
+  },
+  {
+   "id": "cheap",
+   "en": "cheap",
+   "th": "ถูก (ราคา)",
+   "cefr": "A1",
+   "topic": "money",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Do you have a cheaper one?",
+    "th": "มีอันที่ถูกกว่าไหม"
+   }
+  },
+  {
+   "id": "cake",
+   "en": "cake",
+   "th": "เค้ก",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "A small cake is 150 baht.",
+    "th": "เค้กเล็ก 150 บาท"
+   }
+  },
+  {
+   "id": "gift",
+   "en": "gift",
+   "th": "ของขวัญ",
+   "cefr": "A1",
+   "topic": "shopping",
+   "worlds": [
+    "04"
+   ],
+   "audio": null,
+   "example": {
+    "en": "We need a small gift.",
+    "th": "เราต้องมีของขวัญเล็ก ๆ"
+   }
+  },
+  {
+   "id": "platform",
+   "en": "platform",
+   "th": "ชานชาลา",
+   "cefr": "A2",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Which platform is it?",
+    "th": "ขึ้นที่ชานชาลาไหน"
+   }
+  },
+  {
+   "id": "ticket",
+   "en": "ticket",
+   "th": "ตั๋ว",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Two tickets to Bangkok, please.",
+    "th": "ขอตั๋วไปกรุงเทพฯ สองใบ"
+   }
+  },
+  {
+   "id": "straight",
+   "en": "straight",
+   "th": "ตรงไป",
+   "cefr": "A1",
+   "topic": "directions",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Go straight, then turn right.",
+    "th": "เดินตรงไป แล้วเลี้ยวขวา"
+   }
+  },
+  {
+   "id": "turn-right",
+   "en": "turn right",
+   "th": "เลี้ยวขวา",
+   "cefr": "A1",
+   "topic": "directions",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Go straight, then turn right.",
+    "th": "เดินตรงไป แล้วเลี้ยวขวา"
+   }
+  },
+  {
+   "id": "next-to",
+   "en": "next to",
+   "th": "ติดกับ ข้าง ๆ",
+   "cefr": "A1",
+   "topic": "directions",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "The station is next to the hotel.",
+    "th": "สถานีอยู่ติดกับโรงแรม"
+   }
+  },
+  {
+   "id": "booking",
+   "en": "booking",
+   "th": "การจอง",
+   "cefr": "A2",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I have a booking for two nights.",
+    "th": "จองห้องไว้สองคืน"
+   }
+  },
+  {
+   "id": "breakfast",
+   "en": "breakfast",
+   "th": "อาหารเช้า",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Breakfast is from half past six.",
+    "th": "อาหารเช้าเริ่มหกโมงครึ่ง"
+   }
+  },
+  {
+   "id": "noisy",
+   "en": "noisy",
+   "th": "เสียงดัง",
+   "cefr": "A2",
+   "topic": "describing",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "It's very noisy.",
+    "th": "เสียงดังมาก"
+   }
+  },
+  {
+   "id": "lost",
+   "en": "lost",
+   "th": "หาย",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "My friend's bag is lost.",
+    "th": "กระเป๋าเพื่อนหาย"
+   }
+  },
+  {
+   "id": "bag",
+   "en": "bag",
+   "th": "กระเป๋า",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "It's a big blue bag.",
+    "th": "เป็นกระเป๋าใบใหญ่สีน้ำเงิน"
+   }
+  },
+  {
+   "id": "airport",
+   "en": "airport",
+   "th": "สนามบิน",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "My bag isn't at the airport.",
+    "th": "กระเป๋าฉันไม่อยู่ที่สนามบิน"
+   }
+  },
+  {
+   "id": "robot",
+   "en": "robot",
+   "th": "หุ่นยนต์",
+   "cefr": "A1",
+   "topic": "technology",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "It can plant trees in the park.",
+    "th": "มันปลูกต้นไม้ในสวนได้"
+   }
+  },
+  {
+   "id": "battery",
+   "en": "battery",
+   "th": "แบตเตอรี่",
+   "cefr": "A2",
+   "topic": "technology",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Its battery is empty.",
+    "th": "แบตเตอรี่หมด"
+   }
+  },
+  {
+   "id": "solar",
+   "en": "solar",
+   "th": "พลังงานแสงอาทิตย์",
+   "cefr": "A2",
+   "topic": "energy",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Why don't we use solar power?",
+    "th": "ทำไมเราไม่ใช้พลังงานแสงอาทิตย์ล่ะ"
+   }
+  },
+  {
+   "id": "energy",
+   "en": "energy",
+   "th": "พลังงาน",
+   "cefr": "A2",
+   "topic": "energy",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Wind is clean energy.",
+    "th": "ลมเป็นพลังงานสะอาด"
+   }
+  },
+  {
+   "id": "idea",
+   "en": "idea",
+   "th": "ความคิด ไอเดีย",
+   "cefr": "A1",
+   "topic": "opinions",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "That's a good idea.",
+    "th": "เป็นไอเดียที่ดี"
+   }
+  },
+  {
+   "id": "agree",
+   "en": "agree",
+   "th": "เห็นด้วย",
+   "cefr": "A2",
+   "topic": "opinions",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I agree. Wind is clean energy.",
+    "th": "เห็นด้วย ลมเป็นพลังงานสะอาด"
+   }
+  },
+  {
+   "id": "because",
+   "en": "because",
+   "th": "เพราะว่า",
+   "cefr": "A1",
+   "topic": "opinions",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I like it because it saves energy.",
+    "th": "ฉันชอบเพราะมันประหยัดพลังงาน"
+   }
+  },
+  {
+   "id": "first",
+   "en": "first",
+   "th": "อันดับแรก",
+   "cefr": "A1",
+   "topic": "sequence",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "First, it digs a hole.",
+    "th": "อันดับแรก มันขุดหลุม"
+   }
+  },
+  {
+   "id": "finally",
+   "en": "finally",
+   "th": "สุดท้าย",
+   "cefr": "A2",
+   "topic": "sequence",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Finally, it takes a photo.",
+    "th": "สุดท้าย มันถ่ายรูป"
+   }
+  },
+  {
+   "id": "project",
+   "en": "project",
+   "th": "โครงการ",
+   "cefr": "A2",
+   "topic": "school",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Today we're going to talk about our project.",
+    "th": "วันนี้เราจะพูดเรื่องโครงการของเรา"
+   }
+  },
+  {
+   "id": "vote",
+   "en": "vote",
+   "th": "ลงคะแนน โหวต",
+   "cefr": "A2",
+   "topic": "opinions",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Solar bus stops got the most votes.",
+    "th": "ป้ายรถเมล์พลังงานแสงอาทิตย์ได้โหวตมากที่สุด"
+   }
+  }
+ ]
+}

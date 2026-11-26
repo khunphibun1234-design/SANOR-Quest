@@ -1,0 +1,1184 @@
+{
+ "id": "03",
+ "slug": "phibun",
+ "cefr": "A1-A2",
+ "title": {
+  "en": "Phibun Hometown Quest",
+  "th": "ภารกิจบ้านเกิดพิบูล"
+ },
+ "places": {
+  "square": {
+   "name": "Town square",
+   "en": "Clock tower",
+   "th": "ลานกลางเมือง",
+   "icon": "🕰️",
+   "pos": [
+    0,
+    3.2,
+    3.6
+   ],
+   "approach": [
+    0,
+    5.4
+   ]
+  },
+  "rapids": {
+   "name": "Kaeng Saphue",
+   "en": "Rapids",
+   "th": "แก่งสะพือ",
+   "icon": "🪨",
+   "pos": [
+    -5.2,
+    2.4,
+    -4.6
+   ],
+   "approach": [
+    -4.2,
+    -2.6
+   ]
+  },
+  "river": {
+   "name": "Mun River pier",
+   "en": "Boats",
+   "th": "ท่าเรือแม่น้ำมูล",
+   "icon": "⛵",
+   "pos": [
+    4.6,
+    2.4,
+    -4.6
+   ],
+   "approach": [
+    3.8,
+    -2.6
+   ]
+  },
+  "temple": {
+   "name": "Temple",
+   "en": "Wat",
+   "th": "วัด",
+   "icon": "🛕",
+   "pos": [
+    -6.6,
+    4.4,
+    2.6
+   ],
+   "approach": [
+    -4.4,
+    2.4
+   ]
+  },
+  "stall": {
+   "name": "Noodle stall",
+   "en": "Food",
+   "th": "ร้านก๋วยเตี๋ยว",
+   "icon": "🍜",
+   "pos": [
+    6.4,
+    2.8,
+    2.0
+   ],
+   "approach": [
+    4.6,
+    2.2
+   ]
+  },
+  "home": {
+   "name": "Grandma's house",
+   "en": "Home",
+   "th": "บ้านคุณยาย",
+   "icon": "🏡",
+   "pos": [
+    -6.4,
+    3.2,
+    6.8
+   ],
+   "approach": [
+    -4.6,
+    6.6
+   ]
+  }
+ },
+ "missionOrder": [
+  "guide",
+  "songkran",
+  "plans"
+ ],
+ "missions": [
+  {
+   "id": "guide",
+   "type": "story",
+   "title": {
+    "en": "Be a Young Local Guide",
+    "th": "เป็นไกด์ท้องถิ่นตัวน้อย"
+   },
+   "summary": {
+    "en": "Show Alex the town square, Kaeng Saphue and the Mun River, and describe each place.",
+    "th": "พา Alex ชมลานกลางเมือง แก่งสะพือ และแม่น้ำมูล แล้วบรรยายแต่ละที่"
+   },
+   "stages": [
+    {
+     "id": "town",
+     "title": "Welcome to Phibun",
+     "subtitle": "At the town square",
+     "th": "ต้อนรับสู่พิบูล",
+     "target": "square",
+     "go": "Meet Alex at the town square.",
+     "questions": [
+      "town",
+      "market"
+     ]
+    },
+    {
+     "id": "rapids",
+     "title": "Kaeng Saphue",
+     "subtitle": "The rapids",
+     "th": "แก่งสะพือ",
+     "target": "rapids",
+     "go": "Take Alex to Kaeng Saphue.",
+     "questions": [
+      "rapids",
+      "water"
+     ]
+    },
+    {
+     "id": "river",
+     "title": "The Mun River",
+     "subtitle": "At the pier",
+     "th": "แม่น้ำมูล",
+     "target": "river",
+     "go": "Walk to the Mun River pier.",
+     "questions": [
+      "mun",
+      "boat"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My local place",
+     "subtitle": "Describe a place",
+     "th": "สถานที่ในท้องถิ่นของฉัน",
+     "target": "square",
+     "go": "Go back to the town square to write about a place.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "town": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "So this is Phibun! What is there in your town?",
+      "th": "นี่คือพิบูลนี่เอง ในเมืองของเธอมีอะไรบ้าง"
+     },
+     "prompt": {
+      "en": "Tell Alex about your town.",
+      "th": "เล่าให้ Alex ฟังเรื่องเมืองของคุณ"
+     },
+     "hint": {
+      "en": "Use There is with one thing and There are with many things.",
+      "th": "ใช้ There is กับสิ่งเดียว และ There are กับหลายสิ่ง"
+     },
+     "why": {
+      "en": "There is a big river and there are many rapids. uses is for one river and are for many rapids",
+      "th": "ประโยคนี้ใช้ is กับแม่น้ำหนึ่งสาย และ are กับแก่งหลายแห่ง"
+     },
+     "reply": {
+      "en": "Wow! I love rivers."
+     },
+     "choices": [
+      {
+       "en": "There is a big river and there are many rapids."
+      },
+      {
+       "en": "There are a big river and there is many rapids."
+      },
+      {
+       "en": "It is a river big and many rapid."
+      }
+     ],
+     "answer": 0
+    },
+    "market": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Is there a market near here?",
+      "th": "แถวนี้มีตลาดไหม"
+     },
+     "prompt": {
+      "en": "Answer Alex's question.",
+      "th": "ตอบคำถามของ Alex"
+     },
+     "hint": {
+      "en": "A question with Is there…? is answered with Yes, there is. or No, there isn't.",
+      "th": "คำถาม Is there…? ตอบด้วย Yes, there is. หรือ No, there isn't."
+     },
+     "why": {
+      "en": "Yes, there is. It's next to the square. answers and says where",
+      "th": "Yes, there is. It's next to the square. แปลว่า มี อยู่ข้างลานกลางเมือง"
+     },
+     "reply": {
+      "en": "Great, let's go there later."
+     },
+     "choices": [
+      {
+       "en": "Yes, there are. They are market."
+      },
+      {
+       "en": "Yes, there is. It's next to the square."
+      },
+      {
+       "en": "No, it isn't a market."
+      }
+     ],
+     "answer": 1
+    },
+    "rapids": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Wow! What is this place?",
+      "th": "ว้าว ที่นี่คือที่ไหน"
+     },
+     "prompt": {
+      "en": "Tell Alex the name of the place and describe it.",
+      "th": "บอกชื่อสถานที่และบรรยายให้ Alex ฟัง"
+     },
+     "hint": {
+      "en": "Say the name with This is… then describe it with There are…",
+      "th": "บอกชื่อด้วย This is… แล้วบรรยายด้วย There are…"
+     },
+     "why": {
+      "en": "This is Kaeng Saphue. There are many big rocks. names and describes the place",
+      "th": "This is Kaeng Saphue. There are many big rocks. แปลว่า ที่นี่คือแก่งสะพือ มีหินก้อนใหญ่มากมาย"
+     },
+     "reply": {
+      "en": "It's beautiful!"
+     },
+     "choices": [
+      {
+       "en": "This is Kaeng Saphue. There are many big rocks."
+      },
+      {
+       "en": "These are Kaeng Saphue. There is many big rock."
+      },
+      {
+       "en": "I am Kaeng Saphue. It is many rocks."
+      }
+     ],
+     "answer": 0
+    },
+    "water": {
+     "kind": "order",
+     "speaker": "Alex",
+     "line": {
+      "en": "Listen to the water! It's so loud.",
+      "th": "ฟังเสียงน้ำสิ ดังมากเลย"
+     },
+     "prompt": {
+      "en": "Put the words in order to describe the water.",
+      "th": "เรียงคำเพื่อบรรยายสายน้ำ"
+     },
+     "hint": {
+      "en": "Start with The water is…",
+      "th": "ขึ้นต้นด้วย The water is…"
+     },
+     "why": {
+      "en": "The water is very fast here. describes the rapids",
+      "th": "The water is very fast here. แปลว่า น้ำตรงนี้ไหลเร็วมาก"
+     },
+     "reply": {
+      "en": "Be careful near the rocks!"
+     },
+     "tokens": [
+      "The",
+      "water",
+      "is",
+      "very",
+      "fast",
+      "here."
+     ],
+     "answerText": {
+      "en": "The water is very fast here."
+     }
+    },
+    "mun": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Which river is this?",
+      "th": "นี่คือแม่น้ำอะไร"
+     },
+     "prompt": {
+      "en": "Tell Alex about the river.",
+      "th": "เล่าเรื่องแม่น้ำให้ Alex ฟัง"
+     },
+     "hint": {
+      "en": "Say the name, then use a describing word: long, wide, beautiful…",
+      "th": "บอกชื่อ แล้วใช้คำบรรยาย เช่น long, wide, beautiful"
+     },
+     "why": {
+      "en": "It's the Mun River. It's very long. names and describes the river",
+      "th": "It's the Mun River. It's very long. แปลว่า นี่คือแม่น้ำมูล ยาวมาก"
+     },
+     "reply": {
+      "en": "I want to see more of it!"
+     },
+     "choices": [
+      {
+       "en": "It's the Mun River. It's very long."
+      },
+      {
+       "en": "It's Mun River long very."
+      },
+      {
+       "en": "They are the Mun Rivers."
+      }
+     ],
+     "answer": 0
+    },
+    "boat": {
+     "kind": "listen",
+     "speaker": "Alex",
+     "line": {
+      "en": "Can we take a boat on the river this afternoon?",
+      "th": "บ่ายนี้เรานั่งเรือในแม่น้ำได้ไหม"
+     },
+     "prompt": {
+      "en": "Listen. What does Alex want to do?",
+      "th": "ฟังแล้วตอบว่า Alex อยากทำอะไร"
+     },
+     "hint": {
+      "en": "Listen for the word boat.",
+      "th": "ฟังคำว่า boat"
+     },
+     "why": {
+      "en": "Alex wants to take a boat on the river",
+      "th": "Alex อยากนั่งเรือในแม่น้ำ"
+     },
+     "reply": {
+      "en": "Let's ask the boatman."
+     },
+     "choices": [
+      {
+       "en": "Take a boat"
+      },
+      {
+       "en": "Go swimming"
+      },
+      {
+       "en": "Catch fish"
+      }
+     ],
+     "answer": 0
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Describe a place in your town for a visitor: 3 short sentences.",
+     "th": "บรรยายสถานที่ในเมืองของคุณให้นักท่องเที่ยว 3 ประโยคสั้น ๆ"
+    },
+    "fields": [
+     {
+      "id": "name",
+      "label": {
+       "en": "1. Name the place.",
+       "th": "1. บอกชื่อสถานที่"
+      },
+      "example": {
+       "en": "This is Kaeng Saphue."
+      },
+      "help": {
+       "en": "Use This is … or It is …. At least 3 words.",
+       "th": "ใช้ This is … หรือ It is … อย่างน้อย 3 คำ"
+      },
+      "rules": {
+       "minWords": 3,
+       "any": [
+        "\\bthis is\\b",
+        "\\bit is\\b",
+        "\\bit's\\b"
+       ]
+      }
+     },
+     {
+      "id": "there",
+      "label": {
+       "en": "2. Say what there is.",
+       "th": "2. บอกว่ามีอะไรบ้าง"
+      },
+      "example": {
+       "en": "There are many big rocks."
+      },
+      "help": {
+       "en": "Use There is or There are. At least 4 words.",
+       "th": "ใช้ There is หรือ There are อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\bthere (is|are)\\b"
+       ]
+      }
+     },
+     {
+      "id": "do",
+      "label": {
+       "en": "3. Say what visitors can do there.",
+       "th": "3. บอกว่านักท่องเที่ยวทำอะไรได้บ้าง"
+      },
+      "example": {
+       "en": "You can take photos by the river."
+      },
+      "help": {
+       "en": "Use can. At least 4 words.",
+       "th": "ใช้ can อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\bcan\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "This is Kaeng Saphue.",
+     "th": "ที่นี่คือแก่งสะพือ"
+    },
+    {
+     "en": "There are many big rocks.",
+     "th": "มีหินก้อนใหญ่มากมาย"
+    },
+    {
+     "en": "It's the Mun River. It's very long.",
+     "th": "นี่คือแม่น้ำมูล ยาวมาก"
+    }
+   ]
+  },
+  {
+   "id": "songkran",
+   "type": "story",
+   "title": {
+    "en": "Songkran in Phibun",
+    "th": "สงกรานต์ที่พิบูล"
+   },
+   "summary": {
+    "en": "Tell Alex about Songkran: the temple, Grandma and the water fun last year.",
+    "th": "เล่าเรื่องสงกรานต์ให้ Alex ฟัง ทั้งที่วัด บ้านคุณยาย และการเล่นน้ำเมื่อปีที่แล้ว"
+   },
+   "stages": [
+    {
+     "id": "temple",
+     "title": "At the temple",
+     "subtitle": "Thai New Year",
+     "th": "ที่วัด",
+     "target": "temple",
+     "go": "Go to the temple with Alex.",
+     "questions": [
+      "when",
+      "sand"
+     ]
+    },
+    {
+     "id": "grandma",
+     "title": "Visit Grandma",
+     "subtitle": "Respect for elders",
+     "th": "ไปหาคุณยาย",
+     "target": "home",
+     "go": "Visit Grandma's house.",
+     "questions": [
+      "elders",
+      "wish"
+     ]
+    },
+    {
+     "id": "street",
+     "title": "Water fun",
+     "subtitle": "On the street",
+     "th": "เล่นน้ำ",
+     "target": "square",
+     "go": "Go to the town square.",
+     "questions": [
+      "splash",
+      "yesterday"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My Songkran story",
+     "subtitle": "Last Songkran",
+     "th": "เรื่องสงกรานต์ของฉัน",
+     "target": "square",
+     "go": "Write your Songkran story at the square.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "when": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Everyone is so happy! When is Songkran?",
+      "th": "ทุกคนดูมีความสุขจัง สงกรานต์คือเมื่อไร"
+     },
+     "prompt": {
+      "en": "Tell Alex when Songkran is.",
+      "th": "บอก Alex ว่าสงกรานต์อยู่ช่วงไหน"
+     },
+     "hint": {
+      "en": "Use in with a month: in April.",
+      "th": "ใช้ in กับชื่อเดือน: in April"
+     },
+     "why": {
+      "en": "It's in April. It's Thai New Year. gives the month and what it is",
+      "th": "It's in April. It's Thai New Year. แปลว่า อยู่ในเดือนเมษายน เป็นวันขึ้นปีใหม่ไทย"
+     },
+     "reply": {
+      "en": "Happy New Year!"
+     },
+     "choices": [
+      {
+       "en": "It's in April. It's Thai New Year."
+      },
+      {
+       "en": "It's on April. It's a Christmas."
+      },
+      {
+       "en": "It's at April. It's my birthday."
+      }
+     ],
+     "answer": 0
+    },
+    "sand": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "What did you do at the temple last Songkran?",
+      "th": "สงกรานต์ปีที่แล้วเธอทำอะไรที่วัด"
+     },
+     "prompt": {
+      "en": "Answer about last year. Use the past.",
+      "th": "ตอบเรื่องปีที่แล้ว ใช้รูปอดีต"
+     },
+     "hint": {
+      "en": "Last year = the past: made, poured.",
+      "th": "ปีที่แล้ว = อดีต ใช้ made, poured"
+     },
+     "why": {
+      "en": "We made sand pagodas and poured water on the Buddha images. uses the past simple for last year",
+      "th": "We made sand pagodas and poured water on the Buddha images. แปลว่า เราก่อเจดีย์ทรายและสรงน้ำพระ"
+     },
+     "reply": {
+      "en": "That sounds wonderful."
+     },
+     "choices": [
+      {
+       "en": "We make sand pagodas and pour water every day."
+      },
+      {
+       "en": "We made sand pagodas and poured water on the Buddha images."
+      },
+      {
+       "en": "We will made sand pagodas."
+      }
+     ],
+     "answer": 1
+    },
+    "elders": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "What do young people do for older people at Songkran?",
+      "th": "สงกรานต์คนหนุ่มสาวทำอะไรให้ผู้สูงอายุ"
+     },
+     "prompt": {
+      "en": "Explain the tradition to Alex.",
+      "th": "อธิบายประเพณีให้ Alex ฟัง"
+     },
+     "hint": {
+      "en": "Talk about pouring water on hands and a blessing.",
+      "th": "พูดเรื่องรดน้ำที่มือและขอพร"
+     },
+     "why": {
+      "en": "We pour water on their hands and ask for a blessing. explains the tradition",
+      "th": "We pour water on their hands and ask for a blessing. แปลว่า เรารดน้ำที่มือท่านและขอพร"
+     },
+     "reply": {
+      "en": "I'd like to try that."
+     },
+     "choices": [
+      {
+       "en": "We pour water on their hands and ask for a blessing."
+      },
+      {
+       "en": "We throw water at their faces."
+      },
+      {
+       "en": "We sell water to them."
+      }
+     ],
+     "answer": 0
+    },
+    "wish": {
+     "kind": "order",
+     "speaker": "Grandma",
+     "line": {
+      "en": "Happy Songkran, my dear children!",
+      "th": "สุขสันต์วันสงกรานต์นะหลาน ๆ"
+     },
+     "prompt": {
+      "en": "Wish Grandma a happy Songkran. Put the words in order.",
+      "th": "อวยพรคุณยาย เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Start with Happy …",
+      "th": "ขึ้นต้นด้วย Happy …"
+     },
+     "why": {
+      "en": "Happy Songkran, Grandma! wishes Grandma a happy new year",
+      "th": "Happy Songkran, Grandma! แปลว่า สุขสันต์วันสงกรานต์ค่ะ/ครับคุณยาย"
+     },
+     "reply": {
+      "en": "Thank you. May you be happy and healthy."
+     },
+     "tokens": [
+      "Happy",
+      "Songkran,",
+      "Grandma!"
+     ],
+     "answerText": {
+      "en": "Happy Songkran, Grandma!"
+     }
+    },
+    "splash": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "I got so wet today! What did people do on the street last year?",
+      "th": "วันนี้ฉันเปียกมากเลย ปีที่แล้วผู้คนทำอะไรกันบนถนน"
+     },
+     "prompt": {
+      "en": "Tell Alex about last year.",
+      "th": "เล่าเรื่องปีที่แล้วให้ Alex ฟัง"
+     },
+     "hint": {
+      "en": "Last year → splashed, had.",
+      "th": "ปีที่แล้ว → splashed, had"
+     },
+     "why": {
+      "en": "People splashed water and had a lot of fun. uses the past simple",
+      "th": "People splashed water and had a lot of fun. แปลว่า ผู้คนสาดน้ำและสนุกกันมาก"
+     },
+     "reply": {
+      "en": "It's the same this year!"
+     },
+     "choices": [
+      {
+       "en": "People splash water and have fun tomorrow."
+      },
+      {
+       "en": "People splashed water and had a lot of fun."
+      },
+      {
+       "en": "People are splashed water yesterday."
+      }
+     ],
+     "answer": 1
+    },
+    "yesterday": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Did you play with water yesterday?",
+      "th": "เมื่อวานเธอเล่นน้ำไหม"
+     },
+     "prompt": {
+      "en": "Answer Alex's question.",
+      "th": "ตอบคำถามของ Alex"
+     },
+     "hint": {
+      "en": "A Did you…? question is answered with Yes, I did. or No, I didn't.",
+      "th": "คำถาม Did you…? ตอบด้วย Yes, I did. หรือ No, I didn't."
+     },
+     "why": {
+      "en": "Yes, I did. I played with my friends. answers in the past",
+      "th": "Yes, I did. I played with my friends. แปลว่า เล่นสิ ฉันเล่นกับเพื่อน ๆ"
+     },
+     "reply": {
+      "en": "Let's play together today!"
+     },
+     "choices": [
+      {
+       "en": "Yes, I do. I play with my friends."
+      },
+      {
+       "en": "Yes, I did. I played with my friends."
+      },
+      {
+       "en": "Yes, I am playing tomorrow."
+      }
+     ],
+     "answer": 1
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write your Songkran story: 3 short sentences about last Songkran.",
+     "th": "เขียนเรื่องสงกรานต์ของคุณ 3 ประโยคสั้น ๆ เกี่ยวกับสงกรานต์ปีที่แล้ว"
+    },
+    "fields": [
+     {
+      "id": "when",
+      "label": {
+       "en": "1. Say when Songkran is.",
+       "th": "1. บอกว่าสงกรานต์อยู่ช่วงไหน"
+      },
+      "example": {
+       "en": "Songkran is in April."
+      },
+      "help": {
+       "en": "Use April or Thai New Year. At least 4 words.",
+       "th": "ใช้ April หรือ Thai New Year อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bapril\\b",
+        "\\bnew year\\b"
+       ]
+      }
+     },
+     {
+      "id": "did",
+      "label": {
+       "en": "2. Say what you did last Songkran.",
+       "th": "2. บอกว่าสงกรานต์ที่แล้วคุณทำอะไร"
+      },
+      "example": {
+       "en": "Last year I visited my grandma."
+      },
+      "help": {
+       "en": "Use the past: visited, played, went, made… At least 4 words.",
+       "th": "ใช้รูปอดีต เช่น visited, played, went, made อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\b\\w+ed\\b",
+        "\\b(went|made|had|ate|got|saw|gave|took|met|swam)\\b"
+       ]
+      }
+     },
+     {
+      "id": "feel",
+      "label": {
+       "en": "3. Say how you felt.",
+       "th": "3. บอกว่าคุณรู้สึกอย่างไร"
+      },
+      "example": {
+       "en": "It was a lot of fun."
+      },
+      "help": {
+       "en": "Use was or felt. At least 3 words.",
+       "th": "ใช้ was หรือ felt อย่างน้อย 3 คำ"
+      },
+      "rules": {
+       "minWords": 3,
+       "any": [
+        "\\bwas\\b",
+        "\\bfelt\\b",
+        "\\bwere\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "Songkran is in April.",
+     "th": "สงกรานต์อยู่ในเดือนเมษายน"
+    },
+    {
+     "en": "We poured water on Grandma's hands.",
+     "th": "เรารดน้ำที่มือคุณยาย"
+    },
+    {
+     "en": "People splashed water and had fun.",
+     "th": "ผู้คนสาดน้ำและสนุกกัน"
+    }
+   ]
+  },
+  {
+   "id": "plans",
+   "type": "story",
+   "title": {
+    "en": "Change of Plans",
+    "th": "เปลี่ยนแผนกะทันหัน"
+   },
+   "summary": {
+    "en": "The boat trip is closed and it starts to rain. Change your plans and tell Alex what you did.",
+    "th": "เรือปิดให้บริการและฝนตก เปลี่ยนแผน แล้วเล่าให้ Alex ฟังว่าทำอะไรไปบ้าง"
+   },
+   "stages": [
+    {
+     "id": "closed",
+     "title": "The boat is closed",
+     "subtitle": "At the pier",
+     "th": "เรือปิดให้บริการ",
+     "target": "river",
+     "go": "Go to the pier for the boat trip.",
+     "questions": [
+      "closed",
+      "why"
+     ]
+    },
+    {
+     "id": "instead",
+     "title": "Something else",
+     "subtitle": "At the noodle stall",
+     "th": "ทำอย่างอื่นแทน",
+     "target": "stall",
+     "go": "Go to the noodle stall.",
+     "questions": [
+      "instead",
+      "order"
+     ]
+    },
+    {
+     "id": "rain",
+     "title": "It is raining!",
+     "subtitle": "At the temple",
+     "th": "ฝนตก",
+     "target": "temple",
+     "go": "Run to the temple.",
+     "questions": [
+      "rain",
+      "recount"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My changed plan",
+     "subtitle": "What happened",
+     "th": "แผนที่เปลี่ยนไปของฉัน",
+     "target": "temple",
+     "go": "Write about your day in the temple.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "closed": {
+     "kind": "choice",
+     "speaker": "Boatman",
+     "line": {
+      "en": "Sorry, the boat trip is closed today. The river is too high.",
+      "th": "ขอโทษนะ วันนี้งดนั่งเรือ น้ำในแม่น้ำสูงเกินไป"
+     },
+     "prompt": {
+      "en": "Answer the boatman politely.",
+      "th": "ตอบคนขับเรืออย่างสุภาพ"
+     },
+     "hint": {
+      "en": "Stay calm and polite, then make a new plan.",
+      "th": "ใจเย็นและสุภาพ แล้ววางแผนใหม่"
+     },
+     "why": {
+      "en": "Oh no! That's OK. We can come back tomorrow. is calm and polite",
+      "th": "Oh no! That's OK. We can come back tomorrow. แปลว่า แย่จัง ไม่เป็นไร พรุ่งนี้เรามาใหม่ได้"
+     },
+     "reply": {
+      "en": "Thank you for understanding."
+     },
+     "choices": [
+      {
+       "en": "You are bad! Open the boat now!"
+      },
+      {
+       "en": "Oh no! That's OK. We can come back tomorrow."
+      },
+      {
+       "en": "Yes, the boat is open."
+      }
+     ],
+     "answer": 1
+    },
+    "why": {
+     "kind": "listen",
+     "speaker": "Alex",
+     "line": {
+      "en": "Why is the boat trip closed today?",
+      "th": "ทำไมวันนี้ถึงงดนั่งเรือ"
+     },
+     "prompt": {
+      "en": "Listen to the boatman's reason again. Why is it closed?",
+      "th": "ฟังเหตุผลของคนขับเรืออีกครั้ง ทำไมถึงปิด"
+     },
+     "hint": {
+      "en": "Listen for the word because, or too high.",
+      "th": "ฟังคำว่า because หรือ too high"
+     },
+     "why": {
+      "en": "The boatman said the river is too high",
+      "th": "คนขับเรือบอกว่าน้ำในแม่น้ำสูงเกินไป"
+     },
+     "reply": {
+      "en": "I see. Safety first!"
+     },
+     "choices": [
+      {
+       "en": "Because the river is too high"
+      },
+      {
+       "en": "Because it is Monday"
+      },
+      {
+       "en": "Because the boat is new"
+      }
+     ],
+     "answer": 0
+    },
+    "instead": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "So, what can we do instead?",
+      "th": "แล้วเราจะทำอะไรแทนดี"
+     },
+     "prompt": {
+      "en": "Suggest a new plan.",
+      "th": "เสนอแผนใหม่"
+     },
+     "hint": {
+      "en": "Use Let's … instead.",
+      "th": "ใช้ Let's … instead"
+     },
+     "why": {
+      "en": "Let's eat noodles at the food stall instead. suggests a new plan",
+      "th": "Let's eat noodles at the food stall instead. แปลว่า ไปกินก๋วยเตี๋ยวที่ร้านแทนกันเถอะ"
+     },
+     "reply": {
+      "en": "Good idea. I'm hungry!"
+     },
+     "choices": [
+      {
+       "en": "Let's eat noodles at the food stall instead."
+      },
+      {
+       "en": "Let's taking a boat now."
+      },
+      {
+       "en": "Let we go home instead."
+      }
+     ],
+     "answer": 0
+    },
+    "order": {
+     "kind": "choice",
+     "speaker": "Vendor",
+     "line": {
+      "en": "Hello! What would you like?",
+      "th": "สวัสดีจ้ะ รับอะไรดี"
+     },
+     "prompt": {
+      "en": "Order noodles for you and Alex.",
+      "th": "สั่งก๋วยเตี๋ยวให้คุณและ Alex"
+     },
+     "hint": {
+      "en": "Can I have …, please? is a polite way to order.",
+      "th": "Can I have …, please? เป็นวิธีสั่งอาหารที่สุภาพ"
+     },
+     "why": {
+      "en": "Can I have two bowls of noodles, please? orders politely",
+      "th": "Can I have two bowls of noodles, please? แปลว่า ขอก๋วยเตี๋ยวสองชามค่ะ/ครับ"
+     },
+     "reply": {
+      "en": "Two bowls of noodles. Coming up!"
+     },
+     "choices": [
+      {
+       "en": "Give me noodle!"
+      },
+      {
+       "en": "Can I have two bowls of noodles, please?"
+      },
+      {
+       "en": "I have two noodles yesterday."
+      }
+     ],
+     "answer": 1
+    },
+    "rain": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Oh no, it's raining! Where can we go?",
+      "th": "แย่แล้ว ฝนตก เราจะไปที่ไหนดี"
+     },
+     "prompt": {
+      "en": "Suggest a dry place.",
+      "th": "เสนอที่หลบฝน"
+     },
+     "hint": {
+      "en": "Use Let's … and give a reason.",
+      "th": "ใช้ Let's … และให้เหตุผล"
+     },
+     "why": {
+      "en": "Let's go inside the temple. It's dry there. suggests a place and gives a reason",
+      "th": "Let's go inside the temple. It's dry there. แปลว่า เข้าไปในวัดกันเถอะ ข้างในไม่เปียก"
+     },
+     "reply": {
+      "en": "Run!"
+     },
+     "choices": [
+      {
+       "en": "Let's go inside the temple. It's dry there."
+      },
+      {
+       "en": "Let's swim in the river."
+      },
+      {
+       "en": "It is raining yesterday."
+      }
+     ],
+     "answer": 0
+    },
+    "recount": {
+     "kind": "order",
+     "speaker": "Alex",
+     "line": {
+      "en": "This was a great day! What did we do today?",
+      "th": "วันนี้สนุกมาก วันนี้เราทำอะไรไปบ้าง"
+     },
+     "prompt": {
+      "en": "Tell what you did today. Put the words in order.",
+      "th": "เล่าว่าวันนี้ทำอะไรไปบ้าง เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Use the past: ate, visited.",
+      "th": "ใช้รูปอดีต: ate, visited"
+     },
+     "why": {
+      "en": "We ate noodles and visited the temple. recounts the day in the past simple",
+      "th": "We ate noodles and visited the temple. แปลว่า เรากินก๋วยเตี๋ยวและไปวัด"
+     },
+     "reply": {
+      "en": "Let's take the boat tomorrow!"
+     },
+     "tokens": [
+      "We",
+      "ate",
+      "noodles",
+      "and",
+      "visited",
+      "the",
+      "temple."
+     ],
+     "answerText": {
+      "en": "We ate noodles and visited the temple."
+     }
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write about a day when your plans changed: 3 short sentences.",
+     "th": "เขียนเรื่องวันที่แผนของคุณเปลี่ยนไป 3 ประโยคสั้น ๆ"
+    },
+    "fields": [
+     {
+      "id": "plan",
+      "label": {
+       "en": "1. Say what you wanted to do.",
+       "th": "1. บอกว่าตั้งใจจะทำอะไร"
+      },
+      "example": {
+       "en": "We wanted to take a boat."
+      },
+      "help": {
+       "en": "Use wanted to or planned to. At least 4 words.",
+       "th": "ใช้ wanted to หรือ planned to อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bwanted to\\b",
+        "\\bplanned to\\b",
+        "\\bwere going to\\b"
+       ]
+      }
+     },
+     {
+      "id": "problem",
+      "label": {
+       "en": "2. Say what happened.",
+       "th": "2. บอกว่าเกิดอะไรขึ้น"
+      },
+      "example": {
+       "en": "But the river was too high."
+      },
+      "help": {
+       "en": "Use but or because. At least 4 words.",
+       "th": "ใช้ but หรือ because อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bbut\\b",
+        "\\bbecause\\b"
+       ]
+      }
+     },
+     {
+      "id": "instead",
+      "label": {
+       "en": "3. Say what you did instead.",
+       "th": "3. บอกว่าทำอะไรแทน"
+      },
+      "example": {
+       "en": "So we ate noodles instead."
+      },
+      "help": {
+       "en": "Use instead or so. At least 4 words.",
+       "th": "ใช้ instead หรือ so อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\binstead\\b",
+        "\\bso\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "That's OK. We can come back tomorrow.",
+     "th": "ไม่เป็นไร พรุ่งนี้เรามาใหม่ได้"
+    },
+    {
+     "en": "Let's eat noodles instead.",
+     "th": "ไปกินก๋วยเตี๋ยวแทนกันเถอะ"
+    },
+    {
+     "en": "We ate noodles and visited the temple.",
+     "th": "เรากินก๋วยเตี๋ยวและไปวัด"
+    }
+   ]
+  }
+ ]
+}

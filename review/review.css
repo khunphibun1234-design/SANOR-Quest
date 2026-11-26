@@ -1,0 +1,16 @@
+/* Daily Review. Builds on ../school/school.css and ../shared/tokens.css */
+.review-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1rem}
+.review-stats div{display:grid;gap:.1rem;padding:.8rem;border-radius:var(--radius-s);background:var(--tint)}
+.review-stats strong{font:800 1.8rem/1 var(--display)}
+.review-stats span{font-size:.85rem}
+.review-top{display:flex;align-items:center;gap:.8rem}
+.timer{flex:1;height:8px;border-radius:var(--pill);background:var(--tint);overflow:hidden}
+.timer i{display:block;height:100%;width:100%;background:var(--gold);transition:width 1s linear}
+#clock{font:700 1rem var(--display);min-width:3em;text-align:right}
+#question{font-size:clamp(1.4rem,4vw,2rem)}
+#question .blank{display:inline-block;min-width:3.5em;border-bottom:3px solid var(--gold)}
+#feedback:empty{display:none}
+#feedback .th{display:block;font-weight:500}
+#feedback .example{display:block;color:var(--ink-soft);font-weight:500}
+@media(max-width:30rem){.review-stats{grid-template-columns:1fr}}
+#startNote .th{display:block}

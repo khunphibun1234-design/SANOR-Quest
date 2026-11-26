@@ -1,0 +1,18 @@
+const {test,expect}=require('@playwright/test');const {load,memoryStorage}=require('./load');
+test('XP keeps the best score per activity and adds up across worlds',()=>{const {SanorProfile:P}=load('shared/profile.js');
+  P.record('01','welcome',{xp:100});P.record('01','welcome',{xp:40});P.record('01','table',{xp:60});P.record('02','buddy',{xp:20,done:true});
+  expect([P.mapXp('01'),P.mapXp('02'),P.totalXp(),P.activity('02','buddy').done]).toEqual([160,20,180,true]);});
+test('stamps are kept once and ids are cleaned',()=>{const {SanorProfile:P}=load('shared/profile.js');
+  expect(P.record('02','buddy',{stamps:[{id:'Gate',icon:'🚪'}]})).toBe(true);
+  expect(P.record('02','buddy',{stamps:[{id:'gate',icon:'🚪'}]})).toBe(false);
+  P.record('02','buddy',{stamps:[{id:'living room!'}]});
+  expect(P.stamps('02').map(s=>s.id)).toEqual(['gate','living-room-']);});
+test('unknown worlds are refused',()=>{const {SanorProfile:P}=load('shared/profile.js');expect(()=>P.record('99','x',{xp:1})).toThrow(/Unknown world/);});
+test('levels decide the Thai help mode',()=>{const {SanorProfile:P}=load('shared/profile.js');
+  expect(P.thaiMode()).toBe('show');P.setLevel('explorer');expect(P.thaiMode()).toBe('tap');P.setLevel('challenger');expect(P.thaiMode()).toBe('hide');
+  P.setLevel('wizard');expect(P.level()).toBe('challenger');});
+test('the profile is saved and loaded from storage',()=>{const storage=memoryStorage();
+  const a=load('shared/profile.js',{storage}).SanorProfile;a.setName('  Mook  ');a.record('02','buddy',{xp:60});
+  const b=load('shared/profile.js',{storage}).SanorProfile;expect([b.name(),b.totalXp()]).toEqual(['Mook',60]);});
+test('th() escapes text so content can never inject HTML',()=>{const {SanorProfile:P}=load('shared/profile.js');
+  expect(P.th('<img src=x onerror=alert(1)>')).toBe('<span class="th" lang="th">&lt;img src=x onerror=alert(1)&gt;</span>');});

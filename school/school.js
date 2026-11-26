@@ -1,24 +1,49 @@
 'use strict';
-const rounds = [
-  ['gate','Meet me at the school entrance. Where should I wait?','The entrance to the school',['gym','stage'],'🚪'],
-  ['classroom','Where do we have our English lesson?','A room where students have lessons',['canteen','library'],'🏫'],
-  ['timetable','What shows the time of each lesson?','A list of lessons and their times',['notebook','pencil'],'📅'],
-  ['library','I want to borrow a book. Where can we go?','A place to borrow books',['gym','canteen'],'📚'],
-  ['librarian','Who can help me borrow this book?','The person who helps you borrow books',['coach','singer'],'🧑‍🏫'],
-  ['canteen','I am hungry. Where can we buy lunch at school?','A place to buy lunch at school',['stage','classroom'],'🍽️'],
-  ['gym','Where can we play basketball indoors?','An indoor place to play sports',['library','garden'],'🏀'],
-  ['music','What do I like? I love singing and playing the guitar.','What you hear when someone sings or plays an instrument',['science','art'],'🎵'],
-  ['club','I want to join a group that sings after school. Is there a music ___?','A group of students who share an interest',['gate','desk'],'🎸'],
-  ['stage','Our club has a concert! Where should I stand so everyone can see me sing?','A place to stand and perform for an audience',['canteen','library'],'🎤']
-];
+// Map 02 · School Buddy. Each round: Alex says a line, the player picks the English word.
+// Thai help (line, hint, feedback) follows the player's level from SanorProfile.
+// Content: content/worlds/02-school.json (mission "buddy"). Thai words come from content/words.json.
+const SQ = window.SQContent;
+const MISSION = SQ.worlds['02'].missions.find(m => m.id === 'buddy');
+// the 2D quick practice shares the school card with the 3D mission "Show Your Friend Around"
+const CARD = MISSION.card || SQ.worlds['02'].missions.find(m => m.id === 'tour').card;
+const rounds = MISSION.questions.map(q => ({
+  word: q.word, icon: q.icon, th: (SQ.words.find(w => w.id === q.word) || {}).th || '',
+  choices: q.choices.map(c => c.en), line: q.line.en, lineTh: q.line.th, hint: q.hint.en, hintTh: q.hint.th
+}));
+const P = window.SanorProfile, XP = P.XP, th = P.th, esc = P.esc;
 const el = id => document.getElementById(id);
 let index, results;
 el('art').innerHTML = QuestArt.miniature(1);
+P.mountLevelButton(el('barTools'));
+addEventListener('load', () => window.SQPwa && SQPwa.cacheWorld('02'));
+P.track('02', 'buddy');
+const paintXp = () => { el('totalXp').textContent = P.totalXp(); };
+P.onChange(paintXp); paintXp();
+SQCoach.mount();
+let card = null, speech = null;
+
+// Profile: 20 XP per word Alex learns with you, +100 for finishing; stamps stay in the passport.
+function report(done=false) {
+  const earned = results.map((r,i) => r.done ? rounds[i] : null).filter(Boolean);
+  P.record('02', 'buddy', {
+    xp: earned.length * XP.step + (done ? XP.bonus : 0),
+    stamps: earned.map(r => ({id: r.word, label: r.word, icon: r.icon})),
+    done
+  });
+}
 function updatePass() {
   const earned = results.filter(r => r.done);
-  el('stamps').textContent = earned.map((r,i) => rounds[i][4]).join(' ') || 'No stamps yet';
+  el('stamps').textContent = earned.map((r,i) => rounds[i].icon).join(' ') || 'No stamps yet';
+  el('passBar').style.width = earned.length / rounds.length * 100 + '%';
   el('place').textContent = earned.length === rounds.length ? 'Alex is ready for the stage' : earned.length ? 'Stamps for Alex · '+earned.length+' / 10' : 'First day at school';
 }
+function updateCrowd() {
+  const n = results.filter((r, i) => r.first === rounds[i].word && !r.hintBeforeFirst).length;
+  el('crowd').textContent = '🧑‍🎓'.repeat(n) || '·';
+  el('crowdText').innerHTML = n ? esc(n + (n === 1 ? ' friend is' : ' friends are') + ' coming to Alex’s concert!') + th('คำตอบของคุณชวนเพื่อนมาดูคอนเสิร์ตของ Alex ได้ ' + n + ' คน')
+    : esc('Answer on the first try to bring friends to the concert.') + th('ตอบถูกตั้งแต่ครั้งแรก เพื่อชวนเพื่อนมาดูคอนเสิร์ต');
+}
+function say(en, thText) { el('message').innerHTML = esc(en) + th(thText); }
 function restart() {
   el('studentForm').reset();
   updatePrintedStudent();
@@ -26,60 +51,91 @@ function restart() {
   results = rounds.map(() => ({first:'', attempts:0, hint:false, done:false}));
   el('play').hidden = false;
   el('report').hidden = true;
+  el('finale').hidden = true;
+  card = null; speech = null;
   updatePass();
+  updateCrowd();
   showRound();
 }
 function showRound() {
   QuestVoice.stop();
-  const [word,line,,others] = rounds[index];
+  const r = rounds[index];
   el('count').textContent = 'Mission '+(index+1)+' / '+rounds.length;
-  el('line').textContent = line;
-  el('clue').textContent = el('message').textContent = '';
+  P.step('02', 'buddy', r.word, 'open');
+  el('line').textContent = r.line;
+  el('lineTh').textContent = r.lineTh;
+  el('lineTh').classList.remove('open');
+  el('clue').hidden = true;
+  el('message').textContent = '';
   el('next').hidden = true;
   el('hint').disabled = false;
-  const options = [...others];
-  options.splice((index+1)%3,0,word);
-  el('choices').replaceChildren(...options.map(answer => {
-    const button = document.createElement('button');
-    button.textContent = answer;
-    button.lang = 'en';
-    button.onclick = () => {
-      const result = results[index];
-      result.attempts++;
-      if (!result.first) result.first = answer;
-      button.disabled = true;
-      if (answer !== word) {
-        el('message').textContent = 'Listen to Alex again and choose another word.';
-        return;
-      }
-      result.done = true;
-      button.classList.add('correct');
-      for (const other of el('choices').children) other.disabled = true;
+  const options = r.choices;
+  // Answer buttons come from the shared mission player (shared/mission.js).
+  SQMission.render(el('choices'), {kind:'choice', choices:options, answer:options.indexOf(r.word)}, {
+    support: P.support(), showHint: () => el('hint').click(),
+    onPick(value) { const result = results[index]; result.attempts++; if (!result.first) { result.first = options[value]; result.hintBeforeFirst = result.hint; const ok = options[value] === r.word; SanorSRS.record(r.word, {correct: ok, hint: result.hint}); P.logAnswer(ok && !result.hint, {world: '02', activity: 'buddy', item: r.word, label: r.word, correct: ok, hint: result.hint}); updateCrowd(); } },
+    onResult({correct}) {
+      if (!correct) { say('Listen to Alex again and choose another word.', 'ลองฟัง Alex อีกครั้ง แล้วเลือกคำอื่นนะ'); return; }
+      results[index].done = true;
+      P.step('02', 'buddy', r.word, 'done');
       el('hint').disabled = true;
       updatePass();
-      el('message').textContent = 'Correct! Alex earned a stamp for '+word+' '+rounds[index][4];
+      report(false);
+      say('Correct! Alex earned a stamp for '+r.word+' '+r.icon+'  +'+XP.step+' XP', 'ถูกต้อง! "'+r.word+'" แปลว่า '+r.th);
       el('next').hidden = false;
       el('next').textContent = index === rounds.length-1 ? 'See my results' : 'Continue';
       el('next').focus();
-    };
-    return button;
-  }));
+    }
+  });
 }
-el('hint').onclick = () => {results[index].hint = true; el('clue').textContent = rounds[index][2];};
-el('listen').onclick = () => QuestVoice.play(rounds[index][1], message => {el('message').textContent=message;});
+el('hint').onclick = () => {
+  const r = rounds[index];
+  results[index].hint = true;
+  el('clue').innerHTML = '<b>Hint:</b> ' + esc(r.hint) + th(r.hintTh);
+  el('clue').hidden = false;
+};
+el('listen').onclick = () => QuestVoice.play(rounds[index].line, message => { el('message').textContent = message; });
 el('next').onclick = () => {
-  if (++index < rounds.length) {showRound(); el('listen').focus(); return;}
+  if (++index < rounds.length) { showRound(); el('listen').focus(); return; }
   QuestVoice.stop();
+  finale();
+};
+// After the 10 words: one speaking task and the school card (shared/voice.js, shared/writing.js), then the report.
+function finale() {
+  el('play').hidden = true;
+  el('finale').hidden = false;
+  el('cardTitle').textContent = CARD.title.en;
+  el('cardTitleTh').textContent = CARD.title.th;
+  SQVoice.mount(el('speakBox'), {target: MISSION.speak.target, prompt: MISSION.speak.prompt, onDone(r) {
+    speech = r; P.recordSpeech('02', MISSION.speak.id, r);
+  }});
+  card = SQWriting.mount(el('writeBox'), CARD, {prefix: 'school-', onExample() { card.usedExample = true; }});
+  el('finale').querySelector('h2').focus();
+}
+el('finishSchool').onclick = () => {
+  const bad = card.check();
+  if (bad.length) { card.showErrors(bad); el('finaleMsg').innerHTML = esc('Complete the boxes with an orange border.') + th('เขียนช่องที่มีกรอบสีส้มให้ครบ'); return; }
+  showReport();
+};
+function showReport() {
+  report(true);
+  el('finale').hidden = true;
   el('play').hidden = true;
   el('report').hidden = false;
-  el('score').textContent = 'Correct on the first try '+results.filter((r,i)=>r.first===rounds[i][0]).length+' / 10 words';
+  el('score').textContent = 'Correct on the first try '+results.filter((r,i)=>r.first===rounds[i].word).length+' / 10 words';
   el('rows').replaceChildren(...results.map((r,i) => {
     const row = document.createElement('tr');
-    for (const value of [rounds[i][0],r.first,r.attempts,r.hint?'Used':'–']) row.insertCell().textContent = value;
+    [rounds[i].word, rounds[i].th, r.first, r.attempts, r.hint?'Used':'–'].forEach((value, k) => {
+      const cell = row.insertCell(); cell.textContent = value; if (k === 1) cell.lang = 'th';
+    });
     return row;
   }));
+  const v = card.values();
+  el('cardOut').innerHTML = '<h3>' + esc(CARD.title.en) + '</h3>' + CARD.fields.map(f => '<p>' + esc(v[f.id]) + '</p>').join('') + (card.usedExample ? '<p class="note">Used a writing example</p>' : '');
+  el('speechOut').textContent = 'Speaking: “' + MISSION.speak.target.en + '” · ' + ({asr: 'said it (checked by the microphone)', self: 'said it (self-check)', skip: 'skipped', 'not-yet': 'not yet'}[speech ? (speech.mode === 'skip' ? 'skip' : !speech.passed ? 'not-yet' : speech.mode) : 'skip']);
+  SQFeedback.mount(el('feedbackBox'), {world: '02', activity: 'buddy'});
   el('report').querySelector('h2').focus();
-};
+}
 el('again').onclick = restart;
 const studentForm = el('studentForm');
 function updatePrintedStudent() {

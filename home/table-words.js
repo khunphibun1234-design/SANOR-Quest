@@ -1,2 +1,9 @@
-window.AlexTableWords = [
-['garden','Show me the garden.','Garden','🌳','A place to grow plants'],['bedroom','Where is the bedroom?','Bedroom','🛏️','A room with a bed'],['kitchen','Take me to the kitchen, please.','Kitchen','🍳','A room for cooking'],['table','We need a table for lunch.','Table','','A piece of furniture where you put your meal'],['plate','Put a plate on the table.','Plate','🍽️','A flat dish for food'],['fork','Put a fork on the plate.','Fork','🍴','You use its pointed ends to pick up food'],['bowl','Place a bowl beside my plate.','Bowl','🥣','A deep dish for soup'],['spoon','Put a spoon next to the bowl.','Spoon','🥄','You use it to eat soup'],['glass','Bring me an empty glass.','Glass','🥛','A container you drink from'],['water','Pour some water into my glass.','Water','💧','A drink you can pour into a glass']];
+/* Alex's Table content adapter. The content lives in content/worlds/01-home.json (mission "table").
+ * AlexTableWords: [word, Alex's line, label, emoji, English hint, Thai word, Thai line, Thai hint]
+ * AlexTableOptions[i]: the three choices shown for item i, as item indexes. */
+(function(root){'use strict';
+const SQ=root.SQContent,items=SQ.worlds['01'].missions.find(m=>m.id==='table').items;
+const wordTh=id=>(SQ.words.find(w=>w.id===id)||{}).th||'';
+root.AlexTableWords=items.map(it=>[it.word,it.line.en,it.label,it.emoji,it.hint.en,wordTh(it.word),it.line.th,it.hint.th]);
+root.AlexTableOptions=items.map(it=>it.choices.map(c=>items.findIndex(x=>x.word===c)));
+})(typeof window!=='undefined'?window:globalThis);
