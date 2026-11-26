@@ -1,0 +1,6 @@
+{
+ "note": "Where each part of docs/video/narration-th.mp3 starts (seconds). Found from the pauses in the recording; one entry per row of docs/video-script.md. If the narration is recorded again, update these numbers (see docs/video-script.md).",
+ "audio": "docs/video/narration-th.mp3",
+ "end": 121.08,
+ "starts": [0, 5.59, 16.56, 21.35, 25.74, 34.3, 36.95, 43.79, 54.03, 59.14, 64.75, 70.2, 78.02, 83.77, 92.78, 98.06, 102.56, 109.43]
+}
