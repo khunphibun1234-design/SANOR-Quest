@@ -1,0 +1,12 @@
+.lead{color:var(--muted);margin:.2rem 0 .8rem}
+h2{margin:1.8rem 0 .5rem;font-size:1.25rem}h2 small{font-weight:500;font-size:.8rem;color:var(--muted)}
+.bar-tools a{color:var(--green);font-weight:600}
+.criteria{list-style:none;padding:0;margin:0;display:grid;gap:.45rem}
+.criteria li{display:grid;grid-template-columns:2rem 1fr auto;gap:.6rem;align-items:center;padding:.65rem .9rem;border-radius:var(--radius-s);background:var(--card);border:1px solid var(--line)}
+.criteria li b{font-size:1.1rem}.criteria li span{color:var(--ink-soft);font-size:.88rem}
+.criteria li.ok{border-color:#b9dcc2}.criteria li.no{border-color:#f0c9bf}
+td.num,th.num{text-align:right}tr.school td{font-weight:700;background:#f8f8f1}
+#errors .empty{margin:0}
+dialog{max-width:40rem;border:0;border-radius:var(--radius);padding:1.4rem;box-shadow:var(--shadow)}
+dialog label{display:grid;gap:.3rem;font-weight:600}
+dialog pre{max-height:14rem;overflow:auto;font-size:.75rem;background:#f3f4ec;padding:.7rem;border-radius:var(--radius-s);white-space:pre-wrap}

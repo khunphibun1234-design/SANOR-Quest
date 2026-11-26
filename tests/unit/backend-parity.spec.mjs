@@ -4,10 +4,10 @@ import {test,expect} from '@playwright/test';import {freshDb} from './db-harness
 const require=createRequire(import.meta.url);const {load,memoryStorage}=require('./load.js');
 const T1='33333333-3333-3333-3333-333333333333';
 function demoBackend(){const sb=load(['shared/backend.js'],{storage:memoryStorage()});return sb.SQBackend;}
-async function sqlBackend(){const h=await freshDb();await h.teacher(T1);
+async function sqlBackend(){const h=await freshDb();await h.teacher(T1);await h.db.query('insert into public.coordinators(id) values ($1)',[T1]);
   const rpc=async(who,fn,args)=>{const ph=args.map((_,i)=>'$'+(i+1)).join(',');try{return (await h.as(who,`select ${fn}(${ph}) as r`,args))[0].r;}catch(e){const m=/[a-z_]+/.exec(e.message.replace(/^.*?:\s*/,''));throw new Error(['class_not_found','wrong_pin','locked','bad_token','bad_pin_format','bad_number','bad_nickname','not_your_class','bad_batch'].find(c=>e.message.includes(c))||e.message);}};
   return{mode:'sql',student:{join:(c,n,nick,pin)=>rpc('anon','join_class',[c,n,nick,pin]),settings:t=>rpc('anon','class_settings',[t]),submit:(t,ev)=>rpc('anon','submit_events',[t,JSON.stringify(ev)]),deleteMe:t=>rpc('anon','delete_me',[t])},
-   teacher:{classes:()=>rpc(T1,'my_classes',[]),createClass:n=>rpc(T1,'create_class',[n]),updateClass:(id,o)=>rpc(T1,'update_class',[id,o.name??null,o.worlds??null,o.thai??null,o.tests??null]),
+   teacher:{networkReport:()=>rpc(T1,'network_report',[]),amCoordinator:()=>rpc(T1,'am_coordinator',[]),classes:()=>rpc(T1,'my_classes',[]),createClass:n=>rpc(T1,'create_class',[n]),updateClass:(id,o)=>rpc(T1,'update_class',[id,o.name??null,o.worlds??null,o.thai??null,o.tests??null]),
     report:id=>rpc(T1,'class_report',[id]),studentDetail:id=>rpc(T1,'student_detail',[id]),resetPin:(id,p)=>rpc(T1,'reset_student_pin',[id,p]),removeStudent:id=>rpc(T1,'remove_student',[id]),deleteClass:id=>rpc(T1,'delete_class',[id]),pilotReport:id=>rpc(T1,'pilot_report',[id]),addNote:(id,w,n)=>rpc(T1,'add_teacher_note',[id,w,n]),pilotEvents:id=>rpc(T1,'pilot_events',[id])}};}
 async function scenario(B){const out={};const c=await B.teacher.createClass('M.2/5');
   const a=await B.student.join(c.code,1,'Ploy','1234'),b=await B.student.join(c.code,2,'Mook','5678');
@@ -24,6 +24,7 @@ async function scenario(B){const out={};const c=await B.teacher.createClass('M.2
   out.settings=await B.student.settings(a.token);delete out.settings.code;
   const r=await B.teacher.report(c.id);out.students=r.students.map(s=>({number:s.number,nickname:s.nickname,xp:s.xp,answers:s.answers,firstTry:s.firstTry,hints:s.hints,spoken:s.spoken,pre:s.pre,post:s.post,progress:s.progress}));out.missed=r.missed;
   const d=await B.teacher.studentDetail(r.students[0].id);out.detail=d.events.map(e=>[e.kind,e.item,e.firstTry,e.hint,e.result]).sort();
+  out.coordinator=await B.teacher.amCoordinator();out.network=(await B.teacher.networkReport()).map(({school,created,...x})=>x);
   await B.teacher.resetPin(r.students[0].id,'9999');try{await B.student.settings(a.token);out.afterReset='ok';}catch(e){out.afterReset=e.message;}
   await B.teacher.removeStudent(r.students[1].id);out.after=(await B.teacher.report(c.id)).students.map(s=>s.number);
   out.classes=(await B.teacher.classes()).map(x=>({name:x.className,students:x.students}));

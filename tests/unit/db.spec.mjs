@@ -5,7 +5,7 @@ async function setup(){const h=await freshDb();await h.teacher(T1);await h.teach
   const c1=await rpc(h,T1,'create_class',['M.2/5']);const c2=await rpc(h,T2,'create_class',['M.2/6']);return {h,c1,c2};}
 
 test('a teacher creates a class with a 6-character code',async()=>{const {c1}=await setup();
-  expect(c1.code).toMatch(/^[A-HJ-NP-Z2-9]{6}$/);expect(c1).toMatchObject({className:'M.2/5',worldsOpen:['01','02'],thaiLevel:null,testsOpen:['pre']});});
+  expect(c1.code).toMatch(/^[A-HJ-NP-Z2-9]{6}$/);expect(c1).toMatchObject({className:'M.2/5',worldsOpen:['01','02','03','04','05','06'],thaiLevel:null,testsOpen:['pre']});});
 
 test('students join with code + number + nickname + PIN; the same PIN signs in again; a wrong PIN does not',async()=>{const {h,c1}=await setup();
   const j=await rpc(h,'anon','join_class',[c1.code.toLowerCase(),7,' Ploy ','1234']);

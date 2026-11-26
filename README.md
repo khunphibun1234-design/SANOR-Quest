@@ -11,6 +11,8 @@
 | Map 04 · Market & Food Street (3D) · 3 ภารกิจ | `market/` |
 | Map 05 · Around the World (3D) · 3 ภารกิจ | `travel/` |
 | Map 06 · Future Makers City (3D) · 3 ภารกิจ | `future/` |
+| หน้าเว็บสำหรับครูและผู้บริหารโรงเรียน | `schools/` (ผลการทดลอง: `schools/results.js`) |
+| ผลการทดลองทุกโรงเรียน (ผู้ประสานงาน) | `research/` |
 | ทบทวนประจำวัน 3 นาที | `review/` |
 | แบบทดสอบก่อน/หลังเรียน | `test/?kind=pre` · `test/?kind=post` (ข้อสอบ: `content/tests.json`) |
 | **แดชบอร์ดครู** | `teacher/` (แท็บ "การทดลอง": เวลาเล่น จุดที่ติด ความเห็น สถิติก่อน/หลัง) · แบบสังเกต `teacher/observation.html` · แผนทดลอง `docs/PILOT-PLAN.md` |
@@ -24,7 +26,11 @@
 ## ระบบห้องเรียน
 นักเรียนกด **🏫 Join my class** แล้วใส่รหัสห้อง + เลขที่ + ชื่อเล่น + PIN 4 หลัก (ถ้าไม่เข้าห้องก็ยังเล่นได้ตามปกติ)
 ผลการเล่นเก็บในเครื่องก่อน แล้วส่งขึ้นเซิร์ฟเวอร์เมื่อมีอินเทอร์เน็ต (`shared/sync.js`)
-ฐานข้อมูลคือ Supabase (`supabase/migrations/`) ดูวิธีตั้งค่าใน **`docs/SETUP-SUPABASE.md`** ถ้ายังไม่ตั้งค่า ระบบจะทำงานใน **โหมดทดลอง** ซึ่งเก็บข้อมูลในเบราว์เซอร์
+ฐานข้อมูลคือ Supabase (`supabase/migrations/` · โปรเจกต์ใหม่วาง `supabase/setup.sql` ครั้งเดียว) ดูวิธีตั้งค่าใน **`docs/SETUP-SUPABASE.md`** ถ้ายังไม่ตั้งค่า ระบบจะทำงานใน **โหมดทดลอง** ซึ่งเก็บข้อมูลในเบราว์เซอร์
+
+## เปิดใช้งานจริง
+- **`docs/LAUNCH.md`:** ตั้งโดเมน (`node scripts/set-domain.js <โดเมน>`) · ระบบแจ้งเตือน error (`shared/errors.js` + `.github/workflows/health.yml` เปิด GitHub issue เมื่อมีปัญหา · ตรวจเองด้วย `npm run health`) · ผู้ประสานงาน (`research/`)
+- **`docs/PILOT-ROUND2.md`:** ทดลองรอบ 2 ใน 3–5 โรงเรียน และเกณฑ์ตัดสินใจเปิดใช้งาน
 
 ## เนื้อหา
 เนื้อหาทั้งหมดอยู่ใน `content/` (JSON) ดูวิธีแก้ใน `content/README.md` · บทอัดเสียงอยู่ใน `docs/audio/`

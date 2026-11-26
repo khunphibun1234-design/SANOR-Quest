@@ -4,12 +4,14 @@
  *   SQBackend.student.settings(token) → settings          SQBackend.student.submit(token, events) → count
  *   SQBackend.teacher.signUp / signIn / signOut / session / classes / createClass / updateClass / report /
  *                     studentDetail / resetPin / removeStudent
+ *   SQBackend.teacher.amCoordinator / networkReport / recentErrors(days)   (project leads only: no names, counts only)
+ *   SQBackend.reportErrors([{page,message,source,version,agent}])        (no sign-in; shared/errors.js)
  * Errors are thrown as Error(code), e.g. 'class_not_found', 'wrong_pin', 'locked', 'bad_token', 'offline'.
  * Both implementations follow the same rules as supabase/migrations/*.sql (tests check this). */
 (function(root){'use strict';
 const cfg=root.SQ_CONFIG||{},LS=root.localStorage;
 const read=(k,d)=>{try{const v=JSON.parse(LS.getItem(k));return v??d;}catch{return d;}},write=(k,v)=>{try{LS.setItem(k,JSON.stringify(v));}catch{}};
-const ERRORS=['class_not_found','wrong_pin','locked','bad_token','bad_pin_format','bad_number','bad_nickname','not_signed_in','not_your_class','bad_batch','invalid_credentials','email_taken','weak_password'];
+const ERRORS=['class_not_found','wrong_pin','locked','bad_token','bad_pin_format','bad_number','bad_nickname','not_signed_in','not_your_class','bad_batch','invalid_credentials','email_taken','weak_password','not_coordinator','bad_key'];
 const fail=code=>{throw new Error(code);};
 
 // ---------------------------------------------------------------- Supabase (REST + RPC)
@@ -34,11 +36,13 @@ function supabase(){const url=cfg.supabaseUrl.replace(/\/$/,''),key=cfg.supabase
    updateClass:(id,o)=>t('update_class',{p_class:id,p_name:o.name??null,p_worlds:o.worlds??null,p_thai:o.thai??null,p_tests:o.tests??null}),
    report:id=>t('class_report',{p_class:id}),studentDetail:id=>t('student_detail',{p_student:id}),
    resetPin:(id,pin)=>t('reset_student_pin',{p_student:id,p_pin:pin}),removeStudent:id=>t('remove_student',{p_student:id}),deleteClass:id=>t('delete_class',{p_class:id}),
-   pilotReport:id=>t('pilot_report',{p_class:id}),addNote:(id,week,note)=>t('add_teacher_note',{p_class:id,p_week:week,p_note:note}),pilotEvents:id=>t('pilot_events',{p_class:id})}};}
+   pilotReport:id=>t('pilot_report',{p_class:id}),addNote:(id,week,note)=>t('add_teacher_note',{p_class:id,p_week:week,p_note:note}),pilotEvents:id=>t('pilot_events',{p_class:id}),
+   amCoordinator:()=>t('am_coordinator'),networkReport:()=>t('network_report'),recentErrors:days=>t('recent_errors',{p_days:days})},
+  reportErrors:list=>rpc('report_error',{p_errors:list})};}
 
 // ---------------------------------------------------------------- demo (this browser only)
 function demo(){const KEY='sanor-demo-db-v1';
- const db=()=>{const d=read(KEY,null)||{classes:[],students:[],sessions:{},progress:[],events:[],tests:[]};d.feedback=d.feedback||[];d.notes=d.notes||[];return d;};
+ const db=()=>{const d=read(KEY,null)||{classes:[],students:[],sessions:{},progress:[],events:[],tests:[]};d.feedback=d.feedback||[];d.notes=d.notes||[];d.errors=d.errors||[];return d;};
  const tx=f=>{const d=db();const r=f(d);write(KEY,d);return Promise.resolve(JSON.parse(JSON.stringify(r??null)));};
  const uid=()=>([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^Math.random()*16>>c/4).toString(16));
  const hash=s=>{let h=2166136261;for(const ch of s){h^=ch.charCodeAt(0);h=Math.imul(h,16777619);}return(h>>>0).toString(16);};
@@ -98,7 +102,29 @@ function demo(){const KEY='sanor-demo-db-v1';
      feedback:d.feedback.filter(f=>d.students.some(s=>s.id===f.student_id&&s.class_id===id)).sort((a,b)=>b.at.localeCompare(a.at)).map(f=>({world:f.world,activity:f.activity,fun:f.fun,easy:f.easy,learned:f.learned,comment:f.comment,number:num(f.student_id),at:f.at})),
      notes:d.notes.filter(n=>n.class_id===id).sort((a,b)=>b.at.localeCompare(a.at)).map(n=>({week:n.week,note:n.note,at:n.at}))};}),
    addNote:T((d,id,week,note)=>{own(d,id);d.notes.push({class_id:id,week:+week,note:String(note).trim().slice(0,2000),at:new Date().toISOString()});}),
-   pilotEvents:T((d,id)=>{own(d,id);return d.events.filter(e=>e.class_id===id).slice(-20000).reverse().map(e=>({number:(d.students.find(s=>s.id===e.student_id)||{}).number,kind:e.kind,world:e.world,activity:e.activity,item:e.item,label:e.label,correct:e.correct,firstTry:e.first_try,hint:e.hint,result:e.result,seconds:e.seconds??null,action:e.action??null,at:e.at}));})}};}
+   pilotEvents:T((d,id)=>{own(d,id);return d.events.filter(e=>e.class_id===id).slice(-20000).reverse().map(e=>({number:(d.students.find(s=>s.id===e.student_id)||{}).number,kind:e.kind,world:e.world,activity:e.activity,item:e.item,label:e.label,correct:e.correct,firstTry:e.first_try,hint:e.hint,result:e.result,seconds:e.seconds??null,action:e.action??null,at:e.at}));}),
+   // in demo mode the signed-in teacher is also the coordinator, so the research page can be tried out
+   amCoordinator:T(()=>true),
+   networkReport:T(d=>{const school=String(read('sanor-demo-teacher-v1',{})?.school||'').trim()||'?',week=Date.now()-7*864e5,r1=x=>Math.round(x*10)/10,r2=x=>Math.round(x*100)/100;
+    return d.classes.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>{const st=d.students.filter(s=>s.class_id===c.id),ids=new Set(st.map(s=>s.id)),ev=d.events.filter(e=>e.class_id===c.id),ans=ev.filter(e=>e.kind==='answer'),
+      tests=d.tests.filter(t=>ids.has(t.student_id)),fb=d.feedback.filter(f=>ids.has(f.student_id)),done={},pct=t=>r1(100*t.score/t.total);
+     for(const p of d.progress.filter(p=>ids.has(p.student_id)&&p.done))done[p.world+'/'+p.activity]=(done[p.world+'/'+p.activity]||0)+1;
+     const pairs=st.slice().sort((a,b)=>a.number-b.number).map(s=>[tests.find(t=>t.student_id===s.id&&t.kind==='pre'),tests.find(t=>t.student_id===s.id&&t.kind==='post')]).filter(([a,b])=>a&&b&&a.total>0&&b.total>0).map(([a,b])=>[pct(a),pct(b)]);
+     const avg=k=>{const v=fb.map(f=>f[k]).filter(x=>x!=null);return v.length?r2(v.reduce((a,b)=>a+b,0)/v.length):null;};
+     return{school,className:c.name,created:c.created_at,students:st.length,active7:st.filter(s=>s.last_seen&&new Date(s.last_seen)>week).length,
+      minutes:Math.round(ev.filter(e=>e.kind==='time').reduce((n,e)=>n+e.seconds,0)/60),answers:ans.length,firstTry:ans.filter(e=>e.first_try).length,
+      spoken:ev.filter(e=>e.kind==='speech'&&['asr','self'].includes(e.result)).length,done,pre:tests.filter(t=>t.kind==='pre').length,post:tests.filter(t=>t.kind==='post').length,
+      pairs,feedback:{n:fb.length,fun:avg('fun'),easy:avg('easy'),learned:avg('learned')}};});}),
+   recentErrors:T((d,days)=>{const since=Date.now()-Math.min(90,Math.max(1,+days||7))*864e5,by={};
+    for(const e of d.errors.filter(e=>new Date(e.last)>since)){const k=[e.page,e.message,e.source].join('|'),x=by[k]||(by[k]={page:e.page,message:e.message,source:e.source,version:e.version,agent:e.agent,count:0,first:e.first,last:e.last});
+     x.count+=e.count;if(e.first<x.first)x.first=e.first;if(e.last>x.last)x.last=e.last;}
+    return Object.values(by).sort((a,b)=>b.last.localeCompare(a.last)).slice(0,100);})},
+  reportErrors:S((d,list)=>{if(!Array.isArray(list)||list.length>10)fail('bad_batch');let n=0;const day=new Date().toISOString().slice(0,10),now=new Date().toISOString();
+   for(const e of list){const message=String(e.message||'').trim().slice(0,300);if(!message)continue;const page=String(e.page||'').slice(0,80),source=String(e.source||'').slice(0,160);
+    let x=d.errors.find(y=>y.day===day&&y.page===page&&y.message===message&&y.source===source);
+    if(x){x.count++;x.last=now;}else{if(d.errors.filter(y=>y.day===day).length>=500)continue;d.errors.push({day,page,message,source,version:String(e.version||'').slice(0,24),agent:String(e.agent||'').slice(0,160),count:1,first:now,last:now});}
+    n++;}
+   d.errors=d.errors.filter(y=>y.day>=new Date(Date.now()-90*864e5).toISOString().slice(0,10));return n;})};}
 
 root.SQBackend=cfg.supabaseUrl&&cfg.supabaseAnonKey?supabase():demo();
 })(typeof window!=='undefined'?window:globalThis);

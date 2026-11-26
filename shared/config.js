@@ -5,5 +5,7 @@
  * the database rules (row level security) decide what it can do. See docs/SETUP-SUPABASE.md. */
 window.SQ_CONFIG = {
   supabaseUrl: '',
-  supabaseAnonKey: ''
+  supabaseAnonKey: '',
+  // shown on schools/ (the page for teachers and school leaders), e.g. 'ครูสมชาย · โทร 08x-xxx-xxxx · LINE @sanorquest'
+  contact: ''
 };

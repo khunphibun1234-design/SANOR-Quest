@@ -1,0 +1,27 @@
+# Checks the live site and the classroom database every 6 hours. Problems open a GitHub issue labelled
+# "health-alert", and GitHub e-mails the repository owner. Set up: docs/LAUNCH.md → "ระบบแจ้งเตือน".
+name: Health check
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/health-check.js
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+          HEALTH_KEY: ${{ secrets.HEALTH_KEY }}
+          HEALTH_HOURS: '6'
+          GITHUB_TOKEN: ${{ github.token }}

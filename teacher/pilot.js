@@ -14,7 +14,7 @@ function paired(pre,post){const n=pre.length;if(n<2)return{n};const d=post.map((
 function stepsOf(SQ,world,activity){const m=SQ.worlds[world]?.missions.find(x=>x.id===activity);if(!m)return[];
  if(m.type==='story')return [...m.stages.flatMap(st=>st.questions.map(q=>({item:q,label:m.questions[q].line.en,stage:st.title}))),{item:'finale',label:'Writing card + speaking',stage:m.stages.at(-1).title}];
  if(m.type==='tap3d')return m.items.map(i=>({item:i.word,label:i.line.en,stage:''}));if(m.type==='quiz')return m.questions.map(q=>({item:q.word,label:q.line.en,stage:''}));return[];}
-const missions=SQ=>['01','02'].flatMap(w=>(SQ.worlds[w].missionOrder||[]).map(a=>({world:w,activity:a,title:SQ.worlds[w].missions.find(m=>m.id===a).title.en}))).concat([{world:'02',activity:'buddy',title:'School Buddy (2D practice)'}]);
+const missions=SQ=>Object.keys(SQ.worlds).sort().flatMap(w=>(SQ.worlds[w].missionOrder||[]).map(a=>({world:w,activity:a,title:SQ.worlds[w].missions.find(m=>m.id===a).title.en}))).concat([{world:'02',activity:'buddy',title:'School Buddy (2D practice)'}]);
 const min=s=>Math.round(s/60);const fmt=(v,d=1)=>Number.isFinite(v)?v.toFixed(d):'–';
 
 async function render(el,{B,SQ,classId,report,esc,say}){
