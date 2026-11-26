@@ -1,0 +1,1259 @@
+{
+ "id": "06",
+ "slug": "future",
+ "cefr": "A2",
+ "title": {
+  "en": "Future Makers City",
+  "th": "เมืองนักสร้างอนาคต"
+ },
+ "places": {
+  "lab": {
+   "name": "Robot lab",
+   "en": "Robots",
+   "th": "ห้องแล็บหุ่นยนต์",
+   "icon": "🤖",
+   "pos": [
+    -7.0,
+    3.8,
+    -4.0
+   ],
+   "approach": [
+    -4.8,
+    -3.6
+   ]
+  },
+  "energy": {
+   "name": "Energy park",
+   "en": "Solar and wind",
+   "th": "สวนพลังงาน",
+   "icon": "🔆",
+   "pos": [
+    6.8,
+    3.8,
+    -4.6
+   ],
+   "approach": [
+    4.6,
+    -4.0
+   ]
+  },
+  "maker": {
+   "name": "Makerspace",
+   "en": "Build",
+   "th": "ห้องประดิษฐ์",
+   "icon": "🛠️",
+   "pos": [
+    -7.2,
+    3.2,
+    4.2
+   ],
+   "approach": [
+    -5.0,
+    4.0
+   ]
+  },
+  "hall": {
+   "name": "City hall",
+   "en": "Plans",
+   "th": "ศาลาว่าการเมือง",
+   "icon": "🏛️",
+   "pos": [
+    0,
+    4.2,
+    -6.8
+   ],
+   "approach": [
+    0,
+    -4.8
+   ]
+  },
+  "garden": {
+   "name": "Green park",
+   "en": "Ideas",
+   "th": "สวนสีเขียว",
+   "icon": "🌳",
+   "pos": [
+    6.8,
+    3.0,
+    4.0
+   ],
+   "approach": [
+    4.6,
+    4.0
+   ]
+  },
+  "stage": {
+   "name": "Stage",
+   "en": "Present",
+   "th": "เวทีนำเสนอ",
+   "icon": "🎤",
+   "pos": [
+    0,
+    3.0,
+    4.6
+   ],
+   "approach": [
+    0,
+    2.6
+   ]
+  }
+ },
+ "missionOrder": [
+  "design",
+  "ideas",
+  "present"
+ ],
+ "missions": [
+  {
+   "id": "design",
+   "type": "story",
+   "title": {
+    "en": "Design a Smart Robot",
+    "th": "ออกแบบหุ่นยนต์อัจฉริยะ"
+   },
+   "summary": {
+    "en": "Build a garden robot with the engineer, put its steps in order and test it.",
+    "th": "สร้างหุ่นยนต์ทำสวนกับวิศวกร เรียงขั้นตอนการทำงาน และทดสอบหุ่นยนต์"
+   },
+   "stages": [
+    {
+     "id": "plan",
+     "title": "Plan the robot",
+     "subtitle": "At the robot lab",
+     "th": "วางแผนหุ่นยนต์",
+     "target": "lab",
+     "go": "Meet the engineer at the robot lab.",
+     "questions": [
+      "job",
+      "first"
+     ]
+    },
+    {
+     "id": "build",
+     "title": "Build it",
+     "subtitle": "In the makerspace",
+     "th": "ประกอบหุ่นยนต์",
+     "target": "maker",
+     "go": "Go to the makerspace.",
+     "questions": [
+      "order",
+      "next"
+     ]
+    },
+    {
+     "id": "test",
+     "title": "Test it",
+     "subtitle": "In the green park",
+     "th": "ทดสอบหุ่นยนต์",
+     "target": "garden",
+     "go": "Take the robot to the green park.",
+     "questions": [
+      "problem",
+      "fixed"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "Robot instructions",
+     "subtitle": "First, then, finally",
+     "th": "คู่มือหุ่นยนต์",
+     "target": "garden",
+     "go": "Write the robot instructions in the park.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "job": {
+     "kind": "choice",
+     "speaker": "Engineer",
+     "line": {
+      "en": "Welcome to the robot lab! What job should our robot do?",
+      "th": "ยินดีต้อนรับสู่ห้องแล็บหุ่นยนต์ หุ่นยนต์ของเราควรทำงานอะไรดี"
+     },
+     "prompt": {
+      "en": "Choose a useful job for the robot.",
+      "th": "เลือกงานที่มีประโยชน์ให้หุ่นยนต์"
+     },
+     "hint": {
+      "en": "Use It can … + a verb.",
+      "th": "ใช้ It can … + คำกริยา"
+     },
+     "why": {
+      "en": "It can plant trees in the park. says what the robot can do",
+      "th": "It can plant trees in the park. แปลว่า มันปลูกต้นไม้ในสวนได้"
+     },
+     "reply": {
+      "en": "Great idea! A garden robot."
+     },
+     "choices": [
+      {
+       "en": "It can plant trees in the park."
+      },
+      {
+       "en": "It is plant trees."
+      },
+      {
+       "en": "It can to plants tree."
+      }
+     ],
+     "answer": 0
+    },
+    "first": {
+     "kind": "choice",
+     "speaker": "Engineer",
+     "line": {
+      "en": "So, what does the robot do first?",
+      "th": "แล้วหุ่นยนต์ต้องทำอะไรก่อน"
+     },
+     "prompt": {
+      "en": "Read the steps and answer.",
+      "th": "อ่านขั้นตอนแล้วตอบ"
+     },
+     "hint": {
+      "en": "Look at Step 1.",
+      "th": "ดูขั้นตอนที่ 1"
+     },
+     "why": {
+      "en": "First, it digs a hole. is Step 1",
+      "th": "First, it digs a hole. แปลว่า อันดับแรก มันขุดหลุม"
+     },
+     "reply": {
+      "en": "Yes! Step one."
+     },
+     "choices": [
+      {
+       "en": "First, it digs a hole."
+      },
+      {
+       "en": "First, it waters the tree."
+      },
+      {
+       "en": "First, it goes home."
+      }
+     ],
+     "answer": 0,
+     "table": {
+      "caption": {
+       "en": "Robot steps · Plant a tree",
+       "th": "ขั้นตอนของหุ่นยนต์ · ปลูกต้นไม้"
+      },
+      "head": [
+       "Step",
+       "Action"
+      ],
+      "rows": [
+       [
+        "1",
+        "dig a hole"
+       ],
+       [
+        "2",
+        "put the tree in"
+       ],
+       [
+        "3",
+        "water it"
+       ]
+      ]
+     }
+    },
+    "order": {
+     "kind": "order",
+     "speaker": "Alex",
+     "line": {
+      "en": "Let's tell the robot all the steps. Can you put them in order?",
+      "th": "มาบอกขั้นตอนทั้งหมดให้หุ่นยนต์กัน เรียงให้ถูกได้ไหม"
+     },
+     "prompt": {
+      "en": "Put the words in order.",
+      "th": "เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "First …, then …",
+      "th": "First …, then …"
+     },
+     "why": {
+      "en": "First dig a hole, then put the tree in. uses first and then",
+      "th": "First dig a hole, then put the tree in. แปลว่า ขุดหลุมก่อน แล้วค่อยใส่ต้นไม้"
+     },
+     "reply": {
+      "en": "The robot understands!"
+     },
+     "tokens": [
+      "First",
+      "dig",
+      "a",
+      "hole,",
+      "then",
+      "put",
+      "the",
+      "tree",
+      "in."
+     ],
+     "answerText": {
+      "en": "First dig a hole, then put the tree in."
+     },
+     "table": {
+      "caption": {
+       "en": "Robot steps · Plant a tree",
+       "th": "ขั้นตอนของหุ่นยนต์ · ปลูกต้นไม้"
+      },
+      "head": [
+       "Step",
+       "Action"
+      ],
+      "rows": [
+       [
+        "1",
+        "dig a hole"
+       ],
+       [
+        "2",
+        "put the tree in"
+       ],
+       [
+        "3",
+        "water it"
+       ]
+      ]
+     }
+    },
+    "next": {
+     "kind": "listen",
+     "speaker": "Engineer",
+     "line": {
+      "en": "After that, the robot waters the tree. Finally, it takes a photo.",
+      "th": "หลังจากนั้น หุ่นยนต์รดน้ำต้นไม้ สุดท้ายมันถ่ายรูป"
+     },
+     "prompt": {
+      "en": "Listen. What does the robot do last?",
+      "th": "ฟังแล้วตอบว่าหุ่นยนต์ทำอะไรเป็นอย่างสุดท้าย"
+     },
+     "hint": {
+      "en": "Listen for Finally.",
+      "th": "ฟังคำว่า Finally"
+     },
+     "why": {
+      "en": "Finally, it takes a photo",
+      "th": "สุดท้าย มันถ่ายรูป"
+     },
+     "reply": {
+      "en": "That's right. A photo for the city!"
+     },
+     "choices": [
+      {
+       "en": "It takes a photo."
+      },
+      {
+       "en": "It digs a hole."
+      },
+      {
+       "en": "It goes to sleep."
+      }
+     ],
+     "answer": 0
+    },
+    "problem": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Oh no! The robot stopped. Its battery is empty.",
+      "th": "แย่แล้ว หุ่นยนต์หยุดทำงาน แบตเตอรี่หมด"
+     },
+     "prompt": {
+      "en": "Suggest an idea.",
+      "th": "เสนอไอเดีย"
+     },
+     "hint": {
+      "en": "Why don't we …? makes a suggestion.",
+      "th": "Why don't we …? ใช้เสนอความคิด"
+     },
+     "why": {
+      "en": "Why don't we use solar power? is a clever suggestion",
+      "th": "Why don't we use solar power? แปลว่า ทำไมเราไม่ใช้พลังงานแสงอาทิตย์ล่ะ"
+     },
+     "reply": {
+      "en": "Good thinking! A solar panel on its back."
+     },
+     "choices": [
+      {
+       "en": "Why don't we use solar power?"
+      },
+      {
+       "en": "Why we not use solar power?"
+      },
+      {
+       "en": "The battery is happy."
+      }
+     ],
+     "answer": 0
+    },
+    "fixed": {
+     "kind": "choice",
+     "speaker": "Engineer",
+     "line": {
+      "en": "It works now! What do you think of our robot?",
+      "th": "ใช้งานได้แล้ว คิดอย่างไรกับหุ่นยนต์ของเรา"
+     },
+     "prompt": {
+      "en": "Give your opinion.",
+      "th": "บอกความคิดเห็น"
+     },
+     "hint": {
+      "en": "Use I think it's … because …",
+      "th": "ใช้ I think it's … because …"
+     },
+     "why": {
+      "en": "I think it's great because it helps the city. gives an opinion and a reason",
+      "th": "I think it's great because it helps the city. แปลว่า ฉันคิดว่ามันดีมากเพราะช่วยเมืองได้"
+     },
+     "reply": {
+      "en": "I agree!"
+     },
+     "choices": [
+      {
+       "en": "I think it's great because it helps the city."
+      },
+      {
+       "en": "I thinking it great."
+      },
+      {
+       "en": "It's great because robot."
+      }
+     ],
+     "answer": 0
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write instructions for your robot: 3 steps.",
+     "th": "เขียนคู่มือหุ่นยนต์ 3 ขั้นตอน"
+    },
+    "fields": [
+     {
+      "id": "first",
+      "label": {
+       "en": "1. Write the first step.",
+       "th": "1. เขียนขั้นตอนแรก"
+      },
+      "example": {
+       "en": "First, it digs a hole."
+      },
+      "help": {
+       "en": "Start with First. At least 3 words.",
+       "th": "ขึ้นต้นด้วย First อย่างน้อย 3 คำ"
+      },
+      "rules": {
+       "minWords": 3,
+       "all": [
+        "^\\s*first\\b"
+       ]
+      }
+     },
+     {
+      "id": "then",
+      "label": {
+       "en": "2. Write the next step.",
+       "th": "2. เขียนขั้นตอนต่อไป"
+      },
+      "example": {
+       "en": "Then it puts the tree in."
+      },
+      "help": {
+       "en": "Start with Then, Next or After that. At least 3 words.",
+       "th": "ขึ้นต้นด้วย Then, Next หรือ After that อย่างน้อย 3 คำ"
+      },
+      "rules": {
+       "minWords": 3,
+       "any": [
+        "^\\s*then\\b",
+        "^\\s*next\\b",
+        "^\\s*after that\\b"
+       ]
+      }
+     },
+     {
+      "id": "finally",
+      "label": {
+       "en": "3. Write the last step.",
+       "th": "3. เขียนขั้นตอนสุดท้าย"
+      },
+      "example": {
+       "en": "Finally, it waters the tree."
+      },
+      "help": {
+       "en": "Start with Finally. At least 3 words.",
+       "th": "ขึ้นต้นด้วย Finally อย่างน้อย 3 คำ"
+      },
+      "rules": {
+       "minWords": 3,
+       "all": [
+        "^\\s*finally\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "It can plant trees in the park.",
+     "th": "มันปลูกต้นไม้ในสวนได้"
+    },
+    {
+     "en": "First dig a hole, then put the tree in.",
+     "th": "ขุดหลุมก่อน แล้วค่อยใส่ต้นไม้"
+    },
+    {
+     "en": "Why don't we use solar power?",
+     "th": "ทำไมเราไม่ใช้พลังงานแสงอาทิตย์ล่ะ"
+    }
+   ]
+  },
+  {
+   "id": "ideas",
+   "type": "story",
+   "title": {
+    "en": "Ideas for a Greener City",
+    "th": "ไอเดียเพื่อเมืองสีเขียว"
+   },
+   "summary": {
+    "en": "Share ideas with the mayor, agree and disagree politely and choose one plan together.",
+    "th": "เสนอไอเดียกับนายกเทศมนตรี เห็นด้วยและไม่เห็นด้วยอย่างสุภาพ และเลือกแผนร่วมกัน"
+   },
+   "stages": [
+    {
+     "id": "energy",
+     "title": "Clean energy",
+     "subtitle": "At the energy park",
+     "th": "พลังงานสะอาด",
+     "target": "energy",
+     "go": "Go to the energy park.",
+     "questions": [
+      "should",
+      "agree"
+     ]
+    },
+    {
+     "id": "meeting",
+     "title": "City meeting",
+     "subtitle": "At city hall",
+     "th": "ประชุมเมือง",
+     "target": "hall",
+     "go": "Meet the mayor at city hall.",
+     "questions": [
+      "disagree",
+      "vote"
+     ]
+    },
+    {
+     "id": "choose",
+     "title": "Choose a plan",
+     "subtitle": "In the green park",
+     "th": "เลือกแผน",
+     "target": "garden",
+     "go": "Talk to Alex in the green park.",
+     "questions": [
+      "because",
+      "together"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My idea",
+     "subtitle": "Write a proposal",
+     "th": "ข้อเสนอของฉัน",
+     "target": "hall",
+     "go": "Write your idea for the mayor.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "should": {
+     "kind": "choice",
+     "speaker": "Engineer",
+     "line": {
+      "en": "Our city uses a lot of energy. What should we do?",
+      "th": "เมืองเราใช้พลังงานเยอะมาก เราควรทำอย่างไร"
+     },
+     "prompt": {
+      "en": "Share an idea.",
+      "th": "เสนอความคิด"
+     },
+     "hint": {
+      "en": "We should … + a verb.",
+      "th": "We should … + คำกริยา"
+     },
+     "why": {
+      "en": "We should use more solar panels. gives an idea with should",
+      "th": "We should use more solar panels. แปลว่า เราควรใช้แผงโซลาร์มากขึ้น"
+     },
+     "reply": {
+      "en": "Good idea. The sun is free!"
+     },
+     "choices": [
+      {
+       "en": "We should use more solar panels."
+      },
+      {
+       "en": "We should to use more cars."
+      },
+      {
+       "en": "We use should energy."
+      }
+     ],
+     "answer": 0
+    },
+    "agree": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "I think wind turbines are a good idea too.",
+      "th": "ฉันคิดว่ากังหันลมก็เป็นไอเดียที่ดีเหมือนกัน"
+     },
+     "prompt": {
+      "en": "Agree with Alex.",
+      "th": "เห็นด้วยกับ Alex"
+     },
+     "hint": {
+      "en": "I agree is a simple way to say yes to an idea.",
+      "th": "I agree เป็นวิธีง่าย ๆ ที่บอกว่าเห็นด้วย"
+     },
+     "why": {
+      "en": "I agree. Wind is clean energy. agrees and adds a reason",
+      "th": "I agree. Wind is clean energy. แปลว่า เห็นด้วย ลมเป็นพลังงานสะอาด"
+     },
+     "reply": {
+      "en": "Great, we think the same!"
+     },
+     "choices": [
+      {
+       "en": "I agree. Wind is clean energy."
+      },
+      {
+       "en": "I am agree with you."
+      },
+      {
+       "en": "No. Wind is my friend."
+      }
+     ],
+     "answer": 0
+    },
+    "disagree": {
+     "kind": "choice",
+     "speaker": "Mayor",
+     "line": {
+      "en": "I think we should build a big car park in the city centre.",
+      "th": "ฉันคิดว่าเราควรสร้างลานจอดรถใหญ่ใจกลางเมือง"
+     },
+     "prompt": {
+      "en": "Disagree politely and give another idea.",
+      "th": "ไม่เห็นด้วยอย่างสุภาพแล้วเสนอไอเดียอื่น"
+     },
+     "hint": {
+      "en": "I'm not sure. How about …? is polite.",
+      "th": "I'm not sure. How about …? สุภาพ"
+     },
+     "why": {
+      "en": "I'm not sure. How about a bike path instead? disagrees politely",
+      "th": "I'm not sure. How about a bike path instead? แปลว่า ไม่แน่ใจค่ะ/ครับ ทำทางจักรยานแทนดีไหม"
+     },
+     "reply": {
+      "en": "Hmm, that's interesting."
+     },
+     "choices": [
+      {
+       "en": "I'm not sure. How about a bike path instead?"
+      },
+      {
+       "en": "That's a stupid idea!"
+      },
+      {
+       "en": "Yes, more cars, more cars."
+      }
+     ],
+     "answer": 0
+    },
+    "vote": {
+     "kind": "choice",
+     "speaker": "Mayor",
+     "line": {
+      "en": "Here are the results of your class vote.",
+      "th": "นี่คือผลโหวตของห้องเรียน"
+     },
+     "prompt": {
+      "en": "Which idea got the most votes?",
+      "th": "ไอเดียไหนได้คะแนนโหวตมากที่สุด"
+     },
+     "hint": {
+      "en": "Find the biggest number.",
+      "th": "หาตัวเลขที่มากที่สุด"
+     },
+     "why": {
+      "en": "Solar bus stops got the most votes (21)",
+      "th": "ป้ายรถเมล์พลังงานแสงอาทิตย์ได้โหวตมากที่สุด (21)"
+     },
+     "reply": {
+      "en": "So the class chose solar bus stops."
+     },
+     "choices": [
+      {
+       "en": "Solar bus stops"
+      },
+      {
+       "en": "Robot rubbish bins"
+      },
+      {
+       "en": "A bike path"
+      }
+     ],
+     "answer": 0,
+     "table": {
+      "caption": {
+       "en": "Class vote · Our city project",
+       "th": "ผลโหวตของห้อง · โครงการเมืองของเรา"
+      },
+      "head": [
+       "Idea",
+       "Votes"
+      ],
+      "rows": [
+       [
+        "Solar bus stops",
+        "21"
+       ],
+       [
+        "Robot rubbish bins",
+        "17"
+       ],
+       [
+        "A bike path",
+        "12"
+       ]
+      ]
+     }
+    },
+    "because": {
+     "kind": "order",
+     "speaker": "Alex",
+     "line": {
+      "en": "Why do you like solar bus stops?",
+      "th": "ทำไมเธอชอบป้ายรถเมล์พลังงานแสงอาทิตย์"
+     },
+     "prompt": {
+      "en": "Give a reason. Put the words in order.",
+      "th": "บอกเหตุผล เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "I like it because …",
+      "th": "I like it because …"
+     },
+     "why": {
+      "en": "I like it because it saves energy. gives a reason with because",
+      "th": "I like it because it saves energy. แปลว่า ฉันชอบเพราะมันประหยัดพลังงาน"
+     },
+     "reply": {
+      "en": "Good reason!"
+     },
+     "tokens": [
+      "I",
+      "like",
+      "it",
+      "because",
+      "it",
+      "saves",
+      "energy."
+     ],
+     "answerText": {
+      "en": "I like it because it saves energy."
+     }
+    },
+    "together": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "So, which plan do we choose?",
+      "th": "แล้วเราจะเลือกแผนไหน"
+     },
+     "prompt": {
+      "en": "Make the final choice together.",
+      "th": "ตัดสินใจร่วมกัน"
+     },
+     "hint": {
+      "en": "Let's choose … makes a group decision.",
+      "th": "Let's choose … ใช้ตัดสินใจร่วมกัน"
+     },
+     "why": {
+      "en": "Let's choose solar bus stops. Everyone can use them. decides and explains",
+      "th": "Let's choose solar bus stops. Everyone can use them. แปลว่า เลือกป้ายรถเมล์พลังงานแสงอาทิตย์กันเถอะ ทุกคนใช้ได้"
+     },
+     "reply": {
+      "en": "Deal! Let's tell the mayor."
+     },
+     "choices": [
+      {
+       "en": "Let's choose solar bus stops. Everyone can use them."
+      },
+      {
+       "en": "I choose. You don't."
+      },
+      {
+       "en": "Let's choose nothing."
+      }
+     ],
+     "answer": 0
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write your idea for the mayor: 3 sentences.",
+     "th": "เขียนไอเดียถึงนายกเทศมนตรี 3 ประโยค"
+    },
+    "fields": [
+     {
+      "id": "idea",
+      "label": {
+       "en": "1. Give your idea.",
+       "th": "1. เสนอไอเดีย"
+      },
+      "example": {
+       "en": "We should build a bike path."
+      },
+      "help": {
+       "en": "Use should, How about or Why don't we. At least 4 words.",
+       "th": "ใช้ should, How about หรือ Why don't we อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bshould\\b",
+        "\\bhow about\\b",
+        "\\bwhy don'?t we\\b",
+        "\\blet'?s\\b"
+       ]
+      }
+     },
+     {
+      "id": "why",
+      "label": {
+       "en": "2. Give a reason.",
+       "th": "2. บอกเหตุผล"
+      },
+      "example": {
+       "en": "I think it's good because it's clean."
+      },
+      "help": {
+       "en": "Use because. At least 5 words.",
+       "th": "ใช้ because อย่างน้อย 5 คำ"
+      },
+      "rules": {
+       "minWords": 5,
+       "all": [
+        "\\bbecause\\b"
+       ]
+      }
+     },
+     {
+      "id": "who",
+      "label": {
+       "en": "3. Say who it helps.",
+       "th": "3. บอกว่าช่วยใคร"
+      },
+      "example": {
+       "en": "It helps students and old people."
+      },
+      "help": {
+       "en": "Use help or helps. At least 4 words.",
+       "th": "ใช้ help หรือ helps อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bhelps?\\b",
+        "\\bgood for\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "We should use more solar panels.",
+     "th": "เราควรใช้แผงโซลาร์มากขึ้น"
+    },
+    {
+     "en": "I'm not sure. How about a bike path instead?",
+     "th": "ไม่แน่ใจค่ะ/ครับ ทำทางจักรยานแทนดีไหม"
+    },
+    {
+     "en": "I like it because it saves energy.",
+     "th": "ฉันชอบเพราะมันประหยัดพลังงาน"
+    }
+   ]
+  },
+  {
+   "id": "present",
+   "type": "story",
+   "title": {
+    "en": "Present Your Project",
+    "th": "นำเสนอโครงการของคุณ"
+   },
+   "summary": {
+    "en": "Get ready backstage, present your city project on stage and answer a question from the mayor.",
+    "th": "เตรียมตัวหลังเวที นำเสนอโครงการเมืองบนเวที และตอบคำถามของนายกเทศมนตรี"
+   },
+   "stages": [
+    {
+     "id": "ready",
+     "title": "Get ready",
+     "subtitle": "At the makerspace",
+     "th": "เตรียมตัว",
+     "target": "maker",
+     "go": "Meet Alex in the makerspace.",
+     "questions": [
+      "nervous",
+      "slide"
+     ]
+    },
+    {
+     "id": "talk",
+     "title": "On stage",
+     "subtitle": "Present the project",
+     "th": "บนเวที",
+     "target": "stage",
+     "go": "Walk onto the stage.",
+     "questions": [
+      "open",
+      "firstly"
+     ]
+    },
+    {
+     "id": "questions",
+     "title": "Questions",
+     "subtitle": "Answer the mayor",
+     "th": "ตอบคำถาม",
+     "target": "stage",
+     "go": "Stay on the stage for questions.",
+     "questions": [
+      "question",
+      "close"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "My presentation",
+     "subtitle": "Write your talk",
+     "th": "บทนำเสนอของฉัน",
+     "target": "stage",
+     "go": "Write your talk on the stage.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "nervous": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "I'm a bit nervous about the presentation.",
+      "th": "ฉันตื่นเต้นนิดหน่อยเรื่องการนำเสนอ"
+     },
+     "prompt": {
+      "en": "Encourage Alex.",
+      "th": "ให้กำลังใจ Alex"
+     },
+     "hint": {
+      "en": "You can do it! is a great way to encourage someone.",
+      "th": "You can do it! ใช้ให้กำลังใจ"
+     },
+     "why": {
+      "en": "Don't worry. We practised a lot. You can do it! encourages a friend",
+      "th": "Don't worry. We practised a lot. You can do it! แปลว่า ไม่ต้องห่วง เราซ้อมมาเยอะแล้ว เธอทำได้"
+     },
+     "reply": {
+      "en": "Thanks! I feel ready."
+     },
+     "choices": [
+      {
+       "en": "Don't worry. We practised a lot. You can do it!"
+      },
+      {
+       "en": "Yes, you will fail."
+      },
+      {
+       "en": "I'm nervous too, so let's go home."
+      }
+     ],
+     "answer": 0
+    },
+    "slide": {
+     "kind": "choice",
+     "speaker": "Engineer",
+     "line": {
+      "en": "What will you show on your first slide?",
+      "th": "สไลด์แรกจะแสดงอะไร"
+     },
+     "prompt": {
+      "en": "Say what is on the first slide.",
+      "th": "บอกว่าสไลด์แรกมีอะไร"
+     },
+     "hint": {
+      "en": "The first slide shows … + the topic.",
+      "th": "The first slide shows … + หัวข้อ"
+     },
+     "why": {
+      "en": "The first slide shows the name of our project. starts with the topic",
+      "th": "The first slide shows the name of our project. แปลว่า สไลด์แรกแสดงชื่อโครงการของเรา"
+     },
+     "reply": {
+      "en": "Perfect. Start with the title."
+     },
+     "choices": [
+      {
+       "en": "The first slide shows the name of our project."
+      },
+      {
+       "en": "The first slide is shows project."
+      },
+      {
+       "en": "I don't have slides because."
+      }
+     ],
+     "answer": 0
+    },
+    "open": {
+     "kind": "choice",
+     "speaker": "Mayor",
+     "line": {
+      "en": "Welcome, everyone. Please begin.",
+      "th": "ยินดีต้อนรับทุกคน เชิญเริ่มได้เลย"
+     },
+     "prompt": {
+      "en": "Start your presentation.",
+      "th": "เริ่มการนำเสนอ"
+     },
+     "hint": {
+      "en": "Good morning, everyone. Today we're going to talk about …",
+      "th": "Good morning, everyone. Today we're going to talk about …"
+     },
+     "why": {
+      "en": "Good morning, everyone. Today we're going to talk about solar bus stops. is a clear opening",
+      "th": "Good morning, everyone. Today we're going to talk about solar bus stops. แปลว่า สวัสดีตอนเช้าทุกคน วันนี้เราจะพูดเรื่องป้ายรถเมล์พลังงานแสงอาทิตย์"
+     },
+     "reply": {
+      "en": "Everyone is listening."
+     },
+     "choices": [
+      {
+       "en": "Good morning, everyone. Today we're going to talk about solar bus stops."
+      },
+      {
+       "en": "Hey! Listen to me now!"
+      },
+      {
+       "en": "Goodbye, everyone. That's all."
+      }
+     ],
+     "answer": 0
+    },
+    "firstly": {
+     "kind": "listen",
+     "speaker": "Alex",
+     "line": {
+      "en": "Firstly, the bus stops get power from the sun. Secondly, they have free Wi-Fi and lights at night.",
+      "th": "ประการแรก ป้ายรถเมล์ได้พลังงานจากแสงอาทิตย์ ประการที่สอง มีไวไฟฟรีและไฟตอนกลางคืน"
+     },
+     "prompt": {
+      "en": "Listen to Alex. What is the second point?",
+      "th": "ฟัง Alex แล้วตอบว่าประเด็นที่สองคืออะไร"
+     },
+     "hint": {
+      "en": "Listen for Secondly.",
+      "th": "ฟังคำว่า Secondly"
+     },
+     "why": {
+      "en": "Secondly, they have free Wi-Fi and lights at night",
+      "th": "ประการที่สอง มีไวไฟฟรีและไฟตอนกลางคืน"
+     },
+     "reply": {
+      "en": "Well done, team!"
+     },
+     "choices": [
+      {
+       "en": "Free Wi-Fi and lights at night"
+      },
+      {
+       "en": "Power from the sun"
+      },
+      {
+       "en": "A new car park"
+      }
+     ],
+     "answer": 0
+    },
+    "question": {
+     "kind": "choice",
+     "speaker": "Mayor",
+     "line": {
+      "en": "Thank you. How much will one bus stop cost?",
+      "th": "ขอบคุณ ป้ายรถเมล์หนึ่งป้ายราคาเท่าไร"
+     },
+     "prompt": {
+      "en": "Answer the mayor's question.",
+      "th": "ตอบคำถามนายกเทศมนตรี"
+     },
+     "hint": {
+      "en": "Give a number and the money: It costs about …",
+      "th": "บอกจำนวนเงิน: It costs about …"
+     },
+     "why": {
+      "en": "It costs about 50,000 baht. answers how much",
+      "th": "It costs about 50,000 baht. แปลว่า ราคาประมาณ 50,000 บาท"
+     },
+     "reply": {
+      "en": "That's not expensive. Good!"
+     },
+     "choices": [
+      {
+       "en": "It costs about 50,000 baht."
+      },
+      {
+       "en": "It is cost very money."
+      },
+      {
+       "en": "Yes, it is a bus stop."
+      }
+     ],
+     "answer": 0
+    },
+    "close": {
+     "kind": "order",
+     "speaker": "Mayor",
+     "line": {
+      "en": "Do you want to say anything else?",
+      "th": "มีอะไรจะพูดอีกไหม"
+     },
+     "prompt": {
+      "en": "End the presentation. Put the words in order.",
+      "th": "จบการนำเสนอ เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Thank you for …",
+      "th": "Thank you for …"
+     },
+     "why": {
+      "en": "Thank you for listening! ends a presentation politely",
+      "th": "Thank you for listening! แปลว่า ขอบคุณที่ตั้งใจฟัง"
+     },
+     "reply": {
+      "en": "Wonderful work! The city will build your bus stops!"
+     },
+     "tokens": [
+      "Thank",
+      "you",
+      "for",
+      "listening!"
+     ],
+     "answerText": {
+      "en": "Thank you for listening!"
+     }
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write a short talk about your project: 3 sentences.",
+     "th": "เขียนบทนำเสนอโครงการสั้น ๆ 3 ประโยค"
+    },
+    "fields": [
+     {
+      "id": "open",
+      "label": {
+       "en": "1. Open your talk.",
+       "th": "1. เปิดการนำเสนอ"
+      },
+      "example": {
+       "en": "Today we're going to talk about solar bus stops."
+      },
+      "help": {
+       "en": "Use talk about or present. At least 5 words.",
+       "th": "ใช้ talk about หรือ present อย่างน้อย 5 คำ"
+      },
+      "rules": {
+       "minWords": 5,
+       "any": [
+        "\\btalk about\\b",
+        "\\bpresent\\b",
+        "\\btell you about\\b"
+       ]
+      }
+     },
+     {
+      "id": "point",
+      "label": {
+       "en": "2. Give your first point.",
+       "th": "2. บอกประเด็นแรก"
+      },
+      "example": {
+       "en": "Firstly, they use power from the sun."
+      },
+      "help": {
+       "en": "Start with Firstly or First. At least 4 words.",
+       "th": "ขึ้นต้นด้วย Firstly หรือ First อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "^\\s*firstly\\b",
+        "^\\s*first\\b"
+       ]
+      }
+     },
+     {
+      "id": "close",
+      "label": {
+       "en": "3. Close your talk.",
+       "th": "3. ปิดการนำเสนอ"
+      },
+      "example": {
+       "en": "Thank you for listening."
+      },
+      "help": {
+       "en": "Use thank you. At least 3 words.",
+       "th": "ใช้ thank you อย่างน้อย 3 คำ"
+      },
+      "rules": {
+       "minWords": 3,
+       "all": [
+        "\\bthank you\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "Good morning, everyone. Today we're going to talk about solar bus stops.",
+     "th": "สวัสดีตอนเช้าทุกคน วันนี้เราจะพูดเรื่องป้ายรถเมล์พลังงานแสงอาทิตย์"
+    },
+    {
+     "en": "Firstly, the bus stops get power from the sun.",
+     "th": "ประการแรก ป้ายรถเมล์ได้พลังงานจากแสงอาทิตย์"
+    },
+    {
+     "en": "Thank you for listening!",
+     "th": "ขอบคุณที่ตั้งใจฟัง"
+    }
+   ]
+  }
+ ]
+}

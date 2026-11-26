@@ -1,3 +1,8 @@
 /* Map 02 (3D) uses the Map 01 look (../home/home.css); only small differences live here. */
 body{background:#e4ebe0}
 .portrait.teacher,.portrait.librarian{font-size:0}
+/* portraits for the speakers of Maps 03–06 */
+.portrait.grandma::before{content:"👵"}.portrait.boatman::before{content:"🚣"}.portrait.vendor::before{content:"🧑‍🌾"}.portrait.chef::before{content:"🧑‍🍳"}
+.portrait.clerk::before{content:"💁"}.portrait.officer::before{content:"👮"}.portrait.engineer::before{content:"🧑‍🔧"}.portrait.mayor::before{content:"🧑‍💼"}
+.portrait.grandma,.portrait.boatman,.portrait.vendor,.portrait.chef,.portrait.clerk,.portrait.officer,.portrait.engineer,.portrait.mayor{font-size:0;background:#e6def2}
+.portrait.grandma::before,.portrait.boatman::before,.portrait.vendor::before,.portrait.chef::before,.portrait.clerk::before,.portrait.officer::before,.portrait.engineer::before,.portrait.mayor::before{font-size:26px}

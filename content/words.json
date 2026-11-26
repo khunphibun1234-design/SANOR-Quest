@@ -848,6 +848,336 @@
     "en": "We need a small gift.",
     "th": "เราต้องมีของขวัญเล็ก ๆ"
    }
+  },
+  {
+   "id": "platform",
+   "en": "platform",
+   "th": "ชานชาลา",
+   "cefr": "A2",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Which platform is it?",
+    "th": "ขึ้นที่ชานชาลาไหน"
+   }
+  },
+  {
+   "id": "ticket",
+   "en": "ticket",
+   "th": "ตั๋ว",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Two tickets to Bangkok, please.",
+    "th": "ขอตั๋วไปกรุงเทพฯ สองใบ"
+   }
+  },
+  {
+   "id": "straight",
+   "en": "straight",
+   "th": "ตรงไป",
+   "cefr": "A1",
+   "topic": "directions",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Go straight, then turn right.",
+    "th": "เดินตรงไป แล้วเลี้ยวขวา"
+   }
+  },
+  {
+   "id": "turn-right",
+   "en": "turn right",
+   "th": "เลี้ยวขวา",
+   "cefr": "A1",
+   "topic": "directions",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Go straight, then turn right.",
+    "th": "เดินตรงไป แล้วเลี้ยวขวา"
+   }
+  },
+  {
+   "id": "next-to",
+   "en": "next to",
+   "th": "ติดกับ ข้าง ๆ",
+   "cefr": "A1",
+   "topic": "directions",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "The station is next to the hotel.",
+    "th": "สถานีอยู่ติดกับโรงแรม"
+   }
+  },
+  {
+   "id": "booking",
+   "en": "booking",
+   "th": "การจอง",
+   "cefr": "A2",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I have a booking for two nights.",
+    "th": "จองห้องไว้สองคืน"
+   }
+  },
+  {
+   "id": "breakfast",
+   "en": "breakfast",
+   "th": "อาหารเช้า",
+   "cefr": "A1",
+   "topic": "food",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Breakfast is from half past six.",
+    "th": "อาหารเช้าเริ่มหกโมงครึ่ง"
+   }
+  },
+  {
+   "id": "noisy",
+   "en": "noisy",
+   "th": "เสียงดัง",
+   "cefr": "A2",
+   "topic": "describing",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "It's very noisy.",
+    "th": "เสียงดังมาก"
+   }
+  },
+  {
+   "id": "lost",
+   "en": "lost",
+   "th": "หาย",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "My friend's bag is lost.",
+    "th": "กระเป๋าเพื่อนหาย"
+   }
+  },
+  {
+   "id": "bag",
+   "en": "bag",
+   "th": "กระเป๋า",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "It's a big blue bag.",
+    "th": "เป็นกระเป๋าใบใหญ่สีน้ำเงิน"
+   }
+  },
+  {
+   "id": "airport",
+   "en": "airport",
+   "th": "สนามบิน",
+   "cefr": "A1",
+   "topic": "travel",
+   "worlds": [
+    "05"
+   ],
+   "audio": null,
+   "example": {
+    "en": "My bag isn't at the airport.",
+    "th": "กระเป๋าฉันไม่อยู่ที่สนามบิน"
+   }
+  },
+  {
+   "id": "robot",
+   "en": "robot",
+   "th": "หุ่นยนต์",
+   "cefr": "A1",
+   "topic": "technology",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "It can plant trees in the park.",
+    "th": "มันปลูกต้นไม้ในสวนได้"
+   }
+  },
+  {
+   "id": "battery",
+   "en": "battery",
+   "th": "แบตเตอรี่",
+   "cefr": "A2",
+   "topic": "technology",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Its battery is empty.",
+    "th": "แบตเตอรี่หมด"
+   }
+  },
+  {
+   "id": "solar",
+   "en": "solar",
+   "th": "พลังงานแสงอาทิตย์",
+   "cefr": "A2",
+   "topic": "energy",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Why don't we use solar power?",
+    "th": "ทำไมเราไม่ใช้พลังงานแสงอาทิตย์ล่ะ"
+   }
+  },
+  {
+   "id": "energy",
+   "en": "energy",
+   "th": "พลังงาน",
+   "cefr": "A2",
+   "topic": "energy",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Wind is clean energy.",
+    "th": "ลมเป็นพลังงานสะอาด"
+   }
+  },
+  {
+   "id": "idea",
+   "en": "idea",
+   "th": "ความคิด ไอเดีย",
+   "cefr": "A1",
+   "topic": "opinions",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "That's a good idea.",
+    "th": "เป็นไอเดียที่ดี"
+   }
+  },
+  {
+   "id": "agree",
+   "en": "agree",
+   "th": "เห็นด้วย",
+   "cefr": "A2",
+   "topic": "opinions",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I agree. Wind is clean energy.",
+    "th": "เห็นด้วย ลมเป็นพลังงานสะอาด"
+   }
+  },
+  {
+   "id": "because",
+   "en": "because",
+   "th": "เพราะว่า",
+   "cefr": "A1",
+   "topic": "opinions",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "I like it because it saves energy.",
+    "th": "ฉันชอบเพราะมันประหยัดพลังงาน"
+   }
+  },
+  {
+   "id": "first",
+   "en": "first",
+   "th": "อันดับแรก",
+   "cefr": "A1",
+   "topic": "sequence",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "First, it digs a hole.",
+    "th": "อันดับแรก มันขุดหลุม"
+   }
+  },
+  {
+   "id": "finally",
+   "en": "finally",
+   "th": "สุดท้าย",
+   "cefr": "A2",
+   "topic": "sequence",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Finally, it takes a photo.",
+    "th": "สุดท้าย มันถ่ายรูป"
+   }
+  },
+  {
+   "id": "project",
+   "en": "project",
+   "th": "โครงการ",
+   "cefr": "A2",
+   "topic": "school",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Today we're going to talk about our project.",
+    "th": "วันนี้เราจะพูดเรื่องโครงการของเรา"
+   }
+  },
+  {
+   "id": "vote",
+   "en": "vote",
+   "th": "ลงคะแนน โหวต",
+   "cefr": "A2",
+   "topic": "opinions",
+   "worlds": [
+    "06"
+   ],
+   "audio": null,
+   "example": {
+    "en": "Solar bus stops got the most votes.",
+    "th": "ป้ายรถเมล์พลังงานแสงอาทิตย์ได้โหวตมากที่สุด"
+   }
   }
  ]
 }

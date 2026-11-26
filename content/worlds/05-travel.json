@@ -1,0 +1,1274 @@
+{
+ "id": "05",
+ "slug": "travel",
+ "cefr": "A2",
+ "title": {
+  "en": "Around the World",
+  "th": "รอบโลก"
+ },
+ "places": {
+  "board": {
+   "name": "Departures board",
+   "en": "Times",
+   "th": "ป้ายเวลาออกเดินทาง",
+   "icon": "🕒",
+   "pos": [
+    -3.0,
+    3.0,
+    5.2
+   ],
+   "approach": [
+    -2.2,
+    6.2
+   ]
+  },
+  "info": {
+   "name": "Information desk",
+   "en": "Help",
+   "th": "จุดบริการข้อมูล",
+   "icon": "ℹ️",
+   "pos": [
+    0,
+    2.8,
+    1.0
+   ],
+   "approach": [
+    0,
+    2.4
+   ]
+  },
+  "station": {
+   "name": "Train station",
+   "en": "Tickets",
+   "th": "สถานีรถไฟ",
+   "icon": "🚆",
+   "pos": [
+    7.0,
+    3.6,
+    -4.0
+   ],
+   "approach": [
+    4.8,
+    -3.4
+   ]
+  },
+  "hotel": {
+   "name": "Hotel",
+   "en": "Reception",
+   "th": "โรงแรม",
+   "icon": "🏨",
+   "pos": [
+    7.2,
+    4.2,
+    4.0
+   ],
+   "approach": [
+    5.0,
+    4.2
+   ]
+  },
+  "airport": {
+   "name": "Airport",
+   "en": "Bags",
+   "th": "สนามบิน",
+   "icon": "✈️",
+   "pos": [
+    -7.0,
+    3.8,
+    -3.6
+   ],
+   "approach": [
+    -4.8,
+    -3.2
+   ]
+  },
+  "lost": {
+   "name": "Lost and found",
+   "en": "Lost bags",
+   "th": "แผนกของหาย",
+   "icon": "🧳",
+   "pos": [
+    -7.2,
+    3.0,
+    4.2
+   ],
+   "approach": [
+    -5.0,
+    4.0
+   ]
+  }
+ },
+ "missionOrder": [
+  "directions",
+  "hotel",
+  "lostbag"
+ ],
+ "missions": [
+  {
+   "id": "directions",
+   "type": "story",
+   "title": {
+    "en": "Travel Times and Directions",
+    "th": "อ่านเวลาเดินทางและถามทาง"
+   },
+   "summary": {
+    "en": "Read the departures board, ask the way to the station and buy train tickets.",
+    "th": "อ่านป้ายเวลาออกเดินทาง ถามทางไปสถานีรถไฟ และซื้อตั๋วรถไฟ"
+   },
+   "stages": [
+    {
+     "id": "times",
+     "title": "Read the board",
+     "subtitle": "Departures",
+     "th": "อ่านป้ายเวลา",
+     "target": "board",
+     "go": "Meet Alex at the departures board.",
+     "questions": [
+      "time",
+      "platform"
+     ]
+    },
+    {
+     "id": "way",
+     "title": "Ask the way",
+     "subtitle": "At the information desk",
+     "th": "ถามทาง",
+     "target": "info",
+     "go": "Go to the information desk.",
+     "questions": [
+      "excuse",
+      "where"
+     ]
+    },
+    {
+     "id": "ticket",
+     "title": "Buy tickets",
+     "subtitle": "At the station",
+     "th": "ซื้อตั๋ว",
+     "target": "station",
+     "go": "Walk to the train station.",
+     "questions": [
+      "tickets",
+      "howlong"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "Travel note",
+     "subtitle": "Times and directions",
+     "th": "บันทึกการเดินทาง",
+     "target": "station",
+     "go": "Write a travel note at the station.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "time": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "We want to go to Bangkok. What time is our train?",
+      "th": "เราจะไปกรุงเทพฯ รถไฟออกกี่โมง"
+     },
+     "prompt": {
+      "en": "Read the board and tell Alex.",
+      "th": "อ่านป้ายแล้วบอก Alex"
+     },
+     "hint": {
+      "en": "Find Bangkok, then read the time: 11:45 = quarter to twelve.",
+      "th": "หา Bangkok แล้วอ่านเวลา 11:45 = quarter to twelve"
+     },
+     "why": {
+      "en": "It leaves at quarter to twelve. 11:45 is quarter to twelve",
+      "th": "It leaves at quarter to twelve. แปลว่า ออกตอนสิบเอ็ดโมงสี่สิบห้า"
+     },
+     "reply": {
+      "en": "We have time for a snack!"
+     },
+     "choices": [
+      {
+       "en": "It leaves at quarter past nine."
+      },
+      {
+       "en": "It leaves at quarter to twelve."
+      },
+      {
+       "en": "It leaves at half past ten."
+      }
+     ],
+     "answer": 1,
+     "table": {
+      "caption": {
+       "en": "Departures · Platform information",
+       "th": "ตารางเวลาออกเดินทาง"
+      },
+      "head": [
+       "To",
+       "Time",
+       "Platform"
+      ],
+      "rows": [
+       [
+        "Chiang Mai",
+        "09:15",
+        "2"
+       ],
+       [
+        "Airport",
+        "10:30",
+        "3"
+       ],
+       [
+        "Bangkok",
+        "11:45",
+        "1"
+       ]
+      ]
+     }
+    },
+    "platform": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Which platform is it?",
+      "th": "ขึ้นที่ชานชาลาไหน"
+     },
+     "prompt": {
+      "en": "Read the board again.",
+      "th": "อ่านป้ายอีกครั้ง"
+     },
+     "hint": {
+      "en": "Look at the Platform column for Bangkok.",
+      "th": "ดูช่อง Platform ของ Bangkok"
+     },
+     "why": {
+      "en": "Platform 1 is the Bangkok train",
+      "th": "รถไฟไปกรุงเทพฯ ขึ้นชานชาลา 1"
+     },
+     "reply": {
+      "en": "Platform one. Got it!"
+     },
+     "choices": [
+      {
+       "en": "Platform 1"
+      },
+      {
+       "en": "Platform 2"
+      },
+      {
+       "en": "Platform 3"
+      }
+     ],
+     "answer": 0,
+     "table": {
+      "caption": {
+       "en": "Departures · Platform information",
+       "th": "ตารางเวลาออกเดินทาง"
+      },
+      "head": [
+       "To",
+       "Time",
+       "Platform"
+      ],
+      "rows": [
+       [
+        "Chiang Mai",
+        "09:15",
+        "2"
+       ],
+       [
+        "Airport",
+        "10:30",
+        "3"
+       ],
+       [
+        "Bangkok",
+        "11:45",
+        "1"
+       ]
+      ]
+     }
+    },
+    "excuse": {
+     "kind": "choice",
+     "speaker": "Officer",
+     "line": {
+      "en": "Hello! Can I help you?",
+      "th": "สวัสดีครับ ให้ช่วยอะไรไหม"
+     },
+     "prompt": {
+      "en": "Ask how to get to the train station.",
+      "th": "ถามทางไปสถานีรถไฟ"
+     },
+     "hint": {
+      "en": "Start politely with Excuse me, then How do I get to …?",
+      "th": "ขึ้นต้นอย่างสุภาพด้วย Excuse me แล้วถาม How do I get to …?"
+     },
+     "why": {
+      "en": "Excuse me, how do I get to the train station? asks the way politely",
+      "th": "Excuse me, how do I get to the train station? แปลว่า ขอโทษค่ะ/ครับ ไปสถานีรถไฟอย่างไร"
+     },
+     "reply": {
+      "en": "Sure! Let me tell you."
+     },
+     "choices": [
+      {
+       "en": "Excuse me, how do I get to the train station?"
+      },
+      {
+       "en": "Where train station is?"
+      },
+      {
+       "en": "Give me the station!"
+      }
+     ],
+     "answer": 0
+    },
+    "where": {
+     "kind": "listen",
+     "speaker": "Officer",
+     "line": {
+      "en": "Go straight, then turn right. The station is next to the hotel.",
+      "th": "เดินตรงไป แล้วเลี้ยวขวา สถานีอยู่ติดกับโรงแรม"
+     },
+     "prompt": {
+      "en": "Listen. Where is the station?",
+      "th": "ฟังแล้วตอบว่าสถานีอยู่ที่ไหน"
+     },
+     "hint": {
+      "en": "Listen for next to …",
+      "th": "ฟังคำว่า next to …"
+     },
+     "why": {
+      "en": "The officer said the station is next to the hotel",
+      "th": "เจ้าหน้าที่บอกว่าสถานีอยู่ติดกับโรงแรม"
+     },
+     "reply": {
+      "en": "Thank you!"
+     },
+     "choices": [
+      {
+       "en": "Next to the hotel"
+      },
+      {
+       "en": "Behind the airport"
+      },
+      {
+       "en": "Opposite the market"
+      }
+     ],
+     "answer": 0
+    },
+    "tickets": {
+     "kind": "choice",
+     "speaker": "Clerk",
+     "line": {
+      "en": "Hello. Where are you going?",
+      "th": "สวัสดีครับ จะไปไหนครับ"
+     },
+     "prompt": {
+      "en": "Buy tickets for you and Alex.",
+      "th": "ซื้อตั๋วให้คุณและ Alex"
+     },
+     "hint": {
+      "en": "Say the number of tickets and the place.",
+      "th": "บอกจำนวนตั๋วและปลายทาง"
+     },
+     "why": {
+      "en": "Two tickets to Bangkok, please. says how many and where",
+      "th": "Two tickets to Bangkok, please. แปลว่า ขอตั๋วไปกรุงเทพฯ สองใบ"
+     },
+     "reply": {
+      "en": "That's 400 baht, please."
+     },
+     "choices": [
+      {
+       "en": "Two tickets to Bangkok, please."
+      },
+      {
+       "en": "I go Bangkok two."
+      },
+      {
+       "en": "Bangkok is a big city."
+      }
+     ],
+     "answer": 0
+    },
+    "howlong": {
+     "kind": "order",
+     "speaker": "Clerk",
+     "line": {
+      "en": "Here are your tickets.",
+      "th": "นี่ตั๋วของคุณครับ"
+     },
+     "prompt": {
+      "en": "Ask how long the trip takes. Put the words in order.",
+      "th": "ถามว่าเดินทางนานเท่าไร เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Start with How long …",
+      "th": "ขึ้นต้นด้วย How long …"
+     },
+     "why": {
+      "en": "How long does the trip take? asks about time",
+      "th": "How long does the trip take? แปลว่า เดินทางใช้เวลานานเท่าไร"
+     },
+     "reply": {
+      "en": "About three hours."
+     },
+     "tokens": [
+      "How",
+      "long",
+      "does",
+      "the",
+      "trip",
+      "take?"
+     ],
+     "answerText": {
+      "en": "How long does the trip take?"
+     }
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write a travel note: 3 short sentences.",
+     "th": "เขียนบันทึกการเดินทาง 3 ประโยคสั้น ๆ"
+    },
+    "fields": [
+     {
+      "id": "time",
+      "label": {
+       "en": "1. Write when your train or bus leaves.",
+       "th": "1. เขียนว่ารถไฟหรือรถบัสออกกี่โมง"
+      },
+      "example": {
+       "en": "Our train leaves at quarter to twelve."
+      },
+      "help": {
+       "en": "Use leaves at and a time. At least 4 words.",
+       "th": "ใช้ leaves at และเวลา อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\bleaves? at\\b"
+       ]
+      }
+     },
+     {
+      "id": "way",
+      "label": {
+       "en": "2. Give directions.",
+       "th": "2. บอกทาง"
+      },
+      "example": {
+       "en": "Go straight and turn right."
+      },
+      "help": {
+       "en": "Use go straight, turn left or turn right. At least 4 words.",
+       "th": "ใช้ go straight, turn left หรือ turn right อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bgo straight\\b",
+        "\\bturn (left|right)\\b"
+       ]
+      }
+     },
+     {
+      "id": "where",
+      "label": {
+       "en": "3. Say where a place is.",
+       "th": "3. บอกว่าสถานที่อยู่ตรงไหน"
+      },
+      "example": {
+       "en": "The station is next to the hotel."
+      },
+      "help": {
+       "en": "Use next to, opposite, behind or between. At least 4 words.",
+       "th": "ใช้ next to, opposite, behind หรือ between อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bnext to\\b",
+        "\\bopposite\\b",
+        "\\bbehind\\b",
+        "\\bbetween\\b",
+        "\\bin front of\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "It leaves at quarter to twelve.",
+     "th": "ออกตอนสิบเอ็ดโมงสี่สิบห้า"
+    },
+    {
+     "en": "Excuse me, how do I get to the train station?",
+     "th": "ขอโทษค่ะ/ครับ ไปสถานีรถไฟอย่างไร"
+    },
+    {
+     "en": "Two tickets to Bangkok, please.",
+     "th": "ขอตั๋วไปกรุงเทพฯ สองใบ"
+    }
+   ]
+  },
+  {
+   "id": "hotel",
+   "type": "story",
+   "title": {
+    "en": "Check In at the Hotel",
+    "th": "เช็กอินที่โรงแรม"
+   },
+   "summary": {
+    "en": "Check in, understand the hotel times, fix a problem with the room and get advice.",
+    "th": "เช็กอิน เข้าใจเวลาต่าง ๆ ของโรงแรม แก้ปัญหาห้องพัก และขอคำแนะนำ"
+   },
+   "stages": [
+    {
+     "id": "checkin",
+     "title": "Check in",
+     "subtitle": "At reception",
+     "th": "เช็กอิน",
+     "target": "hotel",
+     "go": "Go to the hotel reception.",
+     "questions": [
+      "booking",
+      "name"
+     ]
+    },
+    {
+     "id": "room",
+     "title": "Our room",
+     "subtitle": "Hotel times",
+     "th": "ห้องพัก",
+     "target": "hotel",
+     "go": "Talk to the receptionist again.",
+     "questions": [
+      "breakfast",
+      "noisy"
+     ]
+    },
+    {
+     "id": "advice",
+     "title": "Plans for tomorrow",
+     "subtitle": "At the information desk",
+     "th": "แผนวันพรุ่งนี้",
+     "target": "info",
+     "go": "Go to the information desk.",
+     "questions": [
+      "advice",
+      "thanks"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "Hotel message",
+     "subtitle": "Write a message",
+     "th": "ข้อความถึงโรงแรม",
+     "target": "hotel",
+     "go": "Write a message at the hotel.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "booking": {
+     "kind": "choice",
+     "speaker": "Clerk",
+     "line": {
+      "en": "Good evening. How can I help you?",
+      "th": "สวัสดีตอนเย็นค่ะ ให้ช่วยอะไรคะ"
+     },
+     "prompt": {
+      "en": "Tell the receptionist you have a booking.",
+      "th": "บอกพนักงานต้อนรับว่าคุณจองห้องไว้"
+     },
+     "hint": {
+      "en": "Use I have a booking for … nights.",
+      "th": "ใช้ I have a booking for … nights."
+     },
+     "why": {
+      "en": "Hello. I have a booking for two nights. explains why you are here",
+      "th": "Hello. I have a booking for two nights. แปลว่า สวัสดีค่ะ/ครับ จองห้องไว้สองคืน"
+     },
+     "reply": {
+      "en": "Of course. May I have your name, please?"
+     },
+     "choices": [
+      {
+       "en": "Hello. I have a booking for two nights."
+      },
+      {
+       "en": "Hello. I booking two night."
+      },
+      {
+       "en": "I want a room yesterday."
+      }
+     ],
+     "answer": 0
+    },
+    "name": {
+     "kind": "choice",
+     "speaker": "Clerk",
+     "line": {
+      "en": "May I have your name, please?",
+      "th": "ขอทราบชื่อด้วยค่ะ"
+     },
+     "prompt": {
+      "en": "Give your name.",
+      "th": "บอกชื่อของคุณ"
+     },
+     "hint": {
+      "en": "Sure. It's … is a simple, polite answer.",
+      "th": "Sure. It's … เป็นคำตอบที่ง่ายและสุภาพ"
+     },
+     "why": {
+      "en": "Sure. It's {name}. answers the question politely",
+      "th": "Sure. It's {name}. แปลว่า ได้ค่ะ/ครับ ชื่อ {name}"
+     },
+     "reply": {
+      "en": "Thank you, {name}. Here is your key."
+     },
+     "choices": [
+      {
+       "en": "Sure. It's {name}."
+      },
+      {
+       "en": "I am fine, thank you."
+      },
+      {
+       "en": "My name are {name}."
+      }
+     ],
+     "answer": 0
+    },
+    "breakfast": {
+     "kind": "listen",
+     "speaker": "Clerk",
+     "line": {
+      "en": "Your room is 305 on the third floor. Breakfast is from half past six to ten.",
+      "th": "ห้อง 305 ชั้นสามค่ะ อาหารเช้าตั้งแต่หกโมงครึ่งถึงสิบโมง"
+     },
+     "prompt": {
+      "en": "Listen. What time does breakfast start?",
+      "th": "ฟังแล้วตอบว่าอาหารเช้าเริ่มกี่โมง"
+     },
+     "hint": {
+      "en": "Listen for from …",
+      "th": "ฟังคำว่า from …"
+     },
+     "why": {
+      "en": "Breakfast starts at half past six (6:30)",
+      "th": "อาหารเช้าเริ่มหกโมงครึ่ง"
+     },
+     "reply": {
+      "en": "Enjoy your stay!"
+     },
+     "choices": [
+      {
+       "en": "At half past six"
+      },
+      {
+       "en": "At ten o'clock"
+      },
+      {
+       "en": "At half past ten"
+      }
+     ],
+     "answer": 0,
+     "table": {
+      "caption": {
+       "en": "Hotel information",
+       "th": "ข้อมูลโรงแรม"
+      },
+      "head": [
+       "",
+       "Time"
+      ],
+      "rows": [
+       [
+        "Breakfast",
+        "6:30 – 10:00"
+       ],
+       [
+        "Pool",
+        "8:00 – 20:00"
+       ],
+       [
+        "Check-out",
+        "by 12:00"
+       ]
+      ]
+     }
+    },
+    "noisy": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Our room is next to the lift. It's very noisy!",
+      "th": "ห้องเราอยู่ติดลิฟต์ เสียงดังมากเลย"
+     },
+     "prompt": {
+      "en": "Ask the receptionist politely to change rooms.",
+      "th": "ขอเปลี่ยนห้องกับพนักงานอย่างสุภาพ"
+     },
+     "hint": {
+      "en": "Could we …, please? is very polite.",
+      "th": "Could we …, please? สุภาพมาก"
+     },
+     "why": {
+      "en": "Excuse me, could we change rooms, please? It's very noisy. asks politely and explains",
+      "th": "Excuse me, could we change rooms, please? It's very noisy. แปลว่า ขอโทษค่ะ/ครับ ขอเปลี่ยนห้องได้ไหม เสียงดังมาก"
+     },
+     "reply": {
+      "en": "Of course. Here is room 410. It's very quiet."
+     },
+     "choices": [
+      {
+       "en": "Excuse me, could we change rooms, please? It's very noisy."
+      },
+      {
+       "en": "Change room now!"
+      },
+      {
+       "en": "The room is quiet, thank you."
+      }
+     ],
+     "answer": 0
+    },
+    "advice": {
+     "kind": "choice",
+     "speaker": "Officer",
+     "line": {
+      "en": "Would you like some ideas for tomorrow?",
+      "th": "อยากได้ไอเดียสำหรับวันพรุ่งนี้ไหมครับ"
+     },
+     "prompt": {
+      "en": "Ask what you can visit.",
+      "th": "ถามว่าไปเที่ยวที่ไหนได้บ้าง"
+     },
+     "hint": {
+      "en": "What can we visit …? asks for ideas.",
+      "th": "What can we visit …? ใช้ขอไอเดีย"
+     },
+     "why": {
+      "en": "Yes, please. What can we visit in the city? asks for advice",
+      "th": "Yes, please. What can we visit in the city? แปลว่า ค่ะ/ครับ ในเมืองนี้ไปเที่ยวที่ไหนได้บ้าง"
+     },
+     "reply": {
+      "en": "You can visit the old town and the river market."
+     },
+     "choices": [
+      {
+       "en": "Yes, please. What can we visit in the city?"
+      },
+      {
+       "en": "No, I am a city."
+      },
+      {
+       "en": "Yes, I visit yesterday."
+      }
+     ],
+     "answer": 0
+    },
+    "thanks": {
+     "kind": "order",
+     "speaker": "Officer",
+     "line": {
+      "en": "Here is a city map for you.",
+      "th": "นี่แผนที่เมืองครับ"
+     },
+     "prompt": {
+      "en": "Thank the officer. Put the words in order.",
+      "th": "ขอบคุณเจ้าหน้าที่ เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Start with Thank you …",
+      "th": "ขึ้นต้นด้วย Thank you …"
+     },
+     "why": {
+      "en": "Thank you for your help! thanks someone politely",
+      "th": "Thank you for your help! แปลว่า ขอบคุณที่ช่วยนะคะ/ครับ"
+     },
+     "reply": {
+      "en": "You're welcome. Have a nice trip!"
+     },
+     "tokens": [
+      "Thank",
+      "you",
+      "for",
+      "your",
+      "help!"
+     ],
+     "answerText": {
+      "en": "Thank you for your help!"
+     }
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write a short message to the hotel: 3 sentences.",
+     "th": "เขียนข้อความสั้น ๆ ถึงโรงแรม 3 ประโยค"
+    },
+    "fields": [
+     {
+      "id": "booking",
+      "label": {
+       "en": "1. Say what you booked.",
+       "th": "1. บอกว่าจองอะไรไว้"
+      },
+      "example": {
+       "en": "I have a booking for two nights."
+      },
+      "help": {
+       "en": "Use booking or room. At least 4 words.",
+       "th": "ใช้ booking หรือ room อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bbooking\\b",
+        "\\broom\\b",
+        "\\bbooked\\b"
+       ]
+      }
+     },
+     {
+      "id": "ask",
+      "label": {
+       "en": "2. Ask a polite question.",
+       "th": "2. ถามคำถามอย่างสุภาพ"
+      },
+      "example": {
+       "en": "Could we have a quiet room, please?"
+      },
+      "help": {
+       "en": "Use Could we … or Can we … At least 4 words.",
+       "th": "ใช้ Could we … หรือ Can we … อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\bcould (we|i|you)\\b",
+        "\\bcan (we|i|you)\\b"
+       ]
+      }
+     },
+     {
+      "id": "time",
+      "label": {
+       "en": "3. Ask or say a time.",
+       "th": "3. ถามหรือบอกเวลา"
+      },
+      "example": {
+       "en": "What time is breakfast?"
+      },
+      "help": {
+       "en": "Use what time or a time like 6:30. At least 3 words.",
+       "th": "ใช้ what time หรือเวลา เช่น 6:30 อย่างน้อย 3 คำ"
+      },
+      "rules": {
+       "minWords": 3,
+       "any": [
+        "\\bwhat time\\b",
+        "\\d{1,2}[:.]\\d{2}",
+        "o'clock",
+        "\\bhalf past\\b",
+        "\\bquarter\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "Hello. I have a booking for two nights.",
+     "th": "สวัสดีค่ะ/ครับ จองห้องไว้สองคืน"
+    },
+    {
+     "en": "Excuse me, could we change rooms, please?",
+     "th": "ขอโทษค่ะ/ครับ ขอเปลี่ยนห้องได้ไหม"
+    },
+    {
+     "en": "Thank you for your help!",
+     "th": "ขอบคุณที่ช่วยนะคะ/ครับ"
+    }
+   ]
+  },
+  {
+   "id": "lostbag",
+   "type": "story",
+   "title": {
+    "en": "Help with a Lost Bag",
+    "th": "ขอความช่วยเหลือเมื่อกระเป๋าหาย"
+   },
+   "summary": {
+    "en": "Alex's bag is not on the belt. Ask for help, describe the bag and get it back.",
+    "th": "กระเป๋าของ Alex ไม่อยู่บนสายพาน ขอความช่วยเหลือ บรรยายลักษณะกระเป๋า และได้กระเป๋าคืน"
+   },
+   "stages": [
+    {
+     "id": "missing",
+     "title": "The bag is missing",
+     "subtitle": "At the airport",
+     "th": "กระเป๋าหาย",
+     "target": "airport",
+     "go": "Go to the airport baggage belt.",
+     "questions": [
+      "missing",
+      "worried"
+     ]
+    },
+    {
+     "id": "report",
+     "title": "Report it",
+     "subtitle": "Lost and found",
+     "th": "แจ้งของหาย",
+     "target": "lost",
+     "go": "Go to the lost and found office.",
+     "questions": [
+      "help",
+      "describe"
+     ]
+    },
+    {
+     "id": "found",
+     "title": "Good news",
+     "subtitle": "At the hotel",
+     "th": "ข่าวดี",
+     "target": "hotel",
+     "go": "Go back to the hotel.",
+     "questions": [
+      "arrive",
+      "grateful"
+     ]
+    },
+    {
+     "id": "reflect",
+     "title": "Lost bag report",
+     "subtitle": "Describe the bag",
+     "th": "รายงานของหาย",
+     "target": "lost",
+     "go": "Write a lost bag report.",
+     "questions": []
+    }
+   ],
+   "questions": {
+    "missing": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "Oh no! My bag isn't here. What should we do?",
+      "th": "แย่แล้ว กระเป๋าฉันไม่อยู่ เราควรทำอย่างไรดี"
+     },
+     "prompt": {
+      "en": "Suggest what to do.",
+      "th": "เสนอว่าควรทำอะไร"
+     },
+     "hint": {
+      "en": "The lost and found office helps with lost bags.",
+      "th": "แผนกของหายช่วยเรื่องกระเป๋าหาย"
+     },
+     "why": {
+      "en": "Let's go to the lost and found office. is a good plan",
+      "th": "Let's go to the lost and found office. แปลว่า ไปที่แผนกของหายกันเถอะ"
+     },
+     "reply": {
+      "en": "OK. Let's go!"
+     },
+     "choices": [
+      {
+       "en": "Let's go to the lost and found office."
+      },
+      {
+       "en": "Let's go home without it."
+      },
+      {
+       "en": "Let's buy a new car."
+      }
+     ],
+     "answer": 0
+    },
+    "worried": {
+     "kind": "choice",
+     "speaker": "Alex",
+     "line": {
+      "en": "I'm so worried. All my clothes are in it.",
+      "th": "ฉันกังวลมาก เสื้อผ้าทั้งหมดอยู่ในนั้น"
+     },
+     "prompt": {
+      "en": "Comfort Alex.",
+      "th": "ปลอบใจ Alex"
+     },
+     "hint": {
+      "en": "Don't worry. … can help us.",
+      "th": "Don't worry. … can help us."
+     },
+     "why": {
+      "en": "Don't worry. They can help us. comforts a friend",
+      "th": "Don't worry. They can help us. แปลว่า ไม่ต้องห่วง เขาช่วยเราได้"
+     },
+     "reply": {
+      "en": "Thanks. I feel better."
+     },
+     "choices": [
+      {
+       "en": "Don't worry. They can help us."
+      },
+      {
+       "en": "It's your problem."
+      },
+      {
+       "en": "I'm worry too much."
+      }
+     ],
+     "answer": 0
+    },
+    "help": {
+     "kind": "choice",
+     "speaker": "Officer",
+     "line": {
+      "en": "Hello. How can I help you?",
+      "th": "สวัสดีครับ ให้ช่วยอะไรครับ"
+     },
+     "prompt": {
+      "en": "Ask for help and explain the problem.",
+      "th": "ขอความช่วยเหลือและอธิบายปัญหา"
+     },
+     "hint": {
+      "en": "Can you help us? My friend's bag …",
+      "th": "Can you help us? My friend's bag …"
+     },
+     "why": {
+      "en": "Excuse me, can you help us? My friend's bag is lost. asks for help and explains",
+      "th": "Excuse me, can you help us? My friend's bag is lost. แปลว่า ขอโทษค่ะ/ครับ ช่วยเราหน่อยได้ไหม กระเป๋าเพื่อนหาย"
+     },
+     "reply": {
+      "en": "Of course. Let me help you."
+     },
+     "choices": [
+      {
+       "en": "Excuse me, can you help us? My friend's bag is lost."
+      },
+      {
+       "en": "Where is my bag? You took it!"
+      },
+      {
+       "en": "I lost my friend."
+      }
+     ],
+     "answer": 0
+    },
+    "describe": {
+     "kind": "choice",
+     "speaker": "Officer",
+     "line": {
+      "en": "What does the bag look like?",
+      "th": "กระเป๋ามีลักษณะอย่างไรครับ"
+     },
+     "prompt": {
+      "en": "Describe Alex's bag.",
+      "th": "บรรยายลักษณะกระเป๋าของ Alex"
+     },
+     "hint": {
+      "en": "Size, then colour, then the thing: a big blue bag.",
+      "th": "ขนาด แล้วสี แล้วสิ่งของ: a big blue bag"
+     },
+     "why": {
+      "en": "It's a big blue bag with a red tag. puts size before colour",
+      "th": "It's a big blue bag with a red tag. แปลว่า เป็นกระเป๋าใบใหญ่สีน้ำเงินมีป้ายสีแดง"
+     },
+     "reply": {
+      "en": "Thank you. We will look for it."
+     },
+     "choices": [
+      {
+       "en": "It's a big blue bag with a red tag."
+      },
+      {
+       "en": "It's a blue big bag tag red."
+      },
+      {
+       "en": "It's bag big."
+      }
+     ],
+     "answer": 0
+    },
+    "arrive": {
+     "kind": "listen",
+     "speaker": "Clerk",
+     "line": {
+      "en": "Good news! The airport found your bag. It will arrive at seven this evening.",
+      "th": "ข่าวดีค่ะ สนามบินเจอกระเป๋าแล้ว จะมาถึงตอนหนึ่งทุ่มคืนนี้"
+     },
+     "prompt": {
+      "en": "Listen. When will the bag arrive?",
+      "th": "ฟังแล้วตอบว่ากระเป๋าจะมาถึงเมื่อไร"
+     },
+     "hint": {
+      "en": "Listen for the time.",
+      "th": "ฟังเวลา"
+     },
+     "why": {
+      "en": "The bag will arrive at seven this evening",
+      "th": "กระเป๋าจะมาถึงตอนหนึ่งทุ่มคืนนี้"
+     },
+     "reply": {
+      "en": "Hooray!"
+     },
+     "choices": [
+      {
+       "en": "At seven this evening"
+      },
+      {
+       "en": "Tomorrow morning"
+      },
+      {
+       "en": "Next week"
+      }
+     ],
+     "answer": 0
+    },
+    "grateful": {
+     "kind": "order",
+     "speaker": "Alex",
+     "line": {
+      "en": "I'm so happy! Let's say thank you.",
+      "th": "ดีใจมาก ไปขอบคุณกันเถอะ"
+     },
+     "prompt": {
+      "en": "Thank the receptionist. Put the words in order.",
+      "th": "ขอบคุณพนักงานต้อนรับ เรียงคำให้ถูก"
+     },
+     "hint": {
+      "en": "Thank you so much …",
+      "th": "Thank you so much …"
+     },
+     "why": {
+      "en": "Thank you so much for your help! is a warm thank you",
+      "th": "Thank you so much for your help! แปลว่า ขอบคุณมาก ๆ ที่ช่วยนะคะ/ครับ"
+     },
+     "reply": {
+      "en": "You're very welcome!"
+     },
+     "tokens": [
+      "Thank",
+      "you",
+      "so",
+      "much",
+      "for",
+      "your",
+      "help!"
+     ],
+     "answerText": {
+      "en": "Thank you so much for your help!"
+     }
+    }
+   },
+   "card": {
+    "intro": {
+     "en": "Write a lost bag report: 3 short sentences.",
+     "th": "เขียนรายงานกระเป๋าหาย 3 ประโยคสั้น ๆ"
+    },
+    "fields": [
+     {
+      "id": "what",
+      "label": {
+       "en": "1. Describe the bag.",
+       "th": "1. บรรยายลักษณะกระเป๋า"
+      },
+      "example": {
+       "en": "It's a big blue bag with a red tag."
+      },
+      "help": {
+       "en": "Use a size or colour word. At least 4 words.",
+       "th": "ใช้คำบอกขนาดหรือสี อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "any": [
+        "\\b(big|small|large|little|black|white|blue|red|green|yellow|brown|pink|grey|gray|orange|purple)\\b"
+       ]
+      }
+     },
+     {
+      "id": "where",
+      "label": {
+       "en": "2. Say where you lost it.",
+       "th": "2. บอกว่าทำหายที่ไหน"
+      },
+      "example": {
+       "en": "I lost it at the airport."
+      },
+      "help": {
+       "en": "Use lost and at or on. At least 4 words.",
+       "th": "ใช้ lost และ at หรือ on อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\blost\\b"
+       ]
+      }
+     },
+     {
+      "id": "call",
+      "label": {
+       "en": "3. Ask them to contact you.",
+       "th": "3. ขอให้ติดต่อกลับ"
+      },
+      "example": {
+       "en": "Please call me at the hotel."
+      },
+      "help": {
+       "en": "Use please and call or email. At least 4 words.",
+       "th": "ใช้ please และ call หรือ email อย่างน้อย 4 คำ"
+      },
+      "rules": {
+       "minWords": 4,
+       "all": [
+        "\\bplease\\b"
+       ],
+       "any": [
+        "\\bcall\\b",
+        "\\bemail\\b",
+        "\\bcontact\\b",
+        "\\btell\\b"
+       ]
+      }
+     }
+    ]
+   },
+   "speakPrompt": {
+    "en": "Listen, then say each sentence aloud.",
+    "th": "ฟังแล้วพูดออกเสียงทีละประโยค"
+   },
+   "speaking": [
+    {
+     "en": "Excuse me, can you help us?",
+     "th": "ขอโทษค่ะ/ครับ ช่วยเราหน่อยได้ไหม"
+    },
+    {
+     "en": "It's a big blue bag with a red tag.",
+     "th": "เป็นกระเป๋าใบใหญ่สีน้ำเงินมีป้ายสีแดง"
+    },
+    {
+     "en": "Thank you so much for your help!",
+     "th": "ขอบคุณมาก ๆ ที่ช่วยนะคะ/ครับ"
+    }
+   ]
+  }
+ ]
+}

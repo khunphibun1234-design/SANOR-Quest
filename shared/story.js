@@ -186,7 +186,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min((now-last)/10
   else if(path.length){const [tx,tz]=path[0],dx=tx-player.x,dz=tz-player.z,dist=Math.hypot(dx,dz),step=dt*4.2*SPEED;if(dist<=step){player.x=tx;player.z=tz;path.shift();}else move(dx/dist*step,dz/dist*step);player.walk=true;
    if(!path.length&&pathPlace){const p=pathPlace;pathPlace=null;openPlace(p);}}
   alex.walk=false;
-  if(cfg.follows(current,lesson)){const tail=followTrail.at(-1);if(!tail||Math.hypot(tail[0]-player.x,tail[1]-player.z)>.22)followTrail.push([player.x,player.z]);if(followTrail.length>500)followTrail.shift();
+  if(!cfg.follows||cfg.follows(current,lesson)){const tail=followTrail.at(-1);if(!tail||Math.hypot(tail[0]-player.x,tail[1]-player.z)>.22)followTrail.push([player.x,player.z]);if(followTrail.length>500)followTrail.shift();
    if(Math.hypot(player.x-alex.x,player.z-alex.z)>1.05&&followTrail.length){let target=followTrail[0],dx=target[0]-alex.x,dz=target[1]-alex.z,d=Math.hypot(dx,dz);
     if(d<.12&&followTrail.length>1){followTrail.shift();target=followTrail[0];dx=target[0]-alex.x;dz=target[1]-alex.z;d=Math.hypot(dx,dz);}
     if(d>.01){const step=Math.min(d,dt*4.1*SPEED);alex.x+=dx/d*step;alex.z+=dz/d*step;alex.angle=Math.atan2(dx,dz);alex.walk=true;}}}}
