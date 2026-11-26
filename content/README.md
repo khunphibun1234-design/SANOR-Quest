@@ -7,6 +7,10 @@
 | `words.json` | คลังคำกลาง: คำ, คำแปล, ระดับ CEFR, หมวด, โลกที่ใช้, ไฟล์เสียงของคำ และประโยคตัวอย่าง |
 | `worlds/01-home.json` | Map 01: `welcome` → `table` (Lunch with Alex) → `garden` (บ่ายวันสบายในสวน) |
 | `worlds/02-school.json` | Map 02: `timetable` → `tour` → `club` (+ `buddy` แบบฝึกเร็ว 2D สำรอง) |
+| `worlds/03-phibun.json` | Map 03: `guide` (บรรยายสถานที่) → `songkran` (there is/are) → `plans` (past simple) |
+| `worlds/04-market.json` | Map 04: `shopping` (How much…? ตัวเลข) → `meal` (Can I have…?) → `party` (งบประมาณ 300 บาท) |
+| `worlds/05-travel.json` | Map 05: `directions` (เวลา ถามทาง) → `hotel` (เช็กอิน) → `lostbag` (ขอความช่วยเหลือ) |
+| `worlds/06-future.json` | Map 06: `design` (First, then, finally) → `ideas` (เสนอความคิด) → `present` (นำเสนองาน) |
 | `content.js` | **สร้างอัตโนมัติ** อย่าแก้เอง |
 
 ## แก้เนื้อหาอย่างไร

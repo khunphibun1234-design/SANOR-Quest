@@ -24,3 +24,17 @@ for(const [id,card,next] of [
     const r=await page.evaluate(i=>[SanorProfile.activity('02',i),SanorProfile.stamps('02').some(s=>s.id==='school-'+i+'-done')],id);
     expect(r[0]).toMatchObject({done:true});expect(r[1]).toBe(true);
     expect(errors).toEqual([]);});}
+// Maps 03–06: the first story mission of each world, played in 3D from start to report
+const {load}=require('./unit/load');const {SQContent}=load(['content/content.js']);
+for(const [wid,mid] of [['03','guide'],['04','shopping'],['05','directions'],['06','design']]){
+  const w=SQContent.worlds[wid],m=w.missions.find(x=>x.id===mid),card=Object.fromEntries(m.card.fields.map(f=>[f.id,f.example.en]));
+  test(`Map ${wid} 3D mission: ${mid}`,async({page})=>{test.setTimeout(480_000);const errors=watch(page);
+    await page.goto(`/${w.slug}/?quality=low&speed=4`);await page.evaluate(()=>localStorage.clear());
+    await page.goto(`/${w.slug}/?quality=low&speed=4&mission=${mid}`);
+    await page.fill('#playerName','Ploy');await page.click('#startBtn');
+    await playMission(page,{card});
+    await expect(page.locator('#reportContent')).toContainText('Passport stamp');
+    await expect(page.locator('#nextMission')).toContainText(w.missions.find(x=>x.id===w.missionOrder[1]).title.en);
+    const r=await page.evaluate(([wid,mid])=>[SanorProfile.activity(wid,mid).done,SanorProfile.mapXp(wid)],[wid,mid]);
+    expect(r).toEqual([true,6*20+100]);
+    expect(errors).toEqual([]);});}

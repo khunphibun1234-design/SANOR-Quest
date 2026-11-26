@@ -7,6 +7,10 @@
 |---|---|
 | Map 01 · My Home, My Story (3D) · 3 ภารกิจ | `home/` (ภารกิจ 2 Lunch with Alex: `home/table-three.html`; 2D สำรอง: `home/table.html`) |
 | Map 02 · School of Adventures (3D) · 3 ภารกิจ | `school/` (2D สำรอง: `school/quiz.html`) |
+| Map 03 · Phibun Hometown (3D) · 3 ภารกิจ | `phibun/` |
+| Map 04 · Market & Food Street (3D) · 3 ภารกิจ | `market/` |
+| Map 05 · Around the World (3D) · 3 ภารกิจ | `travel/` |
+| Map 06 · Future Makers City (3D) · 3 ภารกิจ | `future/` |
 | ทบทวนประจำวัน 3 นาที | `review/` |
 | แบบทดสอบก่อน/หลังเรียน | `test/?kind=pre` · `test/?kind=post` (ข้อสอบ: `content/tests.json`) |
 | **แดชบอร์ดครู** | `teacher/` (แท็บ "การทดลอง": เวลาเล่น จุดที่ติด ความเห็น สถิติก่อน/หลัง) · แบบสังเกต `teacher/observation.html` · แผนทดลอง `docs/PILOT-PLAN.md` |
@@ -33,6 +37,7 @@
 - `shared/mission.js`: ตัวเล่นภารกิจกลาง (choice, listen, order, speak, write, tap3d)
 - `shared/srs.js`: ระบบทบทวนคำแบบเว้นระยะ (Leitner 5 กล่อง) ใช้ในหน้า `review/`
 - `shared/voice.js`: ฝึกพูด (ไมค์ตรวจคำ / อัดเสียงแล้วประเมินเอง / ข้าม) ผลเก็บใน profile
+- `shared/props.js`: ชุดฉากสำเร็จรูป (อาคาร แผงร้าน ต้นไม้ น้ำ ฝูงคน) ใช้สร้างโลก 3D ของ Map 03–06 · หน้าโลกใหม่สร้างด้วย `node scripts/make-map-page.js`
 - `shared/writing.js`: การ์ดเขียนประโยค (แม่แบบจากการ์ดต้อนรับ Map 01) ใช้ทุกโลก
 - `shared/coach.js`: ปรับความยากตามผู้เรียน (ถูกครั้งแรก >85% เสนอเลื่อนระดับ, <50% เปิดตัวช่วยเพิ่ม)
 - `shared/tokens.css`: design system (ฟอนต์ Outfit + Noto Sans Thai, สี, ปุ่ม) และสไตล์ตัวช่วยภาษาไทย

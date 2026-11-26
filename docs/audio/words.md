@@ -2,7 +2,7 @@
 
 สร้างอัตโนมัติด้วย `npm run audio` · อย่าแก้ไฟล์นี้เอง
 
-- ต้องอัดเพิ่ม **64** ไฟล์ จากทั้งหมด 87 ประโยค
+- ต้องอัดเพิ่ม **128** ไฟล์ จากทั้งหมด 151 ประโยค
 - อัดเป็น .mp3 (mono, 44.1 kHz) ตั้งชื่อไฟล์ตามคอลัมน์ "ชื่อไฟล์" แล้วส่งมาทั้งชุด
 - `{name}` คือชื่อเล่นของผู้เล่น: ให้พูดว่า "Mook" แทน
 
@@ -95,3 +95,67 @@
 | 85 | ⬜ | Can I have two bowls of noodles, please? | ขอก๋วยเตี๋ยวสองชามค่ะ/ครับ | `word-noodles-example.mp3` | example: noodles |
 | 86 | ⬜ | instead |  | `word-instead.mp3` | word: instead |
 | 87 | ⬜ | Let's eat noodles instead. | ไปกินก๋วยเตี๋ยวแทนกันเถอะ | `word-instead-example.mp3` | example: instead |
+| 88 | ⬜ | mango |  | `word-mango.mp3` | word: mango |
+| 89 | ⬜ | They're fifteen baht each. | ลูกละสิบห้าบาท | `word-mango-example.mp3` | example: mango |
+| 90 | ⬜ | bottle |  | `word-bottle.mp3` | word: bottle |
+| 91 | ⬜ | Can I have two bottles of water, please? | ขอน้ำสองขวดค่ะ/ครับ | `word-bottle-example.mp3` | example: bottle |
+| 92 | ⬜ | baht |  | `word-baht.mp3` | word: baht |
+| 93 | ⬜ | spicy |  | `word-spicy.mp3` | word: spicy |
+| 94 | ⬜ | I don't like spicy food. | ฉันไม่ชอบอาหารเผ็ด | `word-spicy-example.mp3` | example: spicy |
+| 95 | ⬜ | menu |  | `word-menu.mp3` | word: menu |
+| 96 | ⬜ | Look at the menu. | ดูเมนู | `word-menu-example.mp3` | example: menu |
+| 97 | ⬜ | bill |  | `word-bill.mp3` | word: bill |
+| 98 | ⬜ | Can we have the bill, please? | ขอเช็กบิลด้วยค่ะ/ครับ | `word-bill-example.mp3` | example: bill |
+| 99 | ⬜ | budget |  | `word-budget.mp3` | word: budget |
+| 100 | ⬜ | We have a budget of 300 baht. | เรามีงบ 300 บาท | `word-budget-example.mp3` | example: budget |
+| 101 | ⬜ | expensive |  | `word-expensive.mp3` | word: expensive |
+| 102 | ⬜ | That's too expensive. | แพงไปหน่อย | `word-expensive-example.mp3` | example: expensive |
+| 103 | ⬜ | cheap |  | `word-cheap.mp3` | word: cheap |
+| 104 | ⬜ | Do you have a cheaper one? | มีอันที่ถูกกว่าไหม | `word-cheap-example.mp3` | example: cheap |
+| 105 | ⬜ | cake |  | `word-cake.mp3` | word: cake |
+| 106 | ⬜ | A small cake is 150 baht. | เค้กเล็ก 150 บาท | `word-cake-example.mp3` | example: cake |
+| 107 | ⬜ | gift |  | `word-gift.mp3` | word: gift |
+| 108 | ⬜ | We need a small gift. | เราต้องมีของขวัญเล็ก ๆ | `word-gift-example.mp3` | example: gift |
+| 109 | ⬜ | platform |  | `word-platform.mp3` | word: platform |
+| 110 | ⬜ | Which platform is it? | ขึ้นที่ชานชาลาไหน | `word-platform-example.mp3` | example: platform |
+| 111 | ⬜ | ticket |  | `word-ticket.mp3` | word: ticket |
+| 112 | ⬜ | Two tickets to Bangkok, please. | ขอตั๋วไปกรุงเทพฯ สองใบ | `word-ticket-example.mp3` | example: ticket |
+| 113 | ⬜ | straight |  | `word-straight.mp3` | word: straight |
+| 114 | ⬜ | Go straight, then turn right. | เดินตรงไป แล้วเลี้ยวขวา | `word-straight-example.mp3` | example: straight |
+| 115 | ⬜ | turn right |  | `word-turn-right.mp3` | word: turn-right |
+| 116 | ⬜ | next to |  | `word-next-to.mp3` | word: next-to |
+| 117 | ⬜ | The station is next to the hotel. | สถานีอยู่ติดกับโรงแรม | `word-next-to-example.mp3` | example: next-to |
+| 118 | ⬜ | booking |  | `word-booking.mp3` | word: booking |
+| 119 | ⬜ | I have a booking for two nights. | จองห้องไว้สองคืน | `word-booking-example.mp3` | example: booking |
+| 120 | ⬜ | breakfast |  | `word-breakfast.mp3` | word: breakfast |
+| 121 | ⬜ | Breakfast is from half past six. | อาหารเช้าเริ่มหกโมงครึ่ง | `word-breakfast-example.mp3` | example: breakfast |
+| 122 | ⬜ | noisy |  | `word-noisy.mp3` | word: noisy |
+| 123 | ⬜ | It's very noisy. | เสียงดังมาก | `word-noisy-example.mp3` | example: noisy |
+| 124 | ⬜ | lost |  | `word-lost.mp3` | word: lost |
+| 125 | ⬜ | My friend's bag is lost. | กระเป๋าเพื่อนหาย | `word-lost-example.mp3` | example: lost |
+| 126 | ⬜ | bag |  | `word-bag.mp3` | word: bag |
+| 127 | ⬜ | It's a big blue bag. | เป็นกระเป๋าใบใหญ่สีน้ำเงิน | `word-bag-example.mp3` | example: bag |
+| 128 | ⬜ | airport |  | `word-airport.mp3` | word: airport |
+| 129 | ⬜ | My bag isn't at the airport. | กระเป๋าฉันไม่อยู่ที่สนามบิน | `word-airport-example.mp3` | example: airport |
+| 130 | ⬜ | robot |  | `word-robot.mp3` | word: robot |
+| 131 | ⬜ | It can plant trees in the park. | มันปลูกต้นไม้ในสวนได้ | `word-robot-example.mp3` | example: robot |
+| 132 | ⬜ | battery |  | `word-battery.mp3` | word: battery |
+| 133 | ⬜ | Its battery is empty. | แบตเตอรี่หมด | `word-battery-example.mp3` | example: battery |
+| 134 | ⬜ | solar |  | `word-solar.mp3` | word: solar |
+| 135 | ⬜ | Why don't we use solar power? | ทำไมเราไม่ใช้พลังงานแสงอาทิตย์ล่ะ | `word-solar-example.mp3` | example: solar |
+| 136 | ⬜ | energy |  | `word-energy.mp3` | word: energy |
+| 137 | ⬜ | Wind is clean energy. | ลมเป็นพลังงานสะอาด | `word-energy-example.mp3` | example: energy |
+| 138 | ⬜ | idea |  | `word-idea.mp3` | word: idea |
+| 139 | ⬜ | That's a good idea. | เป็นไอเดียที่ดี | `word-idea-example.mp3` | example: idea |
+| 140 | ⬜ | agree |  | `word-agree.mp3` | word: agree |
+| 141 | ⬜ | I agree. Wind is clean energy. | เห็นด้วย ลมเป็นพลังงานสะอาด | `word-agree-example.mp3` | example: agree |
+| 142 | ⬜ | because |  | `word-because.mp3` | word: because |
+| 143 | ⬜ | I like it because it saves energy. | ฉันชอบเพราะมันประหยัดพลังงาน | `word-because-example.mp3` | example: because |
+| 144 | ⬜ | first |  | `word-first.mp3` | word: first |
+| 145 | ⬜ | First, it digs a hole. | อันดับแรก มันขุดหลุม | `word-first-example.mp3` | example: first |
+| 146 | ⬜ | finally |  | `word-finally.mp3` | word: finally |
+| 147 | ⬜ | Finally, it takes a photo. | สุดท้าย มันถ่ายรูป | `word-finally-example.mp3` | example: finally |
+| 148 | ⬜ | project |  | `word-project.mp3` | word: project |
+| 149 | ⬜ | Today we're going to talk about our project. | วันนี้เราจะพูดเรื่องโครงการของเรา | `word-project-example.mp3` | example: project |
+| 150 | ⬜ | vote |  | `word-vote.mp3` | word: vote |
+| 151 | ⬜ | Solar bus stops got the most votes. | ป้ายรถเมล์พลังงานแสงอาทิตย์ได้โหวตมากที่สุด | `word-vote-example.mp3` | example: vote |
