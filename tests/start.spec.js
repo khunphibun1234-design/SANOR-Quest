@@ -16,10 +16,13 @@ test('register, then log in again on another device; mistakes are explained in E
   const R=page.locator('#registerForm');await expect(R).toBeVisible();await expect(page.locator('#splash')).toBeHidden();
   await R.locator('[name=code]').fill(code.toLowerCase());await expect(R.locator('[name=code]')).toHaveValue(code);
   await R.locator('[name=number]').fill('7');await R.locator('[name=nickname]').fill('Ploy');
-  await R.locator('[name=pin]').fill('1a2b');await expect(R.locator('[name=pin]')).toHaveValue('12');await R.locator('[name=pin]').fill('1234');   // digits only
-  await R.locator('[name=pin2]').fill('4321');await R.locator('.cta-button').click();
+  await R.locator('[name=pin]').fill('1234');await expect(R.locator('[name=pin]')).toHaveValue('1234');
+  await R.locator('[name=pin2]').fill('4a3b');await expect(R.locator('[name=pin2]')).toHaveValue('43');   // digits only
+  await R.locator('[name=pin2]').clear();await R.locator('[name=pin2]').fill('4321');await expect(R.locator('[name=pin2]')).toHaveValue('4321');
+  await R.locator('.cta-button').click();
   await expect(page.locator('#registerError')).toContainText('PIN สองช่องไม่ตรงกัน');
-  await R.locator('[name=pin2]').fill('1234');await R.locator('.cta-button').click();
+  await R.locator('[name=pin2]').clear();await R.locator('[name=pin2]').fill('1234');await expect(R.locator('[name=pin2]')).toHaveValue('1234');
+  await R.locator('.cta-button').click();
   await expect(page.locator('#welcome')).toContainText('Welcome, Ploy!');await expect(page.locator('#welcome')).toContainText('M.2/5 · No. 7');
   await expect(page).toHaveURL(/localhost:\d+\/$/);await expect(page.locator('#classChip')).toContainText('M.2/5');
   // the same number cannot be registered again with another PIN
