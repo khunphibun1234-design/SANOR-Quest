@@ -50,3 +50,4 @@ dialog .close{float:right;min-height:0;border:0;background:none;font-size:1.6rem
 .fbar{position:relative;height:12px;border-radius:var(--pill);background:#f0f1ea;overflow:hidden}.fbar i,.fbar b{position:absolute;left:0;top:0;bottom:0;border-radius:var(--pill)}.fbar i{background:#cfe0d4}.fbar b{background:var(--green)}
 .comments{padding-left:1.1rem}.comments li{margin:.35rem 0}.comments small{color:var(--muted)}
 .note-form{display:grid;gap:.5rem;max-width:40rem}.note-form textarea{padding:.6rem;border:1px solid #c5cfc4;border-radius:var(--radius-s);font:inherit}.note-form button{justify-self:start}
+.comments small,.funnel small,.fstep small{text-transform:none;letter-spacing:0;font:500 .8rem var(--body);color:var(--muted)}
