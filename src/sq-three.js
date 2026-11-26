@@ -87,14 +87,15 @@ function lookAt(eye,target){const z=norm(sub(eye,target)),x=norm(cross([0,1,0],z
 function createEngine(canvas,o={}){
  const opt={background:'#e3eadc',fog:[45,110],pixelRatio:1.75,shadowCenter:[0,0,0],shadowRadius:14,exposure:.95,sun:2.3,...o};
  const renderer=new WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
- // ?quality=high keeps full quality; ?quality=low starts at the lightest setting (very weak devices, automated tests)
- const FIXED_Q=/quality=(high|low)/.test(location.search),LOW_Q=/quality=low/.test(location.search);
+ // ?quality=high keeps full quality; ?quality=medium is 1× resolution without shadows (older phones, screen recordings);
+ // ?quality=low starts at the lightest setting (very weak devices, automated tests)
+ const FIXED_Q=/quality=(high|medium|low)/.test(location.search),LOW_Q=/quality=low/.test(location.search),MID_Q=/quality=medium/.test(location.search);
  // budget phones (≤4 GB memory or ≤4 cores) start lighter: 1× resolution and smaller shadows
  const BUDGET=!FIXED_Q&&((navigator.deviceMemory&&navigator.deviceMemory<=4)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4));
- let pixelCap=LOW_Q?.5:BUDGET?1:Math.min(devicePixelRatio||1,opt.pixelRatio);
+ let pixelCap=LOW_Q?.5:MID_Q||BUDGET?1:Math.min(devicePixelRatio||1,opt.pixelRatio);
  renderer.setPixelRatio(pixelCap);renderer.setSize(innerWidth,innerHeight,false);
  renderer.toneMapping=NeutralToneMapping;renderer.toneMappingExposure=opt.exposure;renderer.outputColorSpace=SRGBColorSpace;
- renderer.shadowMap.enabled=!LOW_Q;renderer.shadowMap.type=PCFSoftShadowMap;renderer.setClearColor(new Color(opt.background),1);
+ renderer.shadowMap.enabled=!LOW_Q&&!MID_Q;renderer.shadowMap.type=PCFSoftShadowMap;renderer.setClearColor(new Color(opt.background),1);
  const scene=new Scene();scene.fog=new Fog(new Color(opt.background),opt.fog[0],opt.fog[1]);
  const pmrem=new PMREMGenerator(renderer);scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;scene.environmentIntensity=.22;
  scene.add(new HemisphereLight(0xdfeaf7,0xa98f68,.8));

@@ -21,7 +21,7 @@ const dur=i=>(i+1<T.starts.length?T.starts[i+1]:T.end)-T.starts[i];
  const overlay=()=>p.evaluate(()=>{if(document.getElementById('__cap'))return;const d=document.createElement('div');d.id='__cap';
   d.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:2147483646;max-width:86%;padding:12px 22px 13px;border-radius:16px;background:rgba(18,52,36,.9);border:2px solid #e3b94f;color:#fff;font:600 23px/1.42 "Noto Sans Thai",Outfit,sans-serif;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.3);transition:opacity .25s';
   document.body.append(d);});
- async function caption(th,en){await overlay().catch(()=>{});await p.evaluate(([th,en])=>{const d=document.getElementById('__cap');d.innerHTML=th+(en?'<div style="font:500 16px/1.4 Outfit,sans-serif;color:#d9ead9;margin-top:3px">'+en+'</div>':'');d.style.opacity=1;},[th,en]).catch(()=>{});}
+ async function caption(th,en,top=false){await overlay().catch(()=>{});await p.evaluate(([th,en,top])=>{const d=document.getElementById('__cap');d.style.top=top?'18px':'auto';d.style.bottom=top?'auto':'24px';d.innerHTML=th+(en?'<div style="font:500 16px/1.4 Outfit,sans-serif;color:#d9ead9;margin-top:3px">'+en+'</div>':'');d.style.opacity=1;},[th,en,top]).catch(()=>{});}
  async function titleCard(th,en,lines=[]){await p.evaluate(([th,en,lines])=>{document.getElementById('__cap')?.remove();const d=document.createElement('div');d.id='__title';
   d.style.cssText='position:fixed;inset:0;z-index:2147483647;display:grid;place-content:center;justify-items:center;gap:10px;text-align:center;background:radial-gradient(circle at 50% 35%,#fffaf0,#f1e7c9);color:#1d6338;font:800 50px/1.25 Outfit,"Noto Sans Thai",sans-serif';
   d.innerHTML='<img src="'+location.origin+'/images/brand/logo.webp" style="width:250px;height:auto;filter:drop-shadow(0 8px 16px rgba(80,50,0,.25))"><div>'+th+'</div><div style="font:500 24px/1.5 Outfit,\'Noto Sans Thai\',sans-serif;color:#4c5e48">'+en+'</div>'+lines.map(l=>'<div style="font:600 21px/1.5 \'Noto Sans Thai\',sans-serif;color:#3c5d52">✦ '+l+'</div>').join('');
@@ -29,6 +29,8 @@ const dur=i=>(i+1<T.starts.length?T.starts[i+1]:T.end)-T.starts[i];
  // one scene = one row of the narration script; it lasts at least as long as its narration
  async function scene(i,fn){const start=(Date.now()-t0)/1000;current={i,start};await fn();
   const left=dur(i)*1000-(Date.now()-t0-start*1000);if(left>0)await wait(left);scenes.push({i,start,end:(Date.now()-t0)/1000});}
+ // on the 3D page, click through the DOM: Playwright's "is it still moving?" check is slow while software-rendering 3D
+ const tap=sel=>p.evaluate(s=>{const e=document.querySelector(s);if(e&&!e.disabled){e.click();return true;}return false;},sel);
  const type=async(sel,text)=>{await p.click(sel);await p.keyboard.type(text,{delay:85});};
 
  // 0 · title over the splash screen
@@ -62,17 +64,18 @@ const dur=i=>(i+1<T.starts.length?T.starts[i+1]:T.end)-T.starts[i];
      {kind:'test',test:'pre',score:pre,total:20});if(n<=20)ev.push({kind:'test',test:'post',score:Math.min(20,pre+2+Math.floor(r()*6)),total:20});
     await SQBackend.student.submit(j.token,ev);}},code);});
  // 8 · Map 02 in 3D
- await scene(8,async()=>{await p.goto(BASE+'/school/?speed=2');await caption('แผนที่ที่ 2 · โรงเรียน 3D: เลือกภารกิจแล้วเริ่มเล่น','Map 02: a 3D school · choose a mission and start');await wait(2600);});
- // 9 · Take me there
- await scene(9,async()=>{await p.click('#startBtn');await wait(900);await caption('กด “Take me there” ตัวละครเดินไปเอง หรือเดินเองด้วยปุ่มลูกศร','Tap “Take me there”, or walk with the arrow keys');
-  await p.click('#guideBtn');for(let k=0;k<60;k++){if(await p.locator('#dialogOverlay').isVisible())break;await wait(250);}});
+ await scene(8,async()=>{await p.goto(BASE+'/school/?quality=medium&speed=4');await caption('แผนที่ที่ 2 · โรงเรียน 3D: เลือกภารกิจแล้วเริ่มเล่น','Map 02: a 3D school · choose a mission and start');await wait(3200);await tap('#startBtn');});
+ // 9 · walk with the arrow keys, then "Take me there" walks back on its own, then Talk
+ await scene(9,async()=>{await wait(300);await caption('กด “Take me there” ตัวละครเดินไปเอง หรือเดินเองด้วยปุ่มลูกศร','Tap “Take me there”, or walk with the arrow keys');
+  await p.keyboard.down('ArrowUp');await wait(900);await p.keyboard.up('ArrowUp');await tap('#guideBtn');
+  for(let k=0;k<120;k++){if(await p.locator('#dialogOverlay').isVisible())break;
+   if(await p.locator('#bookOverlay').isVisible().catch(()=>false))await tap('#enterStory');else if(!(await tap('#interact'))&&k%12===11)await tap('#guideBtn');await wait(250);}});
  // 10 · the conversation
- await scene(10,async()=>{for(let k=0;k<40&&!(await p.locator('#dialogOverlay').isVisible());k++)await wait(250);
-  await caption('ฟังสิ่งที่ Alex พูด แล้วเลือกคำตอบ · คำแปลไทยตามระดับที่ตั้งไว้','Listen to Alex and choose · Thai help follows the level');});
+ await scene(10,async()=>{await caption('ฟังสิ่งที่ Alex พูด แล้วเลือกคำตอบ · คำแปลไทยตามระดับที่ตั้งไว้','Listen to Alex and choose · Thai help follows the level',true);});
  // 11 · a first-try answer changes the world
- await scene(11,async()=>{await p.locator('#answerArea .choice',{hasText:/^\s*\w?\s*gate\s*$/i}).first().click().catch(async()=>{await p.locator('#answerArea .choice').nth(1).click();});
-  await wait(600);await caption('ตอบถูกครั้งแรก → โลกในเกมเปลี่ยน คำพูดของนักเรียนเปลี่ยนโลกได้จริง','A first-try answer changes the world');
-  await wait(3200);await p.click('#nextQuestion').catch(()=>{});});
+ await scene(11,async()=>{await tap('#answerArea [data-answer="1"]');
+  await wait(500);await p.evaluate(()=>document.querySelector('#answerFeedback')?.scrollIntoView({block:'center',behavior:'smooth'}));
+  await caption('ตอบถูกครั้งแรก → โลกในเกมเปลี่ยน คำพูดของนักเรียนเปลี่ยนโลกได้จริง','A first-try answer changes the world',true);});
  // 12 · daily review
  await scene(12,async()=>{await p.goto(BASE+'/review/');await wait(400);await caption('การบ้าน: ทบทวนประจำวัน 3 นาที คำที่เคยผิดจะกลับมาบ่อยขึ้น','Homework: a 3-minute daily review');});
  // 13 · dashboard overview
