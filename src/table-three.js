@@ -9,7 +9,7 @@ import {RoomEnvironment} from 'three-addons/environments/RoomEnvironment.js';
 import {stdMat,makeWorldAdapter,createCast} from 'sq3';
 
 const $=id=>document.getElementById(id);
-const SP=window.SanorProfile,TH=SP.th,ESC=SP.esc;SP.mountLevelButton($('levelSlot'));addEventListener('load',()=>window.SQPwa&&SQPwa.cacheWorld('01'));SQCoach.mount();
+const SP=window.SanorProfile,TH=SP.th,ESC=SP.esc;SP.mountLevelButton($('levelSlot'));SP.track('01','table');const opened=new Set();addEventListener('load',()=>window.SQPwa&&SQPwa.cacheWorld('01'));SQCoach.mount();
 const TABLE_MISSION=window.SQContent.worlds['01'].missions.find(m=>m.id==='table');let speakMounted=false;
 // ---------- renderer (fall back to the 2D page if WebGL is missing) ----------
 let renderer;
@@ -99,15 +99,15 @@ const hitRadius=j=>j<=2?110:j===3?90:62;
 function paint(){const i=state.index,done=i>=10;
  $('progress').innerHTML=items.map((_,j)=>'<i class="'+(solved(j)?'done':j===i?'now':'')+'"></i>').join('');
  $('report').hidden=!done;if(done){report();return;}const r=state.rows[i],ok=isOk();
- $('count').textContent=(i+1)+' / 10';$('prompt').textContent=items[i][1];$('promptTh').textContent=items[i][6];$('promptTh').classList.remove('open');$('next').hidden=!ok;$('hint').disabled=ok;
+ $('count').textContent=(i+1)+' / 10';if(!ok&&!opened.has(i)){opened.add(i);SP.step('01','table',items[i][0],'open');}$('prompt').textContent=items[i][1];$('promptTh').textContent=items[i][6];$('promptTh').classList.remove('open');$('next').hidden=!ok;$('hint').disabled=ok;
  $('status').innerHTML=ok?ESC('Correct! '+items[i][0]+(i===9?' · The glass is full.':''))+TH(items[i][0]+' = '+items[i][5]):[r.answers.length?ESC('Listen again. What did Alex ask for?'):'',r.hint?ESC('Hint: '+items[i][4])+TH(items[i][7]):''].filter(Boolean).join(' · ');
  bubbleText=ok?(i===2?'Nice kitchen! Let’s have lunch.':'Thank you!'):items[i][1];}
-function report(){$('playerLine').textContent=SP.name()||'';if(!speakMounted){speakMounted=true;SQVoice.mount($('speakBox'),{target:TABLE_MISSION.speak.target,prompt:TABLE_MISSION.speak.prompt,onDone:r=>SP.recordSpeech('01',TABLE_MISSION.speak.id,r)});}const first=state.rows.filter((r,j)=>r.answers[0]===j).length;
+function report(){SQFeedback.mount($('feedbackBox'),{world:'01',activity:'table'});$('playerLine').textContent=SP.name()||'';if(!speakMounted){speakMounted=true;SQVoice.mount($('speakBox'),{target:TABLE_MISSION.speak.target,prompt:TABLE_MISSION.speak.prompt,onDone:r=>SP.recordSpeech('01',TABLE_MISSION.speak.id,r)});}const first=state.rows.filter((r,j)=>r.answers[0]===j).length;
  $('results').innerHTML='<p>Correct on the first try '+first+'/10 words · Practice results</p><table><tr><th>Word</th><th>First choice</th><th>Attempts</th><th>Hint</th></tr>'+state.rows.map((r,j)=>'<tr><td>'+items[j][0]+'</td><td>'+(r.answers.length?items[r.answers[0]][0]:'–')+'</td><td>'+r.answers.length+'</td><td>'+(r.hint?(r.hintBeforeFirst===true?'Before first try':r.hintBeforeFirst===false?'After first try':'Used'):'–')+'</td></tr>').join('')+'</table>';}
 function speak(){if(state.index<10)QuestVoice.play(items[state.index][1],m=>{$('status').textContent=m;});}
 function syncProfile(){const n=items.filter((_,j)=>solved(j)).length;SP.record('01','table',{xp:n*SP.XP.step+(state.index>=10?SP.XP.bonus:0),done:state.index>=10,stamps:items.filter((_,j)=>solved(j)).map(it=>({id:'table-'+it[0],label:it[0],icon:it[3]||'🪑'}))});}
 function choose(j){const i=state.index;if(i>=10||isOk()||!$('intro').hidden)return;const r=state.rows[i];r.answers.push(j);save();
- const right=SQMission.check({kind:'tap3d',answer:i},j);if(r.answers.length===1){SanorSRS.record(items[i][0],{correct:right,hint:r.hint});SP.logAnswer(right&&!r.hint,{world:'01',activity:'table',item:items[i][0],label:items[i][0],correct:right,hint:r.hint});}
+ const right=SQMission.check({kind:'tap3d',answer:i},j);if(right)SP.step('01','table',items[i][0],'done');if(r.answers.length===1){SanorSRS.record(items[i][0],{correct:right,hint:r.hint});SP.logAnswer(right&&!r.hint,{world:'01',activity:'table',item:items[i][0],label:items[i][0],correct:right,hint:r.hint});}
  if(right){tone([[660,.18,0],[880,.22,.1],[1175,.3,.2]]);buzz(30);alex.act={type:'wave',t0:clock,dur:1.8};if(i===9)player.act={type:'cheer',t0:clock+.9,dur:2.2};
   if(j<=2){focusRoom=j;burst(rooms[j].ring);syncCharacters(false);}else if(j===3){anim={k:3,t0:clock,dur:.6};burst(TABLE);}
   else if(j===9)anim={k:9,t0:clock,dur:1.5,from:shelf[9],to:[slot[8][0]+.16,slot[8][1]+.32,slot[8][2]]};else anim={k:j,t0:clock,dur:.8,from:shelf[j],to:slot[j]};}

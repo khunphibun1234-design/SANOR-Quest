@@ -9,7 +9,7 @@
 | Map 02 · School of Adventures (3D) · 3 ภารกิจ | `school/` (2D สำรอง: `school/quiz.html`) |
 | ทบทวนประจำวัน 3 นาที | `review/` |
 | แบบทดสอบก่อน/หลังเรียน | `test/?kind=pre` · `test/?kind=post` (ข้อสอบ: `content/tests.json`) |
-| **แดชบอร์ดครู** | `teacher/` |
+| **แดชบอร์ดครู** | `teacher/` (แท็บ "การทดลอง": เวลาเล่น จุดที่ติด ความเห็น สถิติก่อน/หลัง) · แบบสังเกต `teacher/observation.html` · แผนทดลอง `docs/PILOT-PLAN.md` |
 
 ## พร้อมใช้ในห้องเรียน
 - **เล่นออฟไลน์ / ติดตั้งลงมือถือ:** `sw.js` (สร้างโดย `npm run build:sw`) + `manifest.webmanifest`

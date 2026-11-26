@@ -75,7 +75,7 @@ function openPlace(id){if(!started||modal)return;if(lesson.state.done){report();
 // ---------- a conversation ----------
 const portraitOf=sp=>'portrait '+String(sp).toLowerCase().replace(/[^a-z]/g,'');
 function tableHtml(t){return `<figure class="story-table"><figcaption>${esc(t.caption.en)}${th(t.caption.th,'small')}</figcaption><table><thead><tr>${t.head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></figure>`;}
-function question(id,place){const q=C.questions[id];show('dialogOverlay');
+function question(id,place){const q=C.questions[id];show('dialogOverlay');P.step(cfg.worldId,current,id,'open');
  $('dialogTitle').textContent=q.speaker;$('dialogStage').textContent=lesson.stage.en.toUpperCase();$('dialogContext').textContent=C.places[place].en+' · '+C.places[place].name;
  $('portrait').className=portraitOf(q.speaker);$('questionCount').textContent=lesson.state.completed.length+1+' / '+lesson.total;
  const listening=q.kind==='listen';let correct=false;
@@ -89,14 +89,14 @@ function question(id,place){const q=C.questions[id];show('dialogOverlay');
    const first=lesson.state.attempts[id]===1,clean=first&&!lesson.state.aided.includes(id);if(first)P.logAnswer(r.correct&&clean,{world:cfg.worldId,activity:current,item:current+'-'+id,label:q.kind==='order'?q.tokens.join(' '):fill(q.choices[q.answer]),correct:r.correct,hint:lesson.state.aided.includes(id)});save();hud();
    $('answerFeedback').hidden=false;$('answerFeedback').className='feedback'+(r.correct?' good':'');
    const who=q.speaker==='Alex'?alex:npcs[q.speaker.toLowerCase()];if(who)who.act={type:r.correct?'wave':'hmm',t0:clock,dur:r.correct?1.8:1.2};
-   if(r.correct){correct=true;const change=clean&&cfg.changeMessage?cfg.changeMessage(current):null;
+   if(r.correct){P.step(cfg.worldId,current,id,'done');correct=true;const change=clean&&cfg.changeMessage?cfg.changeMessage(current):null;
     $('answerFeedback').innerHTML=`<strong>Message understood! +20 XP</strong>${esc(r.why)}${th(q.whyTh)}<div class="reply">${esc(q.speaker)}: “${esc(fill(r.reply))}”</div>${change?`<div class="world-change">${esc(change.en)}${th(change.th)}</div>`:''}`;
     $('nextQuestion').hidden=false;$('hintBtn').hidden=true;setTimeout(()=>$('nextQuestion').focus({preventScroll:true}));}
    else $('answerFeedback').innerHTML='<strong>Try again</strong>'+esc(q.hint)+th(q.hintTh);return r.correct;}});
  $('nextQuestion').onclick=()=>{const next=lesson.nextQuestion(place);if(next)question(next,place);else{close();hud();toast(lesson.stage.go);}};}
 // ---------- finale: writing card, speaking, reflection ----------
 const moods={ready:'I feel ready',practice:'I want more practice',help:'I would like help'},nexts={welcome:'Greetings',rooms:'Words for places',listening:'Listening',speaking:'Speaking'};
-function reflection(){show('dialogOverlay');const m=missionById(current),s=lesson.state;
+function reflection(){show('dialogOverlay');const m=missionById(current),s=lesson.state;P.step(cfg.worldId,current,'finale','open');
  $('dialogTitle').textContent=lesson.stage.title;$('dialogStage').textContent='YOUR WORDS. YOUR STORY.';$('dialogContext').textContent=m.title.en;
  $('questionCount').textContent=String(C.stages.length).padStart(2,'0')+' / '+String(C.stages.length).padStart(2,'0');$('portrait').className='portrait';
  $('dialogBody').innerHTML='<div id="cardBox"></div><div class="speaking-section"><h3>🎤 Practise speaking aloud</h3><p class="form-intro">'+(C.speakPrompt?esc(C.speakPrompt.en)+th(C.speakPrompt.th):'')+' <b id="spokenCount"></b></p><div id="speakBox"></div><button id="nextSentence" class="small-btn" hidden>Next sentence →</button></div><span class="reflection-label">Today I feel…</span><div class="radio-group">'+Object.entries(moods).map(([v,label])=>`<label><input type="radio" name="mood" value="${v}" ${s.mood===v?'checked':''}><span>${label}</span></label>`).join('')+'</div><span class="reflection-label">Next time I want to practise…</span><div class="radio-group">'+Object.entries(nexts).map(([v,label])=>`<label><input type="radio" name="next" value="${v}" ${s.next===v?'checked':''}><span>${label}</span></label>`).join('')+'</div><div id="cardFeedback" class="feedback" role="status" hidden></div><button id="finishMission" class="primary" style="margin-top:20px">Finish the mission +100 XP →</button>';
@@ -110,13 +110,14 @@ function reflection(){show('dialogOverlay');const m=missionById(current),s=lesso
  $('dialogBody').querySelectorAll('input[type=radio]').forEach(x=>x.addEventListener('input',draft));
  $('finishMission').onclick=()=>{draft();const r=lesson.finish(s.card,s.mood,s.next,s.spoken);if(card)card.showErrors(r.errors||[]);
   if(!r.ok){$('cardFeedback').hidden=false;$('cardFeedback').textContent=r.reflection?'Choose how you feel and what you want to practise next.':'Complete the boxes with an orange border.';if(!r.errors?.length)$('cardFeedback').scrollIntoView({block:'nearest'});save();return;}
-  save();hud();report();};}
+  P.step(cfg.worldId,current,'finale','done');save();hud();report();};}
 // ---------- report (printable) ----------
 function report(){const s=lesson.state,m=missionById(current);if(!s.done)return;show('reportOverlay');$('cardPrintOptions').hidden=true;
  const nextId=ORDER[ORDER.indexOf(current)+1],next=nextId&&!missionById(nextId).fallback?missionById(nextId):null;
  const rc=$('reportContent');rc.dataset.header='SANOR QUEST  /  MAP '+cfg.worldId+'  /  MISSION '+String(ORDER.indexOf(current)+1).padStart(2,'0');rc.dataset.title=m.title.en;
  $('reportMission').textContent=m.title.en;
  rc.innerHTML=`<div class="stats"><div><strong>${lesson.xp} XP</strong><span>Completed ${C.stages.length} stages</span></div><div><strong>${lesson.firstTry} / ${lesson.total}</strong><span>First try without a hint</span></div><div><strong>${s.spoken.length} / ${C.speaking.length}</strong><span>sentences spoken</span></div></div><p>🏅 Passport stamp: ${esc(m.title.en)}</p>${C.card?`<div class="welcome-card"><small>${esc(m.title.en.toUpperCase())} · MAP ${cfg.worldId}</small><h3>${esc(s.name)}'s ${esc(lesson.stage.title.replace(/^My /i,'').toLowerCase())}</h3>${C.card.fields.map(f=>'<p>'+esc(s.card[f.id])+'</p>').join('')}</div>`:''}<p class="report-note">My feeling: ${moods[s.mood]} · Next practice: ${nexts[s.next]}<br>${s.aided.includes('card')?'Used a writing example · ':''}The game checked the key parts of your writing. Ask your teacher about grammar.</p>`;
+ if($('feedbackBox'))SQFeedback.mount($('feedbackBox'),{world:cfg.worldId,activity:current});
  $('nextMission').hidden=!next;if(next){$('nextMission').innerHTML='Next: '+esc(next.title.en)+' →';$('nextMission').onclick=()=>next.type==='story'?switchMission(nextId,true):location.href=next.play+'?story=1';}}
 // ---------- word book ----------
 function vocabulary(review=false){show('bookOverlay');$('enterStory').hidden=true;$('bookGuide').textContent='Listen and repeat at your own pace.';
@@ -135,7 +136,7 @@ function switchMission(id,startNow){current=id;C=contents[id];lesson=lessons[id]
 function placeCast(){const p=cfg.start(current);[player.x,player.z,player.angle]=p.player;[alex.x,alex.z,alex.angle]=p.alex;}
 // ---------- start ----------
 $('playerName').value=lesson.state.name!=='Mook'?lesson.state.name:P.name()||'Mook';P.mountLevelButton(document.querySelector('.header-actions'));SQCoach.mount();
-function enterStory(){started=true;save();close();hud();toast(lesson.state.done?'Open your report in the mission panel.':lesson.stage.go);}
+function enterStory(){started=true;P.track(cfg.worldId,current);save();close();hud();toast(lesson.state.done?'Open your report in the mission panel.':lesson.stage.go);}
 $('enterStory').onclick=()=>{lesson.state.studiedTable=true;enterStory();};
 $('startBtn').onclick=()=>{const name=$('playerName').value.trim().slice(0,20)||'Mook';P.setName(name);for(const L of Object.values(lessons))L.state.name=name;
  if(lesson.state.done){lessons[current]=lesson=new root.StoryLesson(null,C);lesson.state.name=name;placeCast();}

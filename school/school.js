@@ -16,6 +16,7 @@ let index, results;
 el('art').innerHTML = QuestArt.miniature(1);
 P.mountLevelButton(el('barTools'));
 addEventListener('load', () => window.SQPwa && SQPwa.cacheWorld('02'));
+P.track('02', 'buddy');
 const paintXp = () => { el('totalXp').textContent = P.totalXp(); };
 P.onChange(paintXp); paintXp();
 SQCoach.mount();
@@ -60,6 +61,7 @@ function showRound() {
   QuestVoice.stop();
   const r = rounds[index];
   el('count').textContent = 'Mission '+(index+1)+' / '+rounds.length;
+  P.step('02', 'buddy', r.word, 'open');
   el('line').textContent = r.line;
   el('lineTh').textContent = r.lineTh;
   el('lineTh').classList.remove('open');
@@ -75,6 +77,7 @@ function showRound() {
     onResult({correct}) {
       if (!correct) { say('Listen to Alex again and choose another word.', 'ลองฟัง Alex อีกครั้ง แล้วเลือกคำอื่นนะ'); return; }
       results[index].done = true;
+      P.step('02', 'buddy', r.word, 'done');
       el('hint').disabled = true;
       updatePass();
       report(false);
@@ -130,6 +133,7 @@ function showReport() {
   const v = card.values();
   el('cardOut').innerHTML = '<h3>' + esc(CARD.title.en) + '</h3>' + CARD.fields.map(f => '<p>' + esc(v[f.id]) + '</p>').join('') + (card.usedExample ? '<p class="note">Used a writing example</p>' : '');
   el('speechOut').textContent = 'Speaking: “' + MISSION.speak.target.en + '” · ' + ({asr: 'said it (checked by the microphone)', self: 'said it (self-check)', skip: 'skipped', 'not-yet': 'not yet'}[speech ? (speech.mode === 'skip' ? 'skip' : !speech.passed ? 'not-yet' : speech.mode) : 'skip']);
+  SQFeedback.mount(el('feedbackBox'), {world: '02', activity: 'buddy'});
   el('report').querySelector('h2').focus();
 }
 el('again').onclick = restart;

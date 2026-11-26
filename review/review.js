@@ -8,6 +8,7 @@ const today = () => { const d = new Date(); return 'd' + d.getFullYear() + Strin
 let queue = [], index = 0, results = [], left = SECONDS, timer = null, current = null;
 P.mountLevelButton(el('barTools')); SQCoach.mount();
 addEventListener('load', () => window.SQPwa && SQPwa.cacheWorld('words'));
+P.track('review', 'review');
 const paintXp = () => { el('totalXp').textContent = P.totalXp(); el('todayXp').textContent = P.activity('review', today()).xp; };
 P.onChange(paintXp);
 

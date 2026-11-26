@@ -41,3 +41,12 @@ dialog .close{float:right;min-height:0;border:0;background:none;font-size:1.6rem
 @media print{.bar,.tabs,.toolbar,.inline-form,#backToClasses,.demo-note,button{display:none!important}.tab[hidden]{display:block!important}.table-wrap{border:0;overflow:visible}th{position:static}main{padding:0}}
 .hint{font-size:.85rem;color:var(--muted)}
 .danger{border:1px solid #e2b3a8;border-radius:var(--radius);padding:1rem;max-width:38rem;margin-top:1.2rem}.danger legend{font-weight:700;color:var(--danger)}#deleteClass{color:var(--danger)}
+.pilot-week{padding:.6rem .9rem;border-radius:var(--radius-s);background:var(--tint)}
+#tab-pilot h2{font:700 1.25rem var(--display);margin:1.6rem 0 .5rem}
+.stuck{padding:.8rem 1rem;border-radius:var(--radius);background:#fbefe9;border:1px solid #efc9bb;margin-bottom:.8rem}.stuck ol{margin:.4rem 0 0}
+.funnel{border:1px solid var(--line);border-radius:var(--radius-s);background:var(--card);margin:.4rem 0;padding:.5rem .8rem}.funnel summary{cursor:pointer;min-height:var(--tap);display:flex;align-items:center}
+.fstep{display:grid;grid-template-columns:minmax(0,1.4fr) 2fr 3.5rem;gap:.6rem;align-items:center;font-size:.85rem;padding:.2rem 0}
+.fstep span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fbar{position:relative;height:12px;border-radius:var(--pill);background:#f0f1ea;overflow:hidden}.fbar i,.fbar b{position:absolute;left:0;top:0;bottom:0;border-radius:var(--pill)}.fbar i{background:#cfe0d4}.fbar b{background:var(--green)}
+.comments{padding-left:1.1rem}.comments li{margin:.35rem 0}.comments small{color:var(--muted)}
+.note-form{display:grid;gap:.5rem;max-width:40rem}.note-form textarea{padding:.6rem;border:1px solid #c5cfc4;border-radius:var(--radius-s);font:inherit}.note-form button{justify-self:start}

@@ -33,11 +33,12 @@ function supabase(){const url=cfg.supabaseUrl.replace(/\/$/,''),key=cfg.supabase
    classes:()=>t('my_classes'),createClass:name=>t('create_class',{p_name:name}),
    updateClass:(id,o)=>t('update_class',{p_class:id,p_name:o.name??null,p_worlds:o.worlds??null,p_thai:o.thai??null,p_tests:o.tests??null}),
    report:id=>t('class_report',{p_class:id}),studentDetail:id=>t('student_detail',{p_student:id}),
-   resetPin:(id,pin)=>t('reset_student_pin',{p_student:id,p_pin:pin}),removeStudent:id=>t('remove_student',{p_student:id}),deleteClass:id=>t('delete_class',{p_class:id})}};}
+   resetPin:(id,pin)=>t('reset_student_pin',{p_student:id,p_pin:pin}),removeStudent:id=>t('remove_student',{p_student:id}),deleteClass:id=>t('delete_class',{p_class:id}),
+   pilotReport:id=>t('pilot_report',{p_class:id}),addNote:(id,week,note)=>t('add_teacher_note',{p_class:id,p_week:week,p_note:note}),pilotEvents:id=>t('pilot_events',{p_class:id})}};}
 
 // ---------------------------------------------------------------- demo (this browser only)
 function demo(){const KEY='sanor-demo-db-v1';
- const db=()=>read(KEY,null)||{classes:[],students:[],sessions:{},progress:[],events:[],tests:[]};
+ const db=()=>{const d=read(KEY,null)||{classes:[],students:[],sessions:{},progress:[],events:[],tests:[]};d.feedback=d.feedback||[];d.notes=d.notes||[];return d;};
  const tx=f=>{const d=db();const r=f(d);write(KEY,d);return Promise.resolve(JSON.parse(JSON.stringify(r??null)));};
  const uid=()=>([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^Math.random()*16>>c/4).toString(16));
  const hash=s=>{let h=2166136261;for(const ch of s){h^=ch.charCodeAt(0);h=Math.imul(h,16777619);}return(h>>>0).toString(16);};
@@ -59,8 +60,9 @@ function demo(){const KEY='sanor-demo-db-v1';
     return{token:tok,student:{number:s.number,nickname:s.nickname},settings:settings(c)};}),
    settings:S((d,tok)=>{const s=student(d,tok);s.last_seen=new Date().toISOString();return settings(d.classes.find(c=>c.id===s.class_id));}),
    submit:S((d,tok,events)=>{const s=student(d,tok);if(!Array.isArray(events)||events.length>200)fail('bad_batch');let n=0;
-    for(const e of events){if(e.kind==='answer'||e.kind==='speech'){if(d.events.some(x=>x.student_id===s.id&&x.client_id===e.id))continue;
-      d.events.push({student_id:s.id,class_id:s.class_id,client_id:e.id,kind:e.kind,world:e.world||'',activity:e.activity||'',item:e.item||'',label:e.label||'',correct:e.correct??null,first_try:e.firstTry??null,hint:e.hint??null,result:e.result||null,at:e.at||new Date().toISOString()});n++;}
+    for(const e of events){if(['answer','speech','time','step'].includes(e.kind)){if(d.events.some(x=>x.student_id===s.id&&x.client_id===e.id))continue;
+      d.events.push({student_id:s.id,class_id:s.class_id,client_id:e.id,kind:e.kind,world:e.world||'',activity:e.activity||'',item:e.item||'',label:e.label||'',correct:e.correct??null,first_try:e.firstTry??null,hint:e.hint??null,result:['asr','self','not-yet','skip'].includes(e.result)?e.result:null,seconds:e.kind==='time'?Math.min(3600,Math.max(0,+e.seconds||0)):null,action:['open','done'].includes(e.action)?e.action:null,at:e.at||new Date().toISOString()});n++;}
+     else if(e.kind==='feedback'){d.feedback=d.feedback.filter(f=>!(f.student_id===s.id&&f.world===(e.world||'')&&f.activity===(e.activity||'')));d.feedback.push({student_id:s.id,world:e.world||'',activity:e.activity||'',fun:+e.fun||null,easy:+e.easy||null,learned:+e.learned||null,comment:String(e.comment||'').slice(0,300),at:new Date().toISOString()});n++;}
      else if(e.kind==='progress'){let p=d.progress.find(x=>x.student_id===s.id&&x.world===e.world&&x.activity===e.activity);if(!p)d.progress.push(p={student_id:s.id,world:e.world,activity:e.activity,xp:0,done:false,stamps:0});
       p.xp=Math.max(p.xp,Math.min(5000,+e.xp||0));p.done=p.done||!!e.done;p.stamps=Math.max(p.stamps,+e.stamps||0);n++;}
      else if(e.kind==='test'&&['pre','post'].includes(e.test)&&!d.tests.some(x=>x.student_id===s.id&&x.kind===e.test)){d.tests.push({student_id:s.id,kind:e.test,score:+e.score,total:+e.total,answers:e.answers||[],at:new Date().toISOString()});n++;}}
@@ -72,7 +74,7 @@ function demo(){const KEY='sanor-demo-db-v1';
    signOut(){try{LS.removeItem('sanor-demo-teacher-v1');}catch{}},
    classes:T(d=>d.classes.map(c=>({id:c.id,students:d.students.filter(s=>s.class_id===c.id).length,...settings(c)}))),
    createClass:T((d,name)=>{const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let code;do code=[...Array(6)].map(()=>A[Math.floor(Math.random()*32)]).join('');while(d.classes.some(c=>c.code===code));
-    const c={id:uid(),name:String(name).trim().slice(0,60),code,worlds_open:['01','02'],thai_level:null,tests_open:['pre']};d.classes.push(c);return{id:c.id,...settings(c)};}),
+    const c={id:uid(),name:String(name).trim().slice(0,60),code,worlds_open:['01','02'],thai_level:null,tests_open:['pre'],created_at:new Date().toISOString()};d.classes.push(c);return{id:c.id,...settings(c)};}),
    updateClass:T((d,id,o)=>{const c=own(d,id);if(o.name)c.name=o.name.trim().slice(0,60);if(o.worlds)c.worlds_open=o.worlds;c.thai_level=['starter','explorer','challenger'].includes(o.thai)?o.thai:null;if(o.tests)c.tests_open=o.tests;return{id,...settings(c)};}),
    report:T((d,id)=>{const c=own(d,id),ev=d.events.filter(e=>e.class_id===id);
     const students=d.students.filter(s=>s.class_id===id).sort((a,b)=>a.number-b.number).map(s=>{const mine=ev.filter(e=>e.student_id===s.id),ans=mine.filter(e=>e.kind==='answer'),pr=d.progress.filter(p=>p.student_id===s.id),t=k=>{const x=d.tests.find(y=>y.student_id===s.id&&y.kind===k);return x?{score:x.score,total:x.total}:null;};
@@ -86,7 +88,17 @@ function demo(){const KEY='sanor-demo-db-v1';
      tests:d.tests.filter(t=>t.student_id===id).map(t=>({kind:t.kind,score:t.score,total:t.total,answers:t.answers,at:t.at}))};}),
    resetPin:T((d,id,pin)=>{if(!/^[0-9]{4}$/.test(pin||''))fail('bad_pin_format');const s=d.students.find(x=>x.id===id);if(!s)fail('not_your_class');own(d,s.class_id);s.pin_hash=hash(s.id+':'+pin);s.failed=0;s.locked_until=0;for(const [k,v] of Object.entries(d.sessions))if(v===id)delete d.sessions[k];}),
    removeStudent:T((d,id)=>{const s=d.students.find(x=>x.id===id);if(!s)return;own(d,s.class_id);wipe(d,id);}),
-   deleteClass:T((d,id)=>{own(d,id);for(const s of d.students.filter(x=>x.class_id===id))wipe(d,s.id);d.classes=d.classes.filter(c=>c.id!==id);})}};}
+   deleteClass:T((d,id)=>{own(d,id);for(const s of d.students.filter(x=>x.class_id===id))wipe(d,s.id);d.classes=d.classes.filter(c=>c.id!==id);d.notes=d.notes.filter(n=>n.class_id!==id);}),
+   pilotReport:T((d,id)=>{const c=own(d,id),ev=d.events.filter(e=>e.class_id===id),start=c.created_at,wk=t=>Math.max(1,Math.floor((new Date(t)-new Date(start))/604800000)+1),time={},steps={};
+    for(const e of ev.filter(e=>e.kind==='time')){const k=[e.student_id,wk(e.at),e.world,e.activity].join('|');time[k]=(time[k]||0)+e.seconds;}
+    for(const e of ev.filter(e=>e.kind==='step')){const k=[e.world,e.activity,e.item].join('|');const x=steps[k]||(steps[k]={o:new Set(),d:new Set()});(e.action==='open'?x.o:x.d).add(e.student_id);}
+    const num=sid=>(d.students.find(s=>s.id===sid)||{}).number;
+    return{start,time:Object.entries(time).map(([k,v])=>{const [student,week,world,activity]=k.split('|');return{student,week:+week,world,activity,seconds:v};}),
+     steps:Object.entries(steps).map(([k,v])=>{const [world,activity,item]=k.split('|');return{world,activity,item,opened:v.o.size,done:v.d.size};}),
+     feedback:d.feedback.filter(f=>d.students.some(s=>s.id===f.student_id&&s.class_id===id)).sort((a,b)=>b.at.localeCompare(a.at)).map(f=>({world:f.world,activity:f.activity,fun:f.fun,easy:f.easy,learned:f.learned,comment:f.comment,number:num(f.student_id),at:f.at})),
+     notes:d.notes.filter(n=>n.class_id===id).sort((a,b)=>b.at.localeCompare(a.at)).map(n=>({week:n.week,note:n.note,at:n.at}))};}),
+   addNote:T((d,id,week,note)=>{own(d,id);d.notes.push({class_id:id,week:+week,note:String(note).trim().slice(0,2000),at:new Date().toISOString()});}),
+   pilotEvents:T((d,id)=>{own(d,id);return d.events.filter(e=>e.class_id===id).slice(-20000).reverse().map(e=>({number:(d.students.find(s=>s.id===e.student_id)||{}).number,kind:e.kind,world:e.world,activity:e.activity,item:e.item,label:e.label,correct:e.correct,firstTry:e.first_try,hint:e.hint,result:e.result,seconds:e.seconds??null,action:e.action??null,at:e.at}));})}};}
 
 root.SQBackend=cfg.supabaseUrl&&cfg.supabaseAnonKey?supabase():demo();
 })(typeof window!=='undefined'?window:globalThis);

@@ -66,3 +66,22 @@ test('PDPA: a student deletes their own data; a teacher deletes a whole class',a
   await expect(rpc(h,T1,'delete_class',[c2.id])).rejects.toThrow(/not_your_class/);
   await rpc(h,T1,'delete_class',[c1.id]);expect(await rpc(h,T1,'my_classes',[])).toEqual([]);
   expect((await h.db.query('select count(*)::int n from public.students')).rows[0].n).toBe(0);});
+
+test('pilot: play time per week, steps (where students stop), feedback and teacher notes',async()=>{const {h,c1,c2}=await setup();
+  const a=await rpc(h,'anon','join_class',[c1.code,1,'A','1111']),b=await rpc(h,'anon','join_class',[c1.code,2,'B','2222']);
+  const ev=[{id:'t-0000001',kind:'time',world:'02',activity:'tour',seconds:300},{id:'t-0000002',kind:'time',world:'02',activity:'tour',seconds:9999},
+    {id:'s-0000001',kind:'step',world:'02',activity:'tour',item:'library',action:'open'},{id:'s-0000002',kind:'step',world:'02',activity:'tour',item:'library',action:'done'},
+    {id:'s-0000003',kind:'step',world:'02',activity:'tour',item:'gym',action:'open'},{kind:'feedback',world:'02',activity:'tour',fun:3,easy:2,learned:3,comment:'สนุกมาก'}];
+  expect(await rpc(h,'anon','submit_events',[a.token,JSON.stringify(ev)])).toBe(6);
+  await rpc(h,'anon','submit_events',[b.token,JSON.stringify([{id:'s-0000009',kind:'step',world:'02',activity:'tour',item:'library',action:'open'},{kind:'feedback',world:'02',activity:'tour',fun:1,easy:1,learned:2,comment:''},{kind:'feedback',world:'02',activity:'tour',fun:2,easy:1,learned:2,comment:'ยาก'}])]);
+  await rpc(h,T1,'add_teacher_note',[c1.id,1,'นักเรียนติดที่ห้องสมุด']);
+  const r=await rpc(h,T1,'pilot_report',[c1.id]);
+  expect(r.time.map(x=>x.seconds).sort((x,y)=>x-y)).toEqual([3900]);                                  // 300 + 3600 (capped)
+  expect(r.time[0]).toMatchObject({week:1,world:'02',activity:'tour'});
+  expect(r.steps.sort((x,y)=>x.item.localeCompare(y.item))).toEqual([{world:'02',activity:'tour',item:'gym',opened:1,done:0},{world:'02',activity:'tour',item:'library',opened:2,done:1}]);
+  expect(r.feedback.map(f=>[f.number,f.fun,f.comment]).sort()).toEqual([[1,3,'สนุกมาก'],[2,2,'ยาก']]);   // one answer per student per mission (latest)
+  expect(r.notes).toEqual([expect.objectContaining({week:1,note:'นักเรียนติดที่ห้องสมุด'})]);
+  expect((await rpc(h,T1,'pilot_events',[c1.id])).length).toBe(6);
+  await expect(rpc(h,T1,'pilot_report',[c2.id])).rejects.toThrow(/not_your_class/);
+  await expect(rpc(h,'anon','pilot_report',[c1.id])).rejects.toThrow(/permission denied/);
+  for(const t of ['feedback','teacher_notes'])await expect(h.as('anon',`select * from public.${t}`)).rejects.toThrow(/permission denied/);});

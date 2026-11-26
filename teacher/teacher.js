@@ -71,7 +71,8 @@ function rows() {
 }
 function render() {
   document.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === tab));
-  for (const t of ['overview', 'words', 'tests', 'settings']) el('tab-' + t).hidden = t !== tab;
+  for (const t of ['overview', 'words', 'tests', 'pilot', 'settings']) el('tab-' + t).hidden = t !== tab;
+  if (tab === 'pilot') return SQPilot.render(el('tab-pilot'), {B, SQ, classId: current, report, esc, say});
   ({overview, words, tests, settings})[tab]();
 }
 // students who may need help come first: low first-try rate, then fewer missions

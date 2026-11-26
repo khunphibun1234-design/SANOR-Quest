@@ -27,7 +27,7 @@ const WORLDS={
 const SPEECH_RANK={asr:4,self:3,'not-yet':2,skip:1},RECENT=20;
 const clean=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fresh=()=>({version:1,name:'',level:'starter',maps:{},recent:[],answers:0,adviceAfter:0,supportOn:false,classLevel:null,tests:{},motion:'auto',recognition:false,createdAt:new Date().toISOString(),updatedAt:null});
+const fresh=()=>({version:1,name:'',level:'starter',maps:{},recent:[],answers:0,adviceAfter:0,supportOn:false,classLevel:null,tests:{},motion:'auto',recognition:false,feedback:{},createdAt:new Date().toISOString(),updatedAt:null});
 let storageOK=true;
 
 function sanitize(s){const out=fresh();if(!s||typeof s!=='object'||s.version!==1)return null;
@@ -38,7 +38,7 @@ function sanitize(s){const out=fresh();if(!s||typeof s!=='object'||s.version!==1
   for(const [k,v] of Object.entries(m.stamps||{})){if(!/^[a-z0-9-]{1,40}$/.test(k)||!v)continue;map.stamps[k]={label:clean(v.label,40),icon:clean(v.icon,8),at:typeof v.at==='string'?v.at:null};}
   for(const [k,v] of Object.entries(m.speech||{})){if(!/^[a-z0-9-]{1,40}$/.test(k)||!v||!SPEECH_RANK[v.best])continue;map.speech[k]={best:v.best,tries:Math.max(0,Math.min(999,+v.tries||0)),score:Math.max(0,Math.min(1,+v.score||0)),at:typeof v.at==='string'?v.at:null};}
   out.maps[id]=map;}
- out.recent=Array.isArray(s.recent)?s.recent.filter(x=>x===0||x===1).slice(-RECENT):[];out.answers=Math.max(0,Math.round(+s.answers||0));out.adviceAfter=Math.max(0,Math.round(+s.adviceAfter||0));out.supportOn=s.supportOn===true;out.classLevel=Object.hasOwn(LEVELS,s.classLevel)?s.classLevel:null;out.motion=['auto','reduce','full'].includes(s.motion)?s.motion:'auto';out.recognition=s.recognition===true;
+ out.recent=Array.isArray(s.recent)?s.recent.filter(x=>x===0||x===1).slice(-RECENT):[];out.answers=Math.max(0,Math.round(+s.answers||0));out.adviceAfter=Math.max(0,Math.round(+s.adviceAfter||0));out.supportOn=s.supportOn===true;out.classLevel=Object.hasOwn(LEVELS,s.classLevel)?s.classLevel:null;out.motion=['auto','reduce','full'].includes(s.motion)?s.motion:'auto';out.recognition=s.recognition===true;if(s.feedback&&typeof s.feedback==='object')for(const [k,v] of Object.entries(s.feedback))if(/^[a-z0-9]{1,12}\/[a-z0-9-]{1,24}$/.test(k)&&v)out.feedback[k]={fun:+v.fun||0,easy:+v.easy||0,learned:+v.learned||0};
  for(const k of ['pre','post']){const t=s.tests?.[k];if(t&&Number.isInteger(t.score)&&Number.isInteger(t.total)&&t.total>0&&t.score>=0&&t.score<=t.total)out.tests[k]={score:t.score,total:t.total,at:typeof t.at==='string'?t.at:null};}
  return out;}
 function load(){try{const s=sanitize(JSON.parse(localStorage.getItem(KEY)));storageOK=true;if(s)return s;}catch{storageOK=false;}return migrate(fresh());}
@@ -47,6 +47,12 @@ function migrate(p){try{const old=JSON.parse(localStorage.getItem('sanor-home-we
 let state=load();const listeners=new Set();
 function save(){state.updatedAt=new Date().toISOString();try{localStorage.setItem(KEY,JSON.stringify(state));storageOK=true;}catch{storageOK=false;}emit();}
 const eventListeners=new Set();let seq=0;
+// active play time (for the pilot): seconds count only while the page is visible and the player did something in the last minute
+let tracking=null,activeSecs=0,lastInput=0;
+function flushTime(){if(tracking&&activeSecs>=5)event({kind:'time',world:tracking.world,activity:tracking.activity,seconds:Math.round(activeSecs)});activeSecs=0;}
+if(root.document){for(const t of ['pointerdown','keydown','touchstart','wheel'])root.document.addEventListener(t,()=>{lastInput=Date.now();},{passive:true,capture:true});
+ setInterval(()=>{if(tracking&&root.document.visibilityState==='visible'&&Date.now()-lastInput<60000)activeSecs++;if(activeSecs>=60)flushTime();},1000);
+ root.document.addEventListener('visibilitychange',()=>{if(root.document.visibilityState==='hidden')flushTime();});root.addEventListener('pagehide',flushTime);}
 function event(e){const ev={id:Date.now().toString(36)+'-'+(seq++).toString(36)+'-'+Math.random().toString(36).slice(2,8),at:new Date().toISOString(),...e};for(const f of eventListeners){try{f(ev);}catch(err){console.error(err);}}}
 function emit(){applyThai();for(const f of listeners){try{f(api.get());}catch(e){console.error(e);}}}
 root.addEventListener?.('storage',e=>{if(e.key===KEY||e.key===null){state=load();emit();}});
@@ -84,6 +90,12 @@ const api={XP,LEVELS,WORLDS,KEY,
  // speech recognition sends the voice to the browser maker (Google in Chrome), so it stays off until switched on
  recognitionAllowed:()=>state.recognition,setRecognition(v){if(!!v!==state.recognition){state.recognition=!!v;save();}},
  reducedMotion,motion:()=>state.motion,setMotion(m){if(['auto','reduce','full'].includes(m)&&m!==state.motion){state.motion=m;save();}},
+ // ---------- pilot data: play time, steps, feedback (sent to the class by shared/sync.js) ----------
+ // track(world, activity): count active seconds (page visible and touched/typed in the last 60 s) and send them each minute
+ track(world,activity){flushTime();tracking={world,activity};},
+ step(world,activity,item,action){event({kind:'step',world,activity,item:String(item).slice(0,64),action});},
+ feedback(world,activity,r){state.feedback[world+'/'+activity]={fun:r.fun|0,easy:r.easy|0,learned:r.learned|0};save();event({kind:'feedback',world,activity,fun:r.fun|0,easy:r.easy|0,learned:r.learned|0,comment:String(r.comment||'').slice(0,300)});},
+ feedbackGiven:(world,activity)=>!!state.feedback[world+'/'+activity],
  onEvent(f){eventListeners.add(f);return()=>eventListeners.delete(f);},
  // pre/post test: the first attempt is kept
  recordTest(kind,{score,total,answers=[]}){if(!['pre','post'].includes(kind)||state.tests[kind])return false;state.tests[kind]={score,total,at:new Date().toISOString()};save();event({kind:'test',test:kind,score,total,answers});return true;},

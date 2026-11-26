@@ -24,15 +24,16 @@
 <section id="classView" hidden>
  <div class="row-between"><div><button id="backToClasses" class="link">← ห้องเรียนทั้งหมด</button><h1 id="className"></h1></div>
   <div class="code-card"><small>รหัสห้องสำหรับนักเรียน</small><strong id="classCode"></strong><span>เปิด SANOR QUEST → My passport → Join my class</span></div></div>
- <nav class="tabs" role="tablist"><button role="tab" data-tab="overview" aria-selected="true">ภาพรวมห้อง</button><button role="tab" data-tab="words">คำที่พลาดบ่อย</button><button role="tab" data-tab="tests">ก่อน/หลังเรียน</button><button role="tab" data-tab="settings">ตั้งค่าห้อง</button></nav>
+ <nav class="tabs" role="tablist"><button role="tab" data-tab="overview" aria-selected="true">ภาพรวมห้อง</button><button role="tab" data-tab="words">คำที่พลาดบ่อย</button><button role="tab" data-tab="tests">ก่อน/หลังเรียน</button><button role="tab" data-tab="pilot">การทดลอง</button><button role="tab" data-tab="settings">ตั้งค่าห้อง</button></nav>
  <div class="toolbar"><a href="guide.html">📘 คู่มือครู</a><button id="refresh">↻ รีเฟรช</button><button id="csv">⬇ ส่งออก CSV</button><button id="print">🖨 พิมพ์รายงาน</button><span id="updated"></span></div>
  <div id="tab-overview" class="tab"></div>
  <div id="tab-words" class="tab" hidden></div>
  <div id="tab-tests" class="tab" hidden></div>
+ <div id="tab-pilot" class="tab" hidden></div>
  <div id="tab-settings" class="tab" hidden></div>
 </section>
 
 <dialog id="studentDialog"><button class="close" data-close aria-label="ปิด">×</button><div id="studentBody"></div></dialog>
 </main>
-<script src="../content/content.js"></script><script src="teacher.js"></script>
+<script src="../content/content.js"></script><script src="pilot.js"></script><script src="teacher.js"></script>
 </body></html>

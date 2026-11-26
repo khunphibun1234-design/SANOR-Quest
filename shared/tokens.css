@@ -115,3 +115,18 @@
 
 /* reduce motion (SanorProfile.setMotion or the device setting) */
 [data-motion="reduce"] *,[data-motion="reduce"] *::before,[data-motion="reduce"] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+
+/* ---------- mission feedback (shared/feedback.js) ---------- */
+.sq-fb{display:grid;gap:.6rem;margin:1rem 0;padding:1rem;border-radius:var(--radius);background:#f3f6fb;border:1px solid #d6e0ee;text-align:left}
+.sq-fb-title{margin:0}.sq-fb-title .th{display:block}
+.sq-fb-q{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.sq-fb-q legend{font-weight:600;font-size:.92rem;margin-bottom:.25rem;width:100%}.sq-fb-q legend [lang=th]{color:var(--ink-soft);font-weight:500}
+.sq-fb-q label{display:inline-flex;align-items:center;gap:.3rem;min-height:var(--tap);padding:.3rem .7rem;border:1px solid #c9d3e2;border-radius:var(--pill);background:#fff;cursor:pointer;font-size:.85rem}
+.sq-fb-q label span[aria-hidden]{font-size:1.4rem}
+.sq-fb-q input{position:absolute;opacity:0;width:1px;height:1px}
+.sq-fb-q label:has(input:checked){border-color:var(--green);background:#e7f3ec;box-shadow:inset 0 0 0 1px var(--green)}
+.sq-fb-q label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:2px}
+.sq-fb-c{display:grid;gap:.25rem;font-size:.9rem}.sq-fb-c textarea{min-height:3em;padding:.5rem;border:1px solid #c5cfc4;border-radius:var(--radius-s);font:inherit;color:var(--ink)}
+.sq-fb-c [lang=th]{color:var(--ink-soft)}
+.sq-fb button{justify-self:start;min-height:var(--tap);padding:.5rem 1.2rem;border-radius:var(--radius-s);border:0;background:var(--green);color:#fff;font:600 .95rem var(--body);cursor:pointer}
+.sq-fb-done{margin:1rem 0;padding:.7rem 1rem;border-radius:var(--radius-s);background:#e7f3ec;color:var(--green-dark)}.sq-fb-done .th{display:block}
