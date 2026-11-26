@@ -179,7 +179,11 @@ function move(dx,dz){const nx=player.x+dx,nz=player.z+dz;if(!nav.blocked(nx,play
 // ?speed=N walks faster (used by automated tests on slow machines)
 const SPEED=Math.min(8,Math.max(1,+new URLSearchParams(location.search).get('speed')||1));
 let last=performance.now(),clock=0,uiTick=0;const camCfg={center:[0,.1,-.3],r:29,rNarrow:51,...(cfg.camera||{})};
-function frame(now){requestAnimationFrame(frame);const dt=Math.min((now-last)/1000,.05);last=now;clock+=dt;player.walk=false;
+// while a dialog covers the (blurred) world, redraw it only 4 times a second: saves phone batteries and keeps
+// the dialog quick on slow devices (software rendering would otherwise spend every frame on the hidden scene)
+let lastDraw=0;
+function frame(now){requestAnimationFrame(frame);const dt=Math.min((now-last)/1000,.05);last=now;clock+=dt;
+ if(modal&&now-lastDraw<250)return;lastDraw=now;player.walk=false;
  if(ready()){if(keys.has('q'))camera.yaw-=dt*1.3;if(keys.has('e'))camera.yaw+=dt*1.3;
   let x=(keys.has('right')?1:0)-(keys.has('left')?1:0),z=(keys.has('down')?1:0)-(keys.has('up')?1:0);
   if(x||z){const l=Math.hypot(x,z),s=dt*3.5/l;move((x*Math.cos(camera.yaw)+z*Math.sin(camera.yaw))*s,(-x*Math.sin(camera.yaw)+z*Math.cos(camera.yaw))*s);player.walk=true;}
