@@ -6,3 +6,7 @@ test('content/content.js is up to date with the JSON',()=>{const {execFileSync}=
   const before=fs.readFileSync('content/content.js','utf8');execFileSync('node',['scripts/build-content.js']);expect(fs.readFileSync('content/content.js','utf8')).toBe(before);});
 test('validation catches broken content',()=>{const d=lib.load();const q=d.worlds['02'].missions.find(m=>m.id==='buddy').questions[0];q.answer=7;delete q.line.th;
   const errs=lib.validate(d);expect(errs.some(e=>/answer must point/.test(e))).toBe(true);expect(errs.some(e=>/line.th/.test(e))).toBe(true);});
+test('the pre/post test has 30 questions, 5 from each of the 6 maps',()=>{const {tests,worlds}=lib.load();
+  const items=tests.parts.flatMap(p=>p.items),per={};for(const it of items)per[it.map]=(per[it.map]||0)+1;
+  expect(items.length).toBe(30);expect(per).toEqual(Object.fromEntries(Object.keys(worlds).sort().map(id=>[id,5])));
+  expect(lib.validate({...lib.load(),tests:{...tests,parts:[{...tests.parts[0],items:[{...tests.parts[0].items[0],map:'09'}]}]}}).join(' ')).toMatch(/unknown map 09/);});

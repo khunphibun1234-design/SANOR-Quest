@@ -1,5 +1,5 @@
 {
- "note": "Pre-test and post-test (same 30 questions, shown in a mixed order). Map 01–06, CEFR A1–A2. Items w11–w14, t7–t10 and Part 4 (Maps 03–06) are drafts: please review with the expert.",
+ "note": "Pre-test and post-test (same 30 questions, shown in a mixed order). 5 questions from each of Maps 01–06 (\"map\" on every item), CEFR A1–A2. Draft for expert review.",
  "title": {
   "en": "SANOR QUEST English Check",
   "th": "แบบทดสอบภาษาอังกฤษ SANOR QUEST"
@@ -19,6 +19,7 @@
    "items": [
     {
      "id": "w1",
+     "map": "01",
      "prompt": {
       "en": "สวน"
      },
@@ -32,32 +33,7 @@
     },
     {
      "id": "w2",
-     "prompt": {
-      "en": "ห้องครัว"
-     },
-     "choices": [
-      "living room",
-      "kitchen",
-      "garden"
-     ],
-     "answer": 1,
-     "word": "kitchen"
-    },
-    {
-     "id": "w3",
-     "prompt": {
-      "en": "ห้องนอน"
-     },
-     "choices": [
-      "bedroom",
-      "classroom",
-      "library"
-     ],
-     "answer": 0,
-     "word": "bedroom"
-    },
-    {
-     "id": "w4",
+     "map": "01",
      "prompt": {
       "en": "จาน"
      },
@@ -70,134 +46,144 @@
      "word": "plate"
     },
     {
-     "id": "w5",
-     "prompt": {
-      "en": "ช้อน"
-     },
-     "choices": [
-      "spoon",
-      "fork",
-      "table"
-     ],
-     "answer": 0,
-     "word": "spoon"
-    },
-    {
-     "id": "w6",
-     "prompt": {
-      "en": "แก้ว"
-     },
-     "choices": [
-      "water",
-      "glass",
-      "bowl"
-     ],
-     "answer": 1,
-     "word": "glass"
-    },
-    {
-     "id": "w7",
+     "id": "w3",
+     "map": "02",
      "prompt": {
       "en": "ห้องสมุด"
      },
      "choices": [
       "canteen",
-      "gym",
-      "library"
+      "library",
+      "gym"
      ],
-     "answer": 2,
+     "answer": 1,
      "word": "library"
     },
     {
-     "id": "w8",
-     "prompt": {
-      "en": "โรงอาหาร"
-     },
-     "choices": [
-      "canteen",
-      "stage",
-      "gate"
-     ],
-     "answer": 0,
-     "word": "canteen"
-    },
-    {
-     "id": "w9",
+     "id": "w4",
+     "map": "02",
      "prompt": {
       "en": "ตารางเรียน"
      },
      "choices": [
-      "notebook",
       "timetable",
+      "notebook",
       "club"
      ],
-     "answer": 1,
+     "answer": 0,
      "word": "timetable"
     },
     {
-     "id": "w10",
+     "id": "w5",
+     "map": "03",
      "prompt": {
-      "en": "เวที"
+      "en": "วัด"
      },
      "choices": [
-      "stage",
-      "gym",
-      "classroom"
-     ],
-     "answer": 0,
-     "word": "stage"
-    },
-    {
-     "id": "w11",
-     "prompt": {
-      "en": "ตั๋ว"
-     },
-     "choices": [
-      "menu",
-      "ticket",
-      "bill"
-     ],
-     "answer": 1,
-     "word": "ticket"
-    },
-    {
-     "id": "w12",
-     "prompt": {
-      "en": "สนามบิน"
-     },
-     "choices": [
-      "airport",
-      "platform",
+      "river",
+      "boat",
       "temple"
      ],
-     "answer": 0,
-     "word": "airport"
+     "answer": 2,
+     "word": "temple"
     },
     {
-     "id": "w13",
+     "id": "w6",
+     "map": "03",
+     "prompt": {
+      "en": "แก่ง (ช่วงแม่น้ำที่มีหินและน้ำไหลแรง)"
+     },
+     "choices": [
+      "rapids",
+      "rock",
+      "noodles"
+     ],
+     "answer": 0,
+     "word": "rapids"
+    },
+    {
+     "id": "w7",
+     "map": "04",
      "prompt": {
       "en": "ราคาถูก"
      },
      "choices": [
-      "spicy",
       "expensive",
-      "cheap"
+      "cheap",
+      "spicy"
      ],
-     "answer": 2,
+     "answer": 1,
      "word": "cheap"
     },
     {
-     "id": "w14",
+     "id": "w8",
+     "map": "04",
+     "prompt": {
+      "en": "รายการอาหาร"
+     },
+     "choices": [
+      "bill",
+      "budget",
+      "menu"
+     ],
+     "answer": 2,
+     "word": "menu"
+    },
+    {
+     "id": "w9",
+     "map": "05",
+     "prompt": {
+      "en": "ตั๋ว"
+     },
+     "choices": [
+      "ticket",
+      "booking",
+      "platform"
+     ],
+     "answer": 0,
+     "word": "ticket"
+    },
+    {
+     "id": "w10",
+     "map": "05",
+     "prompt": {
+      "en": "สนามบิน"
+     },
+     "choices": [
+      "hotel",
+      "airport",
+      "bag"
+     ],
+     "answer": 1,
+     "word": "airport"
+    },
+    {
+     "id": "w11",
+     "map": "06",
      "prompt": {
       "en": "หุ่นยนต์"
      },
      "choices": [
-      "robot",
       "battery",
-      "project"
+      "project",
+      "robot"
+     ],
+     "answer": 2,
+     "word": "robot"
+    },
+    {
+     "id": "w12",
+     "map": "06",
+     "prompt": {
+      "en": "พลังงาน"
+     },
+     "choices": [
+      "energy",
+      "idea",
+      "vote"
      ],
      "answer": 0,
-     "word": "robot"
+     "word": "energy"
     }
    ]
   },
@@ -214,6 +200,7 @@
    "items": [
     {
      "id": "t1",
+     "map": "01",
      "prompt": {
       "en": "Alex: Hi! Thank you for inviting me."
      },
@@ -226,54 +213,33 @@
     },
     {
      "id": "t2",
+     "map": "01",
      "prompt": {
-      "en": "Alex: I'm Alex. What's your name?"
+      "en": "Mum: Would you like some water?"
      },
      "choices": [
-      "This is the kitchen.",
-      "I'm Mook. Nice to meet you.",
-      "I like orange juice."
+      "Yes, I am.",
+      "Yes, please. Thank you!",
+      "It's my bedroom."
      ],
      "answer": 1
     },
     {
      "id": "t3",
-     "prompt": {
-      "en": "Mum: Would you like some water?"
-     },
-     "choices": [
-      "Yes, please. Thank you!",
-      "Yes, I am.",
-      "It's my bedroom."
-     ],
-     "answer": 0
-    },
-    {
-     "id": "t4",
-     "prompt": {
-      "en": "Alex: Can I help you?"
-     },
-     "choices": [
-      "No, I'm not.",
-      "I help every day.",
-      "Sure! Take this watering can."
-     ],
-     "answer": 2
-    },
-    {
-     "id": "t5",
+     "map": "02",
      "prompt": {
       "en": "Alex: When is our English lesson? (English 9:30)"
      },
      "choices": [
-      "At half past nine.",
       "At nine o'clock.",
-      "On Monday morning."
+      "On Monday morning.",
+      "At half past nine."
      ],
-     "answer": 0
+     "answer": 2
     },
     {
-     "id": "t6",
+     "id": "t4",
+     "map": "02",
      "prompt": {
       "en": "Alex: Do you want to play basketball?"
      },
@@ -285,31 +251,60 @@
      "answer": 0
     },
     {
-     "id": "t7",
+     "id": "t5",
+     "map": "03",
+     "prompt": {
+      "en": "Tourist: Is there a temple near here?"
+     },
+     "choices": [
+      "Yes, there are temple.",
+      "Yes, there is a temple next to the river.",
+      "No, I am a temple."
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t6",
+     "map": "03",
      "prompt": {
       "en": "Grandma: What did you do at Songkran last year?"
      },
      "choices": [
-      "I splashed water with my friends.",
       "I splash water tomorrow.",
-      "Yes, I am at Songkran."
+      "Yes, I am at Songkran.",
+      "I splashed water with my friends."
+     ],
+     "answer": 2
+    },
+    {
+     "id": "t7",
+     "map": "04",
+     "prompt": {
+      "en": "Vendor: These mangoes are 40 baht a kilo."
+     },
+     "choices": [
+      "Can I have two kilos, please?",
+      "Mangoes is yellow.",
+      "I am two kilos."
      ],
      "answer": 0
     },
     {
      "id": "t8",
+     "map": "04",
      "prompt": {
-      "en": "Vendor: These mangoes are 40 baht a kilo."
+      "en": "Waiter: What would you like to order?"
      },
      "choices": [
-      "Mangoes is yellow.",
-      "Can I have two kilos, please?",
-      "I am two kilos."
+      "I would like yesterday.",
+      "Can I have fried rice, please?",
+      "Yes, I am hungry rice."
      ],
      "answer": 1
     },
     {
      "id": "t9",
+     "map": "05",
      "prompt": {
       "en": "Officer: Go straight, then turn left. The station is next to the hotel."
      },
@@ -322,15 +317,42 @@
     },
     {
      "id": "t10",
+     "map": "05",
+     "prompt": {
+      "en": "Officer: What does your bag look like?"
+     },
+     "choices": [
+      "It's a big blue bag with a red tag.",
+      "It's a blue big bag tag.",
+      "My bag lost yesterday is."
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t11",
+     "map": "06",
+     "prompt": {
+      "en": "Engineer: What does the robot do first?"
+     },
+     "choices": [
+      "Finally first a hole.",
+      "First, it digs a hole.",
+      "It digging first."
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t12",
+     "map": "06",
      "prompt": {
       "en": "Mayor: What should we do to save energy?"
      },
      "choices": [
-      "We should use solar panels.",
       "We should to buying cars.",
-      "Energy is my friend."
+      "Energy is my friend.",
+      "We should use solar panels."
      ],
-     "answer": 0
+     "answer": 2
     }
    ]
   },
@@ -345,56 +367,47 @@
     "th": "อ่านแล้วตอบคำถาม"
    },
    "passage": {
-    "en": "Alex is a new student at Phibun School. He is in Class 2/5. He likes music very much. He can play the guitar and the piano. On Friday, Alex sings at the school concert on the stage. His friends come to watch him."
+    "en": "Mook invited her new friend Alex to her home. They ate lunch together in the kitchen, and then they watered the flowers in the garden. On Monday, Alex started at Phibun School. His English lesson is at half past nine. Last April, Mook and Alex visited Kaeng Saphue during Songkran. There were many people on the rocks, and everyone was splashing water."
    },
    "items": [
     {
      "id": "r1",
+     "map": "01",
      "prompt": {
-      "en": "What does Alex like?"
+      "en": "Where did Mook and Alex eat lunch?"
      },
      "choices": [
-      "Sport",
-      "Music",
-      "Cooking"
-     ],
-     "answer": 1
-    },
-    {
-     "id": "r2",
-     "prompt": {
-      "en": "What can Alex play?"
-     },
-     "choices": [
-      "The guitar and the piano",
-      "The drums",
-      "Basketball"
+      "In the kitchen",
+      "In the garden",
+      "At school"
      ],
      "answer": 0
     },
     {
-     "id": "r3",
+     "id": "r2",
+     "map": "02",
      "prompt": {
-      "en": "When is the concert?"
+      "en": "What time is Alex's English lesson?"
      },
      "choices": [
-      "On Monday",
-      "On Wednesday",
-      "On Friday"
-     ],
-     "answer": 2
-    },
-    {
-     "id": "r4",
-     "prompt": {
-      "en": "Where does Alex sing?"
-     },
-     "choices": [
-      "In the library",
-      "On the stage",
-      "In the canteen"
+      "At nine o'clock",
+      "At half past nine",
+      "At ten past nine"
      ],
      "answer": 1
+    },
+    {
+     "id": "r3",
+     "map": "03",
+     "prompt": {
+      "en": "When did they visit Kaeng Saphue?"
+     },
+     "choices": [
+      "Next week",
+      "Last Monday",
+      "Last April"
+     ],
+     "answer": 2
     }
    ]
   },
@@ -409,32 +422,47 @@
     "th": "อ่านแล้วตอบคำถาม"
    },
    "passage": {
-    "en": "Ploy visited her grandma in Phibun last April. First, they watched the Songkran parade. Then they went to Kaeng Saphue and had lunch at a noodle stall. The noodles were 40 baht. Ploy thinks the rapids are beautiful."
+    "en": "Ploy's class planned a party with a budget of 300 baht. The cake was 180 baht and the drinks were 90 baht. Next month, Ploy is taking a train to Bangkok. The train leaves at quarter to twelve from platform 1. At school, her team built a garden robot. It uses solar power, so it can work all day in the sun."
    },
    "items": [
     {
-     "id": "r5",
+     "id": "r4",
+     "map": "04",
      "prompt": {
-      "en": "When did Ploy visit her grandma?"
+      "en": "How much did the cake and the drinks cost together?"
      },
      "choices": [
-      "In April",
-      "In December",
-      "Last week"
+      "270 baht",
+      "300 baht",
+      "180 baht"
      ],
      "answer": 0
     },
     {
-     "id": "r6",
+     "id": "r5",
+     "map": "05",
      "prompt": {
-      "en": "How much were the noodles?"
+      "en": "Which platform does the train to Bangkok leave from?"
      },
      "choices": [
-      "14 baht",
-      "40 baht",
-      "400 baht"
+      "Platform 3",
+      "Platform 1",
+      "Platform 2"
      ],
      "answer": 1
+    },
+    {
+     "id": "r6",
+     "map": "06",
+     "prompt": {
+      "en": "What kind of power does the robot use?"
+     },
+     "choices": [
+      "Wind power",
+      "Water power",
+      "Solar power"
+     ],
+     "answer": 2
     }
    ]
   }

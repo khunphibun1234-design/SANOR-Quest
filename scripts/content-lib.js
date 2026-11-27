@@ -61,6 +61,7 @@ function validate({words,worlds}){
   if(arguments[0].tests){const T=arguments[0].tests,seen=new Set();need(T.title?.en&&T.title?.th,'tests: title en/th required');
     for(const part of T.parts){need(part.title?.en&&part.title?.th&&part.instruction?.en&&part.instruction?.th,`tests part ${part.id}: title and instruction en/th required`);
       for(const it of part.items){need(!seen.has(it.id),`tests: duplicate item ${it.id}`);seen.add(it.id);need(it.prompt?.en&&Array.isArray(it.choices)&&it.choices.length>=2&&Number.isInteger(it.answer)&&it.answer<it.choices.length,`tests item ${it.id}: prompt, choices and a valid answer are required`);
-        if(it.word)need(words.some(w=>w.id===it.word),`tests item ${it.id}: unknown word ${it.word}`);}}}
+        if(it.word)need(words.some(w=>w.id===it.word),`tests item ${it.id}: unknown word ${it.word}`);
+        if(it.map!==undefined)need(Object.hasOwn(arguments[0].worlds||{},it.map),`tests item ${it.id}: unknown map ${it.map}`);}}}
   return errors;}
 module.exports={ROOT,load,validate,spokenLines};
