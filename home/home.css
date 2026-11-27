@@ -54,3 +54,18 @@
 .portrait.teacher::before{content:"👩‍🏫"}.portrait.librarian::before{content:"🧑‍💼"}.portrait.dad::before{content:"👨"}
 .portrait.teacher,.portrait.librarian{font-size:0;background:#e6def2}.portrait.teacher::before,.portrait.librarian::before{font-size:26px}
 .intro p .th{display:block;margin-top:2px}
+/* walking joystick (replaces the arrow pad): drag the knob; direction = where, distance = how fast */
+.joystick{position:fixed;left:max(34px,env(safe-area-inset-left));bottom:max(30px,env(safe-area-inset-bottom));width:124px;height:124px;z-index:3;touch-action:none;-webkit-user-select:none;user-select:none;cursor:grab}
+.joy-ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fffdf3e6,#f3efdcd9 70%);border:2px solid #fffef8;box-shadow:0 6px 18px #2b4a3a26,inset 0 0 0 7px #e8e2c9a6}
+.joy-ring i{position:absolute;left:50%;top:50%;width:0;height:0;border:6px solid transparent;border-bottom:8px solid #9fb08f;transform-origin:50% 50%}
+.joy-ring i:nth-child(1){transform:translate(-50%,-50%) translateY(-45px)}
+.joy-ring i:nth-child(2){transform:translate(-50%,-50%) rotate(90deg) translateY(-45px)}
+.joy-ring i:nth-child(3){transform:translate(-50%,-50%) rotate(180deg) translateY(-45px)}
+.joy-ring i:nth-child(4){transform:translate(-50%,-50%) rotate(270deg) translateY(-45px)}
+.joy-knob{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#4fa36c,#2a7a4a 62%,#1f5f3a);border:3px solid #e6c25c;box-shadow:0 5px 12px #1f3f2c4d,inset 0 2px 0 #ffffff40;transition:transform .18s cubic-bezier(.3,1.4,.5,1)}
+.joystick.active{cursor:grabbing}.joystick.active .joy-knob{transition:none}
+.joystick.active .joy-ring{box-shadow:0 6px 18px #2b4a3a33,inset 0 0 0 7px #e6c25c66}
+@media(max-width:700px){.joystick{width:108px;height:108px;left:max(18px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom))}.joy-ring i:nth-child(n){--r:-38px}.joy-knob{width:48px;height:48px;margin:-24px 0 0 -24px}}
+@media(prefers-reduced-motion:reduce){.joy-knob{transition:none}}
+[data-motion="reduce"] .joy-knob{transition:none}
+@media(max-height:520px){.joystick{width:94px;height:94px;bottom:max(12px,env(safe-area-inset-bottom));left:max(16px,env(safe-area-inset-left))}.joy-knob{width:42px;height:42px;margin:-21px 0 0 -21px}.joy-ring i:nth-child(1){transform:translate(-50%,-50%) translateY(-34px)}.joy-ring i:nth-child(2){transform:translate(-50%,-50%) rotate(90deg) translateY(-34px)}.joy-ring i:nth-child(3){transform:translate(-50%,-50%) rotate(180deg) translateY(-34px)}.joy-ring i:nth-child(4){transform:translate(-50%,-50%) rotate(270deg) translateY(-34px)}}
