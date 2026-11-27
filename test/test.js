@@ -28,14 +28,32 @@ el('begin').onclick = () => {
     return `<section class="part"><h2>${esc(part.title.en)}${th(part.title.th)}</h2><p>${esc(part.instruction.en)}${th(part.instruction.th)}</p>${part.passage ? `<p class="passage" lang="en">${esc(part.passage.en)}</p>` : ''}`
       + items.map(it => { n++; const opts = order(it.choices.length, n * 7 + (kind === 'pre' ? 3 : 5));
         return `<fieldset class="item"><legend>${n}. <span ${/[฀-๿]/.test(it.prompt.en) ? 'lang="th"' : 'lang="en"'}>${esc(it.prompt.en)}</span></legend>${opts.map(o => `<label><input type="radio" name="${esc(it.id)}" value="${o}" required> <span lang="en">${esc(it.choices[o])}</span></label>`).join('')}</fieldset>`; }).join('') + '</section>';
-  }).join('') + '<p id="submitMsg" role="alert"></p><button class="primary" type="submit">Finish the test</button>';
+  }).join('') + '<p id="submitMsg" role="alert"></p><div class="submit-row"><button class="primary" type="submit" id="finishTest">Finish the test</button><button type="button" id="keepChecking" hidden>Check my answers again</button></div>';
+  form.noValidate = true;   // our own check below says which questions are missing (the browser's hint is easy to miss)
   form.hidden = false; form.querySelector('h2').scrollIntoView({block: 'start'});
+  form.addEventListener('change', e => { e.target.closest('fieldset')?.classList.remove('missing'); unconfirm(); });
+  el('keepChecking').onclick = () => { unconfirm(); form.querySelector('h2').scrollIntoView({block: 'start'}); };
 };
+// finishing takes two taps on the page itself (no browser confirm(): some phones and in-app browsers never show it)
+let confirming = false;
+function unconfirm() { if (!confirming) return; confirming = false; el('finishTest').textContent = 'Finish the test'; el('keepChecking').hidden = true; el('submitMsg').textContent = ''; }
 el('paper').onsubmit = e => {
   e.preventDefault();
-  const items = T.parts.flatMap(p => p.items), data = new FormData(e.target), answers = items.map(it => data.get(it.id) === null ? null : +data.get(it.id));
-  if (answers.some(a => a === null)) { el('submitMsg').innerHTML = esc('Please answer every question.') + th('ตอบให้ครบทุกข้อก่อนส่ง'); return; }
-  if (!confirm('Finish the test? You cannot change your answers after this.')) return;
+  const form = e.target, items = T.parts.flatMap(p => p.items), data = new FormData(form), answers = items.map(it => data.get(it.id) === null ? null : +data.get(it.id));
+  const sets = [...form.querySelectorAll('fieldset.item')], missing = sets.filter(fs => !fs.querySelector('input:checked'));
+  sets.forEach(fs => fs.classList.toggle('missing', missing.includes(fs)));
+  if (missing.length) {
+    const nums = missing.map(fs => fs.querySelector('legend').textContent.split('.')[0]).join(', ');
+    el('submitMsg').innerHTML = esc('Please answer every question. Not answered yet: ' + nums) + th('ยังไม่ได้ตอบข้อ ' + nums + ' ตอบให้ครบทุกข้อก่อนส่ง');
+    missing[0].scrollIntoView({block: 'center'}); missing[0].querySelector('input').focus({preventScroll: true});
+    return;
+  }
+  if (!confirming) {
+    confirming = true;
+    el('submitMsg').innerHTML = esc('You answered all ' + total + ' questions. Tap again to send. You cannot change your answers after this.') + th('ตอบครบ ' + total + ' ข้อแล้ว กดอีกครั้งเพื่อส่ง ส่งแล้วแก้คำตอบไม่ได้');
+    el('finishTest').textContent = 'Yes, finish the test ✓'; el('keepChecking').hidden = false; el('finishTest').focus();
+    return;
+  }
   const score = items.filter((it, i) => answers[i] === it.answer).length;
   P.recordTest(kind, {score, total, answers});
   K.flush();

@@ -23,14 +23,15 @@ test('classroom: teacher creates a class, a student joins and plays, the teacher
   // pre-test
   await student.goto('/test/?kind=pre');await student.click('#begin');
   for(const fs of await student.locator('fieldset.item').all())await fs.locator('input').first().check();
-  student.once('dialog',d=>d.accept());await student.click('#paper button[type=submit]');await expect(student.locator('#score')).toContainText('/ 20');
+  await student.click('#finishTest');await expect(student.locator('#finishTest')).toHaveText(/Yes, finish/);await student.click('#finishTest');
+  await expect(student.locator('#score')).toContainText('/ 30');
   await expect.poll(()=>student.evaluate(()=>SanorClass.status().pending)).toBe(0);
 
   // teacher sees the student, the missed word and the test
   await teacher.click('#refresh');
   const row=teacher.locator('#tab-overview tbody tr').first();await expect(row).toContainText('Ploy');await expect(row).toContainText('40');
   await teacher.click('[data-tab=words]');await expect(teacher.locator('#tab-words')).toContainText('gate');
-  await teacher.click('[data-tab=tests]');await expect(teacher.locator('#tab-tests tbody')).toContainText('/ 20');
+  await teacher.click('[data-tab=tests]');await expect(teacher.locator('#tab-tests tbody')).toContainText('/ 30');
   await teacher.click('[data-tab=overview]');await teacher.click('[data-student]');await expect(teacher.locator('#studentBody')).toContainText('เลขที่ 7 · Ploy');
   await expect(teacher.locator('#studentBody tbody tr')).toHaveCount(2);await teacher.click('#studentDialog [data-close]');
   // CSV export
