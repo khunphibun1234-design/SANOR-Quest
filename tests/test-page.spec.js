@@ -18,7 +18,7 @@ test('the pre-test has 30 questions; unanswered ones are listed; finishing takes
   await expect(page.locator('#score')).toHaveText(/^\d+ \/ 30$/);
   expect(await page.evaluate(()=>SanorProfile.test('pre').total)).toBe(30);
   expect(dialogs).toBe(0);expect(errors).toEqual([]);});
-test('everyone takes the pre-test first: the town map and the worlds send you there, and answers are saved',async({page})=>{const errors=watch(page);
+test('everyone takes the pre-test first: the town map and the worlds send you there, and answers are saved',async({page})=>{test.setTimeout(180_000);const errors=watch(page);   // opens a 3D world twice: slow on CI runners
   await page.goto('/');await expect(page).toHaveURL(/\/test\/\?kind=pre&first=1$/);await expect(page.locator('#firstNote')).toBeVisible();
   await page.goto('/phibun/?quality=low');await expect(page.locator('#startBtn')).toContainText('Take the pre-test first');
   await page.click('#startBtn');await expect(page).toHaveURL(/\/test\/\?kind=pre&first=1$/);
