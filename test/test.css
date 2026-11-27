@@ -10,3 +10,12 @@
 .score{font:800 2.4rem var(--display);margin:.5rem 0}
 #submitMsg{color:var(--danger)}#submitMsg:empty{display:none}
 @media print{.bar,.tools{display:none}}
+/* unanswered questions after pressing Finish, and the two-step finish */
+.item.missing{border-left:4px solid var(--coral);padding-left:.8rem;background:#fdf1ec;border-radius:var(--radius-s)}
+.item.missing legend{color:var(--danger)}
+.submit-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+#submitMsg{font-weight:600}
+#submitMsg .th,#resultNote .th{display:block;margin-top:.2rem}
+.first-note{padding:.75rem .9rem;border-radius:var(--radius-s);background:var(--gold-soft);margin:0 0 .8rem}
+.first-note b{display:block}
+.back-link.primary-link{display:inline-flex;align-items:center;min-height:var(--tap);padding:.5rem 1.1rem;border-radius:var(--radius-s);background:var(--green);color:#fff;text-decoration:none;font-weight:700}

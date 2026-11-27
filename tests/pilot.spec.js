@@ -1,6 +1,6 @@
-const {test,expect,skipSplash}=require('./fixtures');const {watch}=require('./helpers');
+const {test,expect,skipSplash,markPretest}=require('./fixtures');const {watch}=require('./helpers');
 test('pilot: active time, steps and feedback reach the pilot tab, with pre/post statistics',async({browser})=>{test.setTimeout(90_000);
-  const ctx=await browser.newContext();await ctx.addInitScript(skipSplash);const t=await ctx.newPage(),errT=watch(t);
+  const ctx=await browser.newContext();await ctx.addInitScript(skipSplash);await ctx.addInitScript(markPretest);const t=await ctx.newPage(),errT=watch(t);
   await t.goto('/teacher/');await t.evaluate(()=>localStorage.clear());await t.reload();await t.click('#demoStart');
   await t.fill('#newClass input','ม.2/5');await t.click('#newClass button');const code=(await t.locator('#classCode').textContent()).trim();
   // three students; the third plays on this page so time, steps and feedback come from the real game

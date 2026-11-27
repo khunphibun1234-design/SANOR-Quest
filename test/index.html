@@ -10,13 +10,15 @@
 <p class="lede" id="lede"></p>
 <section id="closed" class="card" hidden><h2>This test is not open yet</h2><p>Your teacher will open it. <span class="th" lang="th">ครูยังไม่เปิดแบบทดสอบนี้</span></p><a href="../">← Back to town</a></section>
 <section id="intro" class="card" hidden>
- <ul class="rules"><li><b id="count">20</b> questions · about <b id="minutes">15</b> minutes <span class="th" lang="th">ใช้เวลาประมาณ 15 นาที</span></li>
+ <p class="first-note" id="firstNote" hidden><b>Before your adventure starts</b> Everyone does this short English check once. Then the six worlds open. <span class="th" lang="th">ก่อนเริ่มผจญภัย ทุกคนทำแบบทดสอบนี้ครั้งเดียว ทำเสร็จแล้วโลกทั้ง 6 จะเปิดให้เล่น</span></p>
+ <p class="first-note" id="draftNote" hidden></p>
+ <ul class="rules"><li><b id="count">30</b> questions · about <b id="minutes">20</b> minutes <span class="th" lang="th">ใช้เวลาประมาณ 20 นาที</span></li>
  <li>No hints. Do your best on your own. <span class="th" lang="th">ไม่มีคำใบ้ ทำด้วยตัวเองให้ดีที่สุด</span></li>
  <li>You can do the test only once. <span class="th" lang="th">ทำได้ครั้งเดียว ผลครั้งแรกจะถูกบันทึก</span></li></ul>
  <button id="begin" class="primary">Start the test →</button>
 </section>
 <form id="paper" hidden></form>
-<section id="result" class="card" hidden><h2 tabindex="-1">Test complete</h2><p class="score" id="score"></p><p id="resultNote"></p><div class="tools"><button type="button" onclick="window.print()">Print</button><a class="back-link" href="../">← Back to town</a></div></section>
+<section id="result" class="card" hidden><h2 tabindex="-1">Test complete</h2><p class="score" id="score"></p><p id="resultNote"></p><div class="tools"><button type="button" onclick="window.print()">Print</button><a class="back-link" id="backLink" href="../">← Back to town</a></div></section>
 </main>
 <script src="../content/content.js"></script><script src="test.js"></script>
 </body></html>

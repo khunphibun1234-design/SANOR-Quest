@@ -13,7 +13,7 @@ const calm=matchMedia('(prefers-reduced-motion: reduce)').matches||(P&&P.reduced
 if(calm)document.documentElement.classList.add('calm');
 const inClass=()=>{const me=K&&K.info();return!!me&&!me.expired;};
 const decided=()=>inClass()||store.get(localStorage,WELCOME)==='guest';
-const go=()=>{store.set(sessionStorage,SPLASH,'1');location.replace(next);};
+const go=()=>{store.set(sessionStorage,SPLASH,'1');location.replace(K&&K.pretestDue()?'../test/?kind=pre&first=1':next);};   // pre-test first, once
 $('demoNote').hidden=!(K&&K.mode==='demo');
 
 // ---------- splash ----------
@@ -39,7 +39,7 @@ function show(which){const auth=$('auth'),first=auth.hidden;
  const other=$(which==='login'?'registerForm':'loginForm');for(const n of ['code','number'])if(!form[n].value&&other[n].value)form[n].value=other[n].value;
  if(which==='register'&&!form.nickname.value&&P&&P.name())form.nickname.value=P.name();
  const target=[...form.querySelectorAll('input')].find(i=>!i.value)||form.querySelector('input');
- if(!first)form.querySelector('h1').focus();else setTimeout(()=>target.focus({preventScroll:true}),calm?0:300);}
+ if(!first)form.querySelector('h1').focus();else setTimeout(()=>{const f=document.activeElement;if(!(f&&/INPUT|BUTTON|A/.test(f.tagName)&&f!==$('startBtn')))target.focus({preventScroll:true});},calm?0:300);}   // never move the cursor away from a box the student already chose
 addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(h==='login'||h==='register')show(h);});
 for(const b of document.querySelectorAll('.eye'))b.onclick=()=>{const i=b.parentElement.querySelector('input'),on=i.type==='password';i.type=on?'text':'password';b.setAttribute('aria-pressed',String(on));b.setAttribute('aria-label',on?'Hide PIN':'Show PIN');};
 for(const i of document.querySelectorAll('input[name=code]'))i.addEventListener('input',()=>{i.value=i.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);});

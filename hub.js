@@ -32,7 +32,7 @@ function classBox(){const me=K.info(),st=K.status(),box=$('classBox');
   $('joinForm').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target),btn=e.target.querySelector('button');btn.disabled=true;$('joinError').textContent='';
    try{await K.join(f.get('code'),f.get('number'),f.get('nickname'),f.get('pin'));}catch(err){$('joinError').textContent=ERR[err.message]||err.message;}finally{btn.disabled=false;}};}
  const chip=$('classChip');chip.innerHTML=me?`🏫 ${escape(me.className)} · No. ${me.number} <small>${st.pending?'⏳ '+st.pending:'✓ synced'}</small>`:'🏫 Join my class <small lang="th">เข้าห้องเรียน</small>';chip.onclick=()=>{passport();classBox();$('passportDialog').showModal();};
- const t=['pre','post'].find(k=>K.testOpen(k)&&!P.test(k)),tc=$('testChip');tc.hidden=!t;if(t){tc.href='test/?kind='+t;tc.innerHTML=t==='pre'?'📝 Pre-test <small lang="th">แบบทดสอบก่อนเรียน</small>':'📝 Post-test <small lang="th">แบบทดสอบหลังเรียน</small>';}
+ const t=K.postReady()?'post':null,tc=$('testChip');tc.hidden=!t;if(t){tc.href='test/?kind='+t;tc.innerHTML=t==='pre'?'📝 Pre-test <small lang="th">แบบทดสอบก่อนเรียน</small>':'📝 Post-test <small lang="th">แบบทดสอบหลังเรียน</small>';}
  select(selected,false,false);}
 addEventListener('load',()=>window.SQPwa&&SQPwa.installButton($('installApp')));
 K.onChange(classBox);P.onChange(()=>classBox());classBox();

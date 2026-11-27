@@ -52,8 +52,11 @@ function save(){try{localStorage.setItem(keyFor(current),JSON.stringify(lesson.s
 function toast(s){clearTimeout(toastTimer);$('toast').textContent=s;$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,3600);}
 function stopSpeech(){QuestVoice.stop();}
 function speak(text,rate=.85){QuestVoice.play(text,toast,rate/.85);return true;}
-function releaseOrbit(){const id=orbit?.id;orbit=null;canvas.classList.remove('orbiting');if(id!==undefined&&canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);}
-function halt(){keys.clear();player.walk=false;path=[];pathPlace=null;releaseOrbit();}
+// fingers / mouse buttons down on the 3D view (drag to turn, pinch to zoom) and the walking joystick
+const touches=new Map();let gesture=null,stick=null;
+function releaseOrbit(){for(const id of touches.keys())if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);touches.clear();gesture=null;orbit=null;canvas.classList.remove('orbiting');}
+function stickEnd(){stick=null;const k=$('joyKnob');if(k)k.style.transform='';$('joystick')?.classList.remove('active');}
+function halt(){keys.clear();player.walk=false;path=[];pathPlace=null;releaseOrbit();stickEnd();}
 const overlays=['intro','dialogOverlay','bookOverlay','helpOverlay','pauseOverlay','reportOverlay'].filter(id=>$(id));
 function show(id){lastFocus=document.activeElement;for(const n of overlays)$(n).hidden=n!==id;modal=id;halt();stopSpeech();requestAnimationFrame(()=>$(id).querySelector('input,button,textarea')?.focus({preventScroll:true}));}
 function close(){if(!started){show('intro');return;}for(const n of overlays)$(n).hidden=true;modal=null;stopSpeech();lastFocus?.focus({preventScroll:true});}
@@ -130,7 +133,7 @@ function picker(){const total=ORDER.filter(id=>!missionById(id).fallback);
  $('missionPicker').innerHTML=total.map((id,i)=>{const m=missionById(id),done=isDone(id),open=unlocked(id),story=m.type==='story';
   return `<button type="button" class="mission-option${id===current?' selected':''}${done?' done':''}" data-mission="${id}" ${open?'':'disabled'} aria-pressed="${id===current}"><span class="mo-num">${done?'✓':String(i+1).padStart(2,'0')}</span><span class="mo-text"><b>${esc(m.title.en)}</b>${th(m.title.th,'small')}<small>${esc(m.summary.en)}</small></span><span class="mo-state">${done?'Done':open?(story?'Play':'Open ↗'):'🔒'}</span></button>`;}).join('');
  $('missionPicker').querySelectorAll('[data-mission]').forEach(b=>b.onclick=()=>{const id=b.dataset.mission,m=missionById(id);if(m.type!=='story'){location.href=m.play+'?story=1';return;}switchMission(id,false);});
- const s=lesson.state;$('startBtn').textContent=(s.done?'Play this mission again':s.completed.length?'Continue this mission':'Start this mission')+' →';$('introReport').hidden=!s.done;}
+ const s=lesson.state;$('startBtn').textContent=root.SanorClass&&root.SanorClass.pretestDue()?'📝 Take the pre-test first · ทำแบบทดสอบก่อนเรียนก่อน':(s.done?'Play this mission again':s.completed.length?'Continue this mission':'Start this mission')+' →';$('introReport').hidden=!s.done;}
 function switchMission(id,startNow){current=id;C=contents[id];lesson=lessons[id];placeCast();followTrail=[];history.replaceState(null,'','?mission='+id);picker();hud();
  if(startNow){started=false;show('intro');}}
 function placeCast(){const p=cfg.start(current);[player.x,player.z,player.angle]=p.player;[alex.x,alex.z,alex.angle]=p.alex;}
@@ -155,15 +158,34 @@ $('missionsBtn').onclick=()=>{started=false;picker();show('intro');};
 // ---------- camera & input ----------
 function ready(){return started&&!modal;}
 function zoom(delta){if(!ready()||!Number.isFinite(delta))return;camera.targetZoom=clamp(camera.targetZoom*Math.exp(clamp(delta,-1000,1000)*.0015),.48,1.65);zoomUI();}
-function zoomUI(){$('zoomLevel').textContent=Math.round(100/camera.targetZoom)+'%';$('zoomIn').disabled=camera.targetZoom<=.48;$('zoomOut').disabled=camera.targetZoom>=1.65;}
+function zoomUI(){}
 function resetCamera(){camera.yaw=.38;camera.pitch=.78;camera.zoom=camera.targetZoom=1;zoomUI();}
-$('zoomIn').onclick=()=>zoom(-130);$('zoomOut').onclick=()=>zoom(130);$('cameraReset').onclick=()=>{if(ready())resetCamera();};
-$('rotateLeft').onclick=()=>{if(ready())camera.yaw-=Math.PI/6;};$('rotateRight').onclick=()=>{if(ready())camera.yaw+=Math.PI/6;};
 canvas.addEventListener('wheel',ev=>{if(!ready()||ev.ctrlKey||!Number.isFinite(ev.deltaY))return;ev.preventDefault();zoom(ev.deltaY*(ev.deltaMode===1?16:ev.deltaMode===2?innerHeight:1));},{passive:false});
 canvas.addEventListener('contextmenu',ev=>ev.preventDefault());
-canvas.addEventListener('pointerdown',ev=>{if(ev.button!==2||!ready())return;ev.preventDefault();orbit={id:ev.pointerId,x:ev.clientX,y:ev.clientY};canvas.setPointerCapture(ev.pointerId);canvas.classList.add('orbiting');});
-canvas.addEventListener('pointermove',ev=>{if(!orbit||orbit.id!==ev.pointerId||!ready())return;if(!(ev.buttons&2)){releaseOrbit();return;}camera.yaw-=(ev.clientX-orbit.x)*.008;camera.pitch=clamp(camera.pitch+(ev.clientY-orbit.y)*.006,.35,1.4);orbit.x=ev.clientX;orbit.y=ev.clientY;});
-for(const event of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(event,releaseOrbit);
+// ---------- the view: one finger (or mouse) drags to turn 360° and tilt · two fingers pinch to zoom and twist to turn ----------
+canvas.style.touchAction='none';
+const wrap=a=>{while(a>Math.PI)a-=2*Math.PI;while(a<-Math.PI)a+=2*Math.PI;return a;};
+function gestureStart(){const p=[...touches.values()];
+ if(p.length===1)gesture={mode:'turn',x:p[0].x,y:p[0].y};
+ else if(p.length>=2){const [a,b]=p;gesture={mode:'pinch',d:Math.hypot(a.x-b.x,a.y-b.y)||1,ang:Math.atan2(b.y-a.y,b.x-a.x),cy:(a.y+b.y)/2,zoom:camera.targetZoom,yaw:camera.yaw,pitch:camera.pitch};}
+ else gesture=null;}
+canvas.addEventListener('pointerdown',ev=>{if(!ready()||(ev.pointerType==='mouse'&&ev.button!==0&&ev.button!==2))return;ev.preventDefault();
+ try{canvas.setPointerCapture(ev.pointerId);}catch{}touches.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});gestureStart();canvas.classList.add('orbiting');});
+canvas.addEventListener('pointermove',ev=>{const t=touches.get(ev.pointerId);if(!t||!gesture||!ready())return;t.x=ev.clientX;t.y=ev.clientY;
+ if(gesture.mode==='turn'){camera.yaw-=(t.x-gesture.x)*.008;camera.pitch=clamp(camera.pitch+(t.y-gesture.y)*.006,.35,1.4);gesture.x=t.x;gesture.y=t.y;return;}
+ const [a,b]=[...touches.values()],d=Math.hypot(a.x-b.x,a.y-b.y)||1;
+ camera.targetZoom=clamp(gesture.zoom*gesture.d/d,.48,1.65);                                   // spread = closer, pinch = further
+ camera.yaw=gesture.yaw-wrap(Math.atan2(b.y-a.y,b.x-a.x)-gesture.ang);                          // twist turns the world
+ camera.pitch=clamp(gesture.pitch+((a.y+b.y)/2-gesture.cy)*.004,.35,1.4);});                     // two fingers up/down tilt
+function endPointer(ev){if(!touches.delete(ev.pointerId))return;if(canvas.hasPointerCapture(ev.pointerId))canvas.releasePointerCapture(ev.pointerId);gestureStart();if(!touches.size)canvas.classList.remove('orbiting');}
+for(const event of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(event,endPointer);
+// ---------- walking joystick: which way you drag is where you go; how far is how fast ----------
+{const joy=$('joystick'),knob=$('joyKnob');
+ const at=ev=>{const r=joy.getBoundingClientRect(),R=r.width/2,dx=ev.clientX-(r.left+R),dy=ev.clientY-(r.top+R),d=Math.hypot(dx,dy),m=Math.min(1,d/(R*.7)),k=d>0?m/d:0;
+  stick.x=dx*k;stick.y=dy*k;knob.style.transform=`translate(${stick.x*R*.5}px,${stick.y*R*.5}px)`;};
+ if(joy){joy.addEventListener('pointerdown',ev=>{if(!ready())return;ev.preventDefault();try{joy.setPointerCapture(ev.pointerId);}catch{}stick={id:ev.pointerId,x:0,y:0};path=[];pathPlace=null;joy.classList.add('active');at(ev);});
+  joy.addEventListener('pointermove',ev=>{if(stick&&stick.id===ev.pointerId)at(ev);});
+  for(const event of ['pointerup','pointercancel','lostpointercapture'])joy.addEventListener(event,ev=>{if(stick&&stick.id===ev.pointerId)stickEnd();});}}
 const keyMap={w:'up',ArrowUp:'up',s:'down',ArrowDown:'down',a:'left',ArrowLeft:'left',d:'right',ArrowRight:'right'};
 addEventListener('keydown',ev=>{if(ev.key==='Escape'&&modal){ev.preventDefault();close();return;}
  if(ev.key==='Tab'&&modal){const nodes=[...$(modal).querySelectorAll('button,input,textarea,a')].filter(n=>!n.disabled&&n.getClientRects().length);if(nodes.length&&(ev.shiftKey&&document.activeElement===nodes[0]||!ev.shiftKey&&document.activeElement===nodes.at(-1))){ev.preventDefault();nodes[ev.shiftKey?nodes.length-1:0].focus();}return;}
@@ -171,7 +193,6 @@ addEventListener('keydown',ev=>{if(ev.key==='Escape'&&modal){ev.preventDefault()
  if(keyMap[key]){ev.preventDefault();keys.add(keyMap[key]);path=[];pathPlace=null;}if(key==='q'||key==='e'){ev.preventDefault();keys.add(key);}
  if(ev.code==='Space'&&ev.target.tagName!=='BUTTON'){ev.preventDefault();if(!ev.repeat&&near)openPlace(near);}});
 addEventListener('keyup',ev=>{const key=ev.key.length===1?ev.key.toLowerCase():ev.key;keys.delete(keyMap[key]||key);});
-document.querySelectorAll('[data-move]').forEach(b=>{b.addEventListener('pointerdown',ev=>{if(!ready())return;ev.preventDefault();b.setPointerCapture(ev.pointerId);keys.add(b.dataset.move);path=[];pathPlace=null;});for(const event of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(event,()=>keys.delete(b.dataset.move));});
 addEventListener('blur',()=>{halt();stopSpeech();});document.addEventListener('visibilitychange',()=>{if(document.hidden){halt();stopSpeech();}});
 addEventListener('resize',()=>engine.resize());
 function move(dx,dz){const nx=player.x+dx,nz=player.z+dz;if(!nav.blocked(nx,player.z))player.x=nx;if(!nav.blocked(player.x,nz))player.z=nz;if(Math.abs(dx)+Math.abs(dz)>.0001)player.angle=Math.atan2(dx,dz);}
@@ -186,7 +207,8 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min((now-last)/10
  if(modal&&now-lastDraw<250)return;lastDraw=now;player.walk=false;
  if(ready()){if(keys.has('q'))camera.yaw-=dt*1.3;if(keys.has('e'))camera.yaw+=dt*1.3;
   let x=(keys.has('right')?1:0)-(keys.has('left')?1:0),z=(keys.has('down')?1:0)-(keys.has('up')?1:0);
-  if(x||z){const l=Math.hypot(x,z),s=dt*3.5/l;move((x*Math.cos(camera.yaw)+z*Math.sin(camera.yaw))*s,(-x*Math.sin(camera.yaw)+z*Math.cos(camera.yaw))*s);player.walk=true;}
+  if(stick&&Math.hypot(stick.x,stick.y)>.15){x=stick.x;z=stick.y;}
+  if(x||z){const l=Math.hypot(x,z),s=dt*3.5*Math.min(1,l)/l;move((x*Math.cos(camera.yaw)+z*Math.sin(camera.yaw))*s,(-x*Math.sin(camera.yaw)+z*Math.cos(camera.yaw))*s);player.walk=true;}
   else if(path.length){const [tx,tz]=path[0],dx=tx-player.x,dz=tz-player.z,dist=Math.hypot(dx,dz),step=dt*4.2*SPEED;if(dist<=step){player.x=tx;player.z=tz;path.shift();}else move(dx/dist*step,dz/dist*step);player.walk=true;
    if(!path.length&&pathPlace){const p=pathPlace;pathPlace=null;openPlace(p);}}
   alex.walk=false;
@@ -205,12 +227,13 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min((now-last)/10
   near=distance<1.7?closest:null;$('interact').disabled=!near||!ready();$('nearText').textContent=near?C.places[near].name+' · Ready to talk':'Walk closer to your destination';$('locationName').textContent=C.places[closest].name;}}
 placeCast();picker();hud();zoomUI();
 // a teacher can close a world for the class (shared/sync.js)
-if(root.SanorClass&&!root.SanorClass.worldOpen(cfg.worldId)){$('startBtn').disabled=true;$('startBtn').textContent='Closed by your teacher · ครูยังไม่เปิดโลกนี้';$('missionPicker').querySelectorAll('button').forEach(b=>b.disabled=true);}if(!storageOK)$('saveStatus').textContent='Progress cannot be saved on this device';
+if(root.SanorClass&&root.SanorClass.pretestDue()){const b=$('startBtn');b.textContent='📝 Take the pre-test first · ทำแบบทดสอบก่อนเรียนก่อน';b.onclick=e=>{e.preventDefault();e.stopImmediatePropagation();location.href='../test/?kind=pre&first=1';};}
+else if(root.SanorClass&&!root.SanorClass.worldOpen(cfg.worldId)){$('startBtn').disabled=true;$('startBtn').textContent='Closed by your teacher · ครูยังไม่เปิดโลกนี้';$('missionPicker').querySelectorAll('button').forEach(b=>b.disabled=true);}if(!storageOK)$('saveStatus').textContent='Progress cannot be saved on this device';
 for(const id of stories)syncProfile(id);
 // keep this world's recordings for offline play
 addEventListener('load',()=>root.SQPwa&&root.SQPwa.cacheWorld(cfg.worldId));
 requestAnimationFrame(frame);
-root.storyStatus=()=>({mission:current,stage:lesson.stage.id,completed:[...lesson.state.completed],xp:lesson.xp,done:lesson.state.done,position:{x:player.x,z:player.z}});
+root.storyStatus=()=>({mission:current,stage:lesson.stage.id,completed:[...lesson.state.completed],xp:lesson.xp,done:lesson.state.done,position:{x:player.x,z:player.z},camera:{yaw:camera.yaw,pitch:camera.pitch,zoom:camera.targetZoom}});
 root.homeStatus=root.storyStatus;
 }};
 })(typeof window!=='undefined'?window:globalThis);
