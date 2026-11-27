@@ -58,10 +58,18 @@ function validate({words,worlds}){
       if(m.card){need(m.card.intro?.en&&m.card.intro?.th,`${M}: card.intro en/th required`);for(const f of m.card.fields){const F=`${M} card field ${f.id}`;need(f.label?.en&&f.label?.th&&f.help?.en&&f.help?.th&&f.example?.en,`${F}: label, help (en/th) and example are required`);
         need(f.rules&&f.rules.minWords>0,`${F}: rules.minWords is required`);for(const r of [...(f.rules?.all||[]),...(f.rules?.any||[])]){try{new RegExp(r,'i');}catch{errors.push(`${F}: bad pattern ${r}`);}}
         need(f.example&&require('../shared/mission.js').checkWriting(f.example.en,f.rules),`${F}: the example must pass its own rules`);}}}}
-  if(arguments[0].tests){const T=arguments[0].tests,seen=new Set();need(T.title?.en&&T.title?.th,'tests: title en/th required');
-    for(const part of T.parts){need(part.title?.en&&part.title?.th&&part.instruction?.en&&part.instruction?.th,`tests part ${part.id}: title and instruction en/th required`);
-      for(const it of part.items){need(!seen.has(it.id),`tests: duplicate item ${it.id}`);seen.add(it.id);need(it.prompt?.en&&Array.isArray(it.choices)&&it.choices.length>=2&&Number.isInteger(it.answer)&&it.answer<it.choices.length,`tests item ${it.id}: prompt, choices and a valid answer are required`);
-        if(it.word)need(words.some(w=>w.id===it.word),`tests item ${it.id}: unknown word ${it.word}`);
-        if(it.map!==undefined)need(Object.hasOwn(arguments[0].worlds||{},it.map),`tests item ${it.id}: unknown map ${it.map}`);}}}
+  if(arguments[0].tests){const T=arguments[0].tests;need(T.title?.en&&T.title?.th,'tests: title en/th required');
+    need(T.forms?.pre?.parts&&T.forms?.post?.parts,'tests: forms.pre and forms.post are required (two parallel forms)');
+    const seen=new Set(),byForm={};
+    for(const [form,F] of Object.entries(T.forms||{})){byForm[form]=new Map();
+      for(const part of F.parts||[]){need(part.title?.en&&part.title?.th&&part.instruction?.en&&part.instruction?.th,`tests ${form} part ${part.id}: title and instruction en/th required`);
+        for(const it of part.items){need(!seen.has(it.id),`tests: duplicate item ${it.id}`);seen.add(it.id);byForm[form].set(it.id,{...it,part:part.id});
+          need(it.prompt?.en&&Array.isArray(it.choices)&&it.choices.length>=2&&Number.isInteger(it.answer)&&it.answer>=0&&it.answer<it.choices.length,`tests item ${it.id}: prompt, choices and a valid answer are required`);
+          if(it.word)need(words.some(w=>w.id===it.word),`tests item ${it.id}: unknown word ${it.word}`);
+          if(it.map!==undefined)need(Object.hasOwn(arguments[0].worlds||{},it.map),`tests item ${it.id}: unknown map ${it.map}`);}}}
+    // every post item is the parallel of one pre item: same map and same part, and each pre item is used once
+    if(byForm.pre&&byForm.post){need(byForm.pre.size===byForm.post.size,`tests: pre has ${byForm.pre.size} items but post has ${byForm.post.size}`);const used=new Set();
+      for(const it of byForm.post.values()){const a=byForm.pre.get(it.pair);need(a,`tests post item ${it.id}: "pair" must name a pre item`);
+        if(a){need(!used.has(a.id),`tests: pre item ${a.id} is paired twice`);used.add(a.id);need(a.map===it.map&&a.part===it.part,`tests post item ${it.id}: must have the same map and part as ${a.id}`);}}}}
   return errors;}
 module.exports={ROOT,load,validate,spokenLines};

@@ -13,7 +13,7 @@ const calm=matchMedia('(prefers-reduced-motion: reduce)').matches||(P&&P.reduced
 if(calm)document.documentElement.classList.add('calm');
 const inClass=()=>{const me=K&&K.info();return!!me&&!me.expired;};
 const decided=()=>inClass()||store.get(localStorage,WELCOME)==='guest';
-const go=()=>{store.set(sessionStorage,SPLASH,'1');location.replace(next);};
+const go=()=>{store.set(sessionStorage,SPLASH,'1');location.replace(K&&K.pretestDue()?'../test/?kind=pre&first=1':next);};   // pre-test first, once
 $('demoNote').hidden=!(K&&K.mode==='demo');
 
 // ---------- splash ----------

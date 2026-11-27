@@ -1,470 +1,968 @@
 {
- "note": "Pre-test and post-test (same 30 questions, shown in a mixed order). 5 questions from each of Maps 01–06 (\"map\" on every item), CEFR A1–A2. Draft for expert review.",
  "title": {
   "en": "SANOR QUEST English Check",
   "th": "แบบทดสอบภาษาอังกฤษ SANOR QUEST"
  },
  "minutes": 20,
- "parts": [
-  {
-   "id": "words",
-   "title": {
-    "en": "Part 1 · Words",
-    "th": "ตอนที่ 1 · คำศัพท์"
-   },
-   "instruction": {
-    "en": "Choose the English word.",
-    "th": "เลือกคำภาษาอังกฤษที่ตรงกับความหมาย"
-   },
-   "items": [
+ "note": "Two parallel forms: \"pre\" (form A) before the game, \"post\" (form B) after it. Same skills, same maps (5 questions from each of Maps 01–06), different questions, so students cannot remember the answers. Each post item names its pre item in \"pair\". CEFR A1–A2. Draft for expert review.",
+ "forms": {
+  "pre": {
+   "parts": [
     {
-     "id": "w1",
-     "map": "01",
-     "prompt": {
-      "en": "สวน"
+     "id": "words",
+     "title": {
+      "en": "Part 1 · Words",
+      "th": "ตอนที่ 1 · คำศัพท์"
      },
-     "choices": [
-      "garden",
-      "kitchen",
-      "bedroom"
-     ],
-     "answer": 0,
-     "word": "garden"
+     "instruction": {
+      "en": "Choose the English word.",
+      "th": "เลือกคำภาษาอังกฤษที่ตรงกับความหมาย"
+     },
+     "items": [
+      {
+       "id": "w1",
+       "map": "01",
+       "prompt": {
+        "en": "สวน"
+       },
+       "choices": [
+        "garden",
+        "kitchen",
+        "bedroom"
+       ],
+       "answer": 0,
+       "word": "garden"
+      },
+      {
+       "id": "w2",
+       "map": "01",
+       "prompt": {
+        "en": "จาน"
+       },
+       "choices": [
+        "bowl",
+        "glass",
+        "plate"
+       ],
+       "answer": 2,
+       "word": "plate"
+      },
+      {
+       "id": "w3",
+       "map": "02",
+       "prompt": {
+        "en": "ห้องสมุด"
+       },
+       "choices": [
+        "canteen",
+        "library",
+        "gym"
+       ],
+       "answer": 1,
+       "word": "library"
+      },
+      {
+       "id": "w4",
+       "map": "02",
+       "prompt": {
+        "en": "ตารางเรียน"
+       },
+       "choices": [
+        "timetable",
+        "notebook",
+        "club"
+       ],
+       "answer": 0,
+       "word": "timetable"
+      },
+      {
+       "id": "w5",
+       "map": "03",
+       "prompt": {
+        "en": "วัด"
+       },
+       "choices": [
+        "river",
+        "boat",
+        "temple"
+       ],
+       "answer": 2,
+       "word": "temple"
+      },
+      {
+       "id": "w6",
+       "map": "03",
+       "prompt": {
+        "en": "แก่ง (ช่วงแม่น้ำที่มีหินและน้ำไหลแรง)"
+       },
+       "choices": [
+        "rapids",
+        "rock",
+        "noodles"
+       ],
+       "answer": 0,
+       "word": "rapids"
+      },
+      {
+       "id": "w7",
+       "map": "04",
+       "prompt": {
+        "en": "ราคาถูก"
+       },
+       "choices": [
+        "expensive",
+        "cheap",
+        "spicy"
+       ],
+       "answer": 1,
+       "word": "cheap"
+      },
+      {
+       "id": "w8",
+       "map": "04",
+       "prompt": {
+        "en": "รายการอาหาร"
+       },
+       "choices": [
+        "bill",
+        "budget",
+        "menu"
+       ],
+       "answer": 2,
+       "word": "menu"
+      },
+      {
+       "id": "w9",
+       "map": "05",
+       "prompt": {
+        "en": "ตั๋ว"
+       },
+       "choices": [
+        "ticket",
+        "booking",
+        "platform"
+       ],
+       "answer": 0,
+       "word": "ticket"
+      },
+      {
+       "id": "w10",
+       "map": "05",
+       "prompt": {
+        "en": "สนามบิน"
+       },
+       "choices": [
+        "hotel",
+        "airport",
+        "bag"
+       ],
+       "answer": 1,
+       "word": "airport"
+      },
+      {
+       "id": "w11",
+       "map": "06",
+       "prompt": {
+        "en": "หุ่นยนต์"
+       },
+       "choices": [
+        "battery",
+        "project",
+        "robot"
+       ],
+       "answer": 2,
+       "word": "robot"
+      },
+      {
+       "id": "w12",
+       "map": "06",
+       "prompt": {
+        "en": "พลังงาน"
+       },
+       "choices": [
+        "energy",
+        "idea",
+        "vote"
+       ],
+       "answer": 0,
+       "word": "energy"
+      }
+     ]
     },
     {
-     "id": "w2",
-     "map": "01",
-     "prompt": {
-      "en": "จาน"
+     "id": "talk",
+     "title": {
+      "en": "Part 2 · Conversations",
+      "th": "ตอนที่ 2 · บทสนทนา"
      },
-     "choices": [
-      "bowl",
-      "glass",
-      "plate"
-     ],
-     "answer": 2,
-     "word": "plate"
+     "instruction": {
+      "en": "Choose the best reply.",
+      "th": "เลือกคำตอบที่เหมาะสมที่สุด"
+     },
+     "items": [
+      {
+       "id": "t1",
+       "map": "01",
+       "prompt": {
+        "en": "Alex: Hi! Thank you for inviting me."
+       },
+       "choices": [
+        "Hi! Welcome to my home!",
+        "Goodbye! See you tomorrow.",
+        "Where is your school?"
+       ],
+       "answer": 0
+      },
+      {
+       "id": "t2",
+       "map": "01",
+       "prompt": {
+        "en": "Mum: Would you like some water?"
+       },
+       "choices": [
+        "Yes, I am.",
+        "Yes, please. Thank you!",
+        "It's my bedroom."
+       ],
+       "answer": 1
+      },
+      {
+       "id": "t3",
+       "map": "02",
+       "prompt": {
+        "en": "Alex: When is our English lesson? (English 9:30)"
+       },
+       "choices": [
+        "At nine o'clock.",
+        "On Monday morning.",
+        "At half past nine."
+       ],
+       "answer": 2
+      },
+      {
+       "id": "t4",
+       "map": "02",
+       "prompt": {
+        "en": "Alex: Do you want to play basketball?"
+       },
+       "choices": [
+        "Yes! Let's play after school.",
+        "I play basketball yesterday.",
+        "No, it isn't."
+       ],
+       "answer": 0
+      },
+      {
+       "id": "t5",
+       "map": "03",
+       "prompt": {
+        "en": "Tourist: Is there a temple near here?"
+       },
+       "choices": [
+        "Yes, there are temple.",
+        "Yes, there is a temple next to the river.",
+        "No, I am a temple."
+       ],
+       "answer": 1
+      },
+      {
+       "id": "t6",
+       "map": "03",
+       "prompt": {
+        "en": "Grandma: What did you do at Songkran last year?"
+       },
+       "choices": [
+        "I splash water tomorrow.",
+        "Yes, I am at Songkran.",
+        "I splashed water with my friends."
+       ],
+       "answer": 2
+      },
+      {
+       "id": "t7",
+       "map": "04",
+       "prompt": {
+        "en": "Vendor: These mangoes are 40 baht a kilo."
+       },
+       "choices": [
+        "Can I have two kilos, please?",
+        "Mangoes is yellow.",
+        "I am two kilos."
+       ],
+       "answer": 0
+      },
+      {
+       "id": "t8",
+       "map": "04",
+       "prompt": {
+        "en": "Waiter: What would you like to order?"
+       },
+       "choices": [
+        "I would like yesterday.",
+        "Can I have fried rice, please?",
+        "Yes, I am hungry rice."
+       ],
+       "answer": 1
+      },
+      {
+       "id": "t9",
+       "map": "05",
+       "prompt": {
+        "en": "Officer: Go straight, then turn left. The station is next to the hotel."
+       },
+       "choices": [
+        "I turn left yesterday.",
+        "Yes, I am a hotel.",
+        "Thank you very much!"
+       ],
+       "answer": 2
+      },
+      {
+       "id": "t10",
+       "map": "05",
+       "prompt": {
+        "en": "Officer: What does your bag look like?"
+       },
+       "choices": [
+        "It's a big blue bag with a red tag.",
+        "It's a blue big bag tag.",
+        "My bag lost yesterday is."
+       ],
+       "answer": 0
+      },
+      {
+       "id": "t11",
+       "map": "06",
+       "prompt": {
+        "en": "Engineer: What does the robot do first?"
+       },
+       "choices": [
+        "Finally first a hole.",
+        "First, it digs a hole.",
+        "It digging first."
+       ],
+       "answer": 1
+      },
+      {
+       "id": "t12",
+       "map": "06",
+       "prompt": {
+        "en": "Mayor: What should we do to save energy?"
+       },
+       "choices": [
+        "We should to buying cars.",
+        "Energy is my friend.",
+        "We should use solar panels."
+       ],
+       "answer": 2
+      }
+     ]
     },
     {
-     "id": "w3",
-     "map": "02",
-     "prompt": {
-      "en": "ห้องสมุด"
+     "id": "read",
+     "title": {
+      "en": "Part 3 · Reading",
+      "th": "ตอนที่ 3 · การอ่าน"
      },
-     "choices": [
-      "canteen",
-      "library",
-      "gym"
-     ],
-     "answer": 1,
-     "word": "library"
+     "instruction": {
+      "en": "Read and answer.",
+      "th": "อ่านแล้วตอบคำถาม"
+     },
+     "passage": {
+      "en": "Mook invited her new friend Alex to her home. They ate lunch together in the kitchen, and then they watered the flowers in the garden. On Monday, Alex started at Phibun School. His English lesson is at half past nine. Last April, Mook and Alex visited Kaeng Saphue during Songkran. There were many people on the rocks, and everyone was splashing water."
+     },
+     "items": [
+      {
+       "id": "r1",
+       "map": "01",
+       "prompt": {
+        "en": "Where did Mook and Alex eat lunch?"
+       },
+       "choices": [
+        "In the kitchen",
+        "In the garden",
+        "At school"
+       ],
+       "answer": 0
+      },
+      {
+       "id": "r2",
+       "map": "02",
+       "prompt": {
+        "en": "What time is Alex's English lesson?"
+       },
+       "choices": [
+        "At nine o'clock",
+        "At half past nine",
+        "At ten past nine"
+       ],
+       "answer": 1
+      },
+      {
+       "id": "r3",
+       "map": "03",
+       "prompt": {
+        "en": "When did they visit Kaeng Saphue?"
+       },
+       "choices": [
+        "Next week",
+        "Last Monday",
+        "Last April"
+       ],
+       "answer": 2
+      }
+     ]
     },
     {
-     "id": "w4",
-     "map": "02",
-     "prompt": {
-      "en": "ตารางเรียน"
+     "id": "read2",
+     "title": {
+      "en": "Part 4 · Reading",
+      "th": "ตอนที่ 4 · การอ่าน"
      },
-     "choices": [
-      "timetable",
-      "notebook",
-      "club"
-     ],
-     "answer": 0,
-     "word": "timetable"
-    },
-    {
-     "id": "w5",
-     "map": "03",
-     "prompt": {
-      "en": "วัด"
+     "instruction": {
+      "en": "Read and answer.",
+      "th": "อ่านแล้วตอบคำถาม"
      },
-     "choices": [
-      "river",
-      "boat",
-      "temple"
-     ],
-     "answer": 2,
-     "word": "temple"
-    },
-    {
-     "id": "w6",
-     "map": "03",
-     "prompt": {
-      "en": "แก่ง (ช่วงแม่น้ำที่มีหินและน้ำไหลแรง)"
+     "passage": {
+      "en": "Ploy's class planned a party with a budget of 300 baht. The cake was 180 baht and the drinks were 90 baht. Next month, Ploy is taking a train to Bangkok. The train leaves at quarter to twelve from platform 1. At school, her team built a garden robot. It uses solar power, so it can work all day in the sun."
      },
-     "choices": [
-      "rapids",
-      "rock",
-      "noodles"
-     ],
-     "answer": 0,
-     "word": "rapids"
-    },
-    {
-     "id": "w7",
-     "map": "04",
-     "prompt": {
-      "en": "ราคาถูก"
-     },
-     "choices": [
-      "expensive",
-      "cheap",
-      "spicy"
-     ],
-     "answer": 1,
-     "word": "cheap"
-    },
-    {
-     "id": "w8",
-     "map": "04",
-     "prompt": {
-      "en": "รายการอาหาร"
-     },
-     "choices": [
-      "bill",
-      "budget",
-      "menu"
-     ],
-     "answer": 2,
-     "word": "menu"
-    },
-    {
-     "id": "w9",
-     "map": "05",
-     "prompt": {
-      "en": "ตั๋ว"
-     },
-     "choices": [
-      "ticket",
-      "booking",
-      "platform"
-     ],
-     "answer": 0,
-     "word": "ticket"
-    },
-    {
-     "id": "w10",
-     "map": "05",
-     "prompt": {
-      "en": "สนามบิน"
-     },
-     "choices": [
-      "hotel",
-      "airport",
-      "bag"
-     ],
-     "answer": 1,
-     "word": "airport"
-    },
-    {
-     "id": "w11",
-     "map": "06",
-     "prompt": {
-      "en": "หุ่นยนต์"
-     },
-     "choices": [
-      "battery",
-      "project",
-      "robot"
-     ],
-     "answer": 2,
-     "word": "robot"
-    },
-    {
-     "id": "w12",
-     "map": "06",
-     "prompt": {
-      "en": "พลังงาน"
-     },
-     "choices": [
-      "energy",
-      "idea",
-      "vote"
-     ],
-     "answer": 0,
-     "word": "energy"
+     "items": [
+      {
+       "id": "r4",
+       "map": "04",
+       "prompt": {
+        "en": "How much did the cake and the drinks cost together?"
+       },
+       "choices": [
+        "270 baht",
+        "300 baht",
+        "180 baht"
+       ],
+       "answer": 0
+      },
+      {
+       "id": "r5",
+       "map": "05",
+       "prompt": {
+        "en": "Which platform does the train to Bangkok leave from?"
+       },
+       "choices": [
+        "Platform 3",
+        "Platform 1",
+        "Platform 2"
+       ],
+       "answer": 1
+      },
+      {
+       "id": "r6",
+       "map": "06",
+       "prompt": {
+        "en": "What kind of power does the robot use?"
+       },
+       "choices": [
+        "Wind power",
+        "Water power",
+        "Solar power"
+       ],
+       "answer": 2
+      }
+     ]
     }
    ]
   },
-  {
-   "id": "talk",
-   "title": {
-    "en": "Part 2 · Conversations",
-    "th": "ตอนที่ 2 · บทสนทนา"
-   },
-   "instruction": {
-    "en": "Choose the best reply.",
-    "th": "เลือกคำตอบที่เหมาะสมที่สุด"
-   },
-   "items": [
+  "post": {
+   "parts": [
     {
-     "id": "t1",
-     "map": "01",
-     "prompt": {
-      "en": "Alex: Hi! Thank you for inviting me."
+     "id": "words",
+     "title": {
+      "en": "Part 1 · Words",
+      "th": "ตอนที่ 1 · คำศัพท์"
      },
-     "choices": [
-      "Hi! Welcome to my home!",
-      "Goodbye! See you tomorrow.",
-      "Where is your school?"
-     ],
-     "answer": 0
+     "instruction": {
+      "en": "Choose the English word.",
+      "th": "เลือกคำภาษาอังกฤษที่ตรงกับความหมาย"
+     },
+     "items": [
+      {
+       "id": "pw1",
+       "pair": "w1",
+       "map": "01",
+       "prompt": {
+        "en": "ห้องนอน"
+       },
+       "choices": [
+        "kitchen",
+        "bedroom",
+        "garden"
+       ],
+       "answer": 1,
+       "word": "bedroom"
+      },
+      {
+       "id": "pw2",
+       "pair": "w2",
+       "map": "01",
+       "prompt": {
+        "en": "ช้อน"
+       },
+       "choices": [
+        "spoon",
+        "fork",
+        "glass"
+       ],
+       "answer": 0,
+       "word": "spoon"
+      },
+      {
+       "id": "pw3",
+       "pair": "w3",
+       "map": "02",
+       "prompt": {
+        "en": "โรงอาหาร"
+       },
+       "choices": [
+        "gym",
+        "stage",
+        "canteen"
+       ],
+       "answer": 2,
+       "word": "canteen"
+      },
+      {
+       "id": "pw4",
+       "pair": "w4",
+       "map": "02",
+       "prompt": {
+        "en": "เวที"
+       },
+       "choices": [
+        "gate",
+        "stage",
+        "library"
+       ],
+       "answer": 1,
+       "word": "stage"
+      },
+      {
+       "id": "pw5",
+       "pair": "w5",
+       "map": "03",
+       "prompt": {
+        "en": "แม่น้ำ"
+       },
+       "choices": [
+        "river",
+        "rock",
+        "temple"
+       ],
+       "answer": 0,
+       "word": "river"
+      },
+      {
+       "id": "pw6",
+       "pair": "w6",
+       "map": "03",
+       "prompt": {
+        "en": "เรือ"
+       },
+       "choices": [
+        "noodles",
+        "rapids",
+        "boat"
+       ],
+       "answer": 2,
+       "word": "boat"
+      },
+      {
+       "id": "pw7",
+       "pair": "w7",
+       "map": "04",
+       "prompt": {
+        "en": "ราคาแพง"
+       },
+       "choices": [
+        "cheap",
+        "expensive",
+        "spicy"
+       ],
+       "answer": 1,
+       "word": "expensive"
+      },
+      {
+       "id": "pw8",
+       "pair": "w8",
+       "map": "04",
+       "prompt": {
+        "en": "ใบแจ้งค่าอาหาร (บิล)"
+       },
+       "choices": [
+        "bill",
+        "menu",
+        "gift"
+       ],
+       "answer": 0,
+       "word": "bill"
+      },
+      {
+       "id": "pw9",
+       "pair": "w9",
+       "map": "05",
+       "prompt": {
+        "en": "ชานชาลา"
+       },
+       "choices": [
+        "booking",
+        "ticket",
+        "platform"
+       ],
+       "answer": 2,
+       "word": "platform"
+      },
+      {
+       "id": "pw10",
+       "pair": "w10",
+       "map": "05",
+       "prompt": {
+        "en": "กระเป๋า"
+       },
+       "choices": [
+        "lost",
+        "bag",
+        "airport"
+       ],
+       "answer": 1,
+       "word": "bag"
+      },
+      {
+       "id": "pw11",
+       "pair": "w11",
+       "map": "06",
+       "prompt": {
+        "en": "แบตเตอรี่"
+       },
+       "choices": [
+        "battery",
+        "robot",
+        "solar"
+       ],
+       "answer": 0,
+       "word": "battery"
+      },
+      {
+       "id": "pw12",
+       "pair": "w12",
+       "map": "06",
+       "prompt": {
+        "en": "ความคิด ไอเดีย"
+       },
+       "choices": [
+        "vote",
+        "energy",
+        "idea"
+       ],
+       "answer": 2,
+       "word": "idea"
+      }
+     ]
     },
     {
-     "id": "t2",
-     "map": "01",
-     "prompt": {
-      "en": "Mum: Would you like some water?"
+     "id": "talk",
+     "title": {
+      "en": "Part 2 · Conversations",
+      "th": "ตอนที่ 2 · บทสนทนา"
      },
-     "choices": [
-      "Yes, I am.",
-      "Yes, please. Thank you!",
-      "It's my bedroom."
-     ],
-     "answer": 1
+     "instruction": {
+      "en": "Choose the best reply.",
+      "th": "เลือกคำตอบที่เหมาะสมที่สุด"
+     },
+     "items": [
+      {
+       "id": "pt1",
+       "pair": "t1",
+       "map": "01",
+       "prompt": {
+        "en": "Alex: Wow, this is a nice garden!"
+       },
+       "choices": [
+        "Thank you! Let's water the flowers.",
+        "Yes, I am a garden.",
+        "Goodbye! See you tomorrow."
+       ],
+       "answer": 0
+      },
+      {
+       "id": "pt2",
+       "pair": "t2",
+       "map": "01",
+       "prompt": {
+        "en": "Mum: Would you like some fruit?"
+       },
+       "choices": [
+        "It's my kitchen.",
+        "Yes, please. I'd like an apple.",
+        "No, it isn't."
+       ],
+       "answer": 1
+      },
+      {
+       "id": "pt3",
+       "pair": "t3",
+       "map": "02",
+       "prompt": {
+        "en": "Alex: When is our music lesson? (Music 1:15)"
+       },
+       "choices": [
+        "At one o'clock.",
+        "At half past one.",
+        "At quarter past one."
+       ],
+       "answer": 2
+      },
+      {
+       "id": "pt4",
+       "pair": "t4",
+       "map": "02",
+       "prompt": {
+        "en": "Alex: Do you want to join the music club?"
+       },
+       "choices": [
+        "I join it yesterday.",
+        "Yes! I love singing.",
+        "No, I'm not music."
+       ],
+       "answer": 1
+      },
+      {
+       "id": "pt5",
+       "pair": "t5",
+       "map": "03",
+       "prompt": {
+        "en": "Tourist: Are there any noodle stalls in town?"
+       },
+       "choices": [
+        "Yes, there are two stalls near the square.",
+        "Yes, there is two stall.",
+        "No, I am noodles."
+       ],
+       "answer": 0
+      },
+      {
+       "id": "pt6",
+       "pair": "t6",
+       "map": "03",
+       "prompt": {
+        "en": "Grandma: Where did you go yesterday?"
+       },
+       "choices": [
+        "I go to the river tomorrow.",
+        "I went to the river with my brother.",
+        "Yes, I went."
+       ],
+       "answer": 1
+      },
+      {
+       "id": "pt7",
+       "pair": "t7",
+       "map": "04",
+       "prompt": {
+        "en": "Vendor: This bottle of water is 10 baht."
+       },
+       "choices": [
+        "Water is wet.",
+        "I am ten baht.",
+        "Can I have two bottles, please?"
+       ],
+       "answer": 2
+      },
+      {
+       "id": "pt8",
+       "pair": "t8",
+       "map": "04",
+       "prompt": {
+        "en": "Waiter: Would you like something to drink?"
+       },
+       "choices": [
+        "Yes, can I have orange juice, please?",
+        "I drink yesterday.",
+        "No, I'm a drink."
+       ],
+       "answer": 0
+      },
+      {
+       "id": "pt9",
+       "pair": "t9",
+       "map": "05",
+       "prompt": {
+        "en": "Officer: The hotel is opposite the station."
+       },
+       "choices": [
+        "I opposite yesterday.",
+        "Great, thank you for your help!",
+        "Yes, I am the station."
+       ],
+       "answer": 1
+      },
+      {
+       "id": "pt10",
+       "pair": "t10",
+       "map": "05",
+       "prompt": {
+        "en": "Clerk: Good evening. How can I help you?"
+       },
+       "choices": [
+        "Change room now!",
+        "I am a room.",
+        "Could we change rooms, please? It's very noisy."
+       ],
+       "answer": 2
+      },
+      {
+       "id": "pt11",
+       "pair": "t11",
+       "map": "06",
+       "prompt": {
+        "en": "Engineer: What does the robot do after it digs a hole?"
+       },
+       "choices": [
+        "Then it puts the tree in.",
+        "Finally hole the dig.",
+        "It putting tree."
+       ],
+       "answer": 0
+      },
+      {
+       "id": "pt12",
+       "pair": "t12",
+       "map": "06",
+       "prompt": {
+        "en": "Alex: I think a bike path is a good idea."
+       },
+       "choices": [
+        "Bike is path my.",
+        "I agree. It's good for the city.",
+        "I agrees bike."
+       ],
+       "answer": 1
+      }
+     ]
     },
     {
-     "id": "t3",
-     "map": "02",
-     "prompt": {
-      "en": "Alex: When is our English lesson? (English 9:30)"
+     "id": "read",
+     "title": {
+      "en": "Part 3 · Reading",
+      "th": "ตอนที่ 3 · การอ่าน"
      },
-     "choices": [
-      "At nine o'clock.",
-      "On Monday morning.",
-      "At half past nine."
-     ],
-     "answer": 2
+     "instruction": {
+      "en": "Read and answer.",
+      "th": "อ่านแล้วตอบคำถาม"
+     },
+     "passage": {
+      "en": "Alex visited Mook's home on Saturday. They made sandwiches in the kitchen, and then they played chess in the living room. At school, Alex's favourite lesson is music. It is at quarter past one. Last weekend, Mook and her grandma took a boat on the Mun River. There were many birds near the temple."
+     },
+     "items": [
+      {
+       "id": "pr1",
+       "pair": "r1",
+       "map": "01",
+       "prompt": {
+        "en": "What did Mook and Alex do in the living room?"
+       },
+       "choices": [
+        "They played chess",
+        "They cooked lunch",
+        "They watered flowers"
+       ],
+       "answer": 0
+      },
+      {
+       "id": "pr2",
+       "pair": "r2",
+       "map": "02",
+       "prompt": {
+        "en": "What is Alex's favourite lesson?"
+       },
+       "choices": [
+        "Maths",
+        "Science",
+        "Music"
+       ],
+       "answer": 2
+      },
+      {
+       "id": "pr3",
+       "pair": "r3",
+       "map": "03",
+       "prompt": {
+        "en": "How did Mook and her grandma travel on the river?"
+       },
+       "choices": [
+        "By train",
+        "By boat",
+        "By bus"
+       ],
+       "answer": 1
+      }
+     ]
     },
     {
-     "id": "t4",
-     "map": "02",
-     "prompt": {
-      "en": "Alex: Do you want to play basketball?"
+     "id": "read2",
+     "title": {
+      "en": "Part 4 · Reading",
+      "th": "ตอนที่ 4 · การอ่าน"
      },
-     "choices": [
-      "Yes! Let's play after school.",
-      "I play basketball yesterday.",
-      "No, it isn't."
-     ],
-     "answer": 0
-    },
-    {
-     "id": "t5",
-     "map": "03",
-     "prompt": {
-      "en": "Tourist: Is there a temple near here?"
+     "instruction": {
+      "en": "Read and answer.",
+      "th": "อ่านแล้วตอบคำถาม"
      },
-     "choices": [
-      "Yes, there are temple.",
-      "Yes, there is a temple next to the river.",
-      "No, I am a temple."
-     ],
-     "answer": 1
-    },
-    {
-     "id": "t6",
-     "map": "03",
-     "prompt": {
-      "en": "Grandma: What did you do at Songkran last year?"
+     "passage": {
+      "en": "Nan's class had 300 baht for a party. The snacks were 100 baht and the cake was 150 baht. On Saturday, Nan is flying to Chiang Mai. Her flight leaves at half past ten. In the science club, Nan's team made a robot that picks up rubbish. It uses a battery and works for two hours."
      },
-     "choices": [
-      "I splash water tomorrow.",
-      "Yes, I am at Songkran.",
-      "I splashed water with my friends."
-     ],
-     "answer": 2
-    },
-    {
-     "id": "t7",
-     "map": "04",
-     "prompt": {
-      "en": "Vendor: These mangoes are 40 baht a kilo."
-     },
-     "choices": [
-      "Can I have two kilos, please?",
-      "Mangoes is yellow.",
-      "I am two kilos."
-     ],
-     "answer": 0
-    },
-    {
-     "id": "t8",
-     "map": "04",
-     "prompt": {
-      "en": "Waiter: What would you like to order?"
-     },
-     "choices": [
-      "I would like yesterday.",
-      "Can I have fried rice, please?",
-      "Yes, I am hungry rice."
-     ],
-     "answer": 1
-    },
-    {
-     "id": "t9",
-     "map": "05",
-     "prompt": {
-      "en": "Officer: Go straight, then turn left. The station is next to the hotel."
-     },
-     "choices": [
-      "I turn left yesterday.",
-      "Yes, I am a hotel.",
-      "Thank you very much!"
-     ],
-     "answer": 2
-    },
-    {
-     "id": "t10",
-     "map": "05",
-     "prompt": {
-      "en": "Officer: What does your bag look like?"
-     },
-     "choices": [
-      "It's a big blue bag with a red tag.",
-      "It's a blue big bag tag.",
-      "My bag lost yesterday is."
-     ],
-     "answer": 0
-    },
-    {
-     "id": "t11",
-     "map": "06",
-     "prompt": {
-      "en": "Engineer: What does the robot do first?"
-     },
-     "choices": [
-      "Finally first a hole.",
-      "First, it digs a hole.",
-      "It digging first."
-     ],
-     "answer": 1
-    },
-    {
-     "id": "t12",
-     "map": "06",
-     "prompt": {
-      "en": "Mayor: What should we do to save energy?"
-     },
-     "choices": [
-      "We should to buying cars.",
-      "Energy is my friend.",
-      "We should use solar panels."
-     ],
-     "answer": 2
-    }
-   ]
-  },
-  {
-   "id": "read",
-   "title": {
-    "en": "Part 3 · Reading",
-    "th": "ตอนที่ 3 · การอ่าน"
-   },
-   "instruction": {
-    "en": "Read and answer.",
-    "th": "อ่านแล้วตอบคำถาม"
-   },
-   "passage": {
-    "en": "Mook invited her new friend Alex to her home. They ate lunch together in the kitchen, and then they watered the flowers in the garden. On Monday, Alex started at Phibun School. His English lesson is at half past nine. Last April, Mook and Alex visited Kaeng Saphue during Songkran. There were many people on the rocks, and everyone was splashing water."
-   },
-   "items": [
-    {
-     "id": "r1",
-     "map": "01",
-     "prompt": {
-      "en": "Where did Mook and Alex eat lunch?"
-     },
-     "choices": [
-      "In the kitchen",
-      "In the garden",
-      "At school"
-     ],
-     "answer": 0
-    },
-    {
-     "id": "r2",
-     "map": "02",
-     "prompt": {
-      "en": "What time is Alex's English lesson?"
-     },
-     "choices": [
-      "At nine o'clock",
-      "At half past nine",
-      "At ten past nine"
-     ],
-     "answer": 1
-    },
-    {
-     "id": "r3",
-     "map": "03",
-     "prompt": {
-      "en": "When did they visit Kaeng Saphue?"
-     },
-     "choices": [
-      "Next week",
-      "Last Monday",
-      "Last April"
-     ],
-     "answer": 2
-    }
-   ]
-  },
-  {
-   "id": "read2",
-   "title": {
-    "en": "Part 4 · Reading",
-    "th": "ตอนที่ 4 · การอ่าน"
-   },
-   "instruction": {
-    "en": "Read and answer.",
-    "th": "อ่านแล้วตอบคำถาม"
-   },
-   "passage": {
-    "en": "Ploy's class planned a party with a budget of 300 baht. The cake was 180 baht and the drinks were 90 baht. Next month, Ploy is taking a train to Bangkok. The train leaves at quarter to twelve from platform 1. At school, her team built a garden robot. It uses solar power, so it can work all day in the sun."
-   },
-   "items": [
-    {
-     "id": "r4",
-     "map": "04",
-     "prompt": {
-      "en": "How much did the cake and the drinks cost together?"
-     },
-     "choices": [
-      "270 baht",
-      "300 baht",
-      "180 baht"
-     ],
-     "answer": 0
-    },
-    {
-     "id": "r5",
-     "map": "05",
-     "prompt": {
-      "en": "Which platform does the train to Bangkok leave from?"
-     },
-     "choices": [
-      "Platform 3",
-      "Platform 1",
-      "Platform 2"
-     ],
-     "answer": 1
-    },
-    {
-     "id": "r6",
-     "map": "06",
-     "prompt": {
-      "en": "What kind of power does the robot use?"
-     },
-     "choices": [
-      "Wind power",
-      "Water power",
-      "Solar power"
-     ],
-     "answer": 2
+     "items": [
+      {
+       "id": "pr4",
+       "pair": "r4",
+       "map": "04",
+       "prompt": {
+        "en": "How much did the snacks and the cake cost together?"
+       },
+       "choices": [
+        "300 baht",
+        "150 baht",
+        "250 baht"
+       ],
+       "answer": 2
+      },
+      {
+       "id": "pr5",
+       "pair": "r5",
+       "map": "05",
+       "prompt": {
+        "en": "What time does Nan's flight leave?"
+       },
+       "choices": [
+        "At half past ten",
+        "At ten o'clock",
+        "At quarter past ten"
+       ],
+       "answer": 0
+      },
+      {
+       "id": "pr6",
+       "pair": "r6",
+       "map": "06",
+       "prompt": {
+        "en": "What does the robot do?"
+       },
+       "choices": [
+        "It plants trees",
+        "It picks up rubbish",
+        "It cooks food"
+       ],
+       "answer": 1
+      }
+     ]
     }
    ]
   }
- ]
+ }
 }

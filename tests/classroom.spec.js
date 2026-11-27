@@ -1,4 +1,5 @@
 const {test,expect,skipSplash}=require('./fixtures');const {watch}=require('./helpers');
+test.use({pretestDone:false});   // the student does the pre-test in this file
 // Demo mode (no Supabase): teacher and student share this browser, like trying SANOR QUEST on one computer.
 test('classroom: teacher creates a class, a student joins and plays, the teacher sees the results',async({browser})=>{
   const ctx=await browser.newContext();await ctx.addInitScript(skipSplash);const teacher=await ctx.newPage(),errT=watch(teacher);
@@ -8,23 +9,24 @@ test('classroom: teacher creates a class, a student joins and plays, the teacher
   const code=(await teacher.locator('#classCode').textContent()).trim();expect(code).toMatch(/^[A-Z0-9]{6}$/);
   await expect(teacher.locator('#tab-overview')).toContainText(code);                       // "no students yet" tells the code
 
-  // student joins on the town map (passport → Join my class)
-  const student=await ctx.newPage(),errS=watch(student);await student.goto('/');
-  await student.click('#classChip');
-  await student.fill('#joinForm [name=code]',code.toLowerCase());await student.fill('#joinForm [name=number]','7');await student.fill('#joinForm [name=nickname]','Ploy');await student.fill('#joinForm [name=pin]','2468');
-  await student.click('#joinForm button');await expect(student.locator('#classBox')).toContainText('No. 7 · Ploy');
-  // a wrong PIN on a second sign-in is refused with a Thai + English message
-  expect(await student.evaluate(async c=>{try{await SQBackend.student.join(c,7,'Ploy','0000');}catch(e){return e.message;}return 'joined';},code)).toBe('joined'); // returns {error}, not a throw
+  // student registers (start screens), then is sent to the pre-test, which everyone takes before playing
+  const student=await ctx.newPage(),errS=watch(student);await student.goto('/start/#register');
+  const R=student.locator('#registerForm');
+  for(const [n,v] of [['code',code.toLowerCase()],['number','7'],['nickname','Ploy'],['pin','2468'],['pin2','2468']])await R.locator(`[name=${n}]`).fill(v);
+  await R.locator('.cta-button').click();await expect(student.locator('#welcome')).toContainText('Welcome, Ploy!');
+  await expect(student).toHaveURL(/\/test\/\?kind=pre&first=1$/);
+  // a wrong PIN on a second sign-in is refused (returns {error}, not a throw)
+  expect(await student.evaluate(async c=>{try{await SQBackend.student.join(c,7,'Ploy','0000');}catch(e){return e.message;}return 'joined';},code)).toBe('joined');
+  // pre-test
+  await student.click('#begin');
+  for(const fs of await student.locator('fieldset.item').all())await fs.locator('input').first().check();
+  await student.click('#finishTest');await expect(student.locator('#finishTest')).toHaveText(/Yes, finish/);await student.click('#finishTest');
+  await expect(student.locator('#score')).toContainText('/ 30');
   // play: 3 words in the 2D school practice (one wrong first)
   await student.goto('/school/quiz.html');
   await student.locator('#choices button',{hasText:/^gym$/}).click();await student.locator('#choices button',{hasText:/^gate$/}).click();await student.click('#next');
   await student.locator('#choices button',{hasText:/^classroom$/}).click();await student.click('#next');
   await student.evaluate(()=>SanorClass.flush());await expect.poll(()=>student.evaluate(()=>SanorClass.status().pending)).toBe(0);
-  // pre-test
-  await student.goto('/test/?kind=pre');await student.click('#begin');
-  for(const fs of await student.locator('fieldset.item').all())await fs.locator('input').first().check();
-  await student.click('#finishTest');await expect(student.locator('#finishTest')).toHaveText(/Yes, finish/);await student.click('#finishTest');
-  await expect(student.locator('#score')).toContainText('/ 30');
   await expect.poll(()=>student.evaluate(()=>SanorClass.status().pending)).toBe(0);
 
   // teacher sees the student, the missed word and the test

@@ -130,7 +130,7 @@ function picker(){const total=ORDER.filter(id=>!missionById(id).fallback);
  $('missionPicker').innerHTML=total.map((id,i)=>{const m=missionById(id),done=isDone(id),open=unlocked(id),story=m.type==='story';
   return `<button type="button" class="mission-option${id===current?' selected':''}${done?' done':''}" data-mission="${id}" ${open?'':'disabled'} aria-pressed="${id===current}"><span class="mo-num">${done?'✓':String(i+1).padStart(2,'0')}</span><span class="mo-text"><b>${esc(m.title.en)}</b>${th(m.title.th,'small')}<small>${esc(m.summary.en)}</small></span><span class="mo-state">${done?'Done':open?(story?'Play':'Open ↗'):'🔒'}</span></button>`;}).join('');
  $('missionPicker').querySelectorAll('[data-mission]').forEach(b=>b.onclick=()=>{const id=b.dataset.mission,m=missionById(id);if(m.type!=='story'){location.href=m.play+'?story=1';return;}switchMission(id,false);});
- const s=lesson.state;$('startBtn').textContent=(s.done?'Play this mission again':s.completed.length?'Continue this mission':'Start this mission')+' →';$('introReport').hidden=!s.done;}
+ const s=lesson.state;$('startBtn').textContent=root.SanorClass&&root.SanorClass.pretestDue()?'📝 Take the pre-test first · ทำแบบทดสอบก่อนเรียนก่อน':(s.done?'Play this mission again':s.completed.length?'Continue this mission':'Start this mission')+' →';$('introReport').hidden=!s.done;}
 function switchMission(id,startNow){current=id;C=contents[id];lesson=lessons[id];placeCast();followTrail=[];history.replaceState(null,'','?mission='+id);picker();hud();
  if(startNow){started=false;show('intro');}}
 function placeCast(){const p=cfg.start(current);[player.x,player.z,player.angle]=p.player;[alex.x,alex.z,alex.angle]=p.alex;}
@@ -205,7 +205,8 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min((now-last)/10
   near=distance<1.7?closest:null;$('interact').disabled=!near||!ready();$('nearText').textContent=near?C.places[near].name+' · Ready to talk':'Walk closer to your destination';$('locationName').textContent=C.places[closest].name;}}
 placeCast();picker();hud();zoomUI();
 // a teacher can close a world for the class (shared/sync.js)
-if(root.SanorClass&&!root.SanorClass.worldOpen(cfg.worldId)){$('startBtn').disabled=true;$('startBtn').textContent='Closed by your teacher · ครูยังไม่เปิดโลกนี้';$('missionPicker').querySelectorAll('button').forEach(b=>b.disabled=true);}if(!storageOK)$('saveStatus').textContent='Progress cannot be saved on this device';
+if(root.SanorClass&&root.SanorClass.pretestDue()){const b=$('startBtn');b.textContent='📝 Take the pre-test first · ทำแบบทดสอบก่อนเรียนก่อน';b.onclick=e=>{e.preventDefault();e.stopImmediatePropagation();location.href='../test/?kind=pre&first=1';};}
+else if(root.SanorClass&&!root.SanorClass.worldOpen(cfg.worldId)){$('startBtn').disabled=true;$('startBtn').textContent='Closed by your teacher · ครูยังไม่เปิดโลกนี้';$('missionPicker').querySelectorAll('button').forEach(b=>b.disabled=true);}if(!storageOK)$('saveStatus').textContent='Progress cannot be saved on this device';
 for(const id of stories)syncProfile(id);
 // keep this world's recordings for offline play
 addEventListener('load',()=>root.SQPwa&&root.SQPwa.cacheWorld(cfg.worldId));

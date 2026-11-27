@@ -9,6 +9,9 @@
  *   SanorClass.status()   → {pending, lastSync, lastError, online, mode}
  *   SanorClass.worldOpen('02') → false when the teacher has closed that world
  *   SanorClass.testOpen('post')
+ *   SanorClass.postReady()   → the post-test is open: pre-test done and all six worlds finished (or the teacher opened it)
+ *   SanorClass.pretestDue()  → true until this student has done the pre-test (everyone takes it before playing,
+ *                              in a class or not; a teacher can switch the class's pre-test off in the dashboard)
  *   SanorClass.onChange(fn)
  * The class's Thai-help level (if the teacher set one) is applied with SanorProfile.setClassLevel().
  */
@@ -48,6 +51,11 @@ const api={
  status:()=>({pending:outbox.length,lastSync,lastError,online:!(root.navigator&&root.navigator.onLine===false),mode:B.mode}),
  worldOpen:id=>!me||!me.settings||!/^\d\d$/.test(id)||me.settings.worldsOpen.includes(id),
  testOpen:kind=>!me||!me.settings||me.settings.testsOpen.includes(kind),
+ pretestDue:()=>!P.test('pre')&&api.testOpen('pre'),
+ // post-test: after the pre-test, once every mission of every world is done (needs content/content.js), or earlier
+ // when the teacher opens it for the class
+ postReady(){if(P.test('post')||!P.test('pre'))return false;if(me&&me.settings&&me.settings.testsOpen.includes('post'))return true;
+  const W=(root.SQContent||{}).worlds||{};return Object.keys(W).length>0&&Object.entries(W).every(([id,w])=>(w.missionOrder||[]).every(m=>P.activity(id,m).done));},
  flush,onChange(f){listeners.add(f);return()=>listeners.delete(f);}};
 root.addEventListener('online',()=>soon(200));
 root.addEventListener('pagehide',()=>{if(me&&outbox.length)flush();});
