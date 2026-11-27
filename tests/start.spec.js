@@ -42,3 +42,8 @@ test('register, then log in again on another device; mistakes are explained in E
   await L.locator('[name=pin]').fill('1234');await L.locator('.cta-button').click();
   await expect(page.locator('#welcome')).toContainText('Welcome back, Ploy!');
   expect(errors).toEqual([]);await ctx.close();});
+test('typing straight away is never moved to another box by the opening focus',async({page})=>{
+  await page.goto('/start/#register',{waitUntil:'domcontentloaded'});const R=page.locator('#registerForm');
+  await R.locator('[name=nickname]').fill('Ploy');await page.waitForTimeout(600);                 // the opening focus would fire after 300 ms
+  await expect(R.locator('[name=nickname]')).toHaveValue('Ploy');await expect(R.locator('[name=nickname]')).toBeFocused();
+  await expect(R.locator('[name=code]')).toHaveValue('');});
