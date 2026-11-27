@@ -1,4 +1,5 @@
 const {test,expect}=require('./fixtures');
+test.use({pretestDone:false});   // these tests check the profile itself (including the first-visit carry-over), so start without one
 test.beforeEach(async({page})=>{await page.goto('/school/quiz.html');await page.evaluate(()=>{localStorage.clear();});await page.reload();});
 
 test('record keeps the best XP and never duplicates stamps',async({page})=>{

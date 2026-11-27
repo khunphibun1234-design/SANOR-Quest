@@ -40,3 +40,7 @@ test('the post-test opens only after the pre-test and all six worlds (or when th
   await page.click('#begin');const post=await page.locator('fieldset.item legend').allTextContents();      // form B: different questions
   const pre=await page.evaluate(()=>SQContent.tests.forms.pre.parts.flatMap(p=>p.items).map(i=>i.prompt.en));
   expect(post).toHaveLength(30);expect(post.filter(t=>pre.some(q=>t.endsWith(q)))).toEqual([]);});
+test('a student with an old Map 01 save keeps it when the pre-test comes first',async({page})=>{
+  await page.goto('/test/?kind=pre');await page.evaluate(()=>{localStorage.clear();localStorage.setItem('sanor-home-welcome-v1',JSON.stringify({version:1,name:'Ploy',completed:['greet','name','introduce'],done:false}));});
+  await page.reload();await page.evaluate(()=>SanorProfile.recordTest('pre',{score:10,total:30}));
+  expect(await page.evaluate(()=>[SanorProfile.name(),SanorProfile.mapXp('01'),SanorProfile.test('pre').score])).toEqual(['Ploy',60,10]);});
